@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LibraryTest {
     @Test void someLibraryMethodReturnsTrue() {
+    	System.out.println("!!!!! LibraryTest");
         Library classUnderTest = new Library();
         assertTrue(classUnderTest.someLibraryMethod(), "someLibraryMethod should return 'true'");
     }
