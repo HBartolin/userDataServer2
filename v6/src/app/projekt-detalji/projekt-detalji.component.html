@@ -1,0 +1,11 @@
+<div class="example-button-row">
+    <button (click)="uredi()" mat-raised-button color="primary">Uredi</button>
+</div>
+
+<div class="uDesno">
+    <p></p>
+    <p>Id: {{getDataSource()?.id}}</p>
+    <p>Actual cost: {{getDataSource()?.costActual}}</p>
+    <p>Total revenue: {{getDataSource()?.totalRevenue}}</p>
+    <p>Cost PS: {{getDataSource()?.costPs}}</p>
+</div>

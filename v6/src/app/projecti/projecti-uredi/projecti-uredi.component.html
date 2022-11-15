@@ -1,0 +1,18 @@
+<div mat-dialog-content>
+  <p>Claim:</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Claim?</mat-label>
+    <input matInput [(ngModel)]="data.claim">
+  </mat-form-field>
+</div>
+<div mat-dialog-content>
+    <p>Contract:</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Contract?</mat-label>
+      <input matInput [(ngModel)]="data.contract">
+    </mat-form-field>
+  </div>
+<div mat-dialog-actions>
+  <button mat-raised-button [mat-dialog-close]="data" cdkFocusInitial color="primary">Uredi</button>
+  <button mat-raised-button (click)="onNoClick()" color="primary">Odustani</button>
+</div>

@@ -1,0 +1,21 @@
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <div mat-dialog-content>
+    <p>Total revenue:</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Total revenue?</mat-label>
+      <input matInput ngModel required [(ngModel)]="data.totalRevenue" type="number" name="totalRevenue">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-content>
+      <p>Cost PS:</p>
+      <mat-form-field appearance="fill">
+        <mat-label>Cost PS?</mat-label>
+        <input matInput ngModel required [(ngModel)]="data.costPs" type="number" name="costPs">
+      </mat-form-field>
+    </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button [disabled]="!f.valid" type="submit" color="primary">Uredi</button>
+    <button mat-raised-button (click)="onNoClick()" type="button" color="primary">Odustani</button>
+  </div>
+</form>
+  

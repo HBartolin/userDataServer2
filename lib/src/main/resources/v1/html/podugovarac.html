@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="hr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Verzije aplikacije</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/v1/main.css">
+  </head>
+  <body onload="podugovaraci()" id="bodyForm">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/v1/index.html">Projekti</a></li>
+                        <li class="breadcrumb-item"><a onclick="otvoriProjektDetalji()" href="#">Projekt</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Podugovarač</li>
+                    </ol>
+                </nav>
+                <button class="btn btn-primary mb-3 ml-3" type="submit" data-toggle="modal" data-target="#editPO" onclick="noviPO()">Novi claim</button>
+                <button class="btn btn-primary mb-3 ml-3" type="submit" data-toggle="modal" data-target="#editPodugovarac" onclick="noviPodugovarac()">Novi podugovarač</button>
+            </div>
+        </nav>
+    
+        <div name="greska" class="alert alert-danger" style="display: none" role="alert" ></div>
+
+        <table class="table table-sm table-striped">
+          <thead>
+              <tr>
+                <th colspan="7" class="text-center text-white bg-secondary">Claim</th>
+              </tr>
+              <tr>
+                  <th class="text-right">Id</th>
+                  <th>Naziv</th>
+                  <th class="text-right">Total</th>
+                  <th class="text-right">Aktualni</th>
+                  <th class="text-right">Planirani</th>
+                  <th>PO</th>
+                  <th></th>
+              </tr>
+            </thead>
+          <tbody id="purchaseOrderTablicaBody"></tbody>
+        </table>
+
+        <div></div>
+
+        <table class="table table-sm table-striped">
+          <thead>
+              <tr>
+                <th colspan="8" class="text-center text-white bg-secondary">Podugovarač</th>
+              </tr>
+              <tr>
+                  <th class="text-right">Id</th>
+                  <th>Podugovarač</th>
+                  <th>Datum planirani</th>
+                  <th>Datum aktualni</th>
+                  <th class="text-right">Cijena [kn]</th>
+                  <th>Invoice number</th>
+                  <th>PO</th>
+                  <th></th>
+              </tr>
+          </thead>
+          <tbody id="podugovaracTablicaBody"></tbody>
+        </table>
+    </div>
+
+    <div class="modal fade" id="editPodugovarac" tabindex="-1" role="dialog" aria-labelledby="editPodugovaracLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="noviProjektLabel">Uredi podugovarača</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div name="greska" class="alert alert-danger" style="display: none" role="alert" ></div>
+          <div class="modal-body">
+            <div class="modal-body form-row">
+              <div class="form-group col-md-6">
+                <label for="iPurchaseOrder">Purchase order</label>
+                <select id="iPurchaseOrder" class="form-control" autofocus>
+                  <option value="" disabled selected>Choose..</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="iCijena">Cijena</label>
+                <input type="text" class="form-control" id="iCijena">
+              </div> 
+              <div class="form-group col-md-6">
+                <label for="iDatumPlanned">Planirani datum</label>
+                <input type="date" class="form-control" id="iDatumPlanned">
+              </div> 
+              <div class="form-group col-md-6">
+                <label for="iDatumActual">Aktualni datum</label>
+                <input type="date" class="form-control" id="iDatumActual">
+              </div> 
+              <div class="form-group col-md-6">
+                <label for="iInvoiceNumber">Invoice number</label>
+                <input type="text" class="form-control" id="iInvoiceNumber">
+              </div> 
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick="editirajPodugovarac()">Uredi podugovarača</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
+          </div>
+          <div id="inputId" style="display: none;"></div>
+          <div id="inputTs" style="display: none;"></div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="modal fade" id="editPO" tabindex="-1" role="dialog" aria-labelledby="editPOLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="noviProjektLabel">Uredi claim</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div name="greska" class="alert alert-danger" style="display: none" role="alert" ></div>
+          <div class="modal-body form-row">
+            <div class="form-group col-md-12">
+              <label for="inputNazivlje">Naziv:</label>
+              <select id="inputNazivlje" class="form-control" autofocus>
+                  <option value="" disabled selected>Choose..</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputPO">PO:</label>
+              <input type="text" class="form-control" id="inputPO">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputTotal">Total [hrk]:</label>
+              <input type="text" class="form-control" id="inputTotal">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick="editirajPO()">Uredi claim</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
+          </div>
+          <div id="inputId" style="display: none;"></div>
+          <div id="inputTs" style="display: none;"></div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/v1/main.js"></script>
+    <script type="text/javascript" src="/v1/html/podugovarac.js"></script>
+  </body>
+</html>
