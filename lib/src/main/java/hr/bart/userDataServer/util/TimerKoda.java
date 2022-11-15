@@ -28,7 +28,7 @@ public class TimerKoda {
 			prefiks="**** ";
 		}
 		
-		LOGGER.info("{}Total time: {} {} [{}]", prefiks, koliko, jedinica, clazzSN);
+		LOGGER.info("* {}Total time: {} {} - {} *", prefiks, koliko, jedinica, clazzSN);
 	}
 	
 }
