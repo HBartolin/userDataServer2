@@ -37,7 +37,7 @@ import hr.bart.userDataServer.util.ZatvoriOtvori;
 
 @RestController
 @RequestMapping(value ="/api", method= RequestMethod.PUT /*, RequestMethod.GET, RequestMethod.POST}*/)
-@CrossOrigin(origins = {"http://localhost:4200/", "http://localhost:5173/"}, allowedHeaders="*")
+@CrossOrigin(origins = {"*"}, allowedHeaders="*")
 public class ProjektController {
 	private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("y-M-d");
 	
