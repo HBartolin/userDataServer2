@@ -1,4 +1,4 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {catchError} from 'rxjs/operators';
@@ -7,14 +7,16 @@ import {environment} from '../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class AppService {
-
+export class AppService {  
   constructor() { }
 
   getConfig(http: HttpClient, configUrl: string) {
     let cUrl=this.logError("GET", configUrl);
-    
-    return http.get(cUrl).pipe(catchError(this.mojCatchError()));
+    let headers = new HttpHeaders();
+    headers = headers.append('Cookie', 'JSESSIONID=8C25980925F9855DA179C414691FC885');
+    headers = headers.append('withCredentials', 'true');
+
+    return http.get(cUrl, {headers: headers}).pipe(catchError(this.mojCatchError()));
   }
 
   getConfigPut(http: HttpClient, configUrl: string) {

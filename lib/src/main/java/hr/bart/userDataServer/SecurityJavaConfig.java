@@ -9,7 +9,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
@@ -20,7 +24,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityJavaConfig extends WebSecurityConfigurerAdapter  {
+public class SecurityJavaConfig /*extends WebSecurityConfigurerAdapter*/  {
 	@Autowired
 	private AuthenticationEntryPoint authEntryPoint;
 	
@@ -34,22 +38,50 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter  {
 	}
 	
 	/*@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		http
+			.authorizeHttpRequests((requests) -> requests
+				.antMatchers("/", "/home").permitAll()
+				.anyRequest().authenticated()
+			)
+			.formLogin((form) -> form
+				.loginPage("/login")
+				.permitAll()
+			)
+			.logout((logout) -> logout.permitAll());
+
+		return http.build();
+	}
+	
+	@Bean
+	public UserDetailsService userDetailsService() {
+		UserDetails user =
+			 User.withDefaultPasswordEncoder()
+				.username("user")
+				.password("password")
+				.roles("USER")
+				.build();
+
+		return new InMemoryUserDetailsManager(user);
+	} */
+	
+	/*@Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http
-           // .authorizeHttpRequests((authz) -> authz.anyRequest().authenticated())
-           // .httpBasic();
+       http
+            .authorizeHttpRequests((authz) -> authz.anyRequest().authenticated())
+            .httpBasic();
         
         return http.build();
-    }*/
-	
-	@Override
+    } */
+	 
+	/*@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		 http.csrf().disable();
 	/*http.cors().and().authorizeRequests()
 				.anyRequest().authenticated()
 				.and().httpBasic()
-				.authenticationEntryPoint(authEntryPoint);*/
-	} 
+				.authenticationEntryPoint(authEntryPoint);/
+	} */
 	
 	/*@Bean
     CorsConfigurationSource corsConfigurationSource() {

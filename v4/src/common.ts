@@ -32,7 +32,7 @@ var greska="greska";
 export function pozoviRestServis(mojUrl, ucitaj) {
 	console.log(mojUrl);
 	
-    return fetch(mojUrl)
+    return fetch(mojUrl, {headers: {'JSESSIONID': '843281F774252A67C2BC62FC7E3EDB59'}})
         .then((response) => response.json())
         .then(ucitaj);
         //.catch((error) => postaviGresku(error));
