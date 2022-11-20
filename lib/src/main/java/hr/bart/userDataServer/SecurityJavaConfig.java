@@ -19,6 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -37,7 +38,39 @@ public class SecurityJavaConfig /*extends WebSecurityConfigurerAdapter*/  {
 		auth.inMemoryAuthentication().withUser("q").password("$2a$04$FGxuScCSe.iBtNEHcr4TaONTdrXVUK0gdpe7yafmjc.wy14mxYkga").roles("USER");
 	}
 	
-	/*@Bean
+	@Bean
+	public CorsWebFilter corsWebFilter() {
+	    CorsConfiguration corsConfig = new CorsConfiguration();
+	    corsConfig.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+	    corsConfig.setMaxAge(3600L);
+	    corsConfig.addAllowedMethod("*");
+	    corsConfig.addAllowedHeader("Requestor-Type");
+	    corsConfig.addExposedHeader("X-Get-Header");
+
+	    UrlBasedCorsConfigurationSource source =
+	        new UrlBasedCorsConfigurationSource();
+	    source.registerCorsConfiguration("/**", corsConfig);
+
+	    return new CorsWebFilter((org.springframework.web.cors.reactive.CorsConfigurationSource) source);
+	}
+	
+	/* @Bean
+	public WebMvcConfigurer corsMappingConfigurer() {
+	   return new WebMvcConfigurer() {
+	       @Override
+	       public void addCorsMappings(CorsRegistry registry) {
+	           WebConfigProperties.Cors cors = webConfigProperties.getCors();
+	           registry.addMapping("/**")
+	             .allowedOrigins(cors.getAllowedOrigins())
+	             .allowedMethods(cors.getAllowedMethods())
+	             .maxAge(cors.getMaxAge())
+	             .allowedHeaders(cors.getAllowedHeaders())
+	             .exposedHeaders(cors.getExposedHeaders());
+	       }
+	   };
+	}
+	
+	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests((requests) -> requests
