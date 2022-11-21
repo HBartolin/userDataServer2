@@ -19,7 +19,7 @@ export class ProjektDetaljiService {
   }
 
   getConfigUrediProjektDatalji(id: number, totalRevenue: number, costPs: number) {
-    return this.appService.getConfigPut(this.http, `urediProjektDatalji/${id}?totalRevenue=${totalRevenue}&costPs=${costPs}`);
+    return this.appService.getConfig(this.http, `urediProjektDatalji/${id}?totalRevenue=${totalRevenue}&costPs=${costPs}`);
   }
 
   getConfig(id: string) {

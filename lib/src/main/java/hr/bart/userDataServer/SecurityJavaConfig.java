@@ -5,6 +5,7 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -25,9 +26,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityJavaConfig /*extends WebSecurityConfigurerAdapter*/  {
-	@Autowired
-	private AuthenticationEntryPoint authEntryPoint;
+public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
+//	@Autowired
+//	private AuthenticationEntryPoint authEntryPoint;
 	
 	/** 
 	 * https://www.devglan.com/online-tools/bcrypt-hash-generator
@@ -38,21 +39,24 @@ public class SecurityJavaConfig /*extends WebSecurityConfigurerAdapter*/  {
 		auth.inMemoryAuthentication().withUser("q").password("$2a$04$FGxuScCSe.iBtNEHcr4TaONTdrXVUK0gdpe7yafmjc.wy14mxYkga").roles("USER");
 	}
 	
-	@Bean
-	public CorsWebFilter corsWebFilter() {
-	    CorsConfiguration corsConfig = new CorsConfiguration();
-	    corsConfig.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
-	    corsConfig.setMaxAge(3600L);
-	    corsConfig.addAllowedMethod("*");
-	    corsConfig.addAllowedHeader("Requestor-Type");
-	    corsConfig.addExposedHeader("X-Get-Header");
+//	protected void configure(HttpSecurity http) throws Exception {
+//
+//        http
+//                //HTTP Basic authentication
+//                .httpBasic()
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers(HttpMethod.GET, "/books/**").hasRole("USER")
+//                .antMatchers(HttpMethod.POST, "/books").hasRole("ADMIN")
+//                .antMatchers(HttpMethod.PUT, "/books/**").hasRole("ADMIN")
+//                .antMatchers(HttpMethod.PATCH, "/books/**").hasRole("ADMIN")
+//                .antMatchers(HttpMethod.DELETE, "/books/**").hasRole("ADMIN")
+//                .and()
+//                .csrf().disable()
+//                .formLogin().disable();
+//    }
 
-	    UrlBasedCorsConfigurationSource source =
-	        new UrlBasedCorsConfigurationSource();
-	    source.registerCorsConfiguration("/**", corsConfig);
-
-	    return new CorsWebFilter((org.springframework.web.cors.reactive.CorsConfigurationSource) source);
-	}
+	
 	
 	/* @Bean
 	public WebMvcConfigurer corsMappingConfigurer() {
@@ -84,9 +88,9 @@ public class SecurityJavaConfig /*extends WebSecurityConfigurerAdapter*/  {
 			.logout((logout) -> logout.permitAll());
 
 		return http.build();
-	}
+	} */
 	
-	@Bean
+	/* @Bean
 	public UserDetailsService userDetailsService() {
 		UserDetails user =
 			 User.withDefaultPasswordEncoder()
@@ -96,7 +100,7 @@ public class SecurityJavaConfig /*extends WebSecurityConfigurerAdapter*/  {
 				.build();
 
 		return new InMemoryUserDetailsManager(user);
-	} */
+	} 
 	
 	/*@Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -107,14 +111,14 @@ public class SecurityJavaConfig /*extends WebSecurityConfigurerAdapter*/  {
         return http.build();
     } */
 	 
-	/*@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		 http.csrf().disable();
+		System.out.println("#######################################################################");
+		 http.csrf(); //.disable();
 	/*http.cors().and().authorizeRequests()
 				.anyRequest().authenticated()
 				.and().httpBasic()
-				.authenticationEntryPoint(authEntryPoint);/
-	} */
+				.authenticationEntryPoint(authEntryPoint); */
+	} 
 	
 	/*@Bean
     CorsConfigurationSource corsConfigurationSource() {

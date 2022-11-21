@@ -41,7 +41,7 @@ import hr.bart.userDataServer.util.ZatvoriOtvori;
 		origins = {"http://localhost:4200", "http://localhost:5173"}, 
 		exposedHeaders = "*", //{"Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"},
 		allowedHeaders="*",
-		allowCredentials = "true"
+		allowCredentials = "false"
 	)
 public class ProjektController {
 	private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("y-M-d");
