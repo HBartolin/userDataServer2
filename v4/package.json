@@ -20,6 +20,7 @@
     "vite": "^3.2.3"
   },
   "dependencies": {
+    "@sveltejs/adapter-static": "^1.0.0-next.48",
     "svelte-spa-router": "^3.3.0",
     "sveltestrap": "^5.10.0"
   }
