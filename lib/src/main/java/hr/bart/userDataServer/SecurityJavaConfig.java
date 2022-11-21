@@ -26,7 +26,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
+public class SecurityJavaConfig /* extends WebSecurityConfigurerAdapter */ {
 //	@Autowired
 //	private AuthenticationEntryPoint authEntryPoint;
 	
@@ -38,6 +38,28 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication().withUser("q").password("$2a$04$FGxuScCSe.iBtNEHcr4TaONTdrXVUK0gdpe7yafmjc.wy14mxYkga").roles("USER");
 	}
+	
+	@Bean
+	public BCryptPasswordEncoder encoder() {
+	    return new BCryptPasswordEncoder();
+	}
+	
+	@Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		//System.out.println("=======================================================================");
+		http.csrf();
+		 
+		return http.build();
+	}
+	
+	/* protected void configure(HttpSecurity http) throws Exception {
+		System.out.println("#######################################################################");
+		 http.csrf(); //.disable();
+	/*http.cors().and().authorizeRequests()
+				.anyRequest().authenticated()
+				.and().httpBasic()
+				.authenticationEntryPoint(authEntryPoint); */
+	//} 
 	
 //	protected void configure(HttpSecurity http) throws Exception {
 //
@@ -110,15 +132,6 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
         
         return http.build();
     } */
-	 
-	protected void configure(HttpSecurity http) throws Exception {
-		System.out.println("#######################################################################");
-		 http.csrf(); //.disable();
-	/*http.cors().and().authorizeRequests()
-				.anyRequest().authenticated()
-				.and().httpBasic()
-				.authenticationEntryPoint(authEntryPoint); */
-	} 
 	
 	/*@Bean
     CorsConfigurationSource corsConfigurationSource() {
@@ -150,10 +163,5 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
             }
         };
     } */
-	
-	@Bean
-	public BCryptPasswordEncoder encoder() {
-	    return new BCryptPasswordEncoder();
-	}
 	
 }
