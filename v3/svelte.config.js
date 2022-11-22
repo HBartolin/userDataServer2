@@ -9,7 +9,7 @@ const config = {
 	preprocess: preprocess(),
 
 	kit: {
-		paths: {assets: "", base: "/v3"},
+		paths: {assets: "", base: dev ? '' : "/v3"},
 		adapter: adapter(),
 	}
 };
