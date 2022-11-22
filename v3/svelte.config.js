@@ -7,7 +7,7 @@ const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
 	// for more information about preprocessors
 	preprocess: preprocess(),
-
+	trailingSlash: 'always',
 	kit: {
 		paths: {assets: "", base: dev ? '' : "/v3"},
 		adapter: adapter(),
