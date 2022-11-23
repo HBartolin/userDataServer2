@@ -11,7 +11,9 @@ const config = {
 	kit: {
 		paths: {assets: "", base: dev ? '' : "/v3"},
 		adapter: adapter(),
-	}
+		//trailingSlash: 'always',
+	},
+	//strict: false
 };
 
 export default config;
