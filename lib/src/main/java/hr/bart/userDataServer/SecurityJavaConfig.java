@@ -17,16 +17,20 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityJavaConfig /* extends WebSecurityConfigurerAdapter */ {
+public class SecurityJavaConfig  /* extends WebSecurityConfigurerAdapter */ {
 //	@Autowired
 //	private AuthenticationEntryPoint authEntryPoint;
 	
@@ -47,10 +51,16 @@ public class SecurityJavaConfig /* extends WebSecurityConfigurerAdapter */ {
 	@Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		//System.out.println("=======================================================================");
-		http.csrf();
+		//http.csrf();
+		http.cors().and().csrf().disable(); 
 		 
 		return http.build();
-	}
+	} 
+	
+//	 @Override
+//	    public void addViewControllers(ViewControllerRegistry registry) {
+//	        registry.addRedirectViewController("/", "index.html");
+//	    }
 	
 	/* protected void configure(HttpSecurity http) throws Exception {
 		System.out.println("#######################################################################");

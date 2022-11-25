@@ -17,6 +17,7 @@
 
     onMount(() => { 
         var projektUrl_=`${serverUrl}projektDatalji/${id}`;
+        
         rsData=pozoviRestServis(projektUrl_, projekDetaljiRest_);
 
         return rsData;
