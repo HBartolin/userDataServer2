@@ -2,7 +2,7 @@ plugins {
     id 'java-library'
     id 'java'
 	id 'war'
-	id 'org.springframework.boot' version '+'
+	id 'org.springframework.boot' version '2.7.6'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
@@ -25,7 +25,10 @@ dependencies {
 	implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.2'
 	//implementation group: 'org.postgresql', name: 'postgresql', version: '42.5.0'
 	//implementation group: 'co.elastic.apm', name: 'apm-agent-attach', version: '1.25.0'
-	//implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-parent', version: '2.7.6', ext: 'pom'
+	
 }
 
 /*tasks.named('test') {
