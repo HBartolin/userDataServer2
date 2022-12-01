@@ -7,6 +7,7 @@ import {AppComponent} from './app.component';
 const routes: Routes = [
   { path: '', redirectTo: '/projekti', pathMatch: 'full' },
   { path: 'projekti', component: ProjectiComponent },
+  { path: 'v6/projekti', component: ProjectiComponent },
   { path: 'projektDetalji/:id', component: ProjektDetaljiComponent },
   { path: '**', component: AppComponent },
 ];
