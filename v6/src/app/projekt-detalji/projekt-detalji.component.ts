@@ -38,7 +38,7 @@ export class ProjektDetaljiComponent implements OnInit {
     let copyR: RezultatMsg = Object.assign({}, this.getDataSource());
     
     const dialogRef = this.dialog.open(ProjektDetaljiUrediComponent, {
-      width: '250px',
+      //width: '250px',
       data: copyR,
     });
   }
