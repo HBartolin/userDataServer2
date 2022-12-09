@@ -1,2 +1,2 @@
-cd "lib\bin\main"
+cd "lib\bin\main" 
 call start javaw misc.NoSleepGui
