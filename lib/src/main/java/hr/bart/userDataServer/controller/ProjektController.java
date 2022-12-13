@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -80,6 +81,13 @@ public class ProjektController {
     public PojoInterface projekti(@RequestParam("status") Optional<String> status) {		
 		return projektService.projekti(status);
     }	
+	
+	@GetMapping(value = "/projektiV2")
+    public ResponseEntity<PojoInterface> projektiV2(@RequestParam("status") Optional<String> status) {		
+		PojoInterface pojo=projektService.projekti(status);
+		
+		return ResponseEntity.ok(pojo);
+    }
 	
 	@GetMapping(value="/zatvoriProjekt/{id}") @PutMapping(value="/zatvoriProjekt/{id}")
 	public PojoInterface zatvoriProjekt(@PathVariable Long id, @RequestParam("ts") Long ts, @RequestParam("status") Optional<String> status) {
