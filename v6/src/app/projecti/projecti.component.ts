@@ -27,6 +27,18 @@ export class ProjectiComponent implements OnInit {
     this.getConfigSubscribe();  
   }
 
+  pozoviVanjskiRest() {
+    this.pS.pozoviVanjskiRest().subscribe({
+      next: (data) => {
+        console.log(data);
+        this.snackBar.open(data, "OK");
+        //this.pS.fpData = data;
+        //this.appService.prikaziGreskaOk(this.snackBar, data);
+      },
+      error: (e) => this.appService.catchBadResponse(this.snackBar, e)
+    });
+  }
+
   uredi(r: RezultatMsg) {
     let copyR: RezultatMsg = Object.assign({}, r);
 
