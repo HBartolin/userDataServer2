@@ -4,8 +4,11 @@
 </svelte:head>
 
 <script lang="ts">
-	import { page } from '$app/stores';
 	import {onMount} from 'svelte';
+	import { page } from '$app/stores';
+	import Ducan from '../../store.js';
+
+	Ducan.set(11);
 
 	let dd: string;
 

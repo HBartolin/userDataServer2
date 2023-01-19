@@ -8,15 +8,24 @@
 	import {onMount} from 'svelte';
 	import type { PageData } from './$types';
 	import {serverUrl, pozoviRestServis} from '../../commons.js';
+	import Ducan from '../../store.js';
 
 	export let data: PageData;
 
 	let id: string | null;
 	let rsData: Promise<any>;
 	let ssData={};
+	var lValue: number;
+
+	Ducan.subscribe(value => {
+		console.log("rrrrr: " + value);
+		lValue=value;
+	});
 
 	onMount(() => {
-		console.log("2a: ", data);
+		
+
+		console.log("2a: ", data, lValue);
 
 		id=$page.url.searchParams.get('id');
 		console.log("2: id: ", id);
