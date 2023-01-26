@@ -15,7 +15,7 @@
 	onMount(() => {
 		console.log("1: ", $page.url.origin);
 
-		dd=`${$page.url.origin}/about2?id=11`;
+		dd=`${$page.url.origin}/about2?id=1`;
 	});
 </script>
 

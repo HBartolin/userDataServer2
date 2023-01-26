@@ -8,33 +8,23 @@
 	import {onMount} from 'svelte';
 	import type { PageData } from './$types';
 	import {serverUrl, pozoviRestServis} from '../../commons.js';
-	import Ducan from '../../store.js';
+	//import Ducan from '../../store.js';
+	import MojCatch from "../../MojCatch.svelte";
+    import DisplayAlert from "../../DisplayAlert.svelte";
 
 	export let data: PageData;
 
 	let id: string | null;
 	let rsData: Promise<any>;
 	let ssData={};
-	var lValue: any;
-
-	Ducan.subscribe(value => {
-		console.log("rrrrr: " + value);
-		lValue=value;
-	});
 
 	onMount(() => {
-		
-
-		console.log("2a: ", data, lValue);
-
 		id=$page.url.searchParams.get('id');
-		console.log("2: id: ", id);
-
-		//var projektUrl_=`${serverUrl}projektDatalji/${id}`;
+		var projektUrl_=`${serverUrl}projektDatalji/${id}`;
+        
+        rsData=pozoviRestServis(projektUrl_, projekDetaljiRest_);
 		
-		//rsData=pozoviRestServis(projektUrl_, projekDetaljiRest_);
-		ssData=data;
-        //return data;
+        return rsData;
 	});
 
 	function projekDetaljiRest_(data: string) { 
@@ -43,12 +33,16 @@
 </script>
 
 <div class="text-column">
+	{#await rsData}
+		<DisplayAlert msg="Radim.." />
+	{:catch e}
+		<MojCatch errorMsg={e} />
+	{/await}
+
 	<h1>About this app</h1>
 	<h2>{id}</h2>
 
-	{#if ssData!=null && ssData.lValue!=null }
-			<h3>{JSON.stringify(ssData.lValue.rezultat[0])}</h3>
-	{/if}
+	<h3>{JSON.stringify(ssData)}</h3>
 
 	<p>
 		This is a <a href="https://kit.svelte.dev">SvelteKit</a> app. You can make your own by typing the

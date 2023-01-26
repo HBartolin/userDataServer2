@@ -1,13 +1,13 @@
 //import { dev } from '$app/environment';
 //import type { PageServerLoad } from './$types';
-import Ducan from '../../store.js';
-import {serverUrl, pozoviRestServis} from '../../commons.js';
+//import Ducan from '../../store.js';
+//import {serverUrl, pozoviRestServis} from '../../commons.js';
 
-var lValue: any;
+//var lValue: any;
 
 export const prerender = true;
 
-export const load = async () => {
+/* export const load = async () => {
     Ducan.subscribe(async value => {
     var id=1;
 
@@ -22,7 +22,7 @@ export const load = async () => {
 
 function projekDetaljiRest_(data: string) { 
   lValue=data;
-}
+} */
 
 /*export const load = (async ({ fetch, url}) => {
     //console.log( url.search.substring(3));
