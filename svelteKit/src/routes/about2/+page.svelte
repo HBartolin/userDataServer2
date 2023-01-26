@@ -15,7 +15,7 @@
 	let id: string | null;
 	let rsData: Promise<any>;
 	let ssData={};
-	var lValue: number;
+	var lValue: any;
 
 	Ducan.subscribe(value => {
 		console.log("rrrrr: " + value);
@@ -30,11 +30,11 @@
 		id=$page.url.searchParams.get('id');
 		console.log("2: id: ", id);
 
-		var projektUrl_=`${serverUrl}projektDatalji/${id}`;
+		//var projektUrl_=`${serverUrl}projektDatalji/${id}`;
 		
-		rsData=pozoviRestServis(projektUrl_, projekDetaljiRest_);
-
-        return rsData;
+		//rsData=pozoviRestServis(projektUrl_, projekDetaljiRest_);
+		ssData=data;
+        //return data;
 	});
 
 	function projekDetaljiRest_(data: string) { 
@@ -46,7 +46,9 @@
 	<h1>About this app</h1>
 	<h2>{id}</h2>
 
-	<h3>{JSON.stringify(ssData)}</h3>
+	{#if ssData!=null && ssData.lValue!=null }
+			<h3>{JSON.stringify(ssData.lValue.rezultat[0])}</h3>
+	{/if}
 
 	<p>
 		This is a <a href="https://kit.svelte.dev">SvelteKit</a> app. You can make your own by typing the

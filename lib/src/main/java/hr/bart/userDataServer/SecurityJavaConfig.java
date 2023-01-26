@@ -30,7 +30,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityJavaConfig  /* extends WebSecurityConfigurerAdapter */ {
+public class SecurityJavaConfig /* extends WebSecurityConfigurerAdapter */ {
 //	@Autowired
 //	private AuthenticationEntryPoint authEntryPoint;
 	
@@ -56,6 +56,22 @@ public class SecurityJavaConfig  /* extends WebSecurityConfigurerAdapter */ {
 		 
 		return http.build();
 	} 
+	
+	@Bean
+	public WebMvcConfigurer corsConfigurer()
+	{
+	   String[] allowDomains = new String[2];
+	   allowDomains[0] = "http://localhost:4200";
+	   allowDomains[1] = "http://localhost:5173";
+
+	   System.out.println("CORS configuration....");
+	   return new WebMvcConfigurer() {
+	      @Override
+	      public void addCorsMappings(CorsRegistry registry) {
+	         registry.addMapping("/**").allowedOrigins(allowDomains).allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE");
+	      }
+	   };
+	}
 	
 //	 @Override
 //	    public void addViewControllers(ViewControllerRegistry registry) {
