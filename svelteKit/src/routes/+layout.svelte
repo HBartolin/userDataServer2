@@ -3,7 +3,7 @@
 	import './styles.css';
 
 	export const ssr = false;
-	//export const prerender = 'auto';
+	export const prerender = true;
 </script>
 
 <div class="app">

@@ -11,6 +11,7 @@
 	//import Ducan from '../../store.js';
 	import MojCatch from "../../MojCatch.svelte";
     import DisplayAlert from "../../DisplayAlert.svelte";
+	import { base } from "$app/paths";
 
 	export let data: PageData;
 
@@ -45,7 +46,7 @@
 	<h3>{JSON.stringify(ssData)}</h3>
 
 	<p>
-		This is a <a href="https://kit.svelte.dev">SvelteKit</a> app. You can make your own by typing the
+		This is a SvelteKit app. You can make your own by typing the
 		following into your command line and following the prompts:
 	</p>
 

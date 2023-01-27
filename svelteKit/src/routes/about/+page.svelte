@@ -7,6 +7,7 @@
 	import {onMount} from 'svelte';
 	import { page } from '$app/stores';
 	import Ducan from '../../store.js';
+	//import { base } from "$app/paths";
 
 	Ducan.set(11);
 
@@ -21,7 +22,7 @@
 
 <div class="text-column">
 	<h1>About this app</h1>
-
+	
 	<a href="{dd}" >##############</a>
 
 	<p>
