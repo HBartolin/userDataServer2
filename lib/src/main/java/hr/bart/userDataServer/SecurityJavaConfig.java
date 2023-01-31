@@ -1,5 +1,6 @@
 package hr.bart.userDataServer;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,15 +61,20 @@ public class SecurityJavaConfig /* extends WebSecurityConfigurerAdapter */ {
 	@Bean
 	public WebMvcConfigurer corsConfigurer()
 	{
-	   String[] allowDomains = new String[2];
-	   allowDomains[0] = "http://localhost:4200";
-	   allowDomains[1] = "http://localhost:5173";
+	   ArrayList<String> allowDomainsList=new ArrayList<>();
+	   allowDomainsList.add("http://localhost:8080");
+	   allowDomainsList.add("http://localhost:5173");
+	   allowDomainsList.add("http://localhost:4200");
+	   allowDomainsList.add("http://localhost:4173");
 
+	   String[] allowDomains = allowDomainsList.toArray(new String[allowDomainsList.size()]);
+	   
 	   System.out.println("CORS configuration....");
 	   return new WebMvcConfigurer() {
 	      @Override
 	      public void addCorsMappings(CorsRegistry registry) {
-	         registry.addMapping("/**").allowedOrigins(allowDomains).allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE");
+	         registry.addMapping("/**").allowedOrigins(allowDomains)
+	         	.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE");
 	      }
 	   };
 	}

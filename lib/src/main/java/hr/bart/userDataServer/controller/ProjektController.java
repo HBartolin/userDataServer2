@@ -39,7 +39,7 @@ import hr.bart.userDataServer.util.ZatvoriOtvori;
 @RestController
 @RequestMapping(value ="/api", method= RequestMethod.PUT /*, RequestMethod.GET, RequestMethod.POST}*/)
 //@CrossOrigin(
-//		origins = {"http://localhost:4200", "http://localhost:5173"}, 
+//		origins = {"http://localhost:4200", "http://localhost:5173", }, 
 //		exposedHeaders = "*", //{"Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"},
 //		allowedHeaders="*",
 //		allowCredentials = "false"
