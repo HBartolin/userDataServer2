@@ -66,6 +66,7 @@ public class SecurityJavaConfig /* extends WebSecurityConfigurerAdapter */ {
 	   allowDomainsList.add("http://localhost:5173");
 	   allowDomainsList.add("http://localhost:4200");
 	   allowDomainsList.add("http://localhost:4173");
+	   allowDomainsList.add("http://localhost/");
 
 	   String[] allowDomains = allowDomainsList.toArray(new String[allowDomainsList.size()]);
 	   
