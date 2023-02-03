@@ -15,11 +15,11 @@ const config = {
       		assets: 'build',
       		fallback: null,
       		precompress: false,
-      		strict: true
+      		strict: true,
+			paths: {
+				base: '/build',
+			}
 		}),
-		/*paths: {
-			base: dev ? '' : '/svelteKit',
-		},*/
 	}
 };
 
