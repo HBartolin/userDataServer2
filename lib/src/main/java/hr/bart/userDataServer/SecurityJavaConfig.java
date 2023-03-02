@@ -1,5 +1,6 @@
 package hr.bart.userDataServer;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityJavaConfig  /* extends WebSecurityConfigurerAdapter */ {
+public class SecurityJavaConfig /* extends WebSecurityConfigurerAdapter */ {
 //	@Autowired
 //	private AuthenticationEntryPoint authEntryPoint;
 	
@@ -56,6 +57,28 @@ public class SecurityJavaConfig  /* extends WebSecurityConfigurerAdapter */ {
 		 
 		return http.build();
 	} 
+	
+	@Bean
+	public WebMvcConfigurer corsConfigurer()
+	{
+	   ArrayList<String> allowDomainsList=new ArrayList<>();
+	   allowDomainsList.add("http://localhost:8080");
+	   allowDomainsList.add("http://localhost:5173");
+	   allowDomainsList.add("http://localhost:4200");
+	   allowDomainsList.add("http://localhost:4173");
+	   allowDomainsList.add("http://localhost/");
+
+	   String[] allowDomains = allowDomainsList.toArray(new String[allowDomainsList.size()]);
+	   
+	   System.out.println("CORS configuration....");
+	   return new WebMvcConfigurer() {
+	      @Override
+	      public void addCorsMappings(CorsRegistry registry) {
+	         registry.addMapping("/**").allowedOrigins(allowDomains)
+	         	.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE");
+	      }
+	   };
+	}
 	
 //	 @Override
 //	    public void addViewControllers(ViewControllerRegistry registry) {
