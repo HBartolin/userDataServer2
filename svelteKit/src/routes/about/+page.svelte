@@ -7,7 +7,7 @@
 	import {onMount} from 'svelte';
 	import { page } from '$app/stores';
 	import Ducan from '../../store.js';
-	//import { base } from "$app/paths";
+	import { base } from "$app/paths";
 
 	Ducan.set(11);
 
@@ -16,7 +16,10 @@
 	onMount(() => {
 		console.log("1: ", $page.url.origin);
 
-		dd=`${$page.url.origin}/about2?id=1`;
+		dd=`${$page.url.origin}${base}/about2?id=1`;
+
+		console.log("___________________________");
+		console.log(base);
 	});
 </script>
 

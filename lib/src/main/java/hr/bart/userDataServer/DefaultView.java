@@ -10,7 +10,11 @@ public class DefaultView extends WebMvcConfigurerAdapter {
 
     @Override
     public void addViewControllers( ViewControllerRegistry registry ) {
-        registry.addViewController( "/v2/" ).setViewName( "forward:/v2/index.html" );
+        registry.addViewController( "/v1" ).setViewName( "forward:/v1/index.html" );
+        registry.addViewController( "/v1/" ).setViewName( "forward:/v1/index.html" );
+//        registry.addViewController( "/svelteKit" ).setViewName( "forward:/svelteKit/index.html" );
+        registry.addViewController( "/svelteKit/" ).setViewName( "forward:/svelteKit/index.html" );
+        registry.addViewController( "/svelteKit/about2/" ).setViewName( "forward:/svelteKit/about2/index.html" );
         registry.setOrder( Ordered.HIGHEST_PRECEDENCE );
         super.addViewControllers( registry );
     }
