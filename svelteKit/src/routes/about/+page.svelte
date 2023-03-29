@@ -74,5 +74,5 @@
 		cursor: pointer;
 	}
 
-	.button2 {background-color: #008CBA;}
+	.button2 {background-color: #00bfff;}
 </style>
