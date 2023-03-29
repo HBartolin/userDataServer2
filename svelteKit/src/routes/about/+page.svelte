@@ -8,6 +8,7 @@
 	import { page } from '$app/stores';
 	import Ducan from '../../store.js';
 	import { base } from "$app/paths";
+	import {serverUrl, pozoviRestServis} from '../../commons.js';
 
 	Ducan.set(11);
 
@@ -17,14 +18,27 @@
 		console.log("1: ", $page.url.origin);
 
 		dd=`${$page.url.origin}${base}/about2?id=1`;
-
-		console.log("___________________________");
-		console.log(base);
 	});
+
+	function inicijalnoNapuni() {
+		var projektUrl=`${serverUrl}createDB`;
+	
+		pozoviRestServis(projektUrl, createDB_);
+	}
+
+	function createDB_(data: any) {	
+		//postaviOK(JSON.stringify(data));
+		
+		//projektiTC();
+	}						
 </script>
 
-<div class="text-column">
+<div>
 	<h1>About this app</h1>
+
+	<p>
+		<button on:click={inicijalnoNapuni} class="button button2">Inicijalno napuni</button>
+	</p>
 	
 	<a href="{dd}" >##############</a>
 
@@ -45,3 +59,20 @@
 		
 	</p>
 </div>
+
+<style>
+	.button {
+		background-color: #4CAF50; /* Green */
+		border: none;
+		color: white;
+		padding: 15px 32px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
+	}
+
+	.button2 {background-color: #008CBA;}
+</style>
