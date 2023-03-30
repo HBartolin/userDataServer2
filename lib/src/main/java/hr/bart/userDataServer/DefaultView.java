@@ -2,6 +2,11 @@ package hr.bart.userDataServer;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -49,7 +54,12 @@ public class DefaultView extends WebMvcConfigurerAdapter {
         super.addViewControllers( registry );
     }*/
 
-	private void skenDeeper(ViewControllerRegistry registry, File isFolder, String name) {
+	private void skenDeeper(ViewControllerRegistry registry, File isFolder, String name) throws IOException {
+//		try(Stream<Path> stream = Files.walk(Paths.get(isFolder.toURI()))) {
+//		    stream.filter(Files::isDirectory)
+//		          .forEach(skenEvenDeeper());
+//		}
+		
         File[] list = isFolder.listFiles();
 		
         if (list == null) return;
@@ -67,5 +77,10 @@ public class DefaultView extends WebMvcConfigurerAdapter {
             	}
         	}
         }
+	}
+	
+	private Consumer<? super Path> skenEvenDeeper() {
+		System.out.println();
+		return null;
 	}
 }
