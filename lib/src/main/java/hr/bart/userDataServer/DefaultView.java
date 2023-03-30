@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.springframework.context.annotation.Configuration;
@@ -55,10 +57,26 @@ public class DefaultView extends WebMvcConfigurerAdapter {
     }*/
 
 	private void skenDeeper(ViewControllerRegistry registry, File isFolder, String name) throws IOException {
-//		try(Stream<Path> stream = Files.walk(Paths.get(isFolder.toURI()))) {
-//		    stream.filter(Files::isDirectory)
-//		          .forEach(skenEvenDeeper());
-//		}
+		/* List<Path> pathList=null;
+		
+		try(Stream<Path> stream = Files.walk(Paths.get(isFolder.toURI()))) {
+			pathList=stream.filter(Files::isDirectory)
+		    	.filter(x -> new File(x.toFile(), INDEX_HTML).exists())
+		    	.collect(Collectors.toList());
+		}
+		
+		String dir=isFolder.getParentFile().getAbsoluteFile().toString();
+		
+		if(pathList!=null) {
+			for(int i=0; i<pathList.size(); i++) {
+				Path p=pathList.get(i);
+				String ss=p.toFile().getAbsolutePath().substring(dir.length());
+				String odS=ss.replace("\\", "/");
+				String doS="forward:" + odS + _INDEX_HTML;
+				
+				registry.addViewController(odS).setViewName(doS);
+			}
+		} */
 		
         File[] list = isFolder.listFiles();
 		
@@ -76,7 +94,7 @@ public class DefaultView extends WebMvcConfigurerAdapter {
                 	skenDeeper(registry, f, odS.substring(1));
             	}
         	}
-        }
+        } 
 	}
 	
 	private Consumer<? super Path> skenEvenDeeper() {
