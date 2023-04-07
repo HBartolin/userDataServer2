@@ -8,7 +8,7 @@
 	import { page } from '$app/stores';
 	import Ducan from '../../store.js';
 	import { base } from "$app/paths";
-	import {serverUrl, pozoviRestServis} from '../../commons.js';
+	import {serverUrl, pozoviRestServis} from '../../common/commons.js';
 
 	Ducan.set(11);
 

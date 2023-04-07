@@ -20,6 +20,10 @@ const config = {
 				base: '/build',
 			}
 		}),
+		alias: {
+			'@common': './src/common',
+			'@common/*': './src/common/*'
+		}
 	}
 };
 

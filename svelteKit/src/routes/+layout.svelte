@@ -1,6 +1,12 @@
 <script>
 	import Header from './Header.svelte';
 	import './styles.css';
+	import {onMount} from 'svelte';
+	import DisplayAlert from "@common/DisplayAlert.svelte";
+
+	onMount(() => {
+		console.log(DisplayAlert);
+	})
 </script>
 
 <div class="app">

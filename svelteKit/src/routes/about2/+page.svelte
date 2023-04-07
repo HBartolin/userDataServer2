@@ -7,10 +7,10 @@
 	import { page } from '$app/stores';
 	import {onMount} from 'svelte';
 	//import type { PageData } from './$types';
-	import {serverUrl, pozoviRestServis} from '../../commons.js';
+	import {serverUrl, pozoviRestServis} from '@common/commons.js';
 	//import Ducan from '../../store.js';
-	import MojCatch from "../../MojCatch.svelte";
-    import DisplayAlert from "../../DisplayAlert.svelte";
+	import MojCatch from "@common/MojCatch.svelte";
+    import DisplayAlert from "@common/DisplayAlert.svelte";
 	//import { base } from "$app/paths";
 
 	//export let data: PageData;
