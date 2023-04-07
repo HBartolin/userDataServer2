@@ -6,14 +6,14 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import {onMount} from 'svelte';
-	import type { PageData } from './$types';
+	//import type { PageData } from './$types';
 	import {serverUrl, pozoviRestServis} from '../../commons.js';
 	//import Ducan from '../../store.js';
 	import MojCatch from "../../MojCatch.svelte";
     import DisplayAlert from "../../DisplayAlert.svelte";
-	import { base } from "$app/paths";
+	//import { base } from "$app/paths";
 
-	export let data: PageData;
+	//export let data: PageData;
 
 	let id: string | null;
 	let rsData: Promise<any>;

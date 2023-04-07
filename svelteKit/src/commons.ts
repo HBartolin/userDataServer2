@@ -1,5 +1,5 @@
 export var serverUrl= "http://localhost:8090/api/" //`${document.location.origin}/api/`;
-var greska="greska";
+//var greska="greska";
 
 // export function postaviGresku(e) {
 //     console.log(e);

@@ -2,9 +2,9 @@
 	import { page } from '$app/stores';
 	import logo from '$lib/images/svelte-logo.svg';
 	import github from '$lib/images/github.svg';
-	import { assets, base } from '$app/paths';
+	import { base } from '$app/paths';
 
-	var dirName: string="/build";
+	//var dirName: string="/build";
 </script>
 
 <header>
