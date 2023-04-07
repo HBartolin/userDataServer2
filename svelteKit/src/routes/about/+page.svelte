@@ -6,7 +6,7 @@
 <script lang="ts">
 	import {onMount} from 'svelte';
 	import { page } from '$app/stores';
-	import Ducan from '../../store.js';
+	import Ducan from '@common/store.js';
 	import { base } from "$app/paths";
 	import {serverUrl, pozoviRestServis} from '@common/commons.js';
 
