@@ -45,16 +45,6 @@ public class DefaultView extends WebMvcConfigurerAdapter {
             e.printStackTrace();
         }
     }
-    /*public void addViewControllers( ViewControllerRegistry registry ) {
-        registry.addViewController( "/v1" ).setViewName( "forward:/v1/index.html" );
-        registry.addViewController( "/v1/" ).setViewName( "forward:/v1/index.html" );
-//        registry.addViewController( "/svelteKit" ).setViewName( "forward:/svelteKit/index.html" );
-        registry.addViewController( "/svelteKit/" ).setViewName( "forward:/svelteKit/index.html" );
-//        registry.addViewController( "/svelteKit/about/" ).setViewName( "forward:/svelteKit/about/index.html" );
-        registry.addViewController( "/svelteKit/about2/" ).setViewName( "forward:/svelteKit/about2/index.html" );
-        registry.setOrder( Ordered.HIGHEST_PRECEDENCE );
-        super.addViewControllers( registry );
-    }*/
 
 	private void skenDeeper(ViewControllerRegistry registry, File isFolder, String name) throws IOException {
 		/* List<Path> pathList=null;
@@ -80,10 +70,10 @@ public class DefaultView extends WebMvcConfigurerAdapter {
 		
         File[] list = isFolder.listFiles();
 		
-        if (list == null) return;
+        if(list == null) return;
         
-        for ( File f : list ) {
-        	if ( f.isDirectory() ) {
+        for(File f : list) {
+        	if(f.isDirectory()) {
         		if(new File(f, INDEX_HTML).exists()) {
         			String odS="/" + name + "/" + f.getName();
         			String doS="forward:/" + name + "/" + f.getName() + _INDEX_HTML;
@@ -97,8 +87,4 @@ public class DefaultView extends WebMvcConfigurerAdapter {
         } 
 	}
 	
-	private Consumer<? super Path> skenEvenDeeper() {
-		System.out.println();
-		return null;
-	}
 }
