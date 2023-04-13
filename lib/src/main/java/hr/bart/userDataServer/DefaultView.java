@@ -2,21 +2,14 @@ package hr.bart.userDataServer;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class DefaultView extends WebMvcConfigurerAdapter {
+public class DefaultView implements WebMvcConfigurer {
 	private static final String INDEX_HTML = "index.html";
     private static final String _INDEX_HTML = "/" + INDEX_HTML;
 
