@@ -65,7 +65,7 @@ public class DefaultView implements WebMvcConfigurer {
 		
         if(list == null) return;
         
-        for(File f : list) {
+        for(File f: list) {
         	if(f.isDirectory()) {
         		if(new File(f, INDEX_HTML).exists()) {
         			String odS="/" + name + "/" + f.getName();
