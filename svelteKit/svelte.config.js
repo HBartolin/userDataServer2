@@ -18,7 +18,8 @@ const config = {
       		strict: true,
 			paths: {
 				base: '/build',
-			}
+			},
+			//fallback: "index.html"
 		}),
 		alias: {
 			'@common': './src/common',
