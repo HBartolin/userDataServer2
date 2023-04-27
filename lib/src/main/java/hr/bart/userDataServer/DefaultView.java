@@ -26,8 +26,11 @@ public class DefaultView implements WebMvcConfigurer {
             	
                 if (isFolder.isDirectory()) {
                 	if(new File(isFolder, INDEX_HTML).exists()) {
-                		registry.addViewController("/" + name).setViewName("forward:/" + name +_INDEX_HTML);
-                    	System.out.println("/" + name + " -> " + "forward:/" + name +_INDEX_HTML);
+                		String avc="/" + name + "/";
+                		String svn="forward:/" + name +_INDEX_HTML;
+                		
+                		registry.addViewController(avc).setViewName(svn);
+                    	System.out.println(avc + " -> " + svn);
                     	
                     	skenDeeper(registry, isFolder, name);
                 	}
@@ -68,7 +71,7 @@ public class DefaultView implements WebMvcConfigurer {
         for(File f: list) {
         	if(f.isDirectory()) {
         		if(new File(f, INDEX_HTML).exists()) {
-        			String odS="/" + name + "/" + f.getName();
+        			String odS="/" + name + "/" + f.getName() + "/";
         			String doS="forward:/" + name + "/" + f.getName() + _INDEX_HTML;
         			
             		registry.addViewController(odS).setViewName(doS);
