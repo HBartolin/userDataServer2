@@ -26,11 +26,14 @@ public class DefaultView implements WebMvcConfigurer {
             	
                 if (isFolder.isDirectory()) {
                 	if(new File(isFolder, INDEX_HTML).exists()) {
-                		String avc="/" + name + "/";
+                		String avc="/" + name;
+                		String avcd=avc + "/";
                 		String svn="forward:/" + name +_INDEX_HTML;
                 		
                 		registry.addViewController(avc).setViewName(svn);
                     	System.out.println(avc + " -> " + svn);
+                    	registry.addViewController(avcd).setViewName(svn);
+                    	System.out.println(avcd + " -> " + svn);
                     	
                     	skenDeeper(registry, isFolder, name);
                 	}
@@ -71,13 +74,16 @@ public class DefaultView implements WebMvcConfigurer {
         for(File f: list) {
         	if(f.isDirectory()) {
         		if(new File(f, INDEX_HTML).exists()) {
-        			String odS="/" + name + "/" + f.getName() + "/";
-        			String doS="forward:/" + name + "/" + f.getName() + _INDEX_HTML;
+        			String avc="/" + name + "/" + f.getName();
+        			String avcd=avc + "/";
+        			String svn="forward:/" + name + "/" + f.getName() + _INDEX_HTML;
         			
-            		registry.addViewController(odS).setViewName(doS);
-                	System.out.println(odS + " -> " + doS);
+            		registry.addViewController(avc).setViewName(svn);
+                	System.out.println(avc + " -> " + svn);
+                	registry.addViewController(avcd).setViewName(svn);
+                	System.out.println(avcd + " -> " + svn);
                 	
-                	skenDeeper(registry, f, odS.substring(1));
+                	skenDeeper(registry, f, avc.substring(1));
             	}
         	}
         } 
