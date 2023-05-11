@@ -2,7 +2,8 @@ package hr.bart.userDataServer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +33,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 @EnableWebSecurity
 public class SecurityJavaConfig /* extends WebSecurityConfigurerAdapter */ {
+	private final Logger LOGGER=LoggerFactory.getLogger(getClass());
 //	@Autowired
 //	private AuthenticationEntryPoint authEntryPoint;
 	
@@ -51,7 +53,7 @@ public class SecurityJavaConfig /* extends WebSecurityConfigurerAdapter */ {
 	
 	@Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		//System.out.println("=======================================================================");
+		//LOGGER.info("=======================================================================");
 		//http.csrf();
 		http.cors().and().csrf().disable(); 
 		 
@@ -70,7 +72,7 @@ public class SecurityJavaConfig /* extends WebSecurityConfigurerAdapter */ {
 
 	   String[] allowDomains = allowDomainsList.toArray(new String[allowDomainsList.size()]);
 	   
-	   System.out.println("CORS configuration....");
+	   LOGGER.info("CORS configuration: " + allowDomainsList);
 	   return new WebMvcConfigurer() {
 	      @Override
 	      public void addCorsMappings(CorsRegistry registry) {
@@ -86,7 +88,7 @@ public class SecurityJavaConfig /* extends WebSecurityConfigurerAdapter */ {
 //	    }
 	
 	/* protected void configure(HttpSecurity http) throws Exception {
-		System.out.println("#######################################################################");
+		LOGGER.info("#######################################################################");
 		 http.csrf(); //.disable();
 	/*http.cors().and().authorizeRequests()
 				.anyRequest().authenticated()

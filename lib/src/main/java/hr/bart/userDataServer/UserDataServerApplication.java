@@ -16,7 +16,7 @@ public class UserDataServerApplication {
 //		String[] beans = ctx.getBeanDefinitionNames();
 		
 //		for(String s: beans) {
-//			System.out.println(s);
+//			LOGGER.info(s);
 //		}		
 	}
 

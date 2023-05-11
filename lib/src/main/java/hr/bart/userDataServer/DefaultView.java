@@ -3,6 +3,8 @@ package hr.bart.userDataServer;
 import java.io.File;
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class DefaultView implements WebMvcConfigurer {
 	private static final String INDEX_HTML = "index.html";
     private static final String _INDEX_HTML = "/" + INDEX_HTML;
+    private final Logger LOGGER=LoggerFactory.getLogger(getClass());
 
 	@Override
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -20,7 +23,7 @@ public class DefaultView implements WebMvcConfigurer {
             file = new ClassPathResource("static").getFile();
             String[] names = file.list();
 
-            System.out.println("--------------------------------------------");
+            LOGGER.info("--------------------------------------------");
             for(String name : names) {
             	File isFolder=new File(file.getAbsolutePath() + "/" + name);
             	
@@ -31,15 +34,15 @@ public class DefaultView implements WebMvcConfigurer {
                 		String svn="forward:/" + name +_INDEX_HTML;
                 		
                 		registry.addViewController(avc).setViewName(svn);
-                    	System.out.println(avc + " -> " + svn);
+                		LOGGER.info(avc + " -> " + svn);
                     	registry.addViewController(avcd).setViewName(svn);
-                    	System.out.println(avcd + " -> " + svn);
+                    	LOGGER.info(avcd + " -> " + svn);
                     	
                     	skenDeeper(registry, isFolder, name);
                 	}
                 }
             }
-            System.out.println("--------------------------------------------");
+            LOGGER.info("--------------------------------------------");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -79,9 +82,9 @@ public class DefaultView implements WebMvcConfigurer {
         			String svn="forward:/" + name + "/" + f.getName() + _INDEX_HTML;
         			
             		registry.addViewController(avc).setViewName(svn);
-                	System.out.println(avc + " -> " + svn);
+            		LOGGER.info(avc + " -> " + svn);
                 	registry.addViewController(avcd).setViewName(svn);
-                	System.out.println(avcd + " -> " + svn);
+                	LOGGER.info(avcd + " -> " + svn);
                 	
                 	skenDeeper(registry, f, avc.substring(1));
             	}
