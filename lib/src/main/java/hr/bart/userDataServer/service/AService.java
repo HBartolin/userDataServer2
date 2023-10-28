@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 
@@ -25,7 +23,7 @@ public abstract class AService {
 	private transient OsobaClaimActualRepository osobaClaimActualRepository;
 	@Autowired
 	private transient OsobaClaimPlannedRepository osobaClaimPlannedRepository;
-	private final Logger LOGGER=LoggerFactory.getLogger(getClass());
+//	private final Logger LOGGER=LoggerFactory.getLogger(getClass());
 	protected final static int pageRequestSize50=50;
 	protected final static int pageRequestSize8=8;
 	protected final static LocalDate datumPatakZadnji=LocalDate.of(9999, 12, 24);
