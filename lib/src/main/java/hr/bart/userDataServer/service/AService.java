@@ -37,11 +37,11 @@ public abstract class AService {
 	protected final static int SEDAM=7;
 	protected final static int STO=100;
 	
-	protected void cachException(Throwable t, PojoInterface pi) {
-		LOGGER.error(t.getMessage(), t);
-		
-		pi.setGreska(t.getMessage());
-	}
+//	protected void cachException(Throwable t, PojoInterface pi) {
+//		LOGGER.error(t.getMessage(), t);
+//		
+//		pi.setGreska(t.getMessage());
+//	}
 	
 	private String skratiAkoTreba(int duzina, String provjeri) {
 		if(provjeri.length()>duzina) {
