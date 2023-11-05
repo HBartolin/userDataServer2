@@ -1,7 +1,11 @@
 package hr.bart.userDataServer.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PojoInterface {
 	private String greska="";
+	private List<String> greskaList=new ArrayList<>();
 	private String ok="";
 	private Object rezultat="";
 	private Object rezultatPage="";
@@ -36,6 +40,14 @@ public class PojoInterface {
 
 	public void setRezultatPage(Object rezultatPage) {
 		this.rezultatPage = rezultatPage;
+	}
+
+	public List<String> getGreskaList() {
+		return greskaList;
+	}
+
+	public void setGreskaList(List<String> greskaList) {
+		this.greskaList = greskaList;
 	}
 	
 }
