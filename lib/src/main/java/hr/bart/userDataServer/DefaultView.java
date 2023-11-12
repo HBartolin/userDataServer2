@@ -25,7 +25,7 @@ public class DefaultView implements WebMvcConfigurer {
 
             LOGGER.info("--------------------------------------------");
             for(String name : names) {
-            	File isFolder=new File(file.getAbsolutePath() + "/" + name);
+            	File isFolder=new File(file.getAbsolutePath(), name);
             	
                 if (isFolder.isDirectory()) {
                 	if(new File(isFolder, INDEX_HTML).exists()) {
