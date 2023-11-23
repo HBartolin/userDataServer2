@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 //import co.elastic.apm.attach.ElasticApmAttacher;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"hr.bart.userDataServer", "hr.bart.userDataServer.service.kod"} )
 //@ComponentScan
 public class UserDataServerApplication {
 

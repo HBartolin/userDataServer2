@@ -30,7 +30,7 @@ public class ProjektDetaljiServiceImpl extends AService implements ProjektDetalj
 		HashMap<String, Object> hm=new HashMap<>();
 		hm.put("id", id);
 		
-		return new ProjektDetaljiServiceImplProjektDatalji(hm, getKodRepository()).izvrsi();
+		return new ProjektDetaljiServiceImplProjektDatalji(hm).izvrsi();
 	}
 	
 	@Override
