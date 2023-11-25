@@ -33,10 +33,6 @@ public abstract class Kod {
 		this.kodRepository=kodRepository;
 	}
 	
-	public Kod(HashMap<String, Object> hm) {
-		this.hm=hm;
-	}
-	
 	public abstract PojoInterface izvrsiKod(PojoInterface pi) throws Throwable;
 	
 	public PojoInterface izvrsi() {
