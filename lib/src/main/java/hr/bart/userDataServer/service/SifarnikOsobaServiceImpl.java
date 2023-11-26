@@ -1,9 +1,6 @@
 package hr.bart.userDataServer.service;
 
-import java.util.HashMap;
 import java.util.Optional;
-
-import jakarta.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +11,7 @@ import hr.bart.userDataServer.service.kod.SifarnikOsobaServiceImplEditirajSifarn
 import hr.bart.userDataServer.service.kod.SifarnikOsobaServiceImplSifarniciOsoba;
 import hr.bart.userDataServer.service.kod.SifarnikOsobaServiceImplTablicaSifarnikOsoba;
 import hr.bart.userDataServer.util.PojoInterface;
+import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
@@ -33,10 +31,7 @@ public class SifarnikOsobaServiceImpl extends AService implements SifarnikOsobaS
 	
 	@Override
 	public PojoInterface tablicaSifarnikOsoba(int pageNumber) {
-		HashMap<String, Object> hm=new HashMap<>();
-		hm.put("pageNumber", pageNumber);
-		
-		return new SifarnikOsobaServiceImplTablicaSifarnikOsoba(hm, getKodRepository()).izvrsi();
+		return new SifarnikOsobaServiceImplTablicaSifarnikOsoba(getKodRepository(), pageNumber).izvrsi();
 	}
 	
 	private KodRepository getKodRepository() {

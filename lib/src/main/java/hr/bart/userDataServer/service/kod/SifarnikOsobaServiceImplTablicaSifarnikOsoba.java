@@ -1,17 +1,16 @@
 package hr.bart.userDataServer.service.kod;
 
-import java.util.HashMap;
-
 import org.springframework.data.domain.PageRequest;
 
 import hr.bart.userDataServer.util.PojoInterface;
 
 public class SifarnikOsobaServiceImplTablicaSifarnikOsoba extends Kod {
-	private int pageNumber=(int) hm.get("pageNumber");
+	private final int pageNumber;
 	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 
-	public SifarnikOsobaServiceImplTablicaSifarnikOsoba(HashMap<String, Object> hm, KodRepository kodRepository) {
-		super(hm, kodRepository);
+	public SifarnikOsobaServiceImplTablicaSifarnikOsoba(KodRepository kodRepository, int pageNumber) {
+		super(kodRepository);
+		this.pageNumber=pageNumber;
 	}
 
 	@Override
