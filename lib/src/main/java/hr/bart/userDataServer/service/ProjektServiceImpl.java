@@ -1,9 +1,6 @@
 package hr.bart.userDataServer.service;
 
-import java.util.HashMap;
 import java.util.Optional;
-
-import jakarta.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +14,7 @@ import hr.bart.userDataServer.service.kod.ProjektServiceImplTraziProjekte;
 import hr.bart.userDataServer.service.kod.ProjektServiceImplZatvoriOtvoriProjekt;
 import hr.bart.userDataServer.util.PojoInterface;
 import hr.bart.userDataServer.util.ZatvoriOtvori;
+import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
@@ -31,13 +29,7 @@ public class ProjektServiceImpl extends AService implements ProjektService {
 	
 	@Override
 	public PojoInterface zatvoriOtvoriProjekt(ZatvoriOtvori zo, Long id, Long ts, Optional<String> status) {
-		HashMap<String, Object> hm=new HashMap<>();
-		hm.put("zo", zo);
-		hm.put("id", id);
-		hm.put("ts", ts);
-		hm.put("status", status);
-		
-		return new ProjektServiceImplZatvoriOtvoriProjekt(hm, getKodRepository()).izvrsi();
+		return new ProjektServiceImplZatvoriOtvoriProjekt(getKodRepository(), zo, id, ts, status).izvrsi();
 	}
 	
 	@Override

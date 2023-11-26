@@ -1,6 +1,5 @@
 package hr.bart.userDataServer.service.kod;
 
-import java.util.HashMap;
 import java.util.Optional;
 
 import org.springframework.data.domain.PageRequest;
@@ -10,16 +9,25 @@ import hr.bart.userDataServer.util.DbStatus;
 import hr.bart.userDataServer.util.PojoInterface;
 import hr.bart.userDataServer.util.ZatvoriOtvori;
 
-@SuppressWarnings("unchecked")
 public class ProjektServiceImplZatvoriOtvoriProjekt extends Kod {
-	private ZatvoriOtvori zo=(ZatvoriOtvori) hm.get("zo");
-	private Long id=(Long) hm.get("id");
-	private Long ts=(Long) hm.get("ts");
-	private Optional<String> status=(Optional<String>) hm.get("status");
+	private final ZatvoriOtvori zo;
+	private final Long id;
+	private final Long ts;
+	private final Optional<String> status;
 	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 
-	public ProjektServiceImplZatvoriOtvoriProjekt(HashMap<String, Object> hm, KodRepository kodRepository) {
-		super(hm, kodRepository);
+	public ProjektServiceImplZatvoriOtvoriProjekt(
+			KodRepository kodRepository,
+			ZatvoriOtvori zo,
+			Long id,
+			Long ts,
+			Optional<String> status
+			) {
+		super(kodRepository);
+		this.zo=zo;
+		this.id=id;
+		this.ts=ts;
+		this.status=status;
 	}
 
 	@Override
