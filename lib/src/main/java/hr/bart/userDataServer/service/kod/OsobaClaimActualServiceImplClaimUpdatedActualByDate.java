@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,16 +14,18 @@ import hr.bart.userDataServer.db.SifarnikDatuma;
 import hr.bart.userDataServer.util.ClaimUpdatedActualPlanned;
 import hr.bart.userDataServer.util.PojoInterface;
 
-@SuppressWarnings("unchecked")
 public class OsobaClaimActualServiceImplClaimUpdatedActualByDate extends Kod {
-	private Long idProjektDetalji=(Long) hm.get("idProjektDetalji");
-	private LocalDate datum=(LocalDate) hm.get("datum");
-	private List<ClaimUpdatedActualPlanned> podatci=(List<ClaimUpdatedActualPlanned>) hm.get("podatci");	
+	private final Long idProjektDetalji;
+	private final LocalDate datum;
+	private final List<ClaimUpdatedActualPlanned> podatci;	
 	private String greska;
 	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 	
-	public OsobaClaimActualServiceImplClaimUpdatedActualByDate(HashMap<String, Object> hm, KodRepository kodRepository) {
-		super(hm, kodRepository);
+	public OsobaClaimActualServiceImplClaimUpdatedActualByDate(KodRepository kodRepository, Long idProjektDetalji, LocalDate datum, List<ClaimUpdatedActualPlanned> podatci) {
+		super(kodRepository);
+		this.idProjektDetalji=idProjektDetalji;
+		this.datum=datum;
+		this.podatci=podatci;
 	}
 
 	@Override
