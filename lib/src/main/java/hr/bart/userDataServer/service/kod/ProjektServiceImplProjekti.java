@@ -1,6 +1,5 @@
 package hr.bart.userDataServer.service.kod;
 
-import java.util.HashMap;
 import java.util.Optional;
 
 import org.springframework.data.domain.PageRequest;
@@ -8,13 +7,13 @@ import org.springframework.data.domain.PageRequest;
 import hr.bart.userDataServer.util.DbStatus;
 import hr.bart.userDataServer.util.PojoInterface;
 
-@SuppressWarnings("unchecked")
 public class ProjektServiceImplProjekti extends Kod {
-	private Optional<String> status=(Optional<String>) hm.get("status");
+	private final Optional<String> status;
 	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 
-	public ProjektServiceImplProjekti(HashMap<String, Object> hm, KodRepository kodRepository) {
-		super(hm, kodRepository);
+	public ProjektServiceImplProjekti(KodRepository kodRepository, Optional<String> status) {
+		super(kodRepository);
+		this.status=status;
 	}
 
 	@Override

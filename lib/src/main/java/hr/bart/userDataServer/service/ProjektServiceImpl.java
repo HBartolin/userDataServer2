@@ -26,10 +26,7 @@ public class ProjektServiceImpl extends AService implements ProjektService {
 	
 	@Override
 	public PojoInterface projekti(Optional<String> status) {
-		HashMap<String, Object> hm=new HashMap<>();
-		hm.put("status", status);
-		
-		return new ProjektServiceImplProjekti(hm, getKodRepository()).izvrsi();
+		return new ProjektServiceImplProjekti(getKodRepository(), status).izvrsi();
 	}
 	
 	@Override
