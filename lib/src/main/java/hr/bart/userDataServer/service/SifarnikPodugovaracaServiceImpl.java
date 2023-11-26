@@ -22,11 +22,7 @@ public class SifarnikPodugovaracaServiceImpl extends AService implements Sifarni
 	
 	@Override
 	public PojoInterface editirajSifarnikPodugovaraca(Optional<Long> idO, Optional<String> nazivO) {
-		HashMap<String, Object> hm=new HashMap<>();
-		hm.put("idO", idO);
-		hm.put("nazivO", nazivO);
-		
-		return new SifarnikPodugovaracaServiceImplEditirajSifarnikPodugovaraca(hm, getKodRepository()).izvrsi();
+		return new SifarnikPodugovaracaServiceImplEditirajSifarnikPodugovaraca(getKodRepository(), idO, nazivO).izvrsi();
 	}
 	
 	@Override

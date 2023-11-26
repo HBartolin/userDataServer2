@@ -1,19 +1,19 @@
 package hr.bart.userDataServer.service.kod;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 import hr.bart.userDataServer.db.SifarnikPodugovaraca;
 import hr.bart.userDataServer.util.PojoInterface;
 
-@SuppressWarnings("unchecked")
 public class SifarnikPodugovaracaServiceImplEditirajSifarnikPodugovaraca extends Kod {
-	private Optional<Long> idO=(Optional<Long>) hm.get("idO");
-	private Optional<String> nazivO=(Optional<String>) hm.get("nazivO");
+	private final Optional<Long> idO;
+	private final Optional<String> nazivO;
 
-	public SifarnikPodugovaracaServiceImplEditirajSifarnikPodugovaraca(HashMap<String, Object> hm, KodRepository kodRepository) {
-		super(hm, kodRepository);
+	public SifarnikPodugovaracaServiceImplEditirajSifarnikPodugovaraca(KodRepository kodRepository, Optional<Long> idO, Optional<String> nazivO) {
+		super(kodRepository);
+		this.idO=idO;
+		this.nazivO=nazivO;
 	}
 
 	@Override
