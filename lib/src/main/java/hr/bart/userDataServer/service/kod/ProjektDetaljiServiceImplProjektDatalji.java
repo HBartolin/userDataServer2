@@ -6,7 +6,7 @@ import hr.bart.userDataServer.db.ProjektDetalji;
 import hr.bart.userDataServer.util.PojoInterface;
 
 public class ProjektDetaljiServiceImplProjektDatalji extends Kod {
-	private Long id;
+	private final Long id;
 
 	public ProjektDetaljiServiceImplProjektDatalji(KodRepository kodRepository, Long id) {
 		super(kodRepository);
