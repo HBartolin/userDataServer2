@@ -27,16 +27,11 @@ public class ProjektDetaljiServiceImpl extends AService implements ProjektDetalj
 	
 	@Override
 	public PojoInterface projektDatalji(Long id) {
-		HashMap<String, Object> hm=new HashMap<>();
-		hm.put("id", id);
-		
-		return new ProjektDetaljiServiceImplProjektDatalji(hm, getKodRepository()).izvrsi();
+		return new ProjektDetaljiServiceImplProjektDatalji(getKodRepository(), id).izvrsi();
 	}
 	
 	@Override
 	public PojoInterface urediProjektDatalji(Long id, String totalRevenue, String costPs) {
-
-		
 		HashMap<String, Object> hm=new HashMap<>();
 		hm.put("id", id);
 		hm.put("totalRevenue", totalRevenue);

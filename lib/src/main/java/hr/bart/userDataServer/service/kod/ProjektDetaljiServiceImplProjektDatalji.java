@@ -1,16 +1,16 @@
 package hr.bart.userDataServer.service.kod;
 
-import java.util.HashMap;
 import java.util.Optional;
 
 import hr.bart.userDataServer.db.ProjektDetalji;
 import hr.bart.userDataServer.util.PojoInterface;
 
 public class ProjektDetaljiServiceImplProjektDatalji extends Kod {
-	private Long id=(Long) hm.get("id");
+	private Long id;
 
-	public ProjektDetaljiServiceImplProjektDatalji(HashMap<String, Object> hm, KodRepository kodRepository) {
-		super(hm, kodRepository);
+	public ProjektDetaljiServiceImplProjektDatalji(KodRepository kodRepository, Long id) {
+		super(kodRepository);
+		this.id=id;
 	}
 
 	@Override

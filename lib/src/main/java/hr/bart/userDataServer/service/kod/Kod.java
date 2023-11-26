@@ -33,6 +33,10 @@ public abstract class Kod {
 		this.kodRepository=kodRepository;
 	}
 	
+	public Kod(KodRepository kodRepository) {
+		this.kodRepository=kodRepository;
+	}
+	
 	public abstract PojoInterface izvrsiKod(PojoInterface pi) throws Throwable;
 	
 	public PojoInterface izvrsi() {
