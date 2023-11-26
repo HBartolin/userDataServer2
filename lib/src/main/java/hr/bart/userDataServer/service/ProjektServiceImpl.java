@@ -52,10 +52,7 @@ public class ProjektServiceImpl extends AService implements ProjektService {
 	
 	@Override
 	public PojoInterface traziProjekt(String trazi) {
-		HashMap<String, Object> hm=new HashMap<>();
-		hm.put("trazi", trazi);
-		
-		return new ProjektServiceImplTraziProjekte(hm, getKodRepository()).izvrsi();
+		return new ProjektServiceImplTraziProjekte(getKodRepository(), trazi).izvrsi();
 	}
 	
 	private KodRepository getKodRepository() {

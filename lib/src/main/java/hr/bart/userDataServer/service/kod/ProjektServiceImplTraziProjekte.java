@@ -1,6 +1,5 @@
 package hr.bart.userDataServer.service.kod;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -10,10 +9,11 @@ import hr.bart.userDataServer.db.Projekt;
 import hr.bart.userDataServer.util.PojoInterface;
 
 public class ProjektServiceImplTraziProjekte extends Kod {
-	private String trazi=(String) hm.get("trazi");
+	private final String trazi;
 
-	public ProjektServiceImplTraziProjekte(HashMap<String, Object> hm, KodRepository kodRepository) {
-		super(hm, kodRepository);
+	public ProjektServiceImplTraziProjekte(KodRepository kodRepository, String trazi) {
+		super(kodRepository);
+		this.trazi=trazi;
 	}
 
 	@Override
