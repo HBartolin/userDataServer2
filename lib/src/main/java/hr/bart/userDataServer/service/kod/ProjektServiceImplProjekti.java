@@ -11,7 +11,7 @@ import hr.bart.userDataServer.util.PojoInterface;
 @SuppressWarnings("unchecked")
 public class ProjektServiceImplProjekti extends Kod {
 	private Optional<String> status=(Optional<String>) hm.get("status");
-	private ACommonServis aCommonServis=new ACommonServis(hm, kodRepository);
+	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 
 	public ProjektServiceImplProjekti(HashMap<String, Object> hm, KodRepository kodRepository) {
 		super(hm, kodRepository);

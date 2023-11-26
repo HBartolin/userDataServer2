@@ -13,7 +13,7 @@ public class SifarnikOsobaServiceImplEditirajSifarnikOsoba extends Kod {
 	private Optional<Long> id=(Optional<Long>) hm.get("id");
 	private String ime=(String) hm.get("ime");
 	private String prezime=(String) hm.get("prezime");
-	private ACommonServis aCommonServis=new ACommonServis(hm, kodRepository);
+	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 
 	public SifarnikOsobaServiceImplEditirajSifarnikOsoba(HashMap<String, Object> hm, KodRepository kodRepository) {
 		super(hm, kodRepository);

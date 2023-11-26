@@ -16,7 +16,7 @@ public class ProjektServiceImplZatvoriOtvoriProjekt extends Kod {
 	private Long id=(Long) hm.get("id");
 	private Long ts=(Long) hm.get("ts");
 	private Optional<String> status=(Optional<String>) hm.get("status");
-	private ACommonServis aCommonServis=new ACommonServis(hm, kodRepository);
+	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 
 	public ProjektServiceImplZatvoriOtvoriProjekt(HashMap<String, Object> hm, KodRepository kodRepository) {
 		super(hm, kodRepository);

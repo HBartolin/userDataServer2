@@ -34,7 +34,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 	private String greska="";
 	private String sifarnikDatumaOdValue="Datum od";
 	private String sifarnikDatumaDoValue="Datum do";
-	private ACommonServis aCommonServis=new ACommonServis(hm, kodRepository);
+	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 	
 	public ProjektDetaljiRepositoryUnesiOsobaValuta(HashMap<String, Object> hm, KodRepository kodRepository) {
 		super(hm, kodRepository);

@@ -12,7 +12,7 @@ import hr.bart.userDataServer.util.PojoInterface;
 public class ProjektServiceImplTablicaProjekti extends Kod {
 	private int pageNumber=(int) hm.get("pageNumber");
 	private Optional<String> status=(Optional<String>) hm.get("status");
-	private ACommonServis aCommonServis=new ACommonServis(hm, kodRepository);
+	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 
 	public ProjektServiceImplTablicaProjekti(HashMap<String, Object> hm, KodRepository kodRepository) {
 		super(hm, kodRepository);

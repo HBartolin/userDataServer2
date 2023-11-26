@@ -23,7 +23,7 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 	private Long idProjektDetalji=(Long) hm.get("idProjektDetalji");
 	private LocalDate datum=(LocalDate) hm.get("datum");
 	private HashMap<String, String> podatci=(HashMap<String, String>) hm.get("podatci");
-	private ACommonServis aCommonServis=new ACommonServis(hm, kodRepository);
+	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 	
 	public OsobaClaimActualServiceImplClaimNewActualByDate(HashMap<String, Object> hm, KodRepository kodRepository) {
 		super(hm, kodRepository);

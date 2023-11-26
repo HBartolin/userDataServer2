@@ -8,7 +8,7 @@ import hr.bart.userDataServer.util.PojoInterface;
 
 public class OsobaValutaServiceImplOsobaValuta extends Kod {
 	private Long idSifarnikOsoba=(Long) hm.get("idSifarnikOsoba");
-	private ACommonServis aCommonServis=new ACommonServis(hm, kodRepository);
+	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 	
 	public OsobaValutaServiceImplOsobaValuta(HashMap<String, Object> hm, KodRepository kodRepository) {
 		super(hm, kodRepository);

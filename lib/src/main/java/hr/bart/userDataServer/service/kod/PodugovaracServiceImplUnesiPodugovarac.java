@@ -24,7 +24,7 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 	private LocalDate datumActual=(LocalDate) hm.get("datumActual");
 	private Optional<BigDecimal> cijena=(Optional<BigDecimal>) hm.get("cijena");
 	private Optional<Long> invoiceNumber=(Optional<Long>) hm.get("invoiceNumber");
-	private ACommonServis aCommonServis=new ACommonServis(hm, kodRepository);
+	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 
 	public PodugovaracServiceImplUnesiPodugovarac(HashMap<String, Object> hm, KodRepository kodRepository) {
 		super(hm, kodRepository);

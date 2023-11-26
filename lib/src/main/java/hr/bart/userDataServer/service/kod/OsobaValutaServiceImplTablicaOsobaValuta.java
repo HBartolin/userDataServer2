@@ -9,7 +9,7 @@ import hr.bart.userDataServer.util.PojoInterface;
 public class OsobaValutaServiceImplTablicaOsobaValuta extends Kod {
 	private int pageNumber=(int) hm.get("pageNumber");
 	private Long idSifarnikOsoba=(Long) hm.get("idSifarnikOsoba");
-	private ACommonServis aCommonServis=new ACommonServis(hm, kodRepository);
+	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 
 	public OsobaValutaServiceImplTablicaOsobaValuta(HashMap<String, Object> hm, KodRepository kodRepository) {
 		super(hm, kodRepository);

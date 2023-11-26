@@ -3,7 +3,6 @@ package hr.bart.userDataServer.service.kod;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,8 +23,8 @@ import hr.bart.userDataServer.util.PojoInterface;
 
 public class ACommonServis extends Kod {
 	
-	public ACommonServis(HashMap<String, Object> hm, KodRepository kodRepository) {
-		super(hm, kodRepository);
+	public ACommonServis(KodRepository kodRepository) {
+		super(kodRepository);
 	}
 	
 	@Override

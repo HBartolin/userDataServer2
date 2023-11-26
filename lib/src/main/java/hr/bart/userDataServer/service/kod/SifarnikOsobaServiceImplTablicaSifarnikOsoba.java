@@ -8,7 +8,7 @@ import hr.bart.userDataServer.util.PojoInterface;
 
 public class SifarnikOsobaServiceImplTablicaSifarnikOsoba extends Kod {
 	private int pageNumber=(int) hm.get("pageNumber");
-	private ACommonServis aCommonServis=new ACommonServis(hm, kodRepository);
+	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 
 	public SifarnikOsobaServiceImplTablicaSifarnikOsoba(HashMap<String, Object> hm, KodRepository kodRepository) {
 		super(hm, kodRepository);

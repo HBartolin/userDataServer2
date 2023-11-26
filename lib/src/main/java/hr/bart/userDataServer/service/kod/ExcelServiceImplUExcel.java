@@ -50,7 +50,7 @@ public class ExcelServiceImplUExcel extends Kod {
 	private HashMap<String, CellStyle> hmCellStyle=new HashMap<>();
 	private SortedSet<LocalDate> datumiSortedSet;
 	private Optional<List<Claim>> claimListO;
-	private ACommonServis aCommonServis=new ACommonServis(hm, kodRepository);
+	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 
 	public ExcelServiceImplUExcel(HashMap<String, Object> hm, KodRepository kodRepository) {
 		super(hm, kodRepository);

@@ -21,7 +21,7 @@ public class OsobaClaimActualServiceImplClaimUpdatedActualByDate extends Kod {
 	private LocalDate datum=(LocalDate) hm.get("datum");
 	private List<ClaimUpdatedActualPlanned> podatci=(List<ClaimUpdatedActualPlanned>) hm.get("podatci");	
 	private String greska;
-	private ACommonServis aCommonServis=new ACommonServis(hm, kodRepository);
+	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 	
 	public OsobaClaimActualServiceImplClaimUpdatedActualByDate(HashMap<String, Object> hm, KodRepository kodRepository) {
 		super(hm, kodRepository);
