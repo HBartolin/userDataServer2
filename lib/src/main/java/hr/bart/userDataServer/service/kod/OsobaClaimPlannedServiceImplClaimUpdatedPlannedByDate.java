@@ -2,7 +2,6 @@ package hr.bart.userDataServer.service.kod;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,15 +11,17 @@ import hr.bart.userDataServer.db.SifarnikMjeseca;
 import hr.bart.userDataServer.util.ClaimUpdatedActualPlanned;
 import hr.bart.userDataServer.util.PojoInterface;
 
-@SuppressWarnings("unchecked")
 public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
-	private LocalDate datum=(LocalDate) hm.get("datum");
-	private List<ClaimUpdatedActualPlanned> podatci=(List<ClaimUpdatedActualPlanned>) hm.get("podatci");
-	private Long idProjektDetalji=(Long) hm.get("idProjektDetalji");
+	private final LocalDate datum;
+	private final List<ClaimUpdatedActualPlanned> podatci;
+	private final Long idProjektDetalji;
 	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 
-	public OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate(HashMap<String, Object> hm, KodRepository kodRepository) {
-		super(hm, kodRepository);
+	public OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate(KodRepository kodRepository, LocalDate datum, List<ClaimUpdatedActualPlanned> podatci, Long idProjektDetalji) {
+		super(kodRepository);
+		this.datum=datum;
+		this.podatci=podatci;
+		this.idProjektDetalji=idProjektDetalji;
 	}
 
 	@Override
