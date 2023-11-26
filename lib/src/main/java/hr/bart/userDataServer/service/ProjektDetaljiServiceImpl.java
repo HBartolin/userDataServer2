@@ -1,9 +1,5 @@
 package hr.bart.userDataServer.service;
 
-import java.util.HashMap;
-
-import jakarta.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +10,7 @@ import hr.bart.userDataServer.service.kod.KodRepository;
 import hr.bart.userDataServer.service.kod.ProjektDetaljiServiceImplProjektDatalji;
 import hr.bart.userDataServer.service.kod.ProjektDetaljiServiceImplUrediProjektDatalji;
 import hr.bart.userDataServer.util.PojoInterface;
+import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
@@ -32,12 +29,7 @@ public class ProjektDetaljiServiceImpl extends AService implements ProjektDetalj
 	
 	@Override
 	public PojoInterface urediProjektDatalji(Long id, String totalRevenue, String costPs) {
-		HashMap<String, Object> hm=new HashMap<>();
-		hm.put("id", id);
-		hm.put("totalRevenue", totalRevenue);
-		hm.put("costPs", costPs);
-		
-		return new ProjektDetaljiServiceImplUrediProjektDatalji(hm, getKodRepository()).izvrsi();
+		return new ProjektDetaljiServiceImplUrediProjektDatalji(getKodRepository(), id, totalRevenue, costPs).izvrsi();
 	}
 	
 	private KodRepository getKodRepository() {

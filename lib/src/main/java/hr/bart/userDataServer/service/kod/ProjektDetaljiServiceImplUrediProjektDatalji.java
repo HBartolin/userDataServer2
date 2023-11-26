@@ -1,7 +1,6 @@
 package hr.bart.userDataServer.service.kod;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.Optional;
 
 import hr.bart.userDataServer.db.Projekt;
@@ -10,13 +9,16 @@ import hr.bart.userDataServer.db.SifarnikValuta;
 import hr.bart.userDataServer.util.PojoInterface;
 
 public class ProjektDetaljiServiceImplUrediProjektDatalji extends Kod {
-	private Long id=(Long) hm.get("id");
-	private String totalRevenue=(String) hm.get("totalRevenue");
-	private String costPs=(String) hm.get("costPs");
+	private final Long id;
+	private final String totalRevenue;
+	private final String costPs;
 	private String greska="";
 
-	public ProjektDetaljiServiceImplUrediProjektDatalji(HashMap<String, Object> hm, KodRepository kodRepository) {
-		super(hm, kodRepository);
+	public ProjektDetaljiServiceImplUrediProjektDatalji(KodRepository kodRepository, Long id, String totalRevenue, String costPs) {
+		super(kodRepository);
+		this.id=id;
+		this.totalRevenue=totalRevenue;
+		this.costPs=costPs;
 	}
 
 	@Override
