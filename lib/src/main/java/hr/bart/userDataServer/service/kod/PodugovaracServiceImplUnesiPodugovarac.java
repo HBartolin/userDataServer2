@@ -3,7 +3,6 @@ package hr.bart.userDataServer.service.kod;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -14,20 +13,37 @@ import hr.bart.userDataServer.db.Podugovarac;
 import hr.bart.userDataServer.db.ProjektDetalji;
 import hr.bart.userDataServer.util.PojoInterface;
 
-@SuppressWarnings("unchecked")
 public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
-	private Optional<Long> id=(Optional<Long>) hm.get("id");
-	private Long ts=(Long) hm.get("ts");
-	private Long idProjektDetalji=(Long) hm.get("idProjektDetalji");
-	private Optional<Long> idPurchaseOrder=(Optional<Long>) hm.get("idPurchaseOrder");
-	private LocalDate datumPlanned=(LocalDate) hm.get("datumPlanned");
-	private LocalDate datumActual=(LocalDate) hm.get("datumActual");
-	private Optional<BigDecimal> cijena=(Optional<BigDecimal>) hm.get("cijena");
-	private Optional<Long> invoiceNumber=(Optional<Long>) hm.get("invoiceNumber");
+	private final Optional<Long> id;
+	private final Long ts;
+	private final Long idProjektDetalji;
+	private final Optional<Long> idPurchaseOrder;
+	private final LocalDate datumPlanned;
+	private final LocalDate datumActual;
+	private final Optional<BigDecimal> cijena;
+	private final Optional<Long> invoiceNumber;
 	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 
-	public PodugovaracServiceImplUnesiPodugovarac(HashMap<String, Object> hm, KodRepository kodRepository) {
-		super(hm, kodRepository);
+	public PodugovaracServiceImplUnesiPodugovarac(
+			KodRepository kodRepository,
+			Optional<Long> id,
+			Long ts,
+			Long idProjektDetalji,
+			Optional<Long> idPurchaseOrder,
+			LocalDate datumPlanned,
+			LocalDate datumActual,
+			Optional<BigDecimal> cijena,
+			Optional<Long> invoiceNumber
+			) {
+		super(kodRepository);
+		this.id=id;
+		this.ts=ts;
+		this.idProjektDetalji=idProjektDetalji;
+		this.idPurchaseOrder=idPurchaseOrder;
+		this.datumPlanned=datumPlanned;
+		this.datumActual=datumActual;
+		this.cijena=cijena;
+		this.invoiceNumber=invoiceNumber;
 	}
 
 	@Override

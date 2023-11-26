@@ -2,10 +2,7 @@ package hr.bart.userDataServer.service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.Optional;
-
-import jakarta.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +17,7 @@ import hr.bart.userDataServer.service.kod.KodRepository;
 import hr.bart.userDataServer.service.kod.PodugovaracServiceImplPodugovaraci;
 import hr.bart.userDataServer.service.kod.PodugovaracServiceImplUnesiPodugovarac;
 import hr.bart.userDataServer.util.PojoInterface;
+import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
@@ -44,17 +42,16 @@ public class PodugovaracServiceImpl extends AService implements PodugovaracServi
 
 	@Override
 	public PojoInterface unesiPodugovarac(Optional<Long> id, Long ts, Long idProjektDetalji, Optional<Long> idPurchaseOrder, LocalDate datumPlanned, LocalDate datumActual, Optional<BigDecimal> cijena, Optional<Long> invoiceNumber) {
-		HashMap<String, Object> hm=new HashMap<>();
-		hm.put("id", id);
-		hm.put("ts", ts);
-		hm.put("idProjektDetalji", idProjektDetalji);
-		hm.put("idPurchaseOrder", idPurchaseOrder);
-		hm.put("datumPlanned", datumPlanned);
-		hm.put("datumActual", datumActual);
-		hm.put("cijena", cijena);
-		hm.put("invoiceNumber", invoiceNumber);
-		
-		return new PodugovaracServiceImplUnesiPodugovarac(hm, getKodRepository()).izvrsi();
+		return new PodugovaracServiceImplUnesiPodugovarac(
+				getKodRepository(),
+				id,
+				ts,
+				idProjektDetalji,
+				idPurchaseOrder,
+				datumPlanned,
+				datumActual,
+				cijena,
+				invoiceNumber).izvrsi();
 	}
 	
 	private KodRepository getKodRepository() {
