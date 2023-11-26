@@ -1,17 +1,16 @@
 package hr.bart.userDataServer.service.kod;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 import hr.bart.userDataServer.util.PojoInterface;
 
-@SuppressWarnings("unchecked")
 public class ClaimServiceImplClaimImena extends Kod {
-	private Optional<List<Long>> podatciO=(Optional<List<Long>>) hm.get("podatciO");
+	private final Optional<List<Long>> podatciO;
 
-	public ClaimServiceImplClaimImena(HashMap<String, Object> hm, KodRepository kodRepository) {
-		super(hm, kodRepository);
+	public ClaimServiceImplClaimImena(KodRepository kodRepository, Optional<List<Long>> podatciO) {
+		super(kodRepository);
+		this.podatciO=podatciO;
 	}
 
 	@Override

@@ -44,11 +44,8 @@ public class ClaimServiceImpl extends AService implements ClaimService {
 	} 
 	
 	@Override
-	public PojoInterface claimImena(Optional<List<Long>> podatciO) {		
-		HashMap<String, Object> hm=new HashMap<>();
-		hm.put("podatciO", podatciO);
-		
-		return new ClaimServiceImplClaimImena(hm, getKodRepository()).izvrsi();
+	public PojoInterface claimImena(Optional<List<Long>> podatciO) {	
+		return new ClaimServiceImplClaimImena(getKodRepository(), podatciO).izvrsi();
 	}
 	
 	private KodRepository getKodRepository() {
