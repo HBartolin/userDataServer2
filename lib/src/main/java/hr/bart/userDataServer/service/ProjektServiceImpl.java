@@ -45,11 +45,7 @@ public class ProjektServiceImpl extends AService implements ProjektService {
 	
 	@Override
 	public PojoInterface noviProjekt(String claim, String contract) {
-		HashMap<String, Object> hm=new HashMap<>();
-		hm.put("claim", claim);
-		hm.put("contract", contract);
-		
-		return new ProjektServiceImplNoviProjekt(hm, getKodRepository()).izvrsi();
+		return new ProjektServiceImplNoviProjekt(getKodRepository(), claim, contract).izvrsi();
 	}
 	
 	@Override

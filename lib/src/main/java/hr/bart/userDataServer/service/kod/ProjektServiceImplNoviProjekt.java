@@ -1,6 +1,5 @@
 package hr.bart.userDataServer.service.kod;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -11,12 +10,14 @@ import hr.bart.userDataServer.util.DbStatus;
 import hr.bart.userDataServer.util.PojoInterface;
 
 public class ProjektServiceImplNoviProjekt extends Kod {
-	private String claim=(String) hm.get("claim");
-	private String contract=(String) hm.get("contract");
+	private final String claim;
+	private final String contract;
 	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 
-	public ProjektServiceImplNoviProjekt(HashMap<String, Object> hm, KodRepository kodRepository) {
-		super(hm, kodRepository);
+	public ProjektServiceImplNoviProjekt(KodRepository kodRepository, String claim, String contract) {
+		super(kodRepository);
+		this.claim=claim;
+		this.contract=contract;
 	}
 
 	@Override
