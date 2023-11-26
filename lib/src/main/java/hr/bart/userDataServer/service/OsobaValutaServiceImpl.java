@@ -67,12 +67,8 @@ public class OsobaValutaServiceImpl extends AService implements OsobaValutaServi
 	}
 	
 	@Override
-	public PojoInterface tablicaOsobaValuta(int pageNumber, Long idSifarnikOsoba) {
-		HashMap<String, Object> hm=new HashMap<>();
-		hm.put("pageNumber", pageNumber);
-		hm.put("idSifarnikOsoba", idSifarnikOsoba);
-		
-		return new OsobaValutaServiceImplTablicaOsobaValuta(hm, getKodRepository()).izvrsi();	
+	public PojoInterface tablicaOsobaValuta(int pageNumber, Long idSifarnikOsoba) {		
+		return new OsobaValutaServiceImplTablicaOsobaValuta(getKodRepository(), idSifarnikOsoba, pageNumber).izvrsi();	
 	}
 	
 	private KodRepository getKodRepository() {
