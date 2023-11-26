@@ -29,13 +29,8 @@ public class SifarnikOsobaServiceImpl extends AService implements SifarnikOsobaS
 	}
 
 	@Override
-	public PojoInterface editirajSifarnikOsoba(Optional<Long> id, String ime, String prezime) {
-		HashMap<String, Object> hm=new HashMap<>();
-		hm.put("id", id);
-		hm.put("ime", ime);
-		hm.put("prezime", prezime);
-		
-		return new SifarnikOsobaServiceImplEditirajSifarnikOsoba(hm, getKodRepository()).izvrsi();
+	public PojoInterface editirajSifarnikOsoba(Optional<Long> id, String ime, String prezime) {	
+		return new SifarnikOsobaServiceImplEditirajSifarnikOsoba(getKodRepository(), id, ime, prezime).izvrsi();
 	}
 	
 	@Override

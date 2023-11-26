@@ -1,6 +1,5 @@
 package hr.bart.userDataServer.service.kod;
 
-import java.util.HashMap;
 import java.util.Optional;
 
 import org.springframework.data.domain.PageRequest;
@@ -8,15 +7,17 @@ import org.springframework.data.domain.PageRequest;
 import hr.bart.userDataServer.db.SifarnikOsoba;
 import hr.bart.userDataServer.util.PojoInterface;
 
-@SuppressWarnings("unchecked")
 public class SifarnikOsobaServiceImplEditirajSifarnikOsoba extends Kod {
-	private Optional<Long> id=(Optional<Long>) hm.get("id");
-	private String ime=(String) hm.get("ime");
-	private String prezime=(String) hm.get("prezime");
+	private final Optional<Long> id;
+	private final String ime;
+	private final String prezime;
 	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 
-	public SifarnikOsobaServiceImplEditirajSifarnikOsoba(HashMap<String, Object> hm, KodRepository kodRepository) {
-		super(hm, kodRepository);
+	public SifarnikOsobaServiceImplEditirajSifarnikOsoba(KodRepository kodRepository, Optional<Long> id, String ime, String prezime) {
+		super(kodRepository);
+		this.id=id;
+		this.ime=ime;
+		this.prezime=prezime;
 	}
 
 	@Override
