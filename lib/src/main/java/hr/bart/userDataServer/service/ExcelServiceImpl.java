@@ -1,9 +1,5 @@
 package hr.bart.userDataServer.service;
 
-import java.util.HashMap;
-
-import jakarta.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +12,7 @@ import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
 import hr.bart.userDataServer.service.kod.ExcelServiceImplUExcel;
 import hr.bart.userDataServer.service.kod.KodRepository;
 import hr.bart.userDataServer.util.PojoInterface;
+import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
@@ -35,10 +32,7 @@ public class ExcelServiceImpl  extends AService implements ExcelService {
 
 	@Override
 	public PojoInterface uExcel(Long id) {		
-		HashMap<String, Object> hm=new HashMap<>();
-		hm.put("id", id);
-		
-		return new ExcelServiceImplUExcel(hm, getKodRepository()).izvrsi();
+		return new ExcelServiceImplUExcel(getKodRepository(), id).izvrsi();
 	}
 	
 	private KodRepository getKodRepository() {

@@ -37,7 +37,7 @@ import hr.bart.userDataServer.util.ReturnClaim;
 import hr.bart.userDataServer.util.ReturnPodugovarac;
 
 public class ExcelServiceImplUExcel extends Kod {
-	private Long id=(Long) hm.get("id");
+	private final Long id;
 	private static final String S_VALUTE="valuta";
 	private static final String S_POSTO="posto";
 	private static final String S_CENTRIRANO="centrirano";
@@ -52,8 +52,9 @@ public class ExcelServiceImplUExcel extends Kod {
 	private Optional<List<Claim>> claimListO;
 	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 
-	public ExcelServiceImplUExcel(HashMap<String, Object> hm, KodRepository kodRepository) {
-		super(hm, kodRepository);
+	public ExcelServiceImplUExcel(KodRepository kodRepository, Long id) {
+		super(kodRepository);
+		this.id=id;
 	}
 
 	@Override
