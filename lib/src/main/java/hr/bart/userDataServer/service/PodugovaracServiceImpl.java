@@ -38,11 +38,8 @@ public class PodugovaracServiceImpl extends AService implements PodugovaracServi
 	private transient ClaimRepository claimRepository;
 	
 	@Override
-	public PojoInterface podugovaraci(Long idProjektDetalji) {
-		HashMap<String, Object> hm=new HashMap<>();
-		hm.put("idProjektDetalji", idProjektDetalji);
-		
-		return new PodugovaracServiceImplPodugovaraci(hm, getKodRepository()).izvrsi();
+	public PojoInterface podugovaraci(Long idProjektDetalji) {		
+		return new PodugovaracServiceImplPodugovaraci(getKodRepository(), idProjektDetalji).izvrsi();
 	}
 
 	@Override
