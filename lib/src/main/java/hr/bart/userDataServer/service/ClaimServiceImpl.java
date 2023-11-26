@@ -38,9 +38,7 @@ public class ClaimServiceImpl extends AService implements ClaimService {
 	
 	@Override
 	public PojoInterface novaOsoba() {		
-		HashMap<String, Object> hm=new HashMap<>();
-		
-		return new ClaimServiceImplNovaOsoba(hm, getKodRepository()).izvrsi();
+		return new ClaimServiceImplNovaOsoba(getKodRepository()).izvrsi();
 	} 
 	
 	@Override
