@@ -1,12 +1,11 @@
 package hr.bart.userDataServer;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 //import co.elastic.apm.attach.ElasticApmAttacher;
 
-@SpringBootApplication(scanBasePackages = {"hr.bart.userDataServer", "hr.bart.userDataServer.service.kod"} )
+@SpringBootApplication
 //@ComponentScan
 public class UserDataServerApplication {
 
