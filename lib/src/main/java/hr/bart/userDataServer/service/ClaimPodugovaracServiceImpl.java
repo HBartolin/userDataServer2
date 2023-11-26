@@ -27,11 +27,8 @@ public class ClaimPodugovaracServiceImpl extends AService implements ClaimPodugo
 	private transient ProjektDetaljiRepository projektDetaljiRepository; 
 	
 	@Override
-	public PojoInterface purchaseOrders(Long idProjektDetalji) {
-		HashMap<String, Object> hm=new HashMap<>();
-		hm.put("idProjektDetalji", idProjektDetalji);
-		
-		return new ClaimPodugovaracServiceImplPurchaseOrders(hm, getKodRepository()).izvrsi();
+	public PojoInterface purchaseOrders(Long idProjektDetalji) {		
+		return new ClaimPodugovaracServiceImplPurchaseOrders(getKodRepository(), idProjektDetalji).izvrsi();
 	}
 
 	@Override
