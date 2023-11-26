@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,22 +21,37 @@ import hr.bart.userDataServer.db.SifarnikOsoba;
 import hr.bart.userDataServer.db.SifarnikValuta;
 import hr.bart.userDataServer.util.PojoInterface;
 
-@SuppressWarnings("unchecked")
 public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
-	private Optional<Long> id=(Optional<Long>) hm.get("id");
-	private Long ts=(Long) hm.get("ts");
-	private Long idSifarnikOsoba=(Long) hm.get("idSifarnikOsoba");
-	private String band=(String) hm.get("band");
-	private BigDecimal cijena=(BigDecimal) hm.get("cijena");
-	private LocalDate sifarnikDatumaOdLD=(LocalDate) hm.get("sifarnikDatumaOdLD");
-	private LocalDate sifarnikDatumaDoLD=(LocalDate) hm.get("sifarnikDatumaDoLD");
+	private final Optional<Long> id;
+	private final Long ts;
+	private final Long idSifarnikOsoba;
+	private final String band;
+	private final BigDecimal cijena;
+	private final LocalDate sifarnikDatumaOdLD;
+	private final LocalDate sifarnikDatumaDoLD;
 	private String greska="";
 	private String sifarnikDatumaOdValue="Datum od";
 	private String sifarnikDatumaDoValue="Datum do";
 	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 	
-	public ProjektDetaljiRepositoryUnesiOsobaValuta(HashMap<String, Object> hm, KodRepository kodRepository) {
-		super(hm, kodRepository);
+	public ProjektDetaljiRepositoryUnesiOsobaValuta(
+			KodRepository kodRepository,
+			Optional<Long> id,
+			Long ts,
+			Long idSifarnikOsoba,
+			String band,
+			BigDecimal cijena,
+			LocalDate sifarnikDatumaOdLD,
+			LocalDate sifarnikDatumaDoLD
+			) {
+		super(kodRepository);
+		this.id=id;
+		this.ts=ts;
+		this.idSifarnikOsoba=idSifarnikOsoba;
+		this.band=band;
+		this.cijena=cijena;
+		this.sifarnikDatumaDoLD=sifarnikDatumaDoLD;
+		this.sifarnikDatumaOdLD=sifarnikDatumaOdLD;
 	}
 
 	@Override

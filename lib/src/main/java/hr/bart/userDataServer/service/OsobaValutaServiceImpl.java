@@ -2,10 +2,7 @@ package hr.bart.userDataServer.service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.Optional;
-
-import jakarta.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +21,7 @@ import hr.bart.userDataServer.service.kod.OsobaValutaServiceImplOsobaValuta;
 import hr.bart.userDataServer.service.kod.OsobaValutaServiceImplTablicaOsobaValuta;
 import hr.bart.userDataServer.service.kod.ProjektDetaljiRepositoryUnesiOsobaValuta;
 import hr.bart.userDataServer.util.PojoInterface;
+import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
@@ -54,16 +52,15 @@ public class OsobaValutaServiceImpl extends AService implements OsobaValutaServi
 
 	@Override
 	public PojoInterface unesiOsobaValuta(Optional<Long> id, Long ts, Long idSifarnikOsoba, String band, BigDecimal cijena, LocalDate sifarnikDatumaOdLD, LocalDate sifarnikDatumaDoLD) {
-		HashMap<String, Object> hm=new HashMap<>();
-		hm.put("id", id);
-		hm.put("ts", ts);
-		hm.put("idSifarnikOsoba", idSifarnikOsoba);
-		hm.put("band", band);
-		hm.put("cijena", cijena);
-		hm.put("sifarnikDatumaOdLD", sifarnikDatumaOdLD);
-		hm.put("sifarnikDatumaDoLD", sifarnikDatumaDoLD);
-		
-		return new ProjektDetaljiRepositoryUnesiOsobaValuta(hm, getKodRepository()).izvrsi();
+		return new ProjektDetaljiRepositoryUnesiOsobaValuta(
+				getKodRepository(),
+				id,
+				ts,
+				idSifarnikOsoba,
+				band,
+				cijena,
+				sifarnikDatumaOdLD,
+				sifarnikDatumaDoLD).izvrsi();
 	}
 	
 	@Override
