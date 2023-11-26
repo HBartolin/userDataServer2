@@ -1,6 +1,5 @@
 package hr.bart.userDataServer.service.kod;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,11 +7,12 @@ import hr.bart.userDataServer.db.Claim;
 import hr.bart.userDataServer.util.PojoInterface;
 
 public class ClaimServiceImplTablicaOsobaValuta extends Kod {
-	private Long idProjektDetalji=(Long) hm.get("idProjektDetalji");
+	private final Long idProjektDetalji;
 	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 
-	public ClaimServiceImplTablicaOsobaValuta(HashMap<String, Object> hm, KodRepository kodRepository) {
-		super(hm, kodRepository);
+	public ClaimServiceImplTablicaOsobaValuta(KodRepository kodRepository, Long idProjektDetalji) {
+		super(kodRepository);
+		this.idProjektDetalji=idProjektDetalji;
 	}
 
 	@Override

@@ -1,10 +1,7 @@
 package hr.bart.userDataServer.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
-
-import jakarta.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +14,7 @@ import hr.bart.userDataServer.service.kod.ClaimServiceImplNovaOsoba;
 import hr.bart.userDataServer.service.kod.ClaimServiceImplTablicaOsobaValuta;
 import hr.bart.userDataServer.service.kod.KodRepository;
 import hr.bart.userDataServer.util.PojoInterface;
+import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
@@ -30,10 +28,7 @@ public class ClaimServiceImpl extends AService implements ClaimService {
 	
 	@Override
 	public PojoInterface tablicaOsobaValuta(Long idProjektDetalji) {
-		HashMap<String, Object> hm=new HashMap<>();
-		hm.put("idProjektDetalji", idProjektDetalji);
-		
-		return new ClaimServiceImplTablicaOsobaValuta(hm, getKodRepository()).izvrsi();
+		return new ClaimServiceImplTablicaOsobaValuta(getKodRepository(), idProjektDetalji).izvrsi();
 	}
 	
 	@Override
