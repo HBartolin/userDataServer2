@@ -1,7 +1,6 @@
 package hr.bart.userDataServer.service;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,15 +32,14 @@ public class ClaimPodugovaracServiceImpl extends AService implements ClaimPodugo
 
 	@Override
 	public PojoInterface unesiPO(Optional<Long> idO, Optional<Long> tsO, Long idProjektDetalji, Long idSifarnikPodugovaraca, String po, Optional<BigDecimal> totalO) {
-		HashMap<String, Object> hm=new HashMap<>();
-		hm.put("idO", idO);
-		hm.put("tsO", tsO);
-		hm.put("idProjektDetalji", idProjektDetalji);
-		hm.put("idSifarnikPodugovaraca", idSifarnikPodugovaraca);
-		hm.put("po", po);
-		hm.put("totalO", totalO);
-		
-		return new ClaimPodugovaracServiceImplUnesiPO(hm, getKodRepository()).izvrsi();
+		return new ClaimPodugovaracServiceImplUnesiPO(
+				getKodRepository(), 
+				idO, 
+				tsO, 
+				idProjektDetalji,
+				idSifarnikPodugovaraca,
+				po,
+				totalO).izvrsi();
 	}
 	
 	private KodRepository getKodRepository() {

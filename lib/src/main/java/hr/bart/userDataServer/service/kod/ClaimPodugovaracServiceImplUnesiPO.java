@@ -1,24 +1,36 @@
 package hr.bart.userDataServer.service.kod;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 import hr.bart.userDataServer.db.ClaimPodugovarac;
 import hr.bart.userDataServer.util.PojoInterface;
 
-@SuppressWarnings("unchecked")
 public class ClaimPodugovaracServiceImplUnesiPO extends Kod {
-	private Optional<Long> idO=(Optional<Long>) hm.get("idO");
-	private Optional<Long>tsO=(Optional<Long>) hm.get("tsO");
-	private Long idProjektDetalji=(Long) hm.get("idProjektDetalji");
-	private Long idSifarnikPodugovaraca=(Long) hm.get("idSifarnikPodugovaraca");
-	private String po=(String) hm.get("po");
-	private Optional<BigDecimal> totalO=(Optional<BigDecimal>) hm.get("totalO");
+	private final Optional<Long> idO;
+	private final Optional<Long> tsO;
+	private final Long idProjektDetalji;
+	private final Long idSifarnikPodugovaraca;
+	private final String po;
+	private final Optional<BigDecimal> totalO;
 
-	public ClaimPodugovaracServiceImplUnesiPO(HashMap<String, Object> hm, KodRepository kodRepository) {
-		super(hm, kodRepository);
+	public ClaimPodugovaracServiceImplUnesiPO(
+			KodRepository kodRepository, 
+			Optional<Long> idO, 
+			Optional<Long> tsO,
+			Long idProjektDetalji,
+			Long idSifarnikPodugovaraca,
+			String po,
+			Optional<BigDecimal> totalO
+			) {
+		super(kodRepository);
+		this.idO=idO;
+		this.tsO=tsO;
+		this.idProjektDetalji=idProjektDetalji;
+		this.idSifarnikPodugovaraca=idSifarnikPodugovaraca;
+		this.po=po;
+		this.totalO=totalO;
 	}
 
 	@Override

@@ -7,7 +7,7 @@ import hr.bart.userDataServer.db.ClaimPodugovarac;
 import hr.bart.userDataServer.util.PojoInterface;
 
 public class ClaimPodugovaracServiceImplPurchaseOrders extends Kod {
-	private Long idProjektDetalji;
+	private final Long idProjektDetalji;
 	
 	public ClaimPodugovaracServiceImplPurchaseOrders(KodRepository kodRepository, Long idProjektDetalji) {
 		super(kodRepository);
