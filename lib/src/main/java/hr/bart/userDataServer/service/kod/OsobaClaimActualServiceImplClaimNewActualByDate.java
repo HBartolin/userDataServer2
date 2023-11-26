@@ -18,15 +18,17 @@ import hr.bart.userDataServer.db.SifarnikDatuma;
 import hr.bart.userDataServer.db.SifarnikMjeseca;
 import hr.bart.userDataServer.util.PojoInterface;
 
-@SuppressWarnings("unchecked")
 public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
-	private Long idProjektDetalji=(Long) hm.get("idProjektDetalji");
-	private LocalDate datum=(LocalDate) hm.get("datum");
-	private HashMap<String, String> podatci=(HashMap<String, String>) hm.get("podatci");
+	private final Long idProjektDetalji;
+	private final LocalDate datum;
+	private final HashMap<String, String> podatci;
 	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 	
-	public OsobaClaimActualServiceImplClaimNewActualByDate(HashMap<String, Object> hm, KodRepository kodRepository) {
-		super(hm, kodRepository);
+	public OsobaClaimActualServiceImplClaimNewActualByDate(KodRepository kodRepository, Long idProjektDetalji, LocalDate datum, HashMap<String, String> podatci) {
+		super(kodRepository);
+		this.idProjektDetalji=idProjektDetalji;
+		this.datum=datum;
+		this.podatci=podatci;
 	}
 
 	@Override

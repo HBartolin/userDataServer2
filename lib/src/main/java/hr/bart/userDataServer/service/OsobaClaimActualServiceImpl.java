@@ -55,12 +55,7 @@ public class OsobaClaimActualServiceImpl extends AService implements OsobaClaimA
 	
 	@Override
 	public PojoInterface claimNewActualByDate(Long idProjektDetalji, LocalDate datum, HashMap<String, String> podatci) {		
-		HashMap<String, Object> hm=new HashMap<>();
-		hm.put("idProjektDetalji", idProjektDetalji);
-		hm.put("datum", datum);
-		hm.put("podatci", podatci);
-		
-		return new OsobaClaimActualServiceImplClaimNewActualByDate(hm, getKodRepository()).izvrsi();
+		return new OsobaClaimActualServiceImplClaimNewActualByDate(getKodRepository(), idProjektDetalji, datum, podatci).izvrsi();
 	}
 	
 	private KodRepository getKodRepository() {
