@@ -48,13 +48,8 @@ public class OsobaValutaServiceImpl extends AService implements OsobaValutaServi
 	private transient OsobaClaimPlannedRepository osobaClaimPlannedRepository;
 	
 	@Override
-	public PojoInterface osobaValuta(Long idSifarnikOsoba) {		
-		HashMap<String, Object> hm=new HashMap<String, Object>();
-		hm.put("idSifarnikOsoba", idSifarnikOsoba);
-		hm.put("osobaValutaRepository", osobaValutaRepository);
-		hm.put("osobaClaimPlannedRepository", osobaClaimPlannedRepository);
-		
-		return new OsobaValutaServiceImplOsobaValuta(hm, getKodRepository()).izvrsi();
+	public PojoInterface osobaValuta(Long idSifarnikOsoba) {				
+		return new OsobaValutaServiceImplOsobaValuta(getKodRepository(), idSifarnikOsoba).izvrsi();
 	}
 
 	@Override

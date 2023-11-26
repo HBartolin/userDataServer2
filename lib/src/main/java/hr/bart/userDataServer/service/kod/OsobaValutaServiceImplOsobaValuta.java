@@ -1,17 +1,16 @@
 package hr.bart.userDataServer.service.kod;
 
-import java.util.HashMap;
-
 import org.springframework.data.domain.PageRequest;
 
 import hr.bart.userDataServer.util.PojoInterface;
 
 public class OsobaValutaServiceImplOsobaValuta extends Kod {
-	private Long idSifarnikOsoba=(Long) hm.get("idSifarnikOsoba");
+	private final Long idSifarnikOsoba;
 	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 	
-	public OsobaValutaServiceImplOsobaValuta(HashMap<String, Object> hm, KodRepository kodRepository) {
-		super(hm, kodRepository);
+	public OsobaValutaServiceImplOsobaValuta(KodRepository kodRepository, Long idSifarnikOsoba) {
+		super(kodRepository);
+		this.idSifarnikOsoba=idSifarnikOsoba;
 	}
 
 	@Override
