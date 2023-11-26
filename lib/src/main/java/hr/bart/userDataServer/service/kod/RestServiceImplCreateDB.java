@@ -2,7 +2,6 @@ package hr.bart.userDataServer.service.kod;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.HashMap;
 
 import hr.bart.userDataServer.db.Claim;
 import hr.bart.userDataServer.db.ClaimPodugovarac;
@@ -21,8 +20,8 @@ import hr.bart.userDataServer.util.PojoInterface;
 
 public class RestServiceImplCreateDB extends Kod {
 	
-	public RestServiceImplCreateDB(HashMap<String, Object> hm, KodRepository kodRepository) {
-		super(hm, kodRepository);
+	public RestServiceImplCreateDB(KodRepository kodRepository) {
+		super(kodRepository);
 	}
 
 	@Override

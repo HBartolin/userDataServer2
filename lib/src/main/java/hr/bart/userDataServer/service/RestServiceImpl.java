@@ -1,9 +1,5 @@
 package hr.bart.userDataServer.service;
 
-import java.util.HashMap;
-
-import jakarta.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +18,7 @@ import hr.bart.userDataServer.repository.SifarnikValutaRepository;
 import hr.bart.userDataServer.service.kod.KodRepository;
 import hr.bart.userDataServer.service.kod.RestServiceImplCreateDB;
 import hr.bart.userDataServer.util.PojoInterface;
+import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
@@ -53,9 +50,7 @@ public class RestServiceImpl extends AService implements RestService {
 	
 	@Override
 	public PojoInterface createDB() {
-		HashMap<String, Object> hm=new HashMap<>();
-		
-		return new RestServiceImplCreateDB(hm, getKodRepository()).izvrsi();
+		return new RestServiceImplCreateDB(getKodRepository()).izvrsi();
 	}
 	
 	private KodRepository getKodRepository() {
