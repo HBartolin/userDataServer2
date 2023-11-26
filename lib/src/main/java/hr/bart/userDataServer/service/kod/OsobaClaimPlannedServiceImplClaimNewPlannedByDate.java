@@ -15,15 +15,17 @@ import hr.bart.userDataServer.db.Claim;
 import hr.bart.userDataServer.db.OsobaClaimPlanned;
 import hr.bart.userDataServer.util.PojoInterface;
 
-@SuppressWarnings("unchecked")
 public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
-	private LocalDate datum=(LocalDate) hm.get("datum");
-	private HashMap<String, String> podatci=(HashMap<String, String>) hm.get("podatci");
-	private Long idProjektDetalji=(Long) hm.get("idProjektDetalji");
+	private final LocalDate datum;
+	private final HashMap<String, String> podatci;
+	private final Long idProjektDetalji;
 	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
 	
-	public OsobaClaimPlannedServiceImplClaimNewPlannedByDate(HashMap<String, Object> hm, KodRepository kodRepository) {
-		super(hm, kodRepository);
+	public OsobaClaimPlannedServiceImplClaimNewPlannedByDate(KodRepository kodRepository, LocalDate datum, HashMap<String, String> podatci, Long idProjektDetalji) {
+		super(kodRepository);
+		this.datum=datum;
+		this.podatci=podatci;
+		this.idProjektDetalji=idProjektDetalji;
 	}
 
 	@Override
