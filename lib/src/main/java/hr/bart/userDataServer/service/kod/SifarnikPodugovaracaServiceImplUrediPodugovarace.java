@@ -1,6 +1,5 @@
 package hr.bart.userDataServer.service.kod;
 
-import java.util.HashMap;
 import java.util.List;
 
 import hr.bart.userDataServer.db.SifarnikPodugovaraca;
@@ -8,8 +7,8 @@ import hr.bart.userDataServer.util.PojoInterface;
 
 public class SifarnikPodugovaracaServiceImplUrediPodugovarace extends Kod {
 	
-	public SifarnikPodugovaracaServiceImplUrediPodugovarace(HashMap<String, Object> hm, KodRepository kodRepository) {
-		super(hm, kodRepository);
+	public SifarnikPodugovaracaServiceImplUrediPodugovarace(KodRepository kodRepository) {
+		super(kodRepository);
 	}
 
 	@Override

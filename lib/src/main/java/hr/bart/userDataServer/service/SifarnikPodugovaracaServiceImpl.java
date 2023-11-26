@@ -1,9 +1,6 @@
 package hr.bart.userDataServer.service;
 
-import java.util.HashMap;
 import java.util.Optional;
-
-import jakarta.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +10,7 @@ import hr.bart.userDataServer.service.kod.KodRepository;
 import hr.bart.userDataServer.service.kod.SifarnikPodugovaracaServiceImplEditirajSifarnikPodugovaraca;
 import hr.bart.userDataServer.service.kod.SifarnikPodugovaracaServiceImplUrediPodugovarace;
 import hr.bart.userDataServer.util.PojoInterface;
+import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
@@ -27,9 +25,7 @@ public class SifarnikPodugovaracaServiceImpl extends AService implements Sifarni
 	
 	@Override
 	public PojoInterface urediPodugovarace() {
-		HashMap<String, Object> hm=new HashMap<>();
-		
-		return new SifarnikPodugovaracaServiceImplUrediPodugovarace(hm, getKodRepository()).izvrsi();
+		return new SifarnikPodugovaracaServiceImplUrediPodugovarace(getKodRepository()).izvrsi();
 	}
 	
 	private KodRepository getKodRepository() {
