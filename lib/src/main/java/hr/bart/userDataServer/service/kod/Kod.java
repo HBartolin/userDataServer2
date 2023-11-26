@@ -27,12 +27,7 @@ public abstract class Kod {
 	protected final static int SEDAM=7;
 	protected final static int STO=100;
 	protected String greska="";
-	
-	public Kod(HashMap<String, Object> hm, KodRepository kodRepository) {
-		this.hm=hm;
-		this.kodRepository=kodRepository;
-	}
-	
+		
 	public Kod(KodRepository kodRepository) {
 		this.kodRepository=kodRepository;
 	}
