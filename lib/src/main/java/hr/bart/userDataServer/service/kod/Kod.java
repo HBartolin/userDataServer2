@@ -1,7 +1,6 @@
 package hr.bart.userDataServer.service.kod;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +12,6 @@ import hr.bart.userDataServer.util.TimerKoda;
 
 public abstract class Kod {
 	private TimerKoda timerKoda=new TimerKoda(getClass());
-	protected HashMap<String, Object> hm;
 	protected KodRepository kodRepository;
 	private final Logger LOGGER=LoggerFactory.getLogger(getClass());
 	protected final static int pageRequestSize50=50;
