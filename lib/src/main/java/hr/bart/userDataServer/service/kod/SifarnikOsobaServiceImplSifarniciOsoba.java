@@ -5,7 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import hr.bart.userDataServer.util.PojoInterface;
 
 public class SifarnikOsobaServiceImplSifarniciOsoba extends Kod {
-	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
+	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
 
 	public SifarnikOsobaServiceImplSifarniciOsoba(KodRepository kodRepository) {
 		super(kodRepository);

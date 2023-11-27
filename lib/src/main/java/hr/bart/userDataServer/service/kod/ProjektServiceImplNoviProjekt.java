@@ -12,7 +12,7 @@ import hr.bart.userDataServer.util.PojoInterface;
 public class ProjektServiceImplNoviProjekt extends Kod {
 	private final String claim;
 	private final String contract;
-	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
+	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
 
 	public ProjektServiceImplNoviProjekt(KodRepository kodRepository, String claim, String contract) {
 		super(kodRepository);
@@ -41,13 +41,13 @@ public class ProjektServiceImplNoviProjekt extends Kod {
 			projekt.setContract(aCommonServis.skratiAkoTreba255(contract));
 			projekt.setStatus(DbStatus.A);
 			
-			kodRepository.getProjektRepository().save(projekt);
+			getKodRepository().getProjektRepository().save(projekt);
 			
 			pi.setOk("Projekt je dodan.");
 		}		
 		
 		PageRequest pageRequest=PageRequest.of(NULA, pageRequestSize50);
-		Page<List<Projekt>> pageProjektList=kodRepository.getProjektRepository().findByStatus(DbStatus.A, pageRequest);
+		Page<List<Projekt>> pageProjektList=getKodRepository().getProjektRepository().findByStatus(DbStatus.A, pageRequest);
 		pi.setRezultat(pageProjektList.getContent());
 		
 		setRezultatPage(pi, pageProjektList);

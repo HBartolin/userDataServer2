@@ -15,7 +15,7 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 	private final LocalDate datum;
 	private final List<ClaimUpdatedActualPlanned> podatci;
 	private final Long idProjektDetalji;
-	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
+	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
 
 	public OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate(KodRepository kodRepository, LocalDate datum, List<ClaimUpdatedActualPlanned> podatci, Long idProjektDetalji) {
 		super(kodRepository);
@@ -45,7 +45,7 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 				pi.setGreska(greska);
 			} else {					
 				for(OsobaClaimPlanned osobaClaimPlanned: ocpList) {
-					OsobaClaimPlanned oca=kodRepository.getOsobaClaimPlannedRepository().save(osobaClaimPlanned);
+					OsobaClaimPlanned oca=getKodRepository().getOsobaClaimPlannedRepository().save(osobaClaimPlanned);
 					
 					aCommonServis.setTabliceClaim1(oca);
 				}
@@ -74,8 +74,8 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 	}
 	
 	private void getOsobaClaimPlanned(ClaimUpdatedActualPlanned cua, List<OsobaClaimPlanned> ocpList, LocalDate datum, Long idProjektDetalji) {
-		List<SifarnikMjeseca> sdList=kodRepository.getSifarnikMjesecaRepository().findByMjeseca(datum);
-		Optional<List<Claim>> claimListOptional=kodRepository.getClaimRepository().findAllByIdProjektDetalji_idSifarnikOsoba(idProjektDetalji, cua.getIdSifarnikOsoba());
+		List<SifarnikMjeseca> sdList=getKodRepository().getSifarnikMjesecaRepository().findByMjeseca(datum);
+		Optional<List<Claim>> claimListOptional=getKodRepository().getClaimRepository().findAllByIdProjektDetalji_idSifarnikOsoba(idProjektDetalji, cua.getIdSifarnikOsoba());
 		
 		if(sdList.size()==JEDAN) {
 			if(claimListOptional.isPresent() && claimListOptional.get().size()==JEDAN) {
@@ -96,7 +96,7 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 	}
 	
 	private void getOsobaClaimPlanned(ClaimUpdatedActualPlanned cua, List<OsobaClaimPlanned> ocpList) {		
-		Optional<OsobaClaimPlanned> ocpOptional=kodRepository.getOsobaClaimPlannedRepository().findById(cua.getIdClaim());
+		Optional<OsobaClaimPlanned> ocpOptional=getKodRepository().getOsobaClaimPlannedRepository().findById(cua.getIdClaim());
 		
 		if(!ocpOptional.isPresent()) {
 			if(greska.length()>0) greska+=" <BR> ";

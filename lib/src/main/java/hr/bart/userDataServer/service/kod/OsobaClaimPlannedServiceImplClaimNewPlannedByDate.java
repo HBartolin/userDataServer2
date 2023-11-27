@@ -19,7 +19,7 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 	private final LocalDate datum;
 	private final HashMap<String, String> podatci;
 	private final Long idProjektDetalji;
-	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
+	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
 	
 	public OsobaClaimPlannedServiceImplClaimNewPlannedByDate(KodRepository kodRepository, LocalDate datum, HashMap<String, String> podatci, Long idProjektDetalji) {
 		super(kodRepository);
@@ -47,7 +47,7 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 		    	BigDecimal vBD=v.length()>0 ? new BigDecimal(v) : new BigDecimal(0);
 		    	long kLong=Long.parseLong(mentry.getKey());
 		    	
-		    	Optional<List<Claim>> claimListOptional=kodRepository.getClaimRepository().findAllByIdProjektDetalji_idSifarnikOsoba(idProjektDetalji, kLong);
+		    	Optional<List<Claim>> claimListOptional=getKodRepository().getClaimRepository().findAllByIdProjektDetalji_idSifarnikOsoba(idProjektDetalji, kLong);
 		    	
 		    	if(claimListOptional.isPresent()) {
 		    		List<Claim> claimList=claimListOptional.get();
@@ -62,7 +62,7 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 						ocp.setSifarnikMjeseca(aCommonServis.getSifarnikMjeseca(datum));	
 						greska+=aCommonServis.getGreska();
 						
-						ocp=kodRepository.getOsobaClaimPlannedRepository().save(ocp);
+						ocp=getKodRepository().getOsobaClaimPlannedRepository().save(ocp);
 						osobaClaimPlannedList.add(ocp);
 					}
 			    } else {
@@ -103,7 +103,7 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 				if(greska.length()>0) greska+=" <BR> ";
 				greska+="Polje 'Datum' mora biti prvi u mjesecu.";
 			} else {
-				Optional<List<OsobaClaimPlanned>> ocpListOptional=kodRepository.getOsobaClaimPlannedRepository().findAllByDatum(idProjektDetalji, datum);
+				Optional<List<OsobaClaimPlanned>> ocpListOptional=getKodRepository().getOsobaClaimPlannedRepository().findAllByDatum(idProjektDetalji, datum);
 				
 				if(ocpListOptional.isPresent()) {
 					List<OsobaClaimPlanned> ocpList=ocpListOptional.get();

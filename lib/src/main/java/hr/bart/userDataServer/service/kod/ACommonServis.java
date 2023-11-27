@@ -38,12 +38,12 @@ public class ACommonServis extends Kod {
 	}
 
 	public Optional<List<Claim>> claimActualPlanned(Long idProjektDetalji) {
-		Optional<List<Claim>> claimListOptional=kodRepository.getClaimRepository().findAllByIdProjektDetalji(idProjektDetalji);
+		Optional<List<Claim>> claimListOptional=getKodRepository().getClaimRepository().findAllByIdProjektDetalji(idProjektDetalji);
 		
 		if(claimListOptional.isPresent()) {
 			for(Claim claim: claimListOptional.get()) {
-				Optional<List<OsobaClaimActual>> osobaClaimActualListO=kodRepository.getOsobaClaimActualRepository().findAllByIdClaim(claim.getId());
-				Optional<List<OsobaClaimPlanned>> osobaClaimPlannedListO=kodRepository.getOsobaClaimPlannedRepository().findAllByIdClaim(claim.getId());
+				Optional<List<OsobaClaimActual>> osobaClaimActualListO=getKodRepository().getOsobaClaimActualRepository().findAllByIdClaim(claim.getId());
+				Optional<List<OsobaClaimPlanned>> osobaClaimPlannedListO=getKodRepository().getOsobaClaimPlannedRepository().findAllByIdClaim(claim.getId());
 				
 				if(osobaClaimActualListO.isPresent()) {
 //					for(OsobaClaimActual osa: osobaClaimActualListO.get()) {
@@ -69,31 +69,31 @@ public class ACommonServis extends Kod {
 	public void setTabliceClaim1(OsobaClaimActual oca) {		
 		BigDecimal koliko=new BigDecimal(0);
 		koliko.setScale(2, RoundingMode.HALF_EVEN);
-		Optional<List<OsobaClaimActual>> findAllByIdClaim=kodRepository.getOsobaClaimActualRepository().findAllByIdClaim(oca.getClaim().getId());
+		Optional<List<OsobaClaimActual>> findAllByIdClaim=getKodRepository().getOsobaClaimActualRepository().findAllByIdClaim(oca.getClaim().getId());
 		
 		for(OsobaClaimActual osobaCA: findAllByIdClaim.get()) {
 			koliko=koliko.add(osobaCA.getCijena());
 		}
 		
-		Optional<Claim> claimO=kodRepository.getClaimRepository().findById(oca.getClaim().getId());
+		Optional<Claim> claimO=getKodRepository().getClaimRepository().findById(oca.getClaim().getId());
 		
 		claimO.get().setOsobaClaimActual(koliko);
-		kodRepository.getClaimRepository().save(claimO.get());
+		getKodRepository().getClaimRepository().save(claimO.get());
 	}
 	
 	public void setTabliceClaim1(OsobaClaimPlanned ocp) {
 		BigDecimal koliko=new BigDecimal(0);
 		koliko.setScale(2, RoundingMode.HALF_EVEN);
-		Optional<List<OsobaClaimPlanned>> findAllByIdClaim=kodRepository.getOsobaClaimPlannedRepository().findAllByIdClaim(ocp.getClaim().getId());
+		Optional<List<OsobaClaimPlanned>> findAllByIdClaim=getKodRepository().getOsobaClaimPlannedRepository().findAllByIdClaim(ocp.getClaim().getId());
 		
 		for(OsobaClaimPlanned osobaCP: findAllByIdClaim.get()) {
 			koliko=koliko.add(osobaCP.getSati());
 		}
 		
-		Optional<Claim> claimO=kodRepository.getClaimRepository().findById(ocp.getClaim().getId());
+		Optional<Claim> claimO=getKodRepository().getClaimRepository().findById(ocp.getClaim().getId());
 		
 		claimO.get().setOsobaClaimPlanned(koliko);
-		kodRepository.getClaimRepository().save(claimO.get());
+		getKodRepository().getClaimRepository().save(claimO.get());
 	}
 
 	public void setTabliceActualClaim(Long idProjektDetalji) {		
@@ -107,7 +107,7 @@ public class ACommonServis extends Kod {
 			}
 		}
 		
-		Optional<List<ClaimPodugovarac>> claimPodugovaracListO=kodRepository.getClaimPodugovaracRepository().findAllByIdProjektDetalji(idProjektDetalji);
+		Optional<List<ClaimPodugovarac>> claimPodugovaracListO=getKodRepository().getClaimPodugovaracRepository().findAllByIdProjektDetalji(idProjektDetalji);
 		
 		if(claimPodugovaracListO.isPresent()) {
 			for(ClaimPodugovarac claimPodugovarac: claimPodugovaracListO.get()) {
@@ -115,14 +115,14 @@ public class ACommonServis extends Kod {
 			}
 		}
 		
-		Optional<ProjektDetalji> projektDetaljiO=kodRepository.getProjektDetaljiRepository().findById(idProjektDetalji);
+		Optional<ProjektDetalji> projektDetaljiO=getKodRepository().getProjektDetaljiRepository().findById(idProjektDetalji);
 		projektDetaljiO.get().setCostActual(osobaClaimActualKn);
 
-		kodRepository.getProjektDetaljiRepository().save(projektDetaljiO.get());
+		getKodRepository().getProjektDetaljiRepository().save(projektDetaljiO.get());
 	}
 	
 	public OsobaValuta getOsobaValuta(Long idSifarnikOsoba, String imePrezime, LocalDate datum) throws Throwable {		
-		List<OsobaValuta> osobaValutaList=kodRepository.getOsobaValutaRepository().findAllBySifarnikOsobaId_datum(idSifarnikOsoba, datum);
+		List<OsobaValuta> osobaValutaList=getKodRepository().getOsobaValutaRepository().findAllBySifarnikOsobaId_datum(idSifarnikOsoba, datum);
 		
 		if(osobaValutaList.isEmpty()) {
 			throw new Exception(String.format("U tablici 'OsobaValuta' nije definirana vrijednost za '%s' (%s) za datum = '%s'.", imePrezime, idSifarnikOsoba, datum));
@@ -139,13 +139,13 @@ public class ACommonServis extends Kod {
 		greska="";
 		
 		SifarnikMjeseca sifarnikMjeseca=null;
-		List<SifarnikMjeseca> sifarnikMjesecaList=kodRepository.getSifarnikMjesecaRepository().findByMjeseca(mjesec);
+		List<SifarnikMjeseca> sifarnikMjesecaList=getKodRepository().getSifarnikMjesecaRepository().findByMjeseca(mjesec);
 		
 		if(sifarnikMjesecaList.isEmpty()) {
 			SifarnikMjeseca sifarnikMjesecaTmp=new SifarnikMjeseca();
 			sifarnikMjesecaTmp.setMjesec(mjesec);
 			 
-			sifarnikMjeseca=kodRepository.getSifarnikMjesecaRepository().save(sifarnikMjesecaTmp);
+			sifarnikMjeseca=getKodRepository().getSifarnikMjesecaRepository().save(sifarnikMjesecaTmp);
 		} else if(sifarnikMjesecaList.size()>1){
 			if(greska.length()>0) greska+=" <BR> ";
 			greska+=String.format("Ima previše polja za %s! KRAJ RADA!", mjesec);
@@ -165,7 +165,7 @@ public class ACommonServis extends Kod {
 			osobaClaimPlannedKn=osobaClaimPlannedKn.add(c.getOsobaClaimPlanned());
 		}
 		
-		Optional<List<ClaimPodugovarac>> claimPodugovaracListO=kodRepository.getClaimPodugovaracRepository().findAllByIdProjektDetalji(idProjektDetalji);
+		Optional<List<ClaimPodugovarac>> claimPodugovaracListO=getKodRepository().getClaimPodugovaracRepository().findAllByIdProjektDetalji(idProjektDetalji);
 		
 		if(claimPodugovaracListO.isPresent()) {
 			for(ClaimPodugovarac claimPodugovarac: claimPodugovaracListO.get()) {
@@ -173,14 +173,14 @@ public class ACommonServis extends Kod {
 			}
 		}
 		
-		Optional<ProjektDetalji> projektDetaljiO=kodRepository.getProjektDetaljiRepository().findById(idProjektDetalji);
+		Optional<ProjektDetalji> projektDetaljiO=getKodRepository().getProjektDetaljiRepository().findById(idProjektDetalji);
 		projektDetaljiO.get().setCostPlanned(osobaClaimPlannedKn);
 
-		kodRepository.getProjektDetaljiRepository().save(projektDetaljiO.get());
+		getKodRepository().getProjektDetaljiRepository().save(projektDetaljiO.get());
 	}
 	
 	public void findAllBySifarnikOsobaId(PojoInterface pi, Long idSifarnikOsoba, PageRequest pageRequest) {
-		Page<List<OsobaValuta>> pageOsobaValutaList=kodRepository.getOsobaValutaRepository().findAllBySifarnikOsobaId(idSifarnikOsoba, pageRequest);
+		Page<List<OsobaValuta>> pageOsobaValutaList=getKodRepository().getOsobaValutaRepository().findAllBySifarnikOsobaId(idSifarnikOsoba, pageRequest);
 		
 		pi.setRezultat(pageOsobaValutaList.getContent());
 		
@@ -188,21 +188,21 @@ public class ACommonServis extends Kod {
 	}
 	
 	public void findByStatus(PojoInterface pi, DbStatus dbStatus, PageRequest pageRequest) {
-		Page<List<Projekt>> pageProjektList=kodRepository.getProjektRepository().findByStatus(dbStatus, pageRequest);
+		Page<List<Projekt>> pageProjektList=getKodRepository().getProjektRepository().findByStatus(dbStatus, pageRequest);
 		pi.setRezultat(pageProjektList.getContent());
 		
 		setRezultatPage(pi, pageProjektList);
 	}
 	
 	public void findAll_projekt(PojoInterface pi, PageRequest pageRequest) {
-		Page<List<Projekt>> pageProjektList=kodRepository.getProjektRepository().findAll(pageRequest);
+		Page<List<Projekt>> pageProjektList=getKodRepository().getProjektRepository().findAll(pageRequest);
 		pi.setRezultat(pageProjektList.getContent());
 		
 		setRezultatPage(pi, pageProjektList);
 	}
 	
 	public void findAll_sifarnikOsoba(PojoInterface pi, PageRequest pageRequest) {
-		Page<List<SifarnikOsoba>> pageSifarnikOsobaList=kodRepository.getSifarnikOsobaRepository().findAll(pageRequest);
+		Page<List<SifarnikOsoba>> pageSifarnikOsobaList=getKodRepository().getSifarnikOsobaRepository().findAll(pageRequest);
 		pi.setRezultat(pageSifarnikOsobaList.getContent());
 		
 		setRezultatPage(pi, pageSifarnikOsobaList);

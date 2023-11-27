@@ -13,7 +13,7 @@ public class SifarnikPodugovaracaServiceImplUrediPodugovarace extends Kod {
 
 	@Override
 	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {
-		List<SifarnikPodugovaraca> sifarnikPodugovaracaList=kodRepository.getSifarnikPodugovaracaRepository().findAll();
+		List<SifarnikPodugovaraca> sifarnikPodugovaracaList=getKodRepository().getSifarnikPodugovaracaRepository().findAll();
 		
 		pi.setRezultat(sifarnikPodugovaracaList);
 		

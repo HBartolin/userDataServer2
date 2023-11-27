@@ -9,7 +9,7 @@ import hr.bart.userDataServer.util.PojoInterface;
 
 public class ProjektServiceImplProjekti extends Kod {
 	private final Optional<String> status;
-	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
+	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
 
 	public ProjektServiceImplProjekti(KodRepository kodRepository, Optional<String> status) {
 		super(kodRepository);

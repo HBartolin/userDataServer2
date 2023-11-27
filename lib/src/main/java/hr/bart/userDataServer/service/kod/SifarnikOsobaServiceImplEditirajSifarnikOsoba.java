@@ -11,7 +11,7 @@ public class SifarnikOsobaServiceImplEditirajSifarnikOsoba extends Kod {
 	private final Optional<Long> id;
 	private final String ime;
 	private final String prezime;
-	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
+	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
 
 	public SifarnikOsobaServiceImplEditirajSifarnikOsoba(KodRepository kodRepository, Optional<Long> id, String ime, String prezime) {
 		super(kodRepository);
@@ -42,7 +42,7 @@ public class SifarnikOsobaServiceImplEditirajSifarnikOsoba extends Kod {
 			sifarnikOsoba.setIme(ime);
 			sifarnikOsoba.setPrezime(prezime);
 			
-			kodRepository.getSifarnikOsobaRepository().save(sifarnikOsoba);
+			getKodRepository().getSifarnikOsobaRepository().save(sifarnikOsoba);
 			
 			pi.setOk("Osoba je dodana.");
 		}

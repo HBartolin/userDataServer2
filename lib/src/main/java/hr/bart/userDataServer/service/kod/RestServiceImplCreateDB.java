@@ -28,37 +28,37 @@ public class RestServiceImplCreateDB extends Kod {
 	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {
 		SifarnikValuta sv=new SifarnikValuta();
 		sv.setNaziv("HRK");
-		sv=kodRepository.getSifarnikValutaRepository().save(sv);
+		sv=getKodRepository().getSifarnikValutaRepository().save(sv);
 		pi.setOk("SifarnikValuta");
 		
 		SifarnikOsoba so=new SifarnikOsoba();
 		so.setIme("Ime");
 		so.setPrezime("Prezime");
-		so=kodRepository.getSifarnikOsobaRepository().save(so);
+		so=getKodRepository().getSifarnikOsobaRepository().save(so);
 		pi.setOk(pi.getOk() + ", SifarnikOsoba");
 		
 		SifarnikMjeseca smDo=new SifarnikMjeseca();
 		smDo.setMjesec(LocalDate.of(9999, 12, 1));
-		smDo=kodRepository.getSifarnikMjesecaRepository().save(smDo);
+		smDo=getKodRepository().getSifarnikMjesecaRepository().save(smDo);
 		pi.setOk(pi.getOk() + ", SifarnikMjeseca");
 		
 		SifarnikDatuma sdDo=new SifarnikDatuma();
 		sdDo.setDatumNedjelja(LocalDate.of(9999, 12, 26));
 		sdDo.setDatumPetak(LocalDate.of(9999, 12, 24));
 		sdDo.setMjesec(smDo);
-		sdDo=kodRepository.getSifarnikDatumaRepository().save(sdDo);
+		sdDo=getKodRepository().getSifarnikDatumaRepository().save(sdDo);
 		pi.setOk(pi.getOk() + ", SifarnikDatuma");
 		
 		SifarnikMjeseca smOd=new SifarnikMjeseca();
 		smOd.setMjesec(LocalDate.of(2000, 1, 1));
-		smOd=kodRepository.getSifarnikMjesecaRepository().save(smOd);
+		smOd=getKodRepository().getSifarnikMjesecaRepository().save(smOd);
 		pi.setOk(pi.getOk() + ", SifarnikMjeseca");
 		
 		SifarnikDatuma sdOd=new SifarnikDatuma();
 		sdOd.setDatumNedjelja(LocalDate.of(2000, 1, 9));
 		sdOd.setDatumPetak(LocalDate.of(2000, 1, 7));
 		sdOd.setMjesec(smDo);
-		sdOd=kodRepository.getSifarnikDatumaRepository().save(sdOd);
+		sdOd=getKodRepository().getSifarnikDatumaRepository().save(sdOd);
 		pi.setOk(pi.getOk() + ", SifarnikDatuma");
 		
 		OsobaValuta ov=new OsobaValuta();
@@ -69,12 +69,12 @@ public class RestServiceImplCreateDB extends Kod {
 		ov.setSifarnikOsoba(so);
 		ov.setSifarnikValuta(sv);
 		ov.setTs(0l);
-		ov=kodRepository.getOsobaValutaRepository().save(ov);
+		ov=getKodRepository().getOsobaValutaRepository().save(ov);
 		pi.setOk(pi.getOk() + ", OsobaValuta");
 		
 		SifarnikPodugovaraca sp=new SifarnikPodugovaraca();
 		sp.setNaziv("Podugovarač");
-		sp=kodRepository.getSifarnikPodugovaracaRepository().save(sp);
+		sp=getKodRepository().getSifarnikPodugovaracaRepository().save(sp);
 		pi.setOk(pi.getOk() + ", SifarnikPodugovaraca");
 		
 		Projekt p=new Projekt();
@@ -82,7 +82,7 @@ public class RestServiceImplCreateDB extends Kod {
 		p.setContract("Contract");
 		p.setStatus(DbStatus.A);
 		p.setTs(0l);
-		p=kodRepository.getProjektRepository().save(p);
+		p=getKodRepository().getProjektRepository().save(p);
 		pi.setOk(pi.getOk() + ", Projekt");
 					
 		ProjektDetalji pd=new ProjektDetalji();
@@ -92,7 +92,7 @@ public class RestServiceImplCreateDB extends Kod {
 		pd.setProjekt(p);
 		pd.setSifarnikValuta(sv);
 		pd.setTotalRevenue(new BigDecimal(123456));
-		pd=kodRepository.getProjektDetaljiRepository().save(pd);
+		pd=getKodRepository().getProjektDetaljiRepository().save(pd);
 		pi.setOk(pi.getOk() + ", ProjektDetalji");
 		
 		Claim c=new Claim();
@@ -100,7 +100,7 @@ public class RestServiceImplCreateDB extends Kod {
 		c.setOsobaClaimPlanned(BigDecimal.ZERO);
 		c.setProjektDetalji(pd);
 		c.setSifarnikOsoba(so);
-		c=kodRepository.getClaimRepository().save(c);
+		c=getKodRepository().getClaimRepository().save(c);
 		pi.setOk(pi.getOk() + ", Claim");
 		
 		OsobaClaimActual oca=new OsobaClaimActual();
@@ -109,14 +109,14 @@ public class RestServiceImplCreateDB extends Kod {
 		oca.setOsobaValuta(ov);
 		oca.setSati(BigDecimal.ONE);
 		oca.setSifarnikDatuma(sdOd);
-		oca=kodRepository.getOsobaClaimActualRepository().save(oca);
+		oca=getKodRepository().getOsobaClaimActualRepository().save(oca);
 		pi.setOk(pi.getOk() + ", OsobaClaimActual");
 		
 		OsobaClaimPlanned ocp=new OsobaClaimPlanned();
 		ocp.setClaim(c);
 		ocp.setSati(BigDecimal.ONE);
 		ocp.setSifarnikMjeseca(smOd);
-		ocp=kodRepository.getOsobaClaimPlannedRepository().save(ocp);
+		ocp=getKodRepository().getOsobaClaimPlannedRepository().save(ocp);
 		pi.setOk(pi.getOk() + ", OsobaClaimPlanned");
 		
 		ClaimPodugovarac cp=new ClaimPodugovarac();
@@ -126,7 +126,7 @@ public class RestServiceImplCreateDB extends Kod {
 		cp.setProjektDetalji(pd);
 		cp.setSifarnikPodugovaraca(sp);
 		cp.setTotal(BigDecimal.ZERO);
-		cp=kodRepository.getClaimPodugovaracRepository().save(cp);
+		cp=getKodRepository().getClaimPodugovaracRepository().save(cp);
 		pi.setOk(pi.getOk() + ", ClaimPodugovarac");
 		
 		return pi;

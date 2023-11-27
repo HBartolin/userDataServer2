@@ -21,7 +21,7 @@ public class ProjektServiceImplTraziProjekte extends Kod {
 		PageRequest pageRequest=PageRequest.of(NULA, pageRequestSize50);
 		StringBuilder sb=new StringBuilder("%").append(trazi.toUpperCase()).append("%");
 			
-		Page<List<Projekt>> pageProjektList=kodRepository.getProjektRepository().likeClaimContract(sb.toString(), pageRequest);
+		Page<List<Projekt>> pageProjektList=getKodRepository().getProjektRepository().likeClaimContract(sb.toString(), pageRequest);
 
 		pi.setRezultat(pageProjektList.getContent());
 		

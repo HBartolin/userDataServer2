@@ -37,12 +37,12 @@ public class SifarnikPodugovaracaServiceImplEditirajSifarnikPodugovaraca extends
 					sp.setId(idO.get());
 				}
 				
-				kodRepository.getSifarnikPodugovaracaRepository().save(sp);
+				getKodRepository().getSifarnikPodugovaracaRepository().save(sp);
 			}
 		}
 		
 		if(greska.isEmpty()) {
-			List<SifarnikPodugovaraca> sifarnikPodugovaracaList=kodRepository.getSifarnikPodugovaracaRepository().findAll();
+			List<SifarnikPodugovaraca> sifarnikPodugovaracaList=getKodRepository().getSifarnikPodugovaracaRepository().findAll();
 			
 			pi.setRezultat(sifarnikPodugovaracaList);
 		} else {

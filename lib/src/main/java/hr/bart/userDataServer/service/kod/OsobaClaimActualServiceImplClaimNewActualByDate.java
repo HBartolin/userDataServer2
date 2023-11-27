@@ -22,7 +22,7 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 	private final Long idProjektDetalji;
 	private final LocalDate datum;
 	private final HashMap<String, String> podatci;
-	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
+	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
 	
 	public OsobaClaimActualServiceImplClaimNewActualByDate(KodRepository kodRepository, Long idProjektDetalji, LocalDate datum, HashMap<String, String> podatci) {
 		super(kodRepository);
@@ -50,7 +50,7 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 		    	BigDecimal vBD=v.length()>0 ? new BigDecimal(v) : new BigDecimal(0);
 		    	long kLong=Long.parseLong(mentry.getKey());
 		    	
-		    	Optional<List<Claim>> claimListOptional=kodRepository.getClaimRepository().findAllByIdProjektDetalji_idSifarnikOsoba(idProjektDetalji, kLong);
+		    	Optional<List<Claim>> claimListOptional=getKodRepository().getClaimRepository().findAllByIdProjektDetalji_idSifarnikOsoba(idProjektDetalji, kLong);
 				
 				if(claimListOptional.isPresent()) {
 					List<Claim> claimList=claimListOptional.get();
@@ -59,7 +59,7 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 						if(greska.length()>0) greska+=" <BR> ";
 						greska+="Iz baze je tablica 'Claim' vratila različito od 1!";
 					} else {							
-						List<SifarnikDatuma> sifarnikDatumaList=kodRepository.getSifarnikDatumaRepository().findByDatumPetak(datum);
+						List<SifarnikDatuma> sifarnikDatumaList=getKodRepository().getSifarnikDatumaRepository().findByDatumPetak(datum);
 						
 						if(sifarnikDatumaList.size()>1) {
 							if(greska.length()>0) greska+=" <BR> ";
@@ -67,7 +67,7 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 						} else {
 							OsobaClaimActual oca=new OsobaClaimActual();
 							
-							Optional<Claim> claimO=kodRepository.getClaimRepository().findById(claimList.get(0).getId()/*oca.getClaimId()*/);
+							Optional<Claim> claimO=getKodRepository().getClaimRepository().findById(claimList.get(0).getId()/*oca.getClaimId()*/);
 							
 							oca.setSati(vBD);
 							oca.setCijenaTecaj(BigDecimal.ZERO);
@@ -76,7 +76,7 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 							oca.setOsobaValuta(aCommonServis.getOsobaValuta(kLong,claimO.get().getSifarnikOsoba().getImePrezime(), datum));
 							oca.setCijena(vBD.multiply(oca.getOsobaValuta().getCijena()));
 															
-							oca=kodRepository.getOsobaClaimActualRepository().save(oca);
+							oca=getKodRepository().getOsobaClaimActualRepository().save(oca);
 							osobaClaimActualList.add(oca);
 						}
 					}
@@ -120,7 +120,7 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 			sifarnikDatuma.setDatumNedjelja(ned);
 			sifarnikDatuma.setMjesec(sifarnikMjeseca);
 			
-			sd=kodRepository.getSifarnikDatumaRepository().save(sifarnikDatuma);
+			sd=getKodRepository().getSifarnikDatumaRepository().save(sifarnikDatuma);
 		} else if(sifarnikDatumaList.size()!=JEDAN) {
 			throw new Exception(String.format("Iz tablice 'SifarnikDatuma' dohvat je vratio ništa ili više od jednog upita (%d)!", datum));
 		} else {
@@ -142,7 +142,7 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 				if(greska.length()>0) greska+=" <BR> ";
 				greska+="Polje 'Datum' mora biti PETAK.";
 			} else {
-				Optional<List<OsobaClaimActual>> ocaListOptional=kodRepository.getOsobaClaimActualRepository().findAllByDatum(idProjektDetalji, datum);
+				Optional<List<OsobaClaimActual>> ocaListOptional=getKodRepository().getOsobaClaimActualRepository().findAllByDatum(idProjektDetalji, datum);
 				
 				if(ocaListOptional.isPresent()) {
 					List<OsobaClaimActual> ocaList=ocaListOptional.get();

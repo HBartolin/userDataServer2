@@ -59,14 +59,14 @@ public class ClaimPodugovaracServiceImplUnesiPO extends Kod {
 		
 		if(idSifarnikPodugovaraca!=null && idProjektDetalji!=null) {
 			if(idO.isPresent()) {
-				Optional<List<ClaimPodugovarac>> findAllByIdProjektDetalji_id_idSifarnikPodugovaraca=kodRepository.getClaimPodugovaracRepository().findAllByIdProjektDetalji_id_idSifarnikPodugovaraca(idProjektDetalji, idO.get(), idSifarnikPodugovaraca);
+				Optional<List<ClaimPodugovarac>> findAllByIdProjektDetalji_id_idSifarnikPodugovaraca=getKodRepository().getClaimPodugovaracRepository().findAllByIdProjektDetalji_id_idSifarnikPodugovaraca(idProjektDetalji, idO.get(), idSifarnikPodugovaraca);
 				
 				if(findAllByIdProjektDetalji_id_idSifarnikPodugovaraca.isPresent()) {
 					if(greska.length()>0) greska=greska + " <BR> ";
 					greska=greska + "'Naziv' je već dodijeljen, uredite naziv izravno u tablici.";
 				}
 			} else {
-				Optional<List<ClaimPodugovarac>> findAllByIdProjektDetalji_idSifarnikPodugovaraca=kodRepository.getClaimPodugovaracRepository().findAllByIdProjektDetalji_idSifarnikPodugovaraca(idProjektDetalji, idSifarnikPodugovaraca);
+				Optional<List<ClaimPodugovarac>> findAllByIdProjektDetalji_idSifarnikPodugovaraca=getKodRepository().getClaimPodugovaracRepository().findAllByIdProjektDetalji_idSifarnikPodugovaraca(idProjektDetalji, idSifarnikPodugovaraca);
 				
 				if(findAllByIdProjektDetalji_idSifarnikPodugovaraca.isPresent()) {
 					if(greska.length()>0) greska=greska + " <BR> ";
@@ -80,11 +80,11 @@ public class ClaimPodugovaracServiceImplUnesiPO extends Kod {
 			purchaseOrder.setTs(tsO.get());
 			purchaseOrder.setTotal(totalO.get());
 			purchaseOrder.setPo(po);
-			purchaseOrder.setProjektDetalji(kodRepository.getProjektDetaljiRepository().findById(idProjektDetalji).get());
-			purchaseOrder.setSifarnikPodugovaraca(kodRepository.getSifarnikPodugovaracaRepository().findById(idSifarnikPodugovaraca).get());
+			purchaseOrder.setProjektDetalji(getKodRepository().getProjektDetaljiRepository().findById(idProjektDetalji).get());
+			purchaseOrder.setSifarnikPodugovaraca(getKodRepository().getSifarnikPodugovaracaRepository().findById(idSifarnikPodugovaraca).get());
 			
 			if(idO.isPresent()) {
-				Optional<ClaimPodugovarac> claimPodugovaracO=kodRepository.getClaimPodugovaracRepository().findById(idO.get());					
+				Optional<ClaimPodugovarac> claimPodugovaracO=getKodRepository().getClaimPodugovaracRepository().findById(idO.get());					
 				
 				purchaseOrder.setId(idO.get());
 				purchaseOrder.setActual(claimPodugovaracO.get().getActual());
@@ -94,9 +94,9 @@ public class ClaimPodugovaracServiceImplUnesiPO extends Kod {
 				purchaseOrder.setPlanned(BigDecimal.ZERO);
 			}
 			
-			kodRepository.getClaimPodugovaracRepository().save(purchaseOrder);
+			getKodRepository().getClaimPodugovaracRepository().save(purchaseOrder);
 			
-			Optional<List<ClaimPodugovarac>> purchaseOrderListO=kodRepository.getClaimPodugovaracRepository().findAllByIdProjektDetalji(idProjektDetalji);
+			Optional<List<ClaimPodugovarac>> purchaseOrderListO=getKodRepository().getClaimPodugovaracRepository().findAllByIdProjektDetalji(idProjektDetalji);
 			
 			if(purchaseOrderListO.isPresent()) {
 				pi.setRezultat(purchaseOrderListO.get());

@@ -22,7 +22,7 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 	private final LocalDate datumActual;
 	private final Optional<BigDecimal> cijena;
 	private final Optional<Long> invoiceNumber;
-	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
+	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
 
 	public PodugovaracServiceImplUnesiPodugovarac(
 			KodRepository kodRepository,
@@ -76,7 +76,7 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 		
 		if(greska.isEmpty()) {
 //			Optional<ProjektDetalji> projektDetaljiO=projektDetaljiRepository.findById(idProjektDetalji);
-			Optional<ClaimPodugovarac> claimPodugovaracOrderO=kodRepository.getClaimPodugovaracRepository().findById(idPurchaseOrder.get());
+			Optional<ClaimPodugovarac> claimPodugovaracOrderO=getKodRepository().getClaimPodugovaracRepository().findById(idPurchaseOrder.get());
 			
 			Podugovarac podugovarac=new Podugovarac();
 			podugovarac.setCijena(cijena.get());
@@ -90,11 +90,11 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 				podugovarac.setId(id.get());
 			}
 			
-			podugovarac=kodRepository.getPodugovaracRepository().save(podugovarac);
+			podugovarac=getKodRepository().getPodugovaracRepository().save(podugovarac);
 			
 			setTableProjektDetalji(idProjektDetalji);
 			
-			Optional<List<Podugovarac>> podugovaracListO=kodRepository.getPodugovaracRepository().findAllByIdProjektDetalji(idProjektDetalji);
+			Optional<List<Podugovarac>> podugovaracListO=getKodRepository().getPodugovaracRepository().findAllByIdProjektDetalji(idProjektDetalji);
 			
 			if(podugovaracListO.isPresent()) {
 				pi.setRezultat(podugovaracListO.get());
@@ -122,7 +122,7 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 			}
 		}
 		
-		Optional<List<Podugovarac>> podugovaracListO=kodRepository.getPodugovaracRepository().findAllByIdProjektDetalji(idProjektDetalji);
+		Optional<List<Podugovarac>> podugovaracListO=getKodRepository().getPodugovaracRepository().findAllByIdProjektDetalji(idProjektDetalji);
 	
 		if(podugovaracListO.isPresent()) {
 			for(Podugovarac podugovarac: podugovaracListO.get()) {
@@ -141,7 +141,7 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 			BigDecimal aBD=BigDecimal.ZERO;
 			BigDecimal pBD=BigDecimal.ZERO;
 			
-			Optional<List<Podugovarac>> pListO=kodRepository.getPodugovaracRepository().findAllByIdClaimPodugovarac(idClaimPodugovarac);
+			Optional<List<Podugovarac>> pListO=getKodRepository().getPodugovaracRepository().findAllByIdClaimPodugovarac(idClaimPodugovarac);
 			
 			if(pListO.isPresent()) {
 				for(Podugovarac p: pListO.get()) {
@@ -152,20 +152,20 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 					}
 				}
 				
-				Optional<ClaimPodugovarac> claimPodugovaracOrderO=kodRepository.getClaimPodugovaracRepository().findById(idClaimPodugovarac);
+				Optional<ClaimPodugovarac> claimPodugovaracOrderO=getKodRepository().getClaimPodugovaracRepository().findById(idClaimPodugovarac);
 				
 				claimPodugovaracOrderO.get().setPlanned(pBD);
 				claimPodugovaracOrderO.get().setActual(aBD);
 				
-				kodRepository.getClaimPodugovaracRepository().save(claimPodugovaracOrderO.get());
+				getKodRepository().getClaimPodugovaracRepository().save(claimPodugovaracOrderO.get());
 			}
 		}
 		
-		Optional<ProjektDetalji> projektDetaljiO=kodRepository.getProjektDetaljiRepository().findById(idProjektDetalji);
+		Optional<ProjektDetalji> projektDetaljiO=getKodRepository().getProjektDetaljiRepository().findById(idProjektDetalji);
 		projektDetaljiO.get().setCostPlanned(osobaClaimPlannedKn);
 		projektDetaljiO.get().setCostActual(osobaClaimActualKn);
 
-		kodRepository.getProjektDetaljiRepository().save(projektDetaljiO.get());
+		getKodRepository().getProjektDetaljiRepository().save(projektDetaljiO.get());
 	}
 
 }

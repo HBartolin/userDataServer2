@@ -37,14 +37,14 @@ public class ProjektDetaljiServiceImplUrediProjektDatalji extends Kod {
 	}
 	
 	private ProjektDetalji ucitajProjektDetalje(Long id, BigDecimal totalRevenueBD, BigDecimal costPsBD) {
-		Optional<ProjektDetalji> projektDetaljiOptional=kodRepository.getProjektDetaljiRepository().findById(id);
+		Optional<ProjektDetalji> projektDetaljiOptional=getKodRepository().getProjektDetaljiRepository().findById(id);
 		ProjektDetalji projektDetalji;
 		
 		if(projektDetaljiOptional.isPresent()) {
 			projektDetalji=projektDetaljiOptional.get();
 		} else {
-			Optional<SifarnikValuta> sifarnikValuta=kodRepository.getSifarnikValutaRepository().findAllByNaziv(HRK);
-			Optional<Projekt> projektO=kodRepository.getProjektRepository().findById(id);
+			Optional<SifarnikValuta> sifarnikValuta=getKodRepository().getSifarnikValutaRepository().findAllByNaziv(HRK);
+			Optional<Projekt> projektO=getKodRepository().getProjektRepository().findById(id);
 			
 			projektDetalji=new ProjektDetalji();
 			projektDetalji.setSifarnikValuta(sifarnikValuta.get());
@@ -56,7 +56,7 @@ public class ProjektDetaljiServiceImplUrediProjektDatalji extends Kod {
 		projektDetalji.setTotalRevenue(totalRevenueBD);
 		projektDetalji.setCostPs(costPsBD);
 		
-		projektDetalji=kodRepository.getProjektDetaljiRepository().save(projektDetalji);
+		projektDetalji=getKodRepository().getProjektDetaljiRepository().save(projektDetalji);
 		
 		return projektDetalji;
 	}

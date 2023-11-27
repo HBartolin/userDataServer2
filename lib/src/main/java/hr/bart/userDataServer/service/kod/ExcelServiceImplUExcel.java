@@ -50,7 +50,7 @@ public class ExcelServiceImplUExcel extends Kod {
 	private HashMap<String, CellStyle> hmCellStyle=new HashMap<>();
 	private SortedSet<LocalDate> datumiSortedSet;
 	private Optional<List<Claim>> claimListO;
-	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
+	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
 
 	public ExcelServiceImplUExcel(KodRepository kodRepository, Long id) {
 		super(kodRepository);
@@ -97,7 +97,7 @@ public class ExcelServiceImplUExcel extends Kod {
 		ReturnPodugovarac returnPodugovarac=new ReturnPodugovarac();
 		Sheet sheetPodugovaraci=wb.createSheet(PODUGOVARACI);
 		int iRow=0;
-		Optional<List<Podugovarac>> podugovaracListO=kodRepository.getPodugovaracRepository().findAllByIdProjektDetalji(idProjektDetalji);
+		Optional<List<Podugovarac>> podugovaracListO=getKodRepository().getPodugovaracRepository().findAllByIdProjektDetalji(idProjektDetalji);
 		
 		if(podugovaracListO.isPresent()) {
 			Row row = sheetPodugovaraci.createRow(iRow++);
@@ -514,7 +514,7 @@ public class ExcelServiceImplUExcel extends Kod {
 			return;
 		}
 		
-		Optional<List<OsobaValuta>> osobaValutaListO=kodRepository.getOsobaValutaRepository().findAllByIdSifarnikOsobaList(idSifarnikOsobaList);
+		Optional<List<OsobaValuta>> osobaValutaListO=getKodRepository().getOsobaValutaRepository().findAllByIdSifarnikOsobaList(idSifarnikOsobaList);
 		
 		if(!osobaValutaListO.isPresent()) {
 			return;
@@ -665,7 +665,7 @@ public class ExcelServiceImplUExcel extends Kod {
 	private void setTotalRevenue(Long id, Workbook wb) {		
 		Sheet sheetTotalRevenue = wb.createSheet(TOTAL_REVENUE);
 		
-		Optional<ProjektDetalji> projektDetaljiO=kodRepository.getProjektDetaljiRepository().findById(id);
+		Optional<ProjektDetalji> projektDetaljiO=getKodRepository().getProjektDetaljiRepository().findById(id);
 		
 		if(!projektDetaljiO.isPresent()) {
 			return;

@@ -19,7 +19,7 @@ public class OsobaClaimActualServiceImplClaimUpdatedActualByDate extends Kod {
 	private final LocalDate datum;
 	private final List<ClaimUpdatedActualPlanned> podatci;	
 	private String greska;
-	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
+	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
 	
 	public OsobaClaimActualServiceImplClaimUpdatedActualByDate(KodRepository kodRepository, Long idProjektDetalji, LocalDate datum, List<ClaimUpdatedActualPlanned> podatci) {
 		super(kodRepository);
@@ -41,7 +41,7 @@ public class OsobaClaimActualServiceImplClaimUpdatedActualByDate extends Kod {
 				OsobaValuta osobaValuta=aCommonServis.getOsobaValuta(cua.getIdSifarnikOsoba(), null, datum);
 				
 				if(cua.getIdClaim()>0) {
-					Optional<OsobaClaimActual> ocaOptional=kodRepository.getOsobaClaimActualRepository().findById(cua.getIdClaim());
+					Optional<OsobaClaimActual> ocaOptional=getKodRepository().getOsobaClaimActualRepository().findById(cua.getIdClaim());
 					
 					if(!ocaOptional.isPresent()) {
 						if(greska.length()>0) greska+=" <BR> ";
@@ -61,8 +61,8 @@ public class OsobaClaimActualServiceImplClaimUpdatedActualByDate extends Kod {
 						}
 					}
 				} else {
-					List<SifarnikDatuma> sdList=kodRepository.getSifarnikDatumaRepository().findByDatumPetak(datum);
-					Optional<List<Claim>> claimListOptional=kodRepository.getClaimRepository().findAllByIdProjektDetalji_idSifarnikOsoba(idProjektDetalji, cua.getIdSifarnikOsoba());
+					List<SifarnikDatuma> sdList=getKodRepository().getSifarnikDatumaRepository().findByDatumPetak(datum);
+					Optional<List<Claim>> claimListOptional=getKodRepository().getClaimRepository().findAllByIdProjektDetalji_idSifarnikOsoba(idProjektDetalji, cua.getIdSifarnikOsoba());
 					
 					if(sdList.size()==JEDAN) {
 						if(claimListOptional.isPresent() && claimListOptional.get().size()==JEDAN) {
@@ -90,7 +90,7 @@ public class OsobaClaimActualServiceImplClaimUpdatedActualByDate extends Kod {
 				pi.setGreska(greska);
 			} else {					
 				for(OsobaClaimActual osobaClaimActual: ocaList) {
-					OsobaClaimActual oca=kodRepository.getOsobaClaimActualRepository().save(osobaClaimActual);
+					OsobaClaimActual oca=getKodRepository().getOsobaClaimActualRepository().save(osobaClaimActual);
 					
 					aCommonServis.setTabliceClaim1(oca);
 				}

@@ -8,7 +8,7 @@ import hr.bart.userDataServer.util.PojoInterface;
 
 public class ClaimServiceImplTablicaOsobaValuta extends Kod {
 	private final Long idProjektDetalji;
-	private ACommonServis aCommonServis=new ACommonServis(kodRepository);
+	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
 
 	public ClaimServiceImplTablicaOsobaValuta(KodRepository kodRepository, Long idProjektDetalji) {
 		super(kodRepository);
