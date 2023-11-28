@@ -56,6 +56,7 @@ public abstract class Kod {
 		LOGGER.error(t.getMessage(), t);
 		
 		pi.setGreska(t.getMessage());
+		pi.setGreskaListString(t.getMessage());
 	}
 	
 	protected void setRezultatPage(PojoInterface pi, Page<?> page) {
