@@ -39,22 +39,30 @@ public class ClaimPodugovaracServiceImplUnesiPO extends Kod {
 		
 		if(idProjektDetalji==null) {
 			if(greska.length()>0) greska=greska + " <BR> ";
-			greska=greska + "Polje 'idProjektDetalji' nije upisano.";
+			String msg="Polje 'idProjektDetalji' nije upisano.";
+			greska=greska + msg;
+			pi.setGreskaListString(msg);
 		}
 		
 		if(!totalO.isPresent()) {
 			if(greska.length()>0) greska=greska + " <BR> ";
-			greska=greska + "Polje 'total' nije upisano.";
+			String msg="Polje 'total' nije upisano.";
+			greska=greska + msg;
+			pi.setGreskaListString(msg);
 		}
 		
 		if(idSifarnikPodugovaraca==null) {
 			if(greska.length()>0) greska=greska + " <BR> ";
-			greska=greska + "Polje 'Naziv' nije upisano.";
+			String msg="Polje 'Naziv' nije upisano.";
+			greska=greska + msg;
+			pi.setGreskaListString(msg);
 		}
 		
 		if(po==null || "".equals(po.replaceAll("\\s",""))) {
 			if(greska.length()>0) greska=greska + " <BR> ";
-			greska=greska + "Polje 'PO' nije upisano.";
+			String msg="Polje 'PO' nije upisano.";
+			greska=greska + msg;
+			pi.setGreskaListString(msg);
 		}
 		
 		if(idSifarnikPodugovaraca!=null && idProjektDetalji!=null) {
@@ -63,14 +71,18 @@ public class ClaimPodugovaracServiceImplUnesiPO extends Kod {
 				
 				if(findAllByIdProjektDetalji_id_idSifarnikPodugovaraca.isPresent()) {
 					if(greska.length()>0) greska=greska + " <BR> ";
-					greska=greska + "'Naziv' je već dodijeljen, uredite naziv izravno u tablici.";
+					String msg="'Naziv' je već dodijeljen, uredite naziv izravno u tablici.";
+					greska=greska + msg;
+					pi.setGreskaListString(msg);
 				}
 			} else {
 				Optional<List<ClaimPodugovarac>> findAllByIdProjektDetalji_idSifarnikPodugovaraca=getKodRepository().getClaimPodugovaracRepository().findAllByIdProjektDetalji_idSifarnikPodugovaraca(idProjektDetalji, idSifarnikPodugovaraca);
 				
 				if(findAllByIdProjektDetalji_idSifarnikPodugovaraca.isPresent()) {
 					if(greska.length()>0) greska=greska + " <BR> ";
-					greska=greska + "'Naziv' je već dodijeljen, uredite naziv izravno u tablici.";
+					String msg="'Naziv' je već dodijeljen, uredite naziv izravno u tablici.";
+					greska=greska + msg;
+					pi.setGreskaListString(msg);
 				}
 			}
 		}
