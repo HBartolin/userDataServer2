@@ -40,28 +40,28 @@ public class ClaimPodugovaracServiceImplUnesiPO extends Kod {
 		if(idProjektDetalji==null) {
 			if(greska.length()>0) greska=greska + " <BR> ";
 			String msg="Polje 'idProjektDetalji' nije upisano.";
-			greska=greska + msg;
+			greska+=msg;
 			pi.setGreskaListString(msg);
 		}
 		
 		if(!totalO.isPresent()) {
 			if(greska.length()>0) greska=greska + " <BR> ";
 			String msg="Polje 'total' nije upisano.";
-			greska=greska + msg;
+			greska+=msg;
 			pi.setGreskaListString(msg);
 		}
 		
 		if(idSifarnikPodugovaraca==null) {
 			if(greska.length()>0) greska=greska + " <BR> ";
 			String msg="Polje 'Naziv' nije upisano.";
-			greska=greska + msg;
+			greska+=msg;
 			pi.setGreskaListString(msg);
 		}
 		
 		if(po==null || "".equals(po.replaceAll("\\s",""))) {
 			if(greska.length()>0) greska=greska + " <BR> ";
 			String msg="Polje 'PO' nije upisano.";
-			greska=greska + msg;
+			greska+=msg;
 			pi.setGreskaListString(msg);
 		}
 		
@@ -72,7 +72,7 @@ public class ClaimPodugovaracServiceImplUnesiPO extends Kod {
 				if(findAllByIdProjektDetalji_id_idSifarnikPodugovaraca.isPresent()) {
 					if(greska.length()>0) greska=greska + " <BR> ";
 					String msg="'Naziv' je već dodijeljen, uredite naziv izravno u tablici.";
-					greska=greska + msg;
+					greska+=msg;
 					pi.setGreskaListString(msg);
 				}
 			} else {
@@ -81,7 +81,7 @@ public class ClaimPodugovaracServiceImplUnesiPO extends Kod {
 				if(findAllByIdProjektDetalji_idSifarnikPodugovaraca.isPresent()) {
 					if(greska.length()>0) greska=greska + " <BR> ";
 					String msg="'Naziv' je već dodijeljen, uredite naziv izravno u tablici.";
-					greska=greska + msg;
+					greska+=msg;
 					pi.setGreskaListString(msg);
 				}
 			}
