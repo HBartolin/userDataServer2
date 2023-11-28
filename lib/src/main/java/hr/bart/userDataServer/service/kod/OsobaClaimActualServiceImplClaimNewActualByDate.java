@@ -35,7 +35,7 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {
 		greska="";
 		
-		validirajClaimActualByDate(idProjektDetalji, datum);
+		validirajClaimActualByDate(pi, idProjektDetalji, datum);
 		
 		if(greska.length()>0) {
 			pi.setGreska(greska);
@@ -58,13 +58,17 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 					
 					if(claimList.size()!=1) {
 						if(greska.length()>0) greska+=" <BR> ";
-						greska+="Iz baze je tablica 'Claim' vratila različito od 1!";
+						String msg="Iz baze je tablica 'Claim' vratila različito od 1!";
+						greska+=msg;
+						pi.setGreskaListString(msg);
 					} else {							
 						List<SifarnikDatuma> sifarnikDatumaList=getKodRepository().getSifarnikDatumaRepository().findByDatumPetak(datum);
 						
 						if(sifarnikDatumaList.size()>1) {
 							if(greska.length()>0) greska+=" <BR> ";
-							greska+="Iz baze je tablica 'Claim' vratila različito od 1!";
+							String msg="Iz baze je tablica 'Claim' vratila različito od 1!";
+							greska+=msg;
+							pi.setGreskaListString(msg);
 						} else {
 							OsobaClaimActual oca=new OsobaClaimActual();
 							
@@ -73,7 +77,7 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 							oca.setSati(vBD);
 							oca.setCijenaTecaj(BigDecimal.ZERO);
 							oca.setClaim(claimList.get(0));
-							oca.setSifarnikDatuma(getSifarnikDatuma(sifarnikDatumaList, datum));			
+							oca.setSifarnikDatuma(getSifarnikDatuma(pi, sifarnikDatumaList, datum));			
 							oca.setOsobaValuta(aCommonServis.getOsobaValuta(kLong,claimO.get().getSifarnikOsoba().getImePrezime(), datum));
 							oca.setCijena(vBD.multiply(oca.getOsobaValuta().getCijena()));
 															
@@ -83,7 +87,9 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 					}
 				} else {
 					if(greska.length()>0) greska+=" <BR> ";
-					greska+="Iz baze je tablica 'Claim' vratila null!";
+					String msg="Iz baze je tablica 'Claim' vratila null!";
+					greska+=msg;
+					pi.setGreskaListString(msg);
 				}
 		    }
 			
@@ -107,14 +113,16 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 		return pi;
 	}	
 
-	private SifarnikDatuma getSifarnikDatuma(List<SifarnikDatuma> sifarnikDatumaList, LocalDate datum) throws Exception {		
+	private SifarnikDatuma getSifarnikDatuma(PojoInterface pi, List<SifarnikDatuma> sifarnikDatumaList, LocalDate datum) throws Exception {		
 		SifarnikDatuma sd;
 		
 		if(sifarnikDatumaList.isEmpty()) {
 			LocalDate ned=datum.plusDays(DVA);
 			LocalDate mj=ned.withDayOfMonth(JEDAN);
 			SifarnikMjeseca sifarnikMjeseca = aCommonServis.getSifarnikMjeseca(mj);
-			greska+=aCommonServis.getGreska();
+			String msg=aCommonServis.getGreska();
+			greska+=msg;
+			pi.setGreskaListString(msg);
 			
 			SifarnikDatuma sifarnikDatuma=new SifarnikDatuma();
 			sifarnikDatuma.setDatumPetak(datum);
@@ -131,17 +139,23 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 		return sd;
 	}
 
-	private void validirajClaimActualByDate(Long idProjektDetalji, LocalDate datum) {		
+	private void validirajClaimActualByDate(PojoInterface pi, Long idProjektDetalji, LocalDate datum) {		
 		if(idProjektDetalji==null) {
 			if(greska.length()>0) greska+=" <BR> ";
-			greska+="Polje 'idProjektDetalji' nije upisano.";
+			String msg="Polje 'idProjektDetalji' nije upisano.";
+			greska+=msg;
+			pi.setGreskaListString(msg);
 		} else {		
 			if(datum==null) {
 				if(greska.length()>0) greska+=" <BR> ";
-				greska+="Polje 'Datum' nije upisano.";
+				String msg="Polje 'Datum' nije upisano.";
+				greska+=msg;
+				pi.setGreskaListString(msg);
 			} else if(!DayOfWeek.FRIDAY.equals(datum.getDayOfWeek())) {
 				if(greska.length()>0) greska+=" <BR> ";
-				greska+="Polje 'Datum' mora biti PETAK.";
+				String msg="Polje 'Datum' mora biti PETAK.";
+				greska+=msg;
+				pi.setGreskaListString(msg);
 			} else {
 				Optional<List<OsobaClaimActual>> ocaListOptional=getKodRepository().getOsobaClaimActualRepository().findAllByDatum(idProjektDetalji, datum);
 				
@@ -150,7 +164,9 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 					
 					if(!ocaList.isEmpty()) {
 						if(greska.length()>0) greska+=" <BR> ";
-						greska+=String.format("Datum iz polja 'Datum' već postoji, uredite njega direktno '%s'.", datum);
+						String msg=String.format("Datum iz polja 'Datum' već postoji, uredite njega direktno '%s'.", datum);
+						greska+=msg;
+						pi.setGreskaListString(msg);
 					}
 				}
 			}
