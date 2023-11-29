@@ -22,13 +22,17 @@ public class SifarnikPodugovaracaServiceImplEditirajSifarnikPodugovaraca extends
 		
 		if(!nazivO.isPresent()) {
 			if(greska.length()>0) greska=greska + " <BR> ";
-			greska=greska + "Polje Naziv nije upisano.";
+			String msg="Polje Naziv nije upisano.";
+			greska+=msg;
+			pi.setGreskaListString(msg);
 		} else {
 			String naziv=nazivO.get();
 			
 			if(naziv==null || naziv.isEmpty()) {
 				if(greska.length()>0) greska=greska + " <BR> ";
-				greska=greska + "Polje Naziv nije upisano.";
+				String msg="Polje Naziv nije upisano.";
+				greska+=msg;
+				pi.setGreskaListString(msg);
 			} else {
 				SifarnikPodugovaraca sp=new SifarnikPodugovaraca();
 				sp.setNaziv(naziv);
