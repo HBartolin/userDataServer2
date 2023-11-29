@@ -28,16 +28,16 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {
 		greska="";
 		List<OsobaClaimPlanned> ocpList=new ArrayList<>();  
-		validirajClaimUpdatePlannedByDate(datum);
+		validirajClaimUpdatePlannedByDate(pi, datum);
 		
 		if(greska.length()>0) {
 			pi.setGreska(greska);
 		} else {
 			for(ClaimUpdatedActualPlanned cua: podatci) {					
 				if(cua.getIdClaim()>0) {
-					getOsobaClaimPlanned(cua, ocpList);
+					getOsobaClaimPlanned(pi, cua, ocpList);
 				} else {
-					getOsobaClaimPlanned(cua, ocpList, datum, idProjektDetalji);
+					getOsobaClaimPlanned(pi, cua, ocpList, datum, idProjektDetalji);
 				}
 			}
 			
@@ -63,17 +63,21 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 		return pi;
 	}
 	
-	private void validirajClaimUpdatePlannedByDate(LocalDate datum) {
+	private void validirajClaimUpdatePlannedByDate(PojoInterface pi, LocalDate datum) {
 		if(datum==null) {
 			if(greska.length()>0) greska+=" <BR> ";
-			greska+="Polje 'Datum' nije upisano.";
+			String msg="Polje 'Datum' nije upisano.";
+			greska+=msg;
+			pi.setGreskaListString(msg);
 		} else if(datum.getDayOfMonth()!=JEDAN) {
 			if(greska.length()>0) greska+=" <BR> ";
-			greska+="Polje 'Datum' mora biti prvi u mjesecu.";
+			String msg="Polje 'Datum' mora biti prvi u mjesecu.";
+			greska+=msg;
+			pi.setGreskaListString(msg);
 		} 
 	}
 	
-	private void getOsobaClaimPlanned(ClaimUpdatedActualPlanned cua, List<OsobaClaimPlanned> ocpList, LocalDate datum, Long idProjektDetalji) {
+	private void getOsobaClaimPlanned(PojoInterface pi, ClaimUpdatedActualPlanned cua, List<OsobaClaimPlanned> ocpList, LocalDate datum, Long idProjektDetalji) {
 		List<SifarnikMjeseca> sdList=getKodRepository().getSifarnikMjesecaRepository().findByMjeseca(datum);
 		Optional<List<Claim>> claimListOptional=getKodRepository().getClaimRepository().findAllByIdProjektDetalji_idSifarnikOsoba(idProjektDetalji, cua.getIdSifarnikOsoba());
 		
@@ -87,20 +91,26 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 				ocpList.add(osobaClaimPlanned);
 			} else {
 				if(greska.length()>0) greska+=" <BR> ";
-				greska+=String.format("Iz baze je vraćeno da nema Claim ili ih ima više od jednog (idProjektDetalji=%d, idSifarnikOsoba=%d).", idProjektDetalji, cua.getIdSifarnikOsoba());
+				String msg=String.format("Iz baze je vraćeno da nema Claim ili ih ima više od jednog (idProjektDetalji=%d, idSifarnikOsoba=%d).", idProjektDetalji, cua.getIdSifarnikOsoba());
+				greska+=msg;
+				pi.setGreskaListString(msg);
 			}
 		} else {
 			if(greska.length()>0) greska+=" <BR> ";
-			greska+=String.format("Iz baze je vraćeno da nema SifarnikDatuma ili ih ima više od jednog (%d).", datum);
+			String msg=String.format("Iz baze je vraćeno da nema SifarnikDatuma ili ih ima više od jednog (%d).", datum);
+			greska+=msg;
+			pi.setGreskaListString(msg);
 		}
 	}
 	
-	private void getOsobaClaimPlanned(ClaimUpdatedActualPlanned cua, List<OsobaClaimPlanned> ocpList) {		
+	private void getOsobaClaimPlanned(PojoInterface pi, ClaimUpdatedActualPlanned cua, List<OsobaClaimPlanned> ocpList) {		
 		Optional<OsobaClaimPlanned> ocpOptional=getKodRepository().getOsobaClaimPlannedRepository().findById(cua.getIdClaim());
 		
 		if(!ocpOptional.isPresent()) {
 			if(greska.length()>0) greska+=" <BR> ";
-			greska+=String.format("Iz baze nije ništa vraćeno 'OsobaClaimActual' s id-jem '%d'.", cua.getIdClaim());
+			String msg=String.format("Iz baze nije ništa vraćeno 'OsobaClaimActual' s id-jem '%d'.", cua.getIdClaim());
+			greska+=msg;
+			pi.setGreskaListString(msg);
 		} else {
 			OsobaClaimPlanned osobaClaimPlanned=ocpOptional.get();
 			
@@ -111,7 +121,9 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 				ocpList.add(osobaClaimPlanned);
 			} else {
 				if(greska.length()>0) greska+=" <BR> ";
-				greska+=String.format("Iz baze je vraćen zasstario podatak 'OsobaClaimActual' s id-jem '%d' i ts-om '%d' a očekuje ts '%d'.", cua.getIdClaim(), cua.getTs(), osobaClaimPlanned.getTs());
+				String msg=String.format("Iz baze je vraćen zasstario podatak 'OsobaClaimActual' s id-jem '%d' i ts-om '%d' a očekuje ts '%d'.", cua.getIdClaim(), cua.getTs(), osobaClaimPlanned.getTs());
+				greska+=msg;
+				pi.setGreskaListString(msg);
 			}
 		}
 	}
