@@ -25,12 +25,16 @@ public class SifarnikOsobaServiceImplEditirajSifarnikOsoba extends Kod {
 		String greska="";
 		
 		if(ime==null || "".equals(ime.replaceAll("\\s",""))) {
-			greska="Polje Ime nije upisano.";
+			String msg="Polje Ime nije upisano.";
+			greska=msg;
+			pi.setGreskaListString(msg);
 		}
 		
 		if(prezime==null || "".equals(prezime.replaceAll("\\s",""))) {
 			if(greska.length()>0) greska=greska + " <BR> ";
-			greska=greska + "Polje Prezime nije upisano.";
+			String msg="Polje Prezime nije upisano.";
+			greska+=msg;
+			pi.setGreskaListString(msg);
 		}
 		
 		if(greska.length()>0) {
