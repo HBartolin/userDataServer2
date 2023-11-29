@@ -4,19 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PojoInterface {
-	private String greska="";
-	private List<String> greskaList=new ArrayList<>();
+	private List<String> greska=new ArrayList<>();
 	private String ok="";
 	private Object rezultat="";
 	private Object rezultatPage="";
-	
-	public String getGreska() {
-		return greska;
-	}
-
-	public void setGreska(String greska) {
-		this.greska = greska;
-	}
 
 	public Object getRezultat() {
 		return rezultat;
@@ -42,12 +33,12 @@ public class PojoInterface {
 		this.rezultatPage = rezultatPage;
 	}
 
-	public List<String> getGreskaList() {
-		return greskaList;
+	public List<String> getGreska() {
+		return greska;
 	}
 
 	public void setGreskaListString(String greska) {
-		greskaList.add(greska);
+		this.greska.add(greska);
 	}
 	
 }

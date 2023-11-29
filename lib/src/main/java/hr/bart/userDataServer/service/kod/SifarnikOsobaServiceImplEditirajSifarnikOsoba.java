@@ -21,24 +21,19 @@ public class SifarnikOsobaServiceImplEditirajSifarnikOsoba extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {
-		String greska="";
-		
+	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {		
 		if(ime==null || "".equals(ime.replaceAll("\\s",""))) {
 			String msg="Polje Ime nije upisano.";
-			greska=msg;
 			pi.setGreskaListString(msg);
 		}
 		
 		if(prezime==null || "".equals(prezime.replaceAll("\\s",""))) {
-			if(greska.length()>0) greska=greska + " <BR> ";
 			String msg="Polje Prezime nije upisano.";
-			greska+=msg;
 			pi.setGreskaListString(msg);
 		}
 		
-		if(greska.length()>0) {
-			pi.setGreska(greska);
+		if(!pi.getGreska().isEmpty()) {
+			
 		} else {
 			SifarnikOsoba sifarnikOsoba=new SifarnikOsoba();
 			

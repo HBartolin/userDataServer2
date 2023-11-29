@@ -114,7 +114,7 @@ public class ClaimPodugovaracServiceImplUnesiPO extends Kod {
 				pi.setRezultat(purchaseOrderListO.get());
 			}
 		} else {
-			pi.setGreska(greska);
+			
 		}
 		
 		return pi;

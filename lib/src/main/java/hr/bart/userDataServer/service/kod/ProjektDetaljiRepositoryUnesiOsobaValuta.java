@@ -29,7 +29,6 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 	private final BigDecimal cijena;
 	private final LocalDate sifarnikDatumaOdLD;
 	private final LocalDate sifarnikDatumaDoLD;
-	private String greska="";
 	private String sifarnikDatumaOdValue="Datum od";
 	private String sifarnikDatumaDoValue="Datum do";
 	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
@@ -56,28 +55,21 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 
 	@Override
 	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {
-		greska="";
 		SifarnikDatuma sifarnikDatumaDo=null;
 		SifarnikDatuma sifarnikDatumaOd=null;
 		
 		if("".equals(band)) {
-			if(greska.length()>0) greska+=" <BR> ";
 			String msg="Polje Band nije upisano.";
-			greska+=msg;
 			pi.setGreskaListString(msg);
 		}
 		
 		if(cijena==null) {
-			if(greska.length()>0) greska+=" <BR> ";
 			String msg="Polje Cijena nije upisano.";
-			greska+=msg;
 			pi.setGreskaListString(msg);
 		}
 		
 		if(sifarnikDatumaOdLD==null) {
-			if(greska.length()>0) greska+=" <BR> ";
 			String msg=String.format("Polje '%s' nije upisano.", sifarnikDatumaOdValue);
-			greska+=msg;
 			pi.setGreskaListString(msg);
 		} else {
 			sifarnikDatumaOd=getSifarnikDatumaOd(pi, sifarnikDatumaOdLD);
@@ -89,19 +81,17 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 			sifarnikDatumaDo=getSifarnikDatumaDoExist(pi, sifarnikDatumaDoLD);
 		}
 		
-		if(greska.length()==0 && sifarnikDatumaOd!=null && sifarnikDatumaDo!=null) {
+		if(pi.getGreska().isEmpty() && sifarnikDatumaOd!=null && sifarnikDatumaDo!=null) {
 			if(sifarnikDatumaOd.getDatumPetak().isEqual(sifarnikDatumaDo.getDatumPetak()) || sifarnikDatumaOd.getDatumPetak().isAfter(sifarnikDatumaDo.getDatumPetak())) {
-				if(greska.length()>0) greska+=" <BR> ";
 				String msg=String.format("'%s' je nakon ili jednak '%s'.", sifarnikDatumaOdValue, sifarnikDatumaDoValue);
-				greska+=msg;
 				pi.setGreskaListString(msg);
 			} else {
 				napraviSifarnikeDatuma(pi, id, ts, band, cijena, idSifarnikOsoba, sifarnikDatumaOd, sifarnikDatumaDo);
 			} 
 		}
 			
-		if(greska.length()>0) {
-			pi.setGreska(greska);
+		if(!pi.getGreska().isEmpty()) {
+			
 		} 
 		
 		PageRequest pageRequest=PageRequest.of(NULA, pageRequestSize50);
@@ -116,9 +106,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 		SifarnikDatuma sifarnikDatumaOd=null;
 		
 		if(!DayOfWeek.FRIDAY.equals(dayOfWeek)) {
-			if(greska.length()>0) greska+=" <BR> ";
 			String msg=String.format("Polje '%s' mota biti PETAK.", sifarnikDatumaOdValue);
-			greska+=msg;
 			pi.setGreskaListString(msg);
 		} else {
 			LocalDate ned=sifarnikDatumaOdLD.plusDays(DVA);
@@ -136,9 +124,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 					
 					sifarnikDatumaOd=getKodRepository().getSifarnikDatumaRepository().save(sifarnikDatuma);
 				} else if(sifarnikDatumaList.size()>1) {
-					if(greska.length()>0) greska+=" <BR> ";
 					String msg=String.format("Ima previše polja '%s' = %s! KRAJ RADA!", sifarnikDatumaDoValue, sifarnikDatumaOdLD);
-					greska+=msg;
 					pi.setGreskaListString(msg);
 				} else {
 					sifarnikDatumaOd=sifarnikDatumaList.get(0);
@@ -154,9 +140,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 		DayOfWeek dayOfWeek=sifarnikDatumaDoLD.getDayOfWeek();
 		
 		if(!DayOfWeek.FRIDAY.equals(dayOfWeek)) {
-			if(greska.length()>0) greska+=" <BR> ";
 			String msg=String.format("Polje '%s' mota biti PETAK.", sifarnikDatumaDoValue);
-			greska+=msg;
 			pi.setGreskaListString(msg);
 		} else {
 			LocalDate ned=sifarnikDatumaDoLD.plusDays(DVA);
@@ -174,9 +158,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 					
 					sifarnikDatumaDo=getKodRepository().getSifarnikDatumaRepository().save(sifarnikDatuma);
 				} else if(sifarnikDatumaList.size()>1) {
-					if(greska.length()>0) greska+=" <BR> ";
 					String msg=String.format("Ima previše polja '%s' = %s! KRAJ RADA!", sifarnikDatumaDoValue, sifarnikDatumaDoLD);
-					greska+=msg;
 					pi.setGreskaListString(msg);
 				} else {
 					sifarnikDatumaDo=sifarnikDatumaList.get(0);
@@ -203,9 +185,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 				sifarnikDatumaDo=getKodRepository().getSifarnikDatumaRepository().save(sifarnikDatuma);
 			}
 		} else if(sifarnikDatumaList.size()>1){
-			if(greska.length()>0) greska+=" <BR> ";
 			String msg=String.format("Ima previše polja '%s' = %s! KRAJ RADA!", sifarnikDatumaDoValue, datumPatakZadnji);
-			greska+=msg;
 			pi.setGreskaListString(msg);
 		} else {
 			sifarnikDatumaDo=sifarnikDatumaList.get(0);
@@ -236,14 +216,10 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 				g+=ov.getId();
 			}
 			
-			if(greska.length()>0) greska+=" <BR> ";
 			String msg=String.format("Prevelik raspon datuma, prekriva polje: %s.", g);
-			greska+=msg;
 			pi.setGreskaListString(msg);
 		} else if(osobaValutaOdList.size()>1 || osobaValutaDoList.size()>1) {
-			if(greska.length()>0) greska+=" <BR> ";
 			String msg="Nešto se čudno desilo, ajde u kod.";
-			greska+=msg;
 			pi.setGreskaListString(msg);
 		} else {
 			setOsobaValutaOdList(pi, osobaValutaOdList, sifarnikDatumaOd);
@@ -354,9 +330,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 			OsobaValuta ovDoSljedece=osobaValutaDoList.get(0);
 			
 			if(ovDoSljedece.getSifarnikDatumaDo().getDatumPetak().isBefore(sifarnikDatumaDo.getDatumPetak())) {
-				if(greska.length()>0) greska+=" <BR> ";
 				String msg=String.format("'%s' je zapravo prije '%s': %s.", sifarnikDatumaOdValue, sifarnikDatumaDoValue, ovDoSljedece.getId());
-				greska+=msg;
 				pi.setGreskaListString(msg);
 			} else {
 				LocalDate sdOdPomak=sifarnikDatumaDo.getDatumPetak().plusDays(SEDAM);
@@ -374,9 +348,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 			OsobaValuta ovOdPrethodno=osobaValutaOdList.get(0);
 			
 			if(ovOdPrethodno.getSifarnikDatumaOd().getDatumPetak().isAfter(sifarnikDatumaOd.getDatumPetak())) {
-				if(greska.length()>0) greska+=" <BR> ";
 				String msg=String.format("'%s' je zapravo prije '%s': %s.", sifarnikDatumaDoValue, sifarnikDatumaOdValue, ovOdPrethodno.getId());
-				greska+=msg;
 				pi.setGreskaListString(msg);
 			} else {
 				LocalDate sdDoPomak=sifarnikDatumaOd.getDatumPetak().minusDays(SEDAM);
@@ -399,9 +371,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 			 
 			sifarnikMjeseca=getKodRepository().getSifarnikMjesecaRepository().save(sifarnikMjesecaTmp);
 		} else if(sifarnikMjesecaList.size()>1){
-			if(greska.length()>0) greska+=" <BR> ";
 			String msg=String.format("Ima previše polja '%s' = %s! KRAJ RADA!", sifarnikDatumaValue, mjesec);
-			greska+=msg;
 			pi.setGreskaListString(msg);
 		} else {
 			sifarnikMjeseca=sifarnikMjesecaList.get(0);
@@ -425,9 +395,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 				
 				sdPomak=getKodRepository().getSifarnikDatumaRepository().save(sifarnikDatuma);
 			} else if(sifarnikDatumaList.size()>1) {
-				if(greska.length()>0) greska+=" <BR> ";
 				String msg=String.format("Ima previše polja '%s' = %s! KRAJ RADA!", sifarnikDatumaDoValue, sdOdPomak);
-				greska+=msg;
 				pi.setGreskaListString(msg);
 			} else {
 				sdPomak=sifarnikDatumaList.get(0);

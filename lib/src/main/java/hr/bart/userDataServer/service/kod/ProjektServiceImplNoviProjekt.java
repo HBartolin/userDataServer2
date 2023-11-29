@@ -21,24 +21,19 @@ public class ProjektServiceImplNoviProjekt extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {
-		String greska="";
-		
+	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {		
 		if(claim==null || "".equals(claim.replaceAll("\\s",""))) {
 			String msg="Polje Claim nije upisano.";
-			greska=msg;
 			pi.setGreskaListString(msg);
 		}
 		
 		if(contract==null || "".equals(contract.replaceAll("\\s",""))) {
-			if(greska.length()>0) greska+=" <BR> ";
 			String msg="Polje Contract nije upisano.";
-			greska+=msg;
 			pi.setGreskaListString(msg);
 		}
 		
-		if(greska.length()>0) {
-			pi.setGreska(greska);
+		if(!pi.getGreska().isEmpty()) {
+			
 		} else {
 			Projekt projekt=new Projekt();
 			projekt.setClaim(aCommonServis.skratiAkoTreba255(claim));

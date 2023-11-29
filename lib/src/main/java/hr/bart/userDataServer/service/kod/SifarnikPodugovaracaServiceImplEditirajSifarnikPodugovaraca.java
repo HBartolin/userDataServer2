@@ -17,21 +17,15 @@ public class SifarnikPodugovaracaServiceImplEditirajSifarnikPodugovaraca extends
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {
-		String greska="";
-		
+	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {		
 		if(!nazivO.isPresent()) {
-			if(greska.length()>0) greska=greska + " <BR> ";
 			String msg="Polje Naziv nije upisano.";
-			greska+=msg;
 			pi.setGreskaListString(msg);
 		} else {
 			String naziv=nazivO.get();
 			
 			if(naziv==null || naziv.isEmpty()) {
-				if(greska.length()>0) greska=greska + " <BR> ";
 				String msg="Polje Naziv nije upisano.";
-				greska+=msg;
 				pi.setGreskaListString(msg);
 			} else {
 				SifarnikPodugovaraca sp=new SifarnikPodugovaraca();
@@ -45,12 +39,12 @@ public class SifarnikPodugovaracaServiceImplEditirajSifarnikPodugovaraca extends
 			}
 		}
 		
-		if(greska.isEmpty()) {
+		if(pi.getGreska().isEmpty()) {
 			List<SifarnikPodugovaraca> sifarnikPodugovaracaList=getKodRepository().getSifarnikPodugovaracaRepository().findAll();
 			
 			pi.setRezultat(sifarnikPodugovaracaList);
 		} else {
-			pi.setGreska(greska);
+			
 		}
 		
 		return pi;

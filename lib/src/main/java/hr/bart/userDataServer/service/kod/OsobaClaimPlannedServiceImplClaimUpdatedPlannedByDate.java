@@ -26,12 +26,11 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 
 	@Override
 	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {
-		greska="";
 		List<OsobaClaimPlanned> ocpList=new ArrayList<>();  
 		validirajClaimUpdatePlannedByDate(pi, datum);
 		
-		if(greska.length()>0) {
-			pi.setGreska(greska);
+		if(!pi.getGreska().isEmpty()) {
+			
 		} else {
 			for(ClaimUpdatedActualPlanned cua: podatci) {					
 				if(cua.getIdClaim()>0) {
@@ -41,8 +40,8 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 				}
 			}
 			
-			if(greska.length()>0) {
-				pi.setGreska(greska);
+			if(!pi.getGreska().isEmpty()) {
+				
 			} else {					
 				for(OsobaClaimPlanned osobaClaimPlanned: ocpList) {
 					OsobaClaimPlanned oca=getKodRepository().getOsobaClaimPlannedRepository().save(osobaClaimPlanned);
@@ -65,14 +64,10 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 	
 	private void validirajClaimUpdatePlannedByDate(PojoInterface pi, LocalDate datum) {
 		if(datum==null) {
-			if(greska.length()>0) greska+=" <BR> ";
 			String msg="Polje 'Datum' nije upisano.";
-			greska+=msg;
 			pi.setGreskaListString(msg);
 		} else if(datum.getDayOfMonth()!=JEDAN) {
-			if(greska.length()>0) greska+=" <BR> ";
 			String msg="Polje 'Datum' mora biti prvi u mjesecu.";
-			greska+=msg;
 			pi.setGreskaListString(msg);
 		} 
 	}
@@ -90,15 +85,11 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 				
 				ocpList.add(osobaClaimPlanned);
 			} else {
-				if(greska.length()>0) greska+=" <BR> ";
 				String msg=String.format("Iz baze je vraćeno da nema Claim ili ih ima više od jednog (idProjektDetalji=%d, idSifarnikOsoba=%d).", idProjektDetalji, cua.getIdSifarnikOsoba());
-				greska+=msg;
 				pi.setGreskaListString(msg);
 			}
 		} else {
-			if(greska.length()>0) greska+=" <BR> ";
 			String msg=String.format("Iz baze je vraćeno da nema SifarnikDatuma ili ih ima više od jednog (%d).", datum);
-			greska+=msg;
 			pi.setGreskaListString(msg);
 		}
 	}
@@ -107,9 +98,7 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 		Optional<OsobaClaimPlanned> ocpOptional=getKodRepository().getOsobaClaimPlannedRepository().findById(cua.getIdClaim());
 		
 		if(!ocpOptional.isPresent()) {
-			if(greska.length()>0) greska+=" <BR> ";
 			String msg=String.format("Iz baze nije ništa vraćeno 'OsobaClaimActual' s id-jem '%d'.", cua.getIdClaim());
-			greska+=msg;
 			pi.setGreskaListString(msg);
 		} else {
 			OsobaClaimPlanned osobaClaimPlanned=ocpOptional.get();
@@ -120,9 +109,7 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 				
 				ocpList.add(osobaClaimPlanned);
 			} else {
-				if(greska.length()>0) greska+=" <BR> ";
 				String msg=String.format("Iz baze je vraćen zasstario podatak 'OsobaClaimActual' s id-jem '%d' i ts-om '%d' a očekuje ts '%d'.", cua.getIdClaim(), cua.getTs(), osobaClaimPlanned.getTs());
-				greska+=msg;
 				pi.setGreskaListString(msg);
 			}
 		}

@@ -47,44 +47,33 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {
-		String greska="";
-		
+	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {		
 		if(!idPurchaseOrder.isPresent()) {
-			if(greska.length()>0) greska+=" <BR> ";
 			String msg="'Purchase order' nije odababran. Odaberite ga.";
-			greska+=msg;
 			pi.setGreskaListString(msg);
 		}
 		
 		if(datumPlanned==null) {
-			if(greska.length()>0) greska+=" <BR> ";
 			String msg="'Planirani datum' nije unesen. Unesite ga.";
-			greska+=msg;
 			pi.setGreskaListString(msg);
 		} else if(datumActual!=null) {
 			if(datumActual.isBefore(datumPlanned)) {
 				String msg="'Aktualni datum' je prije 'Planirani datum'. Može biti ili jednaki ili kasniji.";
-				greska+=msg;
 				pi.setGreskaListString(msg);
 			}
 		}
 		
 		if(!invoiceNumber.isPresent()) {
-			if(greska.length()>0) greska+=" <BR> ";
 			String msg="'Invoice number' nije unesen. Unesite ga.";
-			greska+=msg;
 			pi.setGreskaListString(msg);
 		}
 		
 		if(!cijena.isPresent()) {
-			if(greska.length()>0) greska+=" <BR> ";
 			String msg="'Cijena' nije unesena. Unesite je.";
-			greska+=msg;
 			pi.setGreskaListString(msg);
 		}
 		
-		if(greska.isEmpty()) {
+		if(pi.getGreska().isEmpty()) {
 //			Optional<ProjektDetalji> projektDetaljiO=projektDetaljiRepository.findById(idProjektDetalji);
 			Optional<ClaimPodugovarac> claimPodugovaracOrderO=getKodRepository().getClaimPodugovaracRepository().findById(idPurchaseOrder.get());
 			
@@ -110,7 +99,7 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 				pi.setRezultat(podugovaracListO.get());
 			} 
 		} else {
-			pi.setGreska(greska);
+			
 		}			
 		
 		return pi;

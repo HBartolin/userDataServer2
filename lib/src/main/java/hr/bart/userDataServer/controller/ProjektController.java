@@ -290,7 +290,7 @@ public class ProjektController {
 	}
 	
 	private ResponseEntity<PojoInterface> handlePi(PojoInterface pi) {
-		if(!pi.getGreska().isBlank()) {
+		if(!pi.getGreska().isEmpty()) {
 			return ResponseEntity.badRequest().body(pi);
 		}
 		

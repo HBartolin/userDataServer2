@@ -135,9 +135,7 @@ public class ACommonServis extends Kod {
 		return osobaValutaList.get(0);
 	}
 	
-	public SifarnikMjeseca getSifarnikMjeseca(LocalDate mjesec) {
-		greska="";
-		
+	public SifarnikMjeseca getSifarnikMjeseca(PojoInterface pi, LocalDate mjesec) {		
 		SifarnikMjeseca sifarnikMjeseca=null;
 		List<SifarnikMjeseca> sifarnikMjesecaList=getKodRepository().getSifarnikMjesecaRepository().findByMjeseca(mjesec);
 		
@@ -147,8 +145,8 @@ public class ACommonServis extends Kod {
 			 
 			sifarnikMjeseca=getKodRepository().getSifarnikMjesecaRepository().save(sifarnikMjesecaTmp);
 		} else if(sifarnikMjesecaList.size()>1){
-			if(greska.length()>0) greska+=" <BR> ";
-			greska+=String.format("Ima previše polja za %s! KRAJ RADA!", mjesec);
+			String msg=String.format("Ima previše polja za %s! KRAJ RADA!", mjesec);
+			pi.setGreskaListString(msg);
 		} else {
 			sifarnikMjeseca=sifarnikMjesecaList.get(0);
 		}

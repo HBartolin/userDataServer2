@@ -12,7 +12,6 @@ public class ProjektDetaljiServiceImplUrediProjektDatalji extends Kod {
 	private final Long id;
 	private final String totalRevenue;
 	private final String costPs;
-	private String greska="";
 
 	public ProjektDetaljiServiceImplUrediProjektDatalji(KodRepository kodRepository, Long id, String totalRevenue, String costPs) {
 		super(kodRepository);
@@ -23,12 +22,11 @@ public class ProjektDetaljiServiceImplUrediProjektDatalji extends Kod {
 
 	@Override
 	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {
-		greska="";
 		BigDecimal totalRevenueBD=getBigDecimalValue(pi, totalRevenue, "Total revenue");			
 		BigDecimal costPsBD=getBigDecimalValue(pi, costPs, "Cost");
 		
-		if(greska!="") {
-			pi.setGreska(greska);
+		if(!pi.getGreska().isEmpty()) {
+			
 		} else {
 			pi.setRezultat(ucitajProjektDetalje(id, totalRevenueBD, costPsBD));
 		}
@@ -67,17 +65,13 @@ public class ProjektDetaljiServiceImplUrediProjektDatalji extends Kod {
 			BigDecimal valueBD=new BigDecimal(value);
 			
 			if(!(valueBD.compareTo(BigDecimal.ZERO)>0)) {
-				if(greska.length()>0) greska+=" <BR> ";
 				String msg=String.format("Iznosi za '%s' moraju biti veći od nule.", text);
-				greska+=msg;
 				pi.setGreskaListString(msg);
 			}
 			
 			return valueBD;
 		} catch(NumberFormatException e) {
-			if(greska.length()>0) greska+=" <BR> ";
 			String msg=String.format("Iznosi za '%s' moraju biti brojke.", text);
-			greska+=msg;
 			pi.setGreskaListString(msg);
 			
 			return BigDecimal.ONE;

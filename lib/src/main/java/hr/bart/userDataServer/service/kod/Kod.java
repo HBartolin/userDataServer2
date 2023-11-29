@@ -24,7 +24,6 @@ public abstract class Kod {
 	protected final static int DVA=2;
 	protected final static int SEDAM=7;
 	protected final static int STO=100;
-	protected String greska="";
 		
 	public Kod(KodRepository kodRepository) {
 		this.kodRepository=kodRepository;
@@ -48,14 +47,9 @@ public abstract class Kod {
 		return pi;
 	}
 	
-	public String getGreska() {
-		return greska;
-	}
-	
 	protected void cachException(Throwable t, PojoInterface pi) {
 		LOGGER.error(t.getMessage(), t);
 		
-		pi.setGreska(t.getMessage());
 		pi.setGreskaListString(t.getMessage());
 	}
 	
