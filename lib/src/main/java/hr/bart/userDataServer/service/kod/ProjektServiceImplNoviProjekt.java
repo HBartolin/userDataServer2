@@ -25,12 +25,16 @@ public class ProjektServiceImplNoviProjekt extends Kod {
 		String greska="";
 		
 		if(claim==null || "".equals(claim.replaceAll("\\s",""))) {
-			greska="Polje Claim nije upisano.";
+			String msg="Polje Claim nije upisano.";
+			greska=msg;
+			pi.setGreskaListString(msg);
 		}
 		
 		if(contract==null || "".equals(contract.replaceAll("\\s",""))) {
 			if(greska.length()>0) greska+=" <BR> ";
-			greska+="Polje Contract nije upisano.";
+			String msg="Polje Contract nije upisano.";
+			greska+=msg;
+			pi.setGreskaListString(msg);
 		}
 		
 		if(greska.length()>0) {
