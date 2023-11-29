@@ -52,26 +52,36 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 		
 		if(!idPurchaseOrder.isPresent()) {
 			if(greska.length()>0) greska+=" <BR> ";
-			greska+="'Purchase order' nije odababran. Odaberite ga.";
+			String msg="'Purchase order' nije odababran. Odaberite ga.";
+			greska+=msg;
+			pi.setGreskaListString(msg);
 		}
 		
 		if(datumPlanned==null) {
 			if(greska.length()>0) greska+=" <BR> ";
-			greska+="'Planirani datum' nije unesen. Unesite ga.";
+			String msg="'Planirani datum' nije unesen. Unesite ga.";
+			greska+=msg;
+			pi.setGreskaListString(msg);
 		} else if(datumActual!=null) {
 			if(datumActual.isBefore(datumPlanned)) {
-				greska+="'Aktualni datum' je prije 'Planirani datum'. Može biti ili jednaki ili kasniji.";
+				String msg="'Aktualni datum' je prije 'Planirani datum'. Može biti ili jednaki ili kasniji.";
+				greska+=msg;
+				pi.setGreskaListString(msg);
 			}
 		}
 		
 		if(!invoiceNumber.isPresent()) {
 			if(greska.length()>0) greska+=" <BR> ";
-			greska+="'Invoice number' nije unesen. Unesite ga.";
+			String msg="'Invoice number' nije unesen. Unesite ga.";
+			greska+=msg;
+			pi.setGreskaListString(msg);
 		}
 		
 		if(!cijena.isPresent()) {
 			if(greska.length()>0) greska+=" <BR> ";
-			greska+="'Cijena' nije unesena. Unesite je.";
+			String msg="'Cijena' nije unesena. Unesite je.";
+			greska+=msg;
+			pi.setGreskaListString(msg);
 		}
 		
 		if(greska.isEmpty()) {
