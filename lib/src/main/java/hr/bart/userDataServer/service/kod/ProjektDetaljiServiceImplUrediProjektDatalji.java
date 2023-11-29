@@ -24,8 +24,8 @@ public class ProjektDetaljiServiceImplUrediProjektDatalji extends Kod {
 	@Override
 	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {
 		greska="";
-		BigDecimal totalRevenueBD=getBigDecimalValue(totalRevenue, "Total revenue");			
-		BigDecimal costPsBD=getBigDecimalValue(costPs, "Cost");
+		BigDecimal totalRevenueBD=getBigDecimalValue(pi, totalRevenue, "Total revenue");			
+		BigDecimal costPsBD=getBigDecimalValue(pi, costPs, "Cost");
 		
 		if(greska!="") {
 			pi.setGreska(greska);
@@ -62,19 +62,23 @@ public class ProjektDetaljiServiceImplUrediProjektDatalji extends Kod {
 	}
 
 	
-	private BigDecimal getBigDecimalValue(String value, String text) {
+	private BigDecimal getBigDecimalValue(PojoInterface pi, String value, String text) {
 		try {
 			BigDecimal valueBD=new BigDecimal(value);
 			
 			if(!(valueBD.compareTo(BigDecimal.ZERO)>0)) {
 				if(greska.length()>0) greska+=" <BR> ";
-				greska+=String.format("Iznosi za '%s' moraju biti veći od nule.", text);
+				String msg=String.format("Iznosi za '%s' moraju biti veći od nule.", text);
+				greska+=msg;
+				pi.setGreskaListString(msg);
 			}
 			
 			return valueBD;
 		} catch(NumberFormatException e) {
 			if(greska.length()>0) greska+=" <BR> ";
-			greska+="Iznosi za '%d' moraju biti brojke.";
+			String msg="Iznosi za '%d' moraju biti brojke.";
+			greska+=msg;
+			pi.setGreskaListString(msg);
 			
 			return BigDecimal.ONE;
 		}
