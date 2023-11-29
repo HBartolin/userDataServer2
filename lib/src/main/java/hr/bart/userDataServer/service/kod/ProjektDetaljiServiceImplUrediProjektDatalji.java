@@ -76,7 +76,7 @@ public class ProjektDetaljiServiceImplUrediProjektDatalji extends Kod {
 			return valueBD;
 		} catch(NumberFormatException e) {
 			if(greska.length()>0) greska+=" <BR> ";
-			String msg="Iznosi za '%d' moraju biti brojke.";
+			String msg=String.format("Iznosi za '%s' moraju biti brojke.", text);
 			greska+=msg;
 			pi.setGreskaListString(msg);
 			
