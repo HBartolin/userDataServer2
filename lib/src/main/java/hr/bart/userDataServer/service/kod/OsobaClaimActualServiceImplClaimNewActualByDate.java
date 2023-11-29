@@ -39,7 +39,6 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 		
 		if(greska.length()>0) {
 			pi.setGreska(greska);
-			pi.setGreskaListString(greska);
 		} else {
 			Set<Entry<String, String>> set = podatci.entrySet();
 		    Iterator<Entry<String, String>> iterator = set.iterator();
