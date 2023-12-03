@@ -37,18 +37,18 @@ export class AppService {
   }
 
   prikaziGreskaOk(snackBar: MatSnackBar, data: RestOut): boolean {
-    let message: string="";
+    let message: Array<string>=[];
     let ok: boolean=true;
 
     if(data.greska.length>0) {
       message=data.greska;
     } else if(data.ok.length>0) {
-      message=data.ok;
+      message[0]=data.ok;
     }
 
     if(message.length>0) {
       ok=false;
-      snackBar.open(message, "OK");
+      snackBar.open(message[0], "OK");
     }
 
     return ok;
@@ -61,7 +61,7 @@ export class AppService {
 }
 
 export interface RestOut {
-  greska: string;
+  greska: Array<string>;
   ok: string;
   rezultatPage: any;
 }
