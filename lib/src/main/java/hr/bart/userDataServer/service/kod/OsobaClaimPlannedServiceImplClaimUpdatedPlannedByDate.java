@@ -65,10 +65,10 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 	private void validirajClaimUpdatePlannedByDate(PojoInterface pi, LocalDate datum) {
 		if(datum==null) {
 			String msg="Polje 'Datum' nije upisano.";
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 		} else if(datum.getDayOfMonth()!=JEDAN) {
 			String msg="Polje 'Datum' mora biti prvi u mjesecu.";
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 		} 
 	}
 	
@@ -86,11 +86,11 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 				ocpList.add(osobaClaimPlanned);
 			} else {
 				String msg=String.format("Iz baze je vraćeno da nema Claim ili ih ima više od jednog (idProjektDetalji=%d, idSifarnikOsoba=%d).", idProjektDetalji, cua.getIdSifarnikOsoba());
-				pi.setGreskaListString(msg);
+				pi.addGreskaList(msg);
 			}
 		} else {
 			String msg=String.format("Iz baze je vraćeno da nema SifarnikDatuma ili ih ima više od jednog (%d).", datum);
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 		}
 	}
 	
@@ -99,7 +99,7 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 		
 		if(!ocpOptional.isPresent()) {
 			String msg=String.format("Iz baze nije ništa vraćeno 'OsobaClaimActual' s id-jem '%d'.", cua.getIdClaim());
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 		} else {
 			OsobaClaimPlanned osobaClaimPlanned=ocpOptional.get();
 			
@@ -110,7 +110,7 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 				ocpList.add(osobaClaimPlanned);
 			} else {
 				String msg=String.format("Iz baze je vraćen zasstario podatak 'OsobaClaimActual' s id-jem '%d' i ts-om '%d' a očekuje ts '%d'.", cua.getIdClaim(), cua.getTs(), osobaClaimPlanned.getTs());
-				pi.setGreskaListString(msg);
+				pi.addGreskaList(msg);
 			}
 		}
 	}

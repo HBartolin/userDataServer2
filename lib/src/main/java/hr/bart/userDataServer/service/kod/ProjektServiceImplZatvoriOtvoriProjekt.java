@@ -36,11 +36,11 @@ public class ProjektServiceImplZatvoriOtvoriProjekt extends Kod {
 		
 		if(zo.getDbStatusSuprotni().equals(projektOptional.get().getStatus())) {
 			String msg=String.format(zo.getMsg1(), projektOptional.get().getId());
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 		} else {
 			if(ts!=projektOptional.get().getTs()) {
 				String msg=zo.getMsg2();
-				pi.setGreskaListString(msg);
+				pi.addGreskaList(msg);
 			} else {
 				projektOptional.get().setStatus(zo.getDbStatusSuprotni());
 				getKodRepository().getProjektRepository().save(projektOptional.get());

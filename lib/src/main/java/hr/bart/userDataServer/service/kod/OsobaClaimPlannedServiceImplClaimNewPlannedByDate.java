@@ -52,7 +52,7 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 					
 					if(claimList.size()!=JEDAN) {
 						String msg="Iz baze je tablica 'Claim' vratila različito od 1!";
-						pi.setGreskaListString(msg);
+						pi.addGreskaList(msg);
 					} else {
 						OsobaClaimPlanned ocp=new OsobaClaimPlanned();
 						ocp.setSati(vBD);
@@ -64,7 +64,7 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 					}
 			    } else {
 					String msg="Iz baze je tablica 'Claim' vratila null!";
-					pi.setGreskaListString(msg);
+					pi.addGreskaList(msg);
 				}
 		    }
 		    
@@ -91,14 +91,14 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 	private void validirajClaimPlannedByDate(PojoInterface pi, Long idProjektDetalji, LocalDate datum) {
 		if(idProjektDetalji==null) {
 			String msg="Polje 'idProjektDetalji' nije upisano.";
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 		} else {		
 			if(datum==null) {
 				String msg="Polje 'Datum' nije upisano.";
-				pi.setGreskaListString(msg);
+				pi.addGreskaList(msg);
 			} else if(datum.getDayOfMonth()!=JEDAN) {
 				String msg="Polje 'Datum' mora biti prvi u mjesecu.";
-				pi.setGreskaListString(msg);
+				pi.addGreskaList(msg);
 			} else {
 				Optional<List<OsobaClaimPlanned>> ocpListOptional=getKodRepository().getOsobaClaimPlannedRepository().findAllByDatum(idProjektDetalji, datum);
 				
@@ -107,7 +107,7 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 					
 					if(!ocpList.isEmpty()) {
 						String msg=String.format("Datum iz polja 'Datum' već postoji, uredite njega direktno '%s'.", datum);
-						pi.setGreskaListString(msg);
+						pi.addGreskaList(msg);
 					}
 				}
 			}

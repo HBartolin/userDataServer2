@@ -43,7 +43,7 @@ public class OsobaClaimActualServiceImplClaimUpdatedActualByDate extends Kod {
 					
 					if(!ocaOptional.isPresent()) {
 						String msg=String.format("Iz baze nije ništa vraćeno 'OsobaClaimActual' s id-jem '%d'.", cua.getIdClaim());
-						pi.setGreskaListString(msg);
+						pi.addGreskaList(msg);
 					} else {
 						OsobaClaimActual osobaClaimActual=ocaOptional.get();
 						
@@ -55,7 +55,7 @@ public class OsobaClaimActualServiceImplClaimUpdatedActualByDate extends Kod {
 							ocaList.add(osobaClaimActual);
 						} else {
 							String msg=String.format("Iz baze je vraćen zasstario podatak 'OsobaClaimActual' s id-jem '%d' i ts-om '%d' a očekuje ts '%d'.", cua.getIdClaim(), cua.getTs(), osobaClaimActual.getTs());
-							pi.setGreskaListString(msg);
+							pi.addGreskaList(msg);
 						}
 					}
 				} else {
@@ -75,11 +75,11 @@ public class OsobaClaimActualServiceImplClaimUpdatedActualByDate extends Kod {
 							ocaList.add(osobaClaimActual);
 						} else {
 							String msg=String.format("Iz baze je vraćeno da nema Claim ili ih ima više od jednog (idProjektDetalji=%d, idSifarnikOsoba=%d).", idProjektDetalji, cua.getIdSifarnikOsoba());
-							pi.setGreskaListString(msg);
+							pi.addGreskaList(msg);
 						}
 					} else {
 						String msg=String.format("Iz baze je vraćeno da nema SifarnikDatuma ili ih ima više od jednog (%d).", datum);
-						pi.setGreskaListString(msg);
+						pi.addGreskaList(msg);
 					}
 				}
 			}
@@ -109,10 +109,10 @@ public class OsobaClaimActualServiceImplClaimUpdatedActualByDate extends Kod {
 	private void validirajClaimUpdateActualByDate(PojoInterface pi, LocalDate datum) {
 		if(datum==null) {
 			String msg="Polje 'Datum' nije upisano.";
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 		} else if(!DayOfWeek.FRIDAY.equals(datum.getDayOfWeek())) {
 			String msg="Polje 'Datum' mora biti PETAK.";
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 		} 
 	}
 	

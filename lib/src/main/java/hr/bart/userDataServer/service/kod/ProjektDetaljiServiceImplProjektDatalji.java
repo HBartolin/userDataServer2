@@ -21,7 +21,7 @@ public class ProjektDetaljiServiceImplProjektDatalji extends Kod {
 			pi.setRezultat(projektDetalji.get());
 		} else {
 			String msg=String.format("Ne postoji podatak za ProjektDetalji=%d.", id);
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 		}
 		
 		return pi;

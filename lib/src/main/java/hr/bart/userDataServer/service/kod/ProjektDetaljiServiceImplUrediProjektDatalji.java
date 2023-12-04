@@ -66,13 +66,13 @@ public class ProjektDetaljiServiceImplUrediProjektDatalji extends Kod {
 			
 			if(!(valueBD.compareTo(BigDecimal.ZERO)>0)) {
 				String msg=String.format("Iznosi za '%s' moraju biti veći od nule.", text);
-				pi.setGreskaListString(msg);
+				pi.addGreskaList(msg);
 			}
 			
 			return valueBD;
 		} catch(NumberFormatException e) {
 			String msg=String.format("Iznosi za '%s' moraju biti brojke.", text);
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 			
 			return BigDecimal.ONE;
 		}

@@ -50,27 +50,27 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {		
 		if(!idPurchaseOrder.isPresent()) {
 			String msg="'Purchase order' nije odababran. Odaberite ga.";
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 		}
 		
 		if(datumPlanned==null) {
 			String msg="'Planirani datum' nije unesen. Unesite ga.";
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 		} else if(datumActual!=null) {
 			if(datumActual.isBefore(datumPlanned)) {
 				String msg="'Aktualni datum' je prije 'Planirani datum'. Može biti ili jednaki ili kasniji.";
-				pi.setGreskaListString(msg);
+				pi.addGreskaList(msg);
 			}
 		}
 		
 		if(!invoiceNumber.isPresent()) {
 			String msg="'Invoice number' nije unesen. Unesite ga.";
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 		}
 		
 		if(!cijena.isPresent()) {
 			String msg="'Cijena' nije unesena. Unesite je.";
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 		}
 		
 		if(pi.getGreska().isEmpty()) {

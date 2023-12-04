@@ -20,13 +20,13 @@ public class SifarnikPodugovaracaServiceImplEditirajSifarnikPodugovaraca extends
 	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {		
 		if(!nazivO.isPresent()) {
 			String msg="Polje Naziv nije upisano.";
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 		} else {
 			String naziv=nazivO.get();
 			
 			if(naziv==null || naziv.isEmpty()) {
 				String msg="Polje Naziv nije upisano.";
-				pi.setGreskaListString(msg);
+				pi.addGreskaList(msg);
 			} else {
 				SifarnikPodugovaraca sp=new SifarnikPodugovaraca();
 				sp.setNaziv(naziv);

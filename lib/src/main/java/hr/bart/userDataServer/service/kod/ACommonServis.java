@@ -146,7 +146,7 @@ public class ACommonServis extends Kod {
 			sifarnikMjeseca=getKodRepository().getSifarnikMjesecaRepository().save(sifarnikMjesecaTmp);
 		} else if(sifarnikMjesecaList.size()>1){
 			String msg=String.format("Ima previše polja za %s! KRAJ RADA!", mjesec);
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 		} else {
 			sifarnikMjeseca=sifarnikMjesecaList.get(0);
 		}

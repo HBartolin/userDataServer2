@@ -24,12 +24,12 @@ public class ProjektServiceImplNoviProjekt extends Kod {
 	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {		
 		if(claim==null || "".equals(claim.replaceAll("\\s",""))) {
 			String msg="Polje Claim nije upisano.";
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 		}
 		
 		if(contract==null || "".equals(contract.replaceAll("\\s",""))) {
 			String msg="Polje Contract nije upisano.";
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 		}
 		
 		if(!pi.getGreska().isEmpty()) {

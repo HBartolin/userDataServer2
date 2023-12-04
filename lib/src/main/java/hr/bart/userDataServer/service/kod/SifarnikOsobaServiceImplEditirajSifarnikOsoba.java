@@ -24,12 +24,12 @@ public class SifarnikOsobaServiceImplEditirajSifarnikOsoba extends Kod {
 	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {		
 		if(ime==null || "".equals(ime.replaceAll("\\s",""))) {
 			String msg="Polje Ime nije upisano.";
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 		}
 		
 		if(prezime==null || "".equals(prezime.replaceAll("\\s",""))) {
 			String msg="Polje Prezime nije upisano.";
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 		}
 		
 		if(!pi.getGreska().isEmpty()) {

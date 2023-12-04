@@ -37,7 +37,7 @@ public class PojoInterface {
 		return greska;
 	}
 
-	public void setGreskaListString(String greska) {
+	public void addGreskaList(String greska) {
 		this.greska.add(greska);
 	}
 	

@@ -55,13 +55,13 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 					
 					if(claimList.size()!=1) {
 						String msg="Iz baze je tablica 'Claim' vratila različito od 1!";
-						pi.setGreskaListString(msg);
+						pi.addGreskaList(msg);
 					} else {							
 						List<SifarnikDatuma> sifarnikDatumaList=getKodRepository().getSifarnikDatumaRepository().findByDatumPetak(datum);
 						
 						if(sifarnikDatumaList.size()>1) {
 							String msg="Iz baze je tablica 'Claim' vratila različito od 1!";
-							pi.setGreskaListString(msg);
+							pi.addGreskaList(msg);
 						} else {
 							OsobaClaimActual oca=new OsobaClaimActual();
 							
@@ -80,7 +80,7 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 					}
 				} else {
 					String msg="Iz baze je tablica 'Claim' vratila null!";
-					pi.setGreskaListString(msg);
+					pi.addGreskaList(msg);
 				}
 		    }
 			
@@ -130,14 +130,14 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 	private void validirajClaimActualByDate(PojoInterface pi, Long idProjektDetalji, LocalDate datum) {		
 		if(idProjektDetalji==null) {
 			String msg="Polje 'idProjektDetalji' nije upisano.";
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 		} else {		
 			if(datum==null) {
 				String msg="Polje 'Datum' nije upisano.";
-				pi.setGreskaListString(msg);
+				pi.addGreskaList(msg);
 			} else if(!DayOfWeek.FRIDAY.equals(datum.getDayOfWeek())) {
 				String msg="Polje 'Datum' mora biti PETAK.";
-				pi.setGreskaListString(msg);
+				pi.addGreskaList(msg);
 			} else {
 				Optional<List<OsobaClaimActual>> ocaListOptional=getKodRepository().getOsobaClaimActualRepository().findAllByDatum(idProjektDetalji, datum);
 				
@@ -146,7 +146,7 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 					
 					if(!ocaList.isEmpty()) {
 						String msg=String.format("Datum iz polja 'Datum' već postoji, uredite njega direktno '%s'.", datum);
-						pi.setGreskaListString(msg);
+						pi.addGreskaList(msg);
 					}
 				}
 			}

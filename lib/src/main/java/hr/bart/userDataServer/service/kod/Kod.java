@@ -50,7 +50,7 @@ public abstract class Kod {
 	protected void cachException(Throwable t, PojoInterface pi) {
 		LOGGER.error(t.getMessage(), t);
 		
-		pi.setGreskaListString(t.getMessage());
+		pi.addGreskaList(t.getMessage());
 	}
 	
 	protected void setRezultatPage(PojoInterface pi, Page<?> page) {

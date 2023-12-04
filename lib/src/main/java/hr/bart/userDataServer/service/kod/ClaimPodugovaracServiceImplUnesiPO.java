@@ -41,28 +41,28 @@ public class ClaimPodugovaracServiceImplUnesiPO extends Kod {
 			if(greska.length()>0) greska=greska + " <BR> ";
 			String msg="Polje 'idProjektDetalji' nije upisano.";
 			greska+=msg;
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 		}
 		
 		if(!totalO.isPresent()) {
 			if(greska.length()>0) greska=greska + " <BR> ";
 			String msg="Polje 'total' nije upisano.";
 			greska+=msg;
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 		}
 		
 		if(idSifarnikPodugovaraca==null) {
 			if(greska.length()>0) greska=greska + " <BR> ";
 			String msg="Polje 'Naziv' nije upisano.";
 			greska+=msg;
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 		}
 		
 		if(po==null || "".equals(po.replaceAll("\\s",""))) {
 			if(greska.length()>0) greska=greska + " <BR> ";
 			String msg="Polje 'PO' nije upisano.";
 			greska+=msg;
-			pi.setGreskaListString(msg);
+			pi.addGreskaList(msg);
 		}
 		
 		if(idSifarnikPodugovaraca!=null && idProjektDetalji!=null) {
@@ -73,7 +73,7 @@ public class ClaimPodugovaracServiceImplUnesiPO extends Kod {
 					if(greska.length()>0) greska=greska + " <BR> ";
 					String msg="'Naziv' je već dodijeljen, uredite naziv izravno u tablici.";
 					greska+=msg;
-					pi.setGreskaListString(msg);
+					pi.addGreskaList(msg);
 				}
 			} else {
 				Optional<List<ClaimPodugovarac>> findAllByIdProjektDetalji_idSifarnikPodugovaraca=getKodRepository().getClaimPodugovaracRepository().findAllByIdProjektDetalji_idSifarnikPodugovaraca(idProjektDetalji, idSifarnikPodugovaraca);
@@ -82,7 +82,7 @@ public class ClaimPodugovaracServiceImplUnesiPO extends Kod {
 					if(greska.length()>0) greska=greska + " <BR> ";
 					String msg="'Naziv' je već dodijeljen, uredite naziv izravno u tablici.";
 					greska+=msg;
-					pi.setGreskaListString(msg);
+					pi.addGreskaList(msg);
 				}
 			}
 		}
