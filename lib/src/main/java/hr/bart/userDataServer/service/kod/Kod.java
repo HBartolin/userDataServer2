@@ -32,7 +32,6 @@ public abstract class Kod {
 	public abstract PojoInterface izvrsiKod(PojoInterface pi) throws Throwable;
 	
 	public PojoInterface izvrsi() {
-		LOGGER.info("* POCETAK - " + getClass().getSimpleName() + " *");
 		timerKoda.begin();
 		PojoInterface pi=new PojoInterface();
 		

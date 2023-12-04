@@ -14,6 +14,7 @@ public class TimerKoda {
 	
 	public void begin() {
 		pocetak=System.currentTimeMillis();
+		LOGGER.info("* POCETAK - " + clazzSN + " *");
 	}
 	
 	public void end() {
