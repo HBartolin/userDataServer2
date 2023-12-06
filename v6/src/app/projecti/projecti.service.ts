@@ -12,8 +12,9 @@ export class ProjectiService {
   constructor(private http:HttpClient, private appService: AppService) { }
 
   pozoviVanjskiRest() {
-    console.log("https://reqres.in/api/users?page=2");
-    return this.http.get("https://reqres.in/api/users?page=2", { responseType:'text' }).pipe(catchError(this.mojCatchError()));
+    const reqresUrl="https://reqres.in/api/users?page=2";
+    console.log(reqresUrl);
+    return this.http.get(reqresUrl, { responseType:'text' }).pipe(catchError(this.mojCatchError()));
   }
 
   mojCatchError(): any {
