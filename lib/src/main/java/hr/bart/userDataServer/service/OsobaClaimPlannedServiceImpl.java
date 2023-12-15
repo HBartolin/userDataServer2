@@ -45,7 +45,13 @@ public class OsobaClaimPlannedServiceImpl extends AService implements OsobaClaim
 	
 	@Override
 	public PojoInterface claimNewPlannedByDate(Long idProjektDetalji, LocalDate datum, HashMap<String, String> podatci) {		
-		return new OsobaClaimPlannedServiceImplClaimNewPlannedByDate(getKodRepository(), datum, podatci, idProjektDetalji).izvrsi();
+		return new OsobaClaimPlannedServiceImplClaimNewPlannedByDate(
+				getKodRepository(), 
+				claimRepository,
+				osobaClaimPlannedRepository,
+				datum, 
+				podatci, 
+				idProjektDetalji).izvrsi();
 	}
 	
 	private KodRepository getKodRepository() {

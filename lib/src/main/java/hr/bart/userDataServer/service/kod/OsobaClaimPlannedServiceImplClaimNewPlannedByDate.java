@@ -13,6 +13,8 @@ import java.util.Set;
 
 import hr.bart.userDataServer.db.Claim;
 import hr.bart.userDataServer.db.OsobaClaimPlanned;
+import hr.bart.userDataServer.repository.ClaimRepository;
+import hr.bart.userDataServer.repository.OsobaClaimPlannedRepository;
 import hr.bart.userDataServer.util.PojoInterface;
 
 public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
@@ -20,9 +22,19 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 	private final HashMap<String, String> podatci;
 	private final Long idProjektDetalji;
 	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
+	private final ClaimRepository claimRepository;
+	private final OsobaClaimPlannedRepository osobaClaimPlannedRepository;
 	
-	public OsobaClaimPlannedServiceImplClaimNewPlannedByDate(KodRepository kodRepository, LocalDate datum, HashMap<String, String> podatci, Long idProjektDetalji) {
+	public OsobaClaimPlannedServiceImplClaimNewPlannedByDate(
+			KodRepository kodRepository, 
+			ClaimRepository claimRepository,
+			OsobaClaimPlannedRepository osobaClaimPlannedRepository,
+			LocalDate datum, 
+			HashMap<String, String> podatci, 
+			Long idProjektDetalji) {
 		super(kodRepository);
+		this.claimRepository=claimRepository;
+		this.osobaClaimPlannedRepository=osobaClaimPlannedRepository;
 		this.datum=datum;
 		this.podatci=podatci;
 		this.idProjektDetalji=idProjektDetalji;
@@ -45,7 +57,7 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 		    	BigDecimal vBD=v.length()>0 ? new BigDecimal(v) : new BigDecimal(0);
 		    	long kLong=Long.parseLong(mentry.getKey());
 		    	
-		    	Optional<List<Claim>> claimListOptional=getKodRepository().getClaimRepository().findAllByIdProjektDetalji_idSifarnikOsoba(idProjektDetalji, kLong);
+		    	Optional<List<Claim>> claimListOptional=claimRepository.findAllByIdProjektDetalji_idSifarnikOsoba(idProjektDetalji, kLong);
 		    	
 		    	if(claimListOptional.isPresent()) {
 		    		List<Claim> claimList=claimListOptional.get();
@@ -59,7 +71,7 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 						ocp.setClaim(claimList.get(0));
 						ocp.setSifarnikMjeseca(aCommonServis.getSifarnikMjeseca(pi, datum));
 						
-						ocp=getKodRepository().getOsobaClaimPlannedRepository().save(ocp);
+						ocp=osobaClaimPlannedRepository.save(ocp);
 						osobaClaimPlannedList.add(ocp);
 					}
 			    } else {
@@ -100,7 +112,7 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 				String msg="Polje 'Datum' mora biti prvi u mjesecu.";
 				pi.addGreskaList(msg);
 			} else {
-				Optional<List<OsobaClaimPlanned>> ocpListOptional=getKodRepository().getOsobaClaimPlannedRepository().findAllByDatum(idProjektDetalji, datum);
+				Optional<List<OsobaClaimPlanned>> ocpListOptional=osobaClaimPlannedRepository.findAllByDatum(idProjektDetalji, datum);
 				
 				if(ocpListOptional.isPresent()) {
 					List<OsobaClaimPlanned> ocpList=ocpListOptional.get();
