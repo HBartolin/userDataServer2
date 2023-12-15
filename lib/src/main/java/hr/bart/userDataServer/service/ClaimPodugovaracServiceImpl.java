@@ -11,7 +11,6 @@ import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
 import hr.bart.userDataServer.repository.SifarnikPodugovaracaRepository;
 import hr.bart.userDataServer.service.kod.ClaimPodugovaracServiceImplPurchaseOrders;
 import hr.bart.userDataServer.service.kod.ClaimPodugovaracServiceImplUnesiPO;
-import hr.bart.userDataServer.service.kod.KodRepository;
 import hr.bart.userDataServer.util.PojoInterface;
 import jakarta.transaction.Transactional;
 
@@ -33,22 +32,15 @@ public class ClaimPodugovaracServiceImpl extends AService implements ClaimPodugo
 	@Override
 	public PojoInterface unesiPO(Optional<Long> idO, Optional<Long> tsO, Long idProjektDetalji, Long idSifarnikPodugovaraca, String po, Optional<BigDecimal> totalO) {
 		return new ClaimPodugovaracServiceImplUnesiPO(
-				getKodRepository(), 
+				claimPodugovaracRepository, 
+				projektDetaljiRepository,
+				sifarnikPodugovaracaRepository, 
 				idO, 
 				tsO, 
 				idProjektDetalji,
 				idSifarnikPodugovaraca,
 				po,
 				totalO).izvrsi();
-	}
-	
-	private KodRepository getKodRepository() {
-		KodRepository kodRepository=new KodRepository();
-		kodRepository.setClaimPodugovaracRepository(claimPodugovaracRepository);
-		kodRepository.setProjektDetaljiRepository(projektDetaljiRepository);
-		kodRepository.setSifarnikPodugovaracaRepository(sifarnikPodugovaracaRepository);
-		
-		return kodRepository;
 	}
 
 }
