@@ -3,19 +3,21 @@ package hr.bart.userDataServer.service.kod;
 import java.util.Optional;
 
 import hr.bart.userDataServer.db.ProjektDetalji;
+import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
 import hr.bart.userDataServer.util.PojoInterface;
 
 public class ProjektDetaljiServiceImplProjektDatalji extends Kod {
 	private final Long id;
+	private final ProjektDetaljiRepository projektDetaljiRepositor;
 
-	public ProjektDetaljiServiceImplProjektDatalji(KodRepository kodRepository, Long id) {
-		super(kodRepository);
+	public ProjektDetaljiServiceImplProjektDatalji(ProjektDetaljiRepository projektDetaljiRepository, Long id) {
+		this.projektDetaljiRepositor=projektDetaljiRepository;
 		this.id=id;
 	}
 
 	@Override
 	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {
-		Optional<ProjektDetalji> projektDetalji=getKodRepository().getProjektDetaljiRepository().findById(id);
+		Optional<ProjektDetalji> projektDetalji=projektDetaljiRepositor.findById(id);
 		
 		if(projektDetalji.isPresent()) {
 			pi.setRezultat(projektDetalji.get());

@@ -24,7 +24,7 @@ public class ProjektDetaljiServiceImpl extends AService implements ProjektDetalj
 	
 	@Override
 	public PojoInterface projektDatalji(Long id) {
-		return new ProjektDetaljiServiceImplProjektDatalji(getKodRepository(), id).izvrsi();
+		return new ProjektDetaljiServiceImplProjektDatalji(projektDetaljiRepository, id).izvrsi();
 	}
 	
 	@Override

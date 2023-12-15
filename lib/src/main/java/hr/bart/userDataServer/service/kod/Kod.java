@@ -29,6 +29,10 @@ public abstract class Kod {
 		this.kodRepository=kodRepository;
 	}
 	
+	public Kod() {
+		this.kodRepository = new KodRepository();
+	}
+	
 	public abstract PojoInterface izvrsiKod(PojoInterface pi) throws Throwable;
 	
 	public PojoInterface izvrsi() {
