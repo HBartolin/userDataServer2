@@ -27,7 +27,7 @@ public class ClaimPodugovaracServiceImpl extends AService implements ClaimPodugo
 	
 	@Override
 	public PojoInterface purchaseOrders(Long idProjektDetalji) {		
-		return new ClaimPodugovaracServiceImplPurchaseOrders(getKodRepository(), idProjektDetalji).izvrsi();
+		return new ClaimPodugovaracServiceImplPurchaseOrders(claimPodugovaracRepository, idProjektDetalji).izvrsi();
 	}
 
 	@Override
