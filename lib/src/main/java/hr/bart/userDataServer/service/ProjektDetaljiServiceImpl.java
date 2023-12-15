@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
 import hr.bart.userDataServer.repository.ProjektRepository;
 import hr.bart.userDataServer.repository.SifarnikValutaRepository;
-import hr.bart.userDataServer.service.kod.KodRepository;
 import hr.bart.userDataServer.service.kod.ProjektDetaljiServiceImplProjektDatalji;
 import hr.bart.userDataServer.service.kod.ProjektDetaljiServiceImplUrediProjektDatalji;
 import hr.bart.userDataServer.util.PojoInterface;
@@ -29,16 +28,13 @@ public class ProjektDetaljiServiceImpl extends AService implements ProjektDetalj
 	
 	@Override
 	public PojoInterface urediProjektDatalji(Long id, String totalRevenue, String costPs) {
-		return new ProjektDetaljiServiceImplUrediProjektDatalji(getKodRepository(), id, totalRevenue, costPs).izvrsi();
-	}
-	
-	private KodRepository getKodRepository() {
-		KodRepository kodRepository=new KodRepository();
-		kodRepository.setProjektDetaljiRepository(projektDetaljiRepository);
-		kodRepository.setSifarnikValutaRepository(sifarnikValutaRepository);
-		kodRepository.setProjektRepository(projektRepository);
-
-		return kodRepository;
+		return new ProjektDetaljiServiceImplUrediProjektDatalji(
+				projektDetaljiRepository, 
+				sifarnikValutaRepository,
+				projektRepository, 
+				id, 
+				totalRevenue, 
+				costPs).izvrsi();
 	}
 	
 }

@@ -6,15 +6,29 @@ import java.util.Optional;
 import hr.bart.userDataServer.db.Projekt;
 import hr.bart.userDataServer.db.ProjektDetalji;
 import hr.bart.userDataServer.db.SifarnikValuta;
+import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
+import hr.bart.userDataServer.repository.ProjektRepository;
+import hr.bart.userDataServer.repository.SifarnikValutaRepository;
 import hr.bart.userDataServer.util.PojoInterface;
 
 public class ProjektDetaljiServiceImplUrediProjektDatalji extends Kod {
 	private final Long id;
 	private final String totalRevenue;
 	private final String costPs;
+	private final ProjektDetaljiRepository projektDetaljiRepository;
+	private final SifarnikValutaRepository sifarnikValutaRepository;
+	private final ProjektRepository projektRepository;
 
-	public ProjektDetaljiServiceImplUrediProjektDatalji(KodRepository kodRepository, Long id, String totalRevenue, String costPs) {
-		super(kodRepository);
+	public ProjektDetaljiServiceImplUrediProjektDatalji(
+			ProjektDetaljiRepository projektDetaljiRepository, 
+			SifarnikValutaRepository sifarnikValutaRepository,
+			ProjektRepository projektRepository,
+			Long id, 
+			String totalRevenue, 
+			String costPs) {
+		this.projektDetaljiRepository=projektDetaljiRepository;
+		this.sifarnikValutaRepository=sifarnikValutaRepository;
+		this.projektRepository=projektRepository;
 		this.id=id;
 		this.totalRevenue=totalRevenue;
 		this.costPs=costPs;
@@ -35,14 +49,14 @@ public class ProjektDetaljiServiceImplUrediProjektDatalji extends Kod {
 	}
 	
 	private ProjektDetalji ucitajProjektDetalje(Long id, BigDecimal totalRevenueBD, BigDecimal costPsBD) {
-		Optional<ProjektDetalji> projektDetaljiOptional=getKodRepository().getProjektDetaljiRepository().findById(id);
+		Optional<ProjektDetalji> projektDetaljiOptional=projektDetaljiRepository.findById(id);
 		ProjektDetalji projektDetalji;
 		
 		if(projektDetaljiOptional.isPresent()) {
 			projektDetalji=projektDetaljiOptional.get();
 		} else {
-			Optional<SifarnikValuta> sifarnikValuta=getKodRepository().getSifarnikValutaRepository().findAllByNaziv(HRK);
-			Optional<Projekt> projektO=getKodRepository().getProjektRepository().findById(id);
+			Optional<SifarnikValuta> sifarnikValuta=sifarnikValutaRepository.findAllByNaziv(HRK);
+			Optional<Projekt> projektO=projektRepository.findById(id);
 			
 			projektDetalji=new ProjektDetalji();
 			projektDetalji.setSifarnikValuta(sifarnikValuta.get());
@@ -54,7 +68,7 @@ public class ProjektDetaljiServiceImplUrediProjektDatalji extends Kod {
 		projektDetalji.setTotalRevenue(totalRevenueBD);
 		projektDetalji.setCostPs(costPsBD);
 		
-		projektDetalji=getKodRepository().getProjektDetaljiRepository().save(projektDetalji);
+		projektDetalji=projektDetaljiRepository.save(projektDetalji);
 		
 		return projektDetalji;
 	}
