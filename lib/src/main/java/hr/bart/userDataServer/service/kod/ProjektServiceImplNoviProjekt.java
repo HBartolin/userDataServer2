@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import hr.bart.userDataServer.db.Projekt;
+import hr.bart.userDataServer.repository.ProjektRepository;
 import hr.bart.userDataServer.util.DbStatus;
 import hr.bart.userDataServer.util.PojoInterface;
 
@@ -13,9 +14,11 @@ public class ProjektServiceImplNoviProjekt extends Kod {
 	private final String claim;
 	private final String contract;
 	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
+	private final ProjektRepository projektRepository;
 
-	public ProjektServiceImplNoviProjekt(KodRepository kodRepository, String claim, String contract) {
+	public ProjektServiceImplNoviProjekt(KodRepository kodRepository, ProjektRepository projektRepository, String claim, String contract) {
 		super(kodRepository);
+		this.projektRepository=projektRepository;
 		this.claim=claim;
 		this.contract=contract;
 	}
@@ -40,13 +43,13 @@ public class ProjektServiceImplNoviProjekt extends Kod {
 			projekt.setContract(aCommonServis.skratiAkoTreba255(contract));
 			projekt.setStatus(DbStatus.A);
 			
-			getKodRepository().getProjektRepository().save(projekt);
+			projektRepository.save(projekt);
 			
 			pi.setOk("Projekt je dodan.");
 		}		
 		
 		PageRequest pageRequest=PageRequest.of(NULA, pageRequestSize50);
-		Page<List<Projekt>> pageProjektList=getKodRepository().getProjektRepository().findByStatus(DbStatus.A, pageRequest);
+		Page<List<Projekt>> pageProjektList=projektRepository.findByStatus(DbStatus.A, pageRequest);
 		pi.setRezultat(pageProjektList.getContent());
 		
 		setRezultatPage(pi, pageProjektList);

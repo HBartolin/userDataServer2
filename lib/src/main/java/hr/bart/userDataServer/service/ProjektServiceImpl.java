@@ -34,7 +34,7 @@ public class ProjektServiceImpl extends AService implements ProjektService {
 	
 	@Override
 	public PojoInterface noviProjekt(String claim, String contract) {
-		return new ProjektServiceImplNoviProjekt(getKodRepository(), claim, contract).izvrsi();
+		return new ProjektServiceImplNoviProjekt(getKodRepository(), projektRepository, claim, contract).izvrsi();
 	}
 	
 	@Override
