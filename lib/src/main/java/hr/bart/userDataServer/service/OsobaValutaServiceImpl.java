@@ -54,6 +54,14 @@ public class OsobaValutaServiceImpl extends AService implements OsobaValutaServi
 	public PojoInterface unesiOsobaValuta(Optional<Long> id, Long ts, Long idSifarnikOsoba, String band, BigDecimal cijena, LocalDate sifarnikDatumaOdLD, LocalDate sifarnikDatumaDoLD) {
 		return new ProjektDetaljiRepositoryUnesiOsobaValuta(
 				getKodRepository(),
+				sifarnikDatumaRepository,
+				osobaValutaRepository,
+				sifarnikOsobaRepository,
+				sifarnikValutaRepository,
+				osobaClaimActualRepository,
+				claimRepository,
+				projektDetaljiRepository,
+				sifarnikMjesecaRepository,
 				id,
 				ts,
 				idSifarnikOsoba,

@@ -19,6 +19,14 @@ import hr.bart.userDataServer.db.SifarnikDatuma;
 import hr.bart.userDataServer.db.SifarnikMjeseca;
 import hr.bart.userDataServer.db.SifarnikOsoba;
 import hr.bart.userDataServer.db.SifarnikValuta;
+import hr.bart.userDataServer.repository.ClaimRepository;
+import hr.bart.userDataServer.repository.OsobaClaimActualRepository;
+import hr.bart.userDataServer.repository.OsobaValutaRepository;
+import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
+import hr.bart.userDataServer.repository.SifarnikDatumaRepository;
+import hr.bart.userDataServer.repository.SifarnikMjesecaRepository;
+import hr.bart.userDataServer.repository.SifarnikOsobaRepository;
+import hr.bart.userDataServer.repository.SifarnikValutaRepository;
 import hr.bart.userDataServer.util.PojoInterface;
 
 public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
@@ -32,9 +40,25 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 	private String sifarnikDatumaOdValue="Datum od";
 	private String sifarnikDatumaDoValue="Datum do";
 	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
+	private final SifarnikDatumaRepository sifarnikDatumaRepository;
+	private final OsobaValutaRepository osobaValutaRepository;
+	private final SifarnikOsobaRepository sifarnikOsobaRepository;
+	private final SifarnikValutaRepository sifarnikValutaRepository;
+	private final OsobaClaimActualRepository osobaClaimActualRepository;
+	private final ClaimRepository claimRepository;
+	private final ProjektDetaljiRepository projektDetaljiRepository;
+	private final SifarnikMjesecaRepository sifarnikMjesecaRepository;
 	
 	public ProjektDetaljiRepositoryUnesiOsobaValuta(
 			KodRepository kodRepository,
+			SifarnikDatumaRepository sifarnikDatumaRepository,
+			OsobaValutaRepository osobaValutaRepository,
+			SifarnikOsobaRepository sifarnikOsobaRepository,
+			SifarnikValutaRepository sifarnikValutaRepository,
+			OsobaClaimActualRepository osobaClaimActualRepository,
+			ClaimRepository claimRepository,
+			ProjektDetaljiRepository projektDetaljiRepository,
+			SifarnikMjesecaRepository sifarnikMjesecaRepository,
 			Optional<Long> id,
 			Long ts,
 			Long idSifarnikOsoba,
@@ -44,6 +68,14 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 			LocalDate sifarnikDatumaDoLD
 			) {
 		super(kodRepository);
+		this.sifarnikDatumaRepository=sifarnikDatumaRepository;
+		this.osobaValutaRepository=osobaValutaRepository;
+		this.sifarnikOsobaRepository=sifarnikOsobaRepository;
+		this.sifarnikValutaRepository=sifarnikValutaRepository;
+		this.osobaClaimActualRepository=osobaClaimActualRepository;
+		this.claimRepository=claimRepository;
+		this.projektDetaljiRepository=projektDetaljiRepository;
+		this.sifarnikMjesecaRepository=sifarnikMjesecaRepository;
 		this.id=id;
 		this.ts=ts;
 		this.idSifarnikOsoba=idSifarnikOsoba;
@@ -114,7 +146,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 			SifarnikMjeseca sifarnikMjeseca=getSifarnikMjeseca(pi, sifarnikDatumaOdValue, mj);
 			
 			if(sifarnikMjeseca!=null) {			
-				List<SifarnikDatuma> sifarnikDatumaList=getKodRepository().getSifarnikDatumaRepository().findByDatumPetak(sifarnikDatumaOdLD);
+				List<SifarnikDatuma> sifarnikDatumaList=sifarnikDatumaRepository.findByDatumPetak(sifarnikDatumaOdLD);
 				
 				if(sifarnikDatumaList.isEmpty()) {
 					SifarnikDatuma sifarnikDatuma=new SifarnikDatuma();
@@ -122,7 +154,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 					sifarnikDatuma.setDatumNedjelja(ned);
 					sifarnikDatuma.setMjesec(sifarnikMjeseca);
 					
-					sifarnikDatumaOd=getKodRepository().getSifarnikDatumaRepository().save(sifarnikDatuma);
+					sifarnikDatumaOd=sifarnikDatumaRepository.save(sifarnikDatuma);
 				} else if(sifarnikDatumaList.size()>1) {
 					String msg=String.format("Ima previše polja '%s' = %s! KRAJ RADA!", sifarnikDatumaDoValue, sifarnikDatumaOdLD);
 					pi.addGreskaList(msg);
@@ -148,7 +180,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 			SifarnikMjeseca sifarnikMjeseca=getSifarnikMjeseca(pi, sifarnikDatumaDoValue, mj);
 
 			if(sifarnikMjeseca!=null) {
-				List<SifarnikDatuma> sifarnikDatumaList=getKodRepository().getSifarnikDatumaRepository().findByDatumPetak(sifarnikDatumaDoLD);
+				List<SifarnikDatuma> sifarnikDatumaList=sifarnikDatumaRepository.findByDatumPetak(sifarnikDatumaDoLD);
 				
 				if(sifarnikDatumaList.isEmpty()) {
 					SifarnikDatuma sifarnikDatuma=new SifarnikDatuma();
@@ -156,7 +188,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 					sifarnikDatuma.setDatumNedjelja(ned);
 					sifarnikDatuma.setMjesec(sifarnikMjeseca);
 					
-					sifarnikDatumaDo=getKodRepository().getSifarnikDatumaRepository().save(sifarnikDatuma);
+					sifarnikDatumaDo=sifarnikDatumaRepository.save(sifarnikDatuma);
 				} else if(sifarnikDatumaList.size()>1) {
 					String msg=String.format("Ima previše polja '%s' = %s! KRAJ RADA!", sifarnikDatumaDoValue, sifarnikDatumaDoLD);
 					pi.addGreskaList(msg);
@@ -171,7 +203,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 
 	private SifarnikDatuma getSifarnikDatumaDo(PojoInterface pi) {
 		SifarnikDatuma sifarnikDatumaDo=null;
-		List<SifarnikDatuma> sifarnikDatumaList=getKodRepository().getSifarnikDatumaRepository().findByDatumPetak(datumPatakZadnji);
+		List<SifarnikDatuma> sifarnikDatumaList=sifarnikDatumaRepository.findByDatumPetak(datumPatakZadnji);
 		
 		if(sifarnikDatumaList.isEmpty()) {
 			SifarnikMjeseca sifarnikMjeseca=getSifarnikMjeseca(pi, sifarnikDatumaDoValue, mjesecZadnji);
@@ -182,7 +214,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 				sifarnikDatuma.setDatumNedjelja(datumPatakZadnji.plusDays(DVA));
 				sifarnikDatuma.setMjesec(sifarnikMjeseca);
 				
-				sifarnikDatumaDo=getKodRepository().getSifarnikDatumaRepository().save(sifarnikDatuma);
+				sifarnikDatumaDo=sifarnikDatumaRepository.save(sifarnikDatuma);
 			}
 		} else if(sifarnikDatumaList.size()>1){
 			String msg=String.format("Ima previše polja '%s' = %s! KRAJ RADA!", sifarnikDatumaDoValue, datumPatakZadnji);
@@ -199,11 +231,11 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 		final List<OsobaValuta> osobaValutaDoList;
 		
 		if(id.isPresent()) {
-			osobaValutaOdList=getKodRepository().getOsobaValutaRepository().findAllByIdSifarnikDatumaOd(id.get(), idSifarnikOsoba, sifarnikDatumaOd.getDatumPetak());
-			osobaValutaDoList=getKodRepository().getOsobaValutaRepository().findAllByIdSifarnikDatumaDo(id.get(), idSifarnikOsoba, sifarnikDatumaDo.getDatumPetak());
+			osobaValutaOdList=osobaValutaRepository.findAllByIdSifarnikDatumaOd(id.get(), idSifarnikOsoba, sifarnikDatumaOd.getDatumPetak());
+			osobaValutaDoList=osobaValutaRepository.findAllByIdSifarnikDatumaDo(id.get(), idSifarnikOsoba, sifarnikDatumaDo.getDatumPetak());
 		} else {
-			osobaValutaOdList=getKodRepository().getOsobaValutaRepository().findAllBySifarnikDatumaOd(idSifarnikOsoba, sifarnikDatumaOd.getDatumPetak());
-			osobaValutaDoList=getKodRepository().getOsobaValutaRepository().findAllBySifarnikDatumaDo(idSifarnikOsoba, sifarnikDatumaDo.getDatumPetak());
+			osobaValutaOdList=osobaValutaRepository.findAllBySifarnikDatumaOd(idSifarnikOsoba, sifarnikDatumaOd.getDatumPetak());
+			osobaValutaDoList=osobaValutaRepository.findAllBySifarnikDatumaDo(idSifarnikOsoba, sifarnikDatumaDo.getDatumPetak());
 		}
 		
 		List<OsobaValuta> ovList=getOvList(id, idSifarnikOsoba, sifarnikDatumaOd, sifarnikDatumaDo);	
@@ -224,8 +256,8 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 		} else {
 			setOsobaValutaOdList(pi, osobaValutaOdList, sifarnikDatumaOd);
 			setOsobaValutaDoList(pi, osobaValutaDoList, sifarnikDatumaDo);
-			Optional<SifarnikOsoba> sifarnikOsoba=getKodRepository().getSifarnikOsobaRepository().findById(idSifarnikOsoba);
-			Optional<SifarnikValuta> sifarnikValuta=getKodRepository().getSifarnikValutaRepository().findAllByNaziv(HRK);
+			Optional<SifarnikOsoba> sifarnikOsoba=sifarnikOsobaRepository.findById(idSifarnikOsoba);
+			Optional<SifarnikValuta> sifarnikValuta=sifarnikValutaRepository.findAllByNaziv(HRK);
 			
 			OsobaValuta osobaValuta=new OsobaValuta();			
 			osobaValuta.setBand(band);
@@ -237,11 +269,11 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 			osobaValuta.setTs(ts);
 			if(id.isPresent()) osobaValuta.setId(id.get());
 			
-			osobaValuta=getKodRepository().getOsobaValutaRepository().save(osobaValuta);
+			osobaValuta=osobaValutaRepository.save(osobaValuta);
 			
 			LocalDate datumOd=sifarnikDatumaOd.getDatumPetak();
 			LocalDate datumDo=sifarnikDatumaDo.getDatumPetak();			
-			Optional<List<OsobaClaimActual>> ocaListO=getKodRepository().getOsobaClaimActualRepository().findAllBySifarnikOsoba_datumi(sifarnikOsoba.get(), datumOd, datumDo);
+			Optional<List<OsobaClaimActual>> ocaListO=osobaClaimActualRepository.findAllBySifarnikOsoba_datumi(sifarnikOsoba.get(), datumOd, datumDo);
 			HashSet<Long> idProjektDetaljiList=new HashSet<>();
 			
 			if(ocaListO.isPresent()) {
@@ -254,25 +286,25 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 					osobaClaimActual.setOsobaValuta(osobaValuta);
 					osobaClaimActual.setCijena(osobaClaimActual.getSati().multiply(osobaValuta.getCijena()));
 					
-					getKodRepository().getOsobaClaimActualRepository().save(osobaClaimActual);
+					osobaClaimActualRepository.save(osobaClaimActual);
 					
-					Optional<Claim> claimO=getKodRepository().getClaimRepository().findById(osobaClaimActual.getClaim().getId());
+					Optional<Claim> claimO=claimRepository.findById(osobaClaimActual.getClaim().getId());
 					
 					idProjektDetaljiList.add(claimO.get().getProjektDetalji().getId());
 					idClaimList.add(osobaClaimActual.getClaim().getId());
 				}	
 				
 				for(Long idC: idClaimList) {
-					Optional<List<OsobaClaimActual>> findAllByIdClaim=getKodRepository().getOsobaClaimActualRepository().findAllByIdClaim(idC);
+					Optional<List<OsobaClaimActual>> findAllByIdClaim=osobaClaimActualRepository.findAllByIdClaim(idC);
 					
 					for(OsobaClaimActual osobaCA: findAllByIdClaim.get()) {
 						koliko=koliko.add(osobaCA.getCijena());
 					}
 					
-					Optional<Claim> claimO=getKodRepository().getClaimRepository().findById(idC);
-					
+					Optional<Claim> claimO=claimRepository.findById(idC);
+			
 					claimO.get().setOsobaClaimActual(koliko);
-					getKodRepository().getClaimRepository().save(claimO.get());
+					claimRepository.save(claimO.get());
 				}				
 			}	
 			
@@ -285,10 +317,10 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 					osobaClaimActualKn=osobaClaimActualKn.add(c.getOsobaClaimActual());
 				}
 				
-				Optional<ProjektDetalji> projektDetaljiO=getKodRepository().getProjektDetaljiRepository().findById(idPD);
+				Optional<ProjektDetalji> projektDetaljiO=projektDetaljiRepository.findById(idPD);
 				projektDetaljiO.get().setCostActual(osobaClaimActualKn);
 				
-				getKodRepository().getProjektDetaljiRepository().save(projektDetaljiO.get()); 
+				projektDetaljiRepository.save(projektDetaljiO.get()); 
 			}
 		}
 	}
@@ -298,7 +330,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 		List<OsobaValuta> osobaValutaPrethodnoList=new LinkedList<>();
 		List<OsobaValuta> osobaValutaSlijedeceList=new LinkedList<>();
 		
-		List<OsobaValuta> osobaValutaList=getKodRepository().getOsobaValutaRepository().findAllBySifarnikOsobaId(idSifarnikOsoba);			
+		List<OsobaValuta> osobaValutaList=osobaValutaRepository.findAllBySifarnikOsobaId(idSifarnikOsoba);			
 		
 		for(OsobaValuta ov: osobaValutaList) {
 			if(id.isPresent() && id.get().equals(ov.getId())) {
@@ -363,13 +395,13 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 
 	private SifarnikMjeseca getSifarnikMjeseca(PojoInterface pi, String sifarnikDatumaValue, LocalDate mjesec) {
 		SifarnikMjeseca sifarnikMjeseca=null;
-		List<SifarnikMjeseca> sifarnikMjesecaList=getKodRepository().getSifarnikMjesecaRepository().findByMjeseca(mjesec);
+		List<SifarnikMjeseca> sifarnikMjesecaList=sifarnikMjesecaRepository.findByMjeseca(mjesec);
 		
 		if(sifarnikMjesecaList.isEmpty()) {
 			SifarnikMjeseca sifarnikMjesecaTmp=new SifarnikMjeseca();
 			sifarnikMjesecaTmp.setMjesec(mjesec);
 			 
-			sifarnikMjeseca=getKodRepository().getSifarnikMjesecaRepository().save(sifarnikMjesecaTmp);
+			sifarnikMjeseca=sifarnikMjesecaRepository.save(sifarnikMjesecaTmp);
 		} else if(sifarnikMjesecaList.size()>1){
 			String msg=String.format("Ima previše polja '%s' = %s! KRAJ RADA!", sifarnikDatumaValue, mjesec);
 			pi.addGreskaList(msg);
@@ -384,7 +416,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 		LocalDate ned=sdOdPomak.plusDays(DVA);
 		
 		if(sifarnikMjeseca!=null) {
-			List<SifarnikDatuma> sifarnikDatumaList=getKodRepository().getSifarnikDatumaRepository().findByDatumPetak(sdOdPomak);
+			List<SifarnikDatuma> sifarnikDatumaList=sifarnikDatumaRepository.findByDatumPetak(sdOdPomak);
 			SifarnikDatuma sdPomak=null;
 			
 			if(sifarnikDatumaList.isEmpty()) {
@@ -393,7 +425,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 				sifarnikDatuma.setDatumNedjelja(ned);
 				sifarnikDatuma.setMjesec(sifarnikMjeseca);
 				
-				sdPomak=getKodRepository().getSifarnikDatumaRepository().save(sifarnikDatuma);
+				sdPomak=sifarnikDatumaRepository.save(sifarnikDatuma);
 			} else if(sifarnikDatumaList.size()>1) {
 				String msg=String.format("Ima previše polja '%s' = %s! KRAJ RADA!", sifarnikDatumaDoValue, sdOdPomak);
 				pi.addGreskaList(msg);
@@ -407,7 +439,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 				ovDoSljedece.setSifarnikDatumaDo(sdPomak);
 			}
 			
-			getKodRepository().getOsobaValutaRepository().save(ovDoSljedece);
+			osobaValutaRepository.save(ovDoSljedece);
 		}
 	}
 	
