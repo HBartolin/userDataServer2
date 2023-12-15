@@ -37,7 +37,7 @@ public class PodugovaracServiceImpl extends AService implements PodugovaracServi
 	
 	@Override
 	public PojoInterface podugovaraci(Long idProjektDetalji) {		
-		return new PodugovaracServiceImplPodugovaraci(getKodRepository(), idProjektDetalji).izvrsi();
+		return new PodugovaracServiceImplPodugovaraci(podugovaracRepository, idProjektDetalji).izvrsi();
 	}
 
 	@Override

@@ -4,19 +4,21 @@ import java.util.List;
 import java.util.Optional;
 
 import hr.bart.userDataServer.db.Podugovarac;
+import hr.bart.userDataServer.repository.PodugovaracRepository;
 import hr.bart.userDataServer.util.PojoInterface;
 
 public class PodugovaracServiceImplPodugovaraci extends Kod {
 	private final Long idProjektDetalji;
+	private final PodugovaracRepository podugovaracRepository;
 
-	public PodugovaracServiceImplPodugovaraci(KodRepository kodRepository, Long idProjektDetalji) {
-		super(kodRepository);
+	public PodugovaracServiceImplPodugovaraci(PodugovaracRepository podugovaracRepository, Long idProjektDetalji) {
+		this.podugovaracRepository=podugovaracRepository;
 		this.idProjektDetalji=idProjektDetalji;
 	}
 
 	@Override
 	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {
-		Optional<List<Podugovarac>> podugovaracListO=getKodRepository().getPodugovaracRepository().findAllByIdProjektDetalji(idProjektDetalji);
+		Optional<List<Podugovarac>> podugovaracListO=podugovaracRepository.findAllByIdProjektDetalji(idProjektDetalji);
 		
 		if(podugovaracListO.isPresent()) {
 			pi.setRezultat(podugovaracListO.get());
