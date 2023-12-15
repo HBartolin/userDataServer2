@@ -8,6 +8,9 @@ import java.util.Optional;
 import hr.bart.userDataServer.db.Claim;
 import hr.bart.userDataServer.db.OsobaClaimPlanned;
 import hr.bart.userDataServer.db.SifarnikMjeseca;
+import hr.bart.userDataServer.repository.ClaimRepository;
+import hr.bart.userDataServer.repository.OsobaClaimPlannedRepository;
+import hr.bart.userDataServer.repository.SifarnikMjesecaRepository;
 import hr.bart.userDataServer.util.ClaimUpdatedActualPlanned;
 import hr.bart.userDataServer.util.PojoInterface;
 
@@ -16,9 +19,22 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 	private final List<ClaimUpdatedActualPlanned> podatci;
 	private final Long idProjektDetalji;
 	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
+	private final OsobaClaimPlannedRepository osobaClaimPlannedRepository;
+	private final SifarnikMjesecaRepository sifarnikMjesecaRepository;
+	private final ClaimRepository claimRepository;
 
-	public OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate(KodRepository kodRepository, LocalDate datum, List<ClaimUpdatedActualPlanned> podatci, Long idProjektDetalji) {
+	public OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate(
+			KodRepository kodRepository, 
+			OsobaClaimPlannedRepository osobaClaimPlannedRepository,
+			SifarnikMjesecaRepository sifarnikMjesecaRepository,
+			ClaimRepository claimRepository,
+			LocalDate datum, 
+			List<ClaimUpdatedActualPlanned> podatci, 
+			Long idProjektDetalji) {
 		super(kodRepository);
+		this.osobaClaimPlannedRepository=osobaClaimPlannedRepository;
+		this.sifarnikMjesecaRepository=sifarnikMjesecaRepository;
+		this.claimRepository=claimRepository;
 		this.datum=datum;
 		this.podatci=podatci;
 		this.idProjektDetalji=idProjektDetalji;
@@ -44,7 +60,7 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 				
 			} else {					
 				for(OsobaClaimPlanned osobaClaimPlanned: ocpList) {
-					OsobaClaimPlanned oca=getKodRepository().getOsobaClaimPlannedRepository().save(osobaClaimPlanned);
+					OsobaClaimPlanned oca=osobaClaimPlannedRepository.save(osobaClaimPlanned);
 					
 					aCommonServis.setTabliceClaim1(oca);
 				}
@@ -73,8 +89,8 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 	}
 	
 	private void getOsobaClaimPlanned(PojoInterface pi, ClaimUpdatedActualPlanned cua, List<OsobaClaimPlanned> ocpList, LocalDate datum, Long idProjektDetalji) {
-		List<SifarnikMjeseca> sdList=getKodRepository().getSifarnikMjesecaRepository().findByMjeseca(datum);
-		Optional<List<Claim>> claimListOptional=getKodRepository().getClaimRepository().findAllByIdProjektDetalji_idSifarnikOsoba(idProjektDetalji, cua.getIdSifarnikOsoba());
+		List<SifarnikMjeseca> sdList=sifarnikMjesecaRepository.findByMjeseca(datum);
+		Optional<List<Claim>> claimListOptional=claimRepository.findAllByIdProjektDetalji_idSifarnikOsoba(idProjektDetalji, cua.getIdSifarnikOsoba());
 		
 		if(sdList.size()==JEDAN) {
 			if(claimListOptional.isPresent() && claimListOptional.get().size()==JEDAN) {
@@ -95,7 +111,7 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 	}
 	
 	private void getOsobaClaimPlanned(PojoInterface pi, ClaimUpdatedActualPlanned cua, List<OsobaClaimPlanned> ocpList) {		
-		Optional<OsobaClaimPlanned> ocpOptional=getKodRepository().getOsobaClaimPlannedRepository().findById(cua.getIdClaim());
+		Optional<OsobaClaimPlanned> ocpOptional=osobaClaimPlannedRepository.findById(cua.getIdClaim());
 		
 		if(!ocpOptional.isPresent()) {
 			String msg=String.format("Iz baze nije ništa vraćeno 'OsobaClaimActual' s id-jem '%d'.", cua.getIdClaim());
