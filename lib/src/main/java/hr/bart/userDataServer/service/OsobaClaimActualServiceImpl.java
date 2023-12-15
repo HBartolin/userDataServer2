@@ -45,7 +45,14 @@ public class OsobaClaimActualServiceImpl extends AService implements OsobaClaimA
 	
 	@Override
 	public PojoInterface claimUpdatedActualByDate(Long idProjektDetalji, LocalDate datum, List<ClaimUpdatedActualPlanned> podatci) {
-		return new OsobaClaimActualServiceImplClaimUpdatedActualByDate(getKodRepository(), idProjektDetalji, datum, podatci).izvrsi();
+		return new OsobaClaimActualServiceImplClaimUpdatedActualByDate(
+				getKodRepository(), 
+				osobaClaimActualRepository,
+				sifarnikDatumaRepository,
+				claimRepository,
+				idProjektDetalji, 
+				datum, 
+				podatci).izvrsi();
 	}
 	
 	@Override
