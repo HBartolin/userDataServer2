@@ -32,7 +32,12 @@ public class ExcelServiceImpl  extends AService implements ExcelService {
 
 	@Override
 	public PojoInterface uExcel(Long id) {		
-		return new ExcelServiceImplUExcel(getKodRepository(), id).izvrsi();
+		return new ExcelServiceImplUExcel(
+				getKodRepository(),
+				podugovaracRepository, 
+				osobaValutaRepository,
+				projektDetaljiRepository,
+				id).izvrsi();
 	}
 	
 	private KodRepository getKodRepository() {
