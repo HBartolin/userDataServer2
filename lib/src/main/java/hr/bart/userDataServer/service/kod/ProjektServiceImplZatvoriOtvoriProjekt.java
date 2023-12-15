@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.data.domain.PageRequest;
 
 import hr.bart.userDataServer.db.Projekt;
+import hr.bart.userDataServer.repository.ProjektRepository;
 import hr.bart.userDataServer.util.DbStatus;
 import hr.bart.userDataServer.util.PojoInterface;
 import hr.bart.userDataServer.util.ZatvoriOtvori;
@@ -15,15 +16,18 @@ public class ProjektServiceImplZatvoriOtvoriProjekt extends Kod {
 	private final Long ts;
 	private final Optional<String> status;
 	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
+	private final ProjektRepository projektRepository;
 
 	public ProjektServiceImplZatvoriOtvoriProjekt(
 			KodRepository kodRepository,
+			ProjektRepository projektRepository,
 			ZatvoriOtvori zo,
 			Long id,
 			Long ts,
 			Optional<String> status
 			) {
 		super(kodRepository);
+		this.projektRepository=projektRepository;
 		this.zo=zo;
 		this.id=id;
 		this.ts=ts;
@@ -32,7 +36,7 @@ public class ProjektServiceImplZatvoriOtvoriProjekt extends Kod {
 
 	@Override
 	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {
-		Optional<Projekt> projektOptional=getKodRepository().getProjektRepository().findById(id);
+		Optional<Projekt> projektOptional=projektRepository.findById(id);
 		
 		if(zo.getDbStatusSuprotni().equals(projektOptional.get().getStatus())) {
 			String msg=String.format(zo.getMsg1(), projektOptional.get().getId());
@@ -43,7 +47,7 @@ public class ProjektServiceImplZatvoriOtvoriProjekt extends Kod {
 				pi.addGreskaList(msg);
 			} else {
 				projektOptional.get().setStatus(zo.getDbStatusSuprotni());
-				getKodRepository().getProjektRepository().save(projektOptional.get());
+				projektRepository.save(projektOptional.get());
 				
 				pi.setOk(String.format(zo.getMsg3(), projektOptional.get().getId()));
 			}
