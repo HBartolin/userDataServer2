@@ -8,8 +8,7 @@ import hr.bart.userDataServer.util.PojoInterface;
 public class ClaimServiceImplClaimImena extends Kod {
 	private final Optional<List<Long>> podatciO;
 
-	public ClaimServiceImplClaimImena(KodRepository kodRepository, Optional<List<Long>> podatciO) {
-		super(kodRepository);
+	public ClaimServiceImplClaimImena(Optional<List<Long>> podatciO) {
 		this.podatciO=podatciO;
 	}
 

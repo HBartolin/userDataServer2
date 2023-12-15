@@ -38,7 +38,7 @@ public class ClaimServiceImpl extends AService implements ClaimService {
 	
 	@Override
 	public PojoInterface claimImena(Optional<List<Long>> podatciO) {	
-		return new ClaimServiceImplClaimImena(getKodRepository(), podatciO).izvrsi();
+		return new ClaimServiceImplClaimImena(podatciO).izvrsi();
 	}
 	
 	private KodRepository getKodRepository() {
