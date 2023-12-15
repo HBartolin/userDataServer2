@@ -4,8 +4,7 @@ import hr.bart.userDataServer.util.PojoInterface;
 
 public class ClaimServiceImplNovaOsoba extends Kod {
 
-	public ClaimServiceImplNovaOsoba(KodRepository kodRepository) {
-		super(kodRepository);
+	public ClaimServiceImplNovaOsoba() {
 	}
 
 	@Override

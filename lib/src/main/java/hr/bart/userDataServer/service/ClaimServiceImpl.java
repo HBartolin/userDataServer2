@@ -33,7 +33,7 @@ public class ClaimServiceImpl extends AService implements ClaimService {
 	
 	@Override
 	public PojoInterface novaOsoba() {		
-		return new ClaimServiceImplNovaOsoba(getKodRepository()).izvrsi();
+		return new ClaimServiceImplNovaOsoba().izvrsi();
 	} 
 	
 	@Override
