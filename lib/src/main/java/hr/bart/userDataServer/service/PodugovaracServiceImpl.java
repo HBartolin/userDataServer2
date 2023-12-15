@@ -44,6 +44,9 @@ public class PodugovaracServiceImpl extends AService implements PodugovaracServi
 	public PojoInterface unesiPodugovarac(Optional<Long> id, Long ts, Long idProjektDetalji, Optional<Long> idPurchaseOrder, LocalDate datumPlanned, LocalDate datumActual, Optional<BigDecimal> cijena, Optional<Long> invoiceNumber) {
 		return new PodugovaracServiceImplUnesiPodugovarac(
 				getKodRepository(),
+				claimPodugovaracRepository,
+				podugovaracRepository,
+				projektDetaljiRepository,
 				id,
 				ts,
 				idProjektDetalji,

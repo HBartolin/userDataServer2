@@ -11,6 +11,9 @@ import hr.bart.userDataServer.db.Claim;
 import hr.bart.userDataServer.db.ClaimPodugovarac;
 import hr.bart.userDataServer.db.Podugovarac;
 import hr.bart.userDataServer.db.ProjektDetalji;
+import hr.bart.userDataServer.repository.ClaimPodugovaracRepository;
+import hr.bart.userDataServer.repository.PodugovaracRepository;
+import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
 import hr.bart.userDataServer.util.PojoInterface;
 
 public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
@@ -23,9 +26,15 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 	private final Optional<BigDecimal> cijena;
 	private final Optional<Long> invoiceNumber;
 	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
+	private final ClaimPodugovaracRepository claimPodugovaracRepository;
+	private final PodugovaracRepository podugovaracRepository;
+	private final ProjektDetaljiRepository projektDetaljiRepository;
 
 	public PodugovaracServiceImplUnesiPodugovarac(
 			KodRepository kodRepository,
+			ClaimPodugovaracRepository claimPodugovaracRepository,
+			PodugovaracRepository podugovaracRepository,
+			ProjektDetaljiRepository projektDetaljiRepository,
 			Optional<Long> id,
 			Long ts,
 			Long idProjektDetalji,
@@ -36,6 +45,9 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 			Optional<Long> invoiceNumber
 			) {
 		super(kodRepository);
+		this.claimPodugovaracRepository=claimPodugovaracRepository;
+		this.podugovaracRepository=podugovaracRepository;
+		this.projektDetaljiRepository=projektDetaljiRepository;
 		this.id=id;
 		this.ts=ts;
 		this.idProjektDetalji=idProjektDetalji;
@@ -75,7 +87,7 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 		
 		if(pi.getGreska().isEmpty()) {
 //			Optional<ProjektDetalji> projektDetaljiO=projektDetaljiRepository.findById(idProjektDetalji);
-			Optional<ClaimPodugovarac> claimPodugovaracOrderO=getKodRepository().getClaimPodugovaracRepository().findById(idPurchaseOrder.get());
+			Optional<ClaimPodugovarac> claimPodugovaracOrderO=claimPodugovaracRepository.findById(idPurchaseOrder.get());
 			
 			Podugovarac podugovarac=new Podugovarac();
 			podugovarac.setCijena(cijena.get());
@@ -89,11 +101,11 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 				podugovarac.setId(id.get());
 			}
 			
-			podugovarac=getKodRepository().getPodugovaracRepository().save(podugovarac);
+			podugovarac=podugovaracRepository.save(podugovarac);
 			
 			setTableProjektDetalji(idProjektDetalji);
 			
-			Optional<List<Podugovarac>> podugovaracListO=getKodRepository().getPodugovaracRepository().findAllByIdProjektDetalji(idProjektDetalji);
+			Optional<List<Podugovarac>> podugovaracListO=podugovaracRepository.findAllByIdProjektDetalji(idProjektDetalji);
 			
 			if(podugovaracListO.isPresent()) {
 				pi.setRezultat(podugovaracListO.get());
@@ -121,7 +133,7 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 			}
 		}
 		
-		Optional<List<Podugovarac>> podugovaracListO=getKodRepository().getPodugovaracRepository().findAllByIdProjektDetalji(idProjektDetalji);
+		Optional<List<Podugovarac>> podugovaracListO=podugovaracRepository.findAllByIdProjektDetalji(idProjektDetalji);
 	
 		if(podugovaracListO.isPresent()) {
 			for(Podugovarac podugovarac: podugovaracListO.get()) {
@@ -140,7 +152,7 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 			BigDecimal aBD=BigDecimal.ZERO;
 			BigDecimal pBD=BigDecimal.ZERO;
 			
-			Optional<List<Podugovarac>> pListO=getKodRepository().getPodugovaracRepository().findAllByIdClaimPodugovarac(idClaimPodugovarac);
+			Optional<List<Podugovarac>> pListO=podugovaracRepository.findAllByIdClaimPodugovarac(idClaimPodugovarac);
 			
 			if(pListO.isPresent()) {
 				for(Podugovarac p: pListO.get()) {
@@ -151,20 +163,20 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 					}
 				}
 				
-				Optional<ClaimPodugovarac> claimPodugovaracOrderO=getKodRepository().getClaimPodugovaracRepository().findById(idClaimPodugovarac);
+				Optional<ClaimPodugovarac> claimPodugovaracOrderO=claimPodugovaracRepository.findById(idClaimPodugovarac);
 				
 				claimPodugovaracOrderO.get().setPlanned(pBD);
 				claimPodugovaracOrderO.get().setActual(aBD);
 				
-				getKodRepository().getClaimPodugovaracRepository().save(claimPodugovaracOrderO.get());
+				claimPodugovaracRepository.save(claimPodugovaracOrderO.get());
 			}
 		}
 		
-		Optional<ProjektDetalji> projektDetaljiO=getKodRepository().getProjektDetaljiRepository().findById(idProjektDetalji);
+		Optional<ProjektDetalji> projektDetaljiO=projektDetaljiRepository.findById(idProjektDetalji);
 		projektDetaljiO.get().setCostPlanned(osobaClaimPlannedKn);
 		projektDetaljiO.get().setCostActual(osobaClaimActualKn);
 
-		getKodRepository().getProjektDetaljiRepository().save(projektDetaljiO.get());
+		projektDetaljiRepository.save(projektDetaljiO.get());
 	}
 
 }
