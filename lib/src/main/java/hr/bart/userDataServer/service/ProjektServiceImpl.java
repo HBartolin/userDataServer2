@@ -44,7 +44,7 @@ public class ProjektServiceImpl extends AService implements ProjektService {
 	
 	@Override
 	public PojoInterface traziProjekt(String trazi) {
-		return new ProjektServiceImplTraziProjekte(getKodRepository(), trazi).izvrsi();
+		return new ProjektServiceImplTraziProjekte(projektRepository, trazi).izvrsi();
 	}
 	
 	private KodRepository getKodRepository() {
