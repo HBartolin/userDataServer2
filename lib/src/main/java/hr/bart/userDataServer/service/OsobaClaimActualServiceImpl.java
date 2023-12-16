@@ -70,6 +70,7 @@ public class OsobaClaimActualServiceImpl extends AService implements OsobaClaimA
 				projektDetaljiRepository, 
 				claimPodugovaracRepository,
 				osobaValutaRepository,
+				sifarnikMjesecaRepository,
 				idProjektDetalji, 
 				datum, 
 				podatci).izvrsi();

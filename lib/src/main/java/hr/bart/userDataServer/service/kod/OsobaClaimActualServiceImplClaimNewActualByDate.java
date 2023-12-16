@@ -23,6 +23,7 @@ import hr.bart.userDataServer.repository.OsobaClaimPlannedRepository;
 import hr.bart.userDataServer.repository.OsobaValutaRepository;
 import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
 import hr.bart.userDataServer.repository.SifarnikDatumaRepository;
+import hr.bart.userDataServer.repository.SifarnikMjesecaRepository;
 import hr.bart.userDataServer.util.PojoInterface;
 
 public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
@@ -37,6 +38,7 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 	private final ClaimPodugovaracRepository claimPodugovaracRepository;
 	private final ProjektDetaljiRepository projektDetaljiRepository;
 	private final OsobaValutaRepository osobaValutaRepository;
+	private final SifarnikMjesecaRepository sifarnikMjesecaRepository;
 	
 	public OsobaClaimActualServiceImplClaimNewActualByDate(
 			KodRepository kodRepository, 
@@ -47,6 +49,7 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 			ProjektDetaljiRepository projektDetaljiRepository, 
 			ClaimPodugovaracRepository claimPodugovaracRepository,
 			OsobaValutaRepository osobaValutaRepository,
+			SifarnikMjesecaRepository sifarnikMjesecaRepository,
 			Long idProjektDetalji, 
 			LocalDate datum, 
 			HashMap<String, String> podatci) {
@@ -61,6 +64,7 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 		this.claimPodugovaracRepository = claimPodugovaracRepository;
 		this.projektDetaljiRepository = projektDetaljiRepository;
 		this.osobaValutaRepository = osobaValutaRepository;
+		this.sifarnikMjesecaRepository = sifarnikMjesecaRepository;
 	}
 
 	@Override
@@ -155,7 +159,7 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 		if(sifarnikDatumaList.isEmpty()) {
 			LocalDate ned=datum.plusDays(DVA);
 			LocalDate mj=ned.withDayOfMonth(JEDAN);
-			SifarnikMjeseca sifarnikMjeseca = aCommonServis.getSifarnikMjeseca(pi, mj);
+			SifarnikMjeseca sifarnikMjeseca = aCommonServis.getSifarnikMjeseca(sifarnikMjesecaRepository, pi, mj);
 					
 			SifarnikDatuma sifarnikDatuma=new SifarnikDatuma();
 			sifarnikDatuma.setDatumPetak(datum);

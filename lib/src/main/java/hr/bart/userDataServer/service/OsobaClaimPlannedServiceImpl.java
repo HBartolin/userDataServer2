@@ -58,6 +58,7 @@ public class OsobaClaimPlannedServiceImpl extends AService implements OsobaClaim
 				claimRepository,
 				osobaClaimPlannedRepository,
 				osobaClaimActualRepository,
+				sifarnikMjesecaRepository,
 				datum, 
 				podatci, 
 				idProjektDetalji).izvrsi();

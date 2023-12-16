@@ -24,6 +24,7 @@ import hr.bart.userDataServer.repository.OsobaClaimActualRepository;
 import hr.bart.userDataServer.repository.OsobaClaimPlannedRepository;
 import hr.bart.userDataServer.repository.OsobaValutaRepository;
 import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
+import hr.bart.userDataServer.repository.SifarnikMjesecaRepository;
 import hr.bart.userDataServer.util.DbStatus;
 import hr.bart.userDataServer.util.PojoInterface;
 
@@ -165,15 +166,18 @@ public class ACommonServis extends Kod {
 		return osobaValutaList.get(0);
 	}
 	
-	public SifarnikMjeseca getSifarnikMjeseca(PojoInterface pi, LocalDate mjesec) {		
+	public SifarnikMjeseca getSifarnikMjeseca(
+			SifarnikMjesecaRepository sifarnikMjesecaRepository, 
+			PojoInterface pi, 
+			LocalDate mjesec) {		
 		SifarnikMjeseca sifarnikMjeseca=null;
-		List<SifarnikMjeseca> sifarnikMjesecaList=getKodRepository().getSifarnikMjesecaRepository().findByMjeseca(mjesec);
+		List<SifarnikMjeseca> sifarnikMjesecaList=sifarnikMjesecaRepository.findByMjeseca(mjesec);
 		
 		if(sifarnikMjesecaList.isEmpty()) {
 			SifarnikMjeseca sifarnikMjesecaTmp=new SifarnikMjeseca();
 			sifarnikMjesecaTmp.setMjesec(mjesec);
 			 
-			sifarnikMjeseca=getKodRepository().getSifarnikMjesecaRepository().save(sifarnikMjesecaTmp);
+			sifarnikMjeseca=sifarnikMjesecaRepository.save(sifarnikMjesecaTmp);
 		} else if(sifarnikMjesecaList.size()>1){
 			String msg=String.format("Ima previše polja za %s! KRAJ RADA!", mjesec);
 			pi.addGreskaList(msg);

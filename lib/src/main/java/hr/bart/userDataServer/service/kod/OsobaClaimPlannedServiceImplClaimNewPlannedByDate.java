@@ -16,6 +16,7 @@ import hr.bart.userDataServer.db.OsobaClaimPlanned;
 import hr.bart.userDataServer.repository.ClaimRepository;
 import hr.bart.userDataServer.repository.OsobaClaimActualRepository;
 import hr.bart.userDataServer.repository.OsobaClaimPlannedRepository;
+import hr.bart.userDataServer.repository.SifarnikMjesecaRepository;
 import hr.bart.userDataServer.util.PojoInterface;
 
 public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
@@ -26,12 +27,14 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 	private final ClaimRepository claimRepository;
 	private final OsobaClaimPlannedRepository osobaClaimPlannedRepository;
 	private final OsobaClaimActualRepository osobaClaimActualRepository;
+	private final SifarnikMjesecaRepository sifarnikMjesecaRepository;
 	
 	public OsobaClaimPlannedServiceImplClaimNewPlannedByDate(
 			KodRepository kodRepository, 
 			ClaimRepository claimRepository,
 			OsobaClaimPlannedRepository osobaClaimPlannedRepository,
 			OsobaClaimActualRepository osobaClaimActualRepository,
+			SifarnikMjesecaRepository sifarnikMjesecaRepository,
 			LocalDate datum, 
 			HashMap<String, String> podatci, 
 			Long idProjektDetalji) {
@@ -42,6 +45,7 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 		this.podatci=podatci;
 		this.idProjektDetalji=idProjektDetalji;
 		this.osobaClaimActualRepository = osobaClaimActualRepository;
+		this.sifarnikMjesecaRepository = sifarnikMjesecaRepository;
 	}
 
 	@Override
@@ -73,7 +77,7 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 						OsobaClaimPlanned ocp=new OsobaClaimPlanned();
 						ocp.setSati(vBD);
 						ocp.setClaim(claimList.get(0));
-						ocp.setSifarnikMjeseca(aCommonServis.getSifarnikMjeseca(pi, datum));
+						ocp.setSifarnikMjeseca(aCommonServis.getSifarnikMjeseca(sifarnikMjesecaRepository, pi, datum));
 						
 						ocp=osobaClaimPlannedRepository.save(ocp);
 						osobaClaimPlannedList.add(ocp);
