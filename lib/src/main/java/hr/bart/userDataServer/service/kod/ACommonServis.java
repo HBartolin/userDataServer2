@@ -22,6 +22,7 @@ import hr.bart.userDataServer.repository.ClaimPodugovaracRepository;
 import hr.bart.userDataServer.repository.ClaimRepository;
 import hr.bart.userDataServer.repository.OsobaClaimActualRepository;
 import hr.bart.userDataServer.repository.OsobaClaimPlannedRepository;
+import hr.bart.userDataServer.repository.OsobaValutaRepository;
 import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
 import hr.bart.userDataServer.util.DbStatus;
 import hr.bart.userDataServer.util.PojoInterface;
@@ -150,8 +151,8 @@ public class ACommonServis extends Kod {
 		projektDetaljiRepository.save(projektDetaljiO.get());
 	}
 	
-	public OsobaValuta getOsobaValuta(Long idSifarnikOsoba, String imePrezime, LocalDate datum) throws Throwable {		
-		List<OsobaValuta> osobaValutaList=getKodRepository().getOsobaValutaRepository().findAllBySifarnikOsobaId_datum(idSifarnikOsoba, datum);
+	public OsobaValuta getOsobaValuta(OsobaValutaRepository osobaValutaRepository, Long idSifarnikOsoba, String imePrezime, LocalDate datum) throws Throwable {		
+		List<OsobaValuta> osobaValutaList=osobaValutaRepository.findAllBySifarnikOsobaId_datum(idSifarnikOsoba, datum);
 		
 		if(osobaValutaList.isEmpty()) {
 			throw new Exception(String.format("U tablici 'OsobaValuta' nije definirana vrijednost za '%s' (%s) za datum = '%s'.", imePrezime, idSifarnikOsoba, datum));

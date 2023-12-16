@@ -15,6 +15,7 @@ import hr.bart.userDataServer.repository.ClaimPodugovaracRepository;
 import hr.bart.userDataServer.repository.ClaimRepository;
 import hr.bart.userDataServer.repository.OsobaClaimActualRepository;
 import hr.bart.userDataServer.repository.OsobaClaimPlannedRepository;
+import hr.bart.userDataServer.repository.OsobaValutaRepository;
 import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
 import hr.bart.userDataServer.repository.SifarnikDatumaRepository;
 import hr.bart.userDataServer.util.ClaimUpdatedActualPlanned;
@@ -31,6 +32,7 @@ public class OsobaClaimActualServiceImplClaimUpdatedActualByDate extends Kod {
 	private final OsobaClaimPlannedRepository osobaClaimPlannedRepository;
 	private final ClaimPodugovaracRepository claimPodugovaracRepository;
 	private final ProjektDetaljiRepository projektDetaljiRepository;
+	private final OsobaValutaRepository osobaValutaRepository;
 	
 	public OsobaClaimActualServiceImplClaimUpdatedActualByDate(
 			KodRepository kodRepository, 
@@ -40,6 +42,7 @@ public class OsobaClaimActualServiceImplClaimUpdatedActualByDate extends Kod {
 			OsobaClaimPlannedRepository osobaClaimPlannedRepository,
 			ProjektDetaljiRepository projektDetaljiRepository, 
 			ClaimPodugovaracRepository claimPodugovaracRepository,
+			OsobaValutaRepository osobaValutaRepository,
 			Long idProjektDetalji, 
 			LocalDate datum, 
 			List<ClaimUpdatedActualPlanned> podatci) {
@@ -53,6 +56,7 @@ public class OsobaClaimActualServiceImplClaimUpdatedActualByDate extends Kod {
 		this.osobaClaimPlannedRepository = osobaClaimPlannedRepository;
 		this.claimPodugovaracRepository = claimPodugovaracRepository;
 		this.projektDetaljiRepository = projektDetaljiRepository;
+		this.osobaValutaRepository = osobaValutaRepository;
 	}
 
 	@Override
@@ -64,7 +68,7 @@ public class OsobaClaimActualServiceImplClaimUpdatedActualByDate extends Kod {
 			
 		} else {
 			for(ClaimUpdatedActualPlanned cua: podatci) {		
-				OsobaValuta osobaValuta=aCommonServis.getOsobaValuta(cua.getIdSifarnikOsoba(), null, datum);
+				OsobaValuta osobaValuta=aCommonServis.getOsobaValuta(osobaValutaRepository, cua.getIdSifarnikOsoba(), null, datum);
 				
 				if(cua.getIdClaim()>0) {
 					Optional<OsobaClaimActual> ocaOptional=osobaClaimActualRepository.findById(cua.getIdClaim());

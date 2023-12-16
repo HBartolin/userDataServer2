@@ -20,6 +20,7 @@ import hr.bart.userDataServer.repository.ClaimPodugovaracRepository;
 import hr.bart.userDataServer.repository.ClaimRepository;
 import hr.bart.userDataServer.repository.OsobaClaimActualRepository;
 import hr.bart.userDataServer.repository.OsobaClaimPlannedRepository;
+import hr.bart.userDataServer.repository.OsobaValutaRepository;
 import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
 import hr.bart.userDataServer.repository.SifarnikDatumaRepository;
 import hr.bart.userDataServer.util.PojoInterface;
@@ -35,6 +36,7 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 	private final OsobaClaimPlannedRepository osobaClaimPlannedRepository;
 	private final ClaimPodugovaracRepository claimPodugovaracRepository;
 	private final ProjektDetaljiRepository projektDetaljiRepository;
+	private final OsobaValutaRepository osobaValutaRepository;
 	
 	public OsobaClaimActualServiceImplClaimNewActualByDate(
 			KodRepository kodRepository, 
@@ -44,6 +46,7 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 			OsobaClaimPlannedRepository osobaClaimPlannedRepository,
 			ProjektDetaljiRepository projektDetaljiRepository, 
 			ClaimPodugovaracRepository claimPodugovaracRepository,
+			OsobaValutaRepository osobaValutaRepository,
 			Long idProjektDetalji, 
 			LocalDate datum, 
 			HashMap<String, String> podatci) {
@@ -57,6 +60,7 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 		this.osobaClaimPlannedRepository = osobaClaimPlannedRepository;
 		this.claimPodugovaracRepository = claimPodugovaracRepository;
 		this.projektDetaljiRepository = projektDetaljiRepository;
+		this.osobaValutaRepository = osobaValutaRepository;
 	}
 
 	@Override
@@ -99,7 +103,7 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 							oca.setCijenaTecaj(BigDecimal.ZERO);
 							oca.setClaim(claimList.get(0));
 							oca.setSifarnikDatuma(getSifarnikDatuma(pi, sifarnikDatumaList, datum));			
-							oca.setOsobaValuta(aCommonServis.getOsobaValuta(kLong,claimO.get().getSifarnikOsoba().getImePrezime(), datum));
+							oca.setOsobaValuta(aCommonServis.getOsobaValuta(osobaValutaRepository, kLong, claimO.get().getSifarnikOsoba().getImePrezime(), datum));
 							oca.setCijena(vBD.multiply(oca.getOsobaValuta().getCijena()));
 															
 							oca=osobaClaimActualRepository.save(oca);
