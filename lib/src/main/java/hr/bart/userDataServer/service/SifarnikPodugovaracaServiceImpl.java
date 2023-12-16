@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import hr.bart.userDataServer.repository.SifarnikPodugovaracaRepository;
-import hr.bart.userDataServer.service.kod.KodRepository;
 import hr.bart.userDataServer.service.kod.SifarnikPodugovaracaServiceImplEditirajSifarnikPodugovaraca;
 import hr.bart.userDataServer.service.kod.SifarnikPodugovaracaServiceImplUrediPodugovarace;
 import hr.bart.userDataServer.util.PojoInterface;
@@ -25,13 +24,7 @@ public class SifarnikPodugovaracaServiceImpl extends AService implements Sifarni
 	
 	@Override
 	public PojoInterface urediPodugovarace() {
-		return new SifarnikPodugovaracaServiceImplUrediPodugovarace(getKodRepository()).izvrsi();
+		return new SifarnikPodugovaracaServiceImplUrediPodugovarace(sifarnikPodugovaracaRepository).izvrsi();
 	}
 	
-	private KodRepository getKodRepository() {
-		KodRepository kodRepository=new KodRepository();
-		kodRepository.setSifarnikPodugovaracaRepository(sifarnikPodugovaracaRepository);
-
-		return kodRepository;
-	}
 }
