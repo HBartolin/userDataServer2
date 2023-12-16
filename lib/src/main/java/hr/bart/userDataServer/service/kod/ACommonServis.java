@@ -221,8 +221,12 @@ public class ACommonServis extends Kod {
 		projektDetaljiRepository.save(projektDetaljiO.get());
 	}
 	
-	public void findAllBySifarnikOsobaId(PojoInterface pi, Long idSifarnikOsoba, PageRequest pageRequest) {
-		Page<List<OsobaValuta>> pageOsobaValutaList=getKodRepository().getOsobaValutaRepository().findAllBySifarnikOsobaId(idSifarnikOsoba, pageRequest);
+	public void findAllBySifarnikOsobaId(
+			OsobaValutaRepository osobaValutaRepository,
+			PojoInterface pi, 
+			Long idSifarnikOsoba, 
+			PageRequest pageRequest) {
+		Page<List<OsobaValuta>> pageOsobaValutaList=osobaValutaRepository.findAllBySifarnikOsobaId(idSifarnikOsoba, pageRequest);
 		
 		pi.setRezultat(pageOsobaValutaList.getContent());
 		

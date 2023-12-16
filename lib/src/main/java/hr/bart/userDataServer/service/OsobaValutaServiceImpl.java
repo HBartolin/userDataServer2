@@ -47,7 +47,7 @@ public class OsobaValutaServiceImpl extends AService implements OsobaValutaServi
 	
 	@Override
 	public PojoInterface osobaValuta(Long idSifarnikOsoba) {				
-		return new OsobaValutaServiceImplOsobaValuta(getKodRepository(), idSifarnikOsoba).izvrsi();
+		return new OsobaValutaServiceImplOsobaValuta(osobaValutaRepository, idSifarnikOsoba).izvrsi();
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class OsobaValutaServiceImpl extends AService implements OsobaValutaServi
 	
 	@Override
 	public PojoInterface tablicaOsobaValuta(int pageNumber, Long idSifarnikOsoba) {		
-		return new OsobaValutaServiceImplTablicaOsobaValuta(getKodRepository(), idSifarnikOsoba, pageNumber).izvrsi();	
+		return new OsobaValutaServiceImplTablicaOsobaValuta(osobaValutaRepository, idSifarnikOsoba, pageNumber).izvrsi();	
 	}
 	
 	private KodRepository getKodRepository() {

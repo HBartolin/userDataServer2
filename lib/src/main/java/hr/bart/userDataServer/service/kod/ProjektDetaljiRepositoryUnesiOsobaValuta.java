@@ -132,7 +132,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 		
 		PageRequest pageRequest=PageRequest.of(NULA, pageRequestSize50);
 		
-		aCommonServis.findAllBySifarnikOsobaId(pi, idSifarnikOsoba, pageRequest);
+		aCommonServis.findAllBySifarnikOsobaId(osobaValutaRepository, pi, idSifarnikOsoba, pageRequest);
 		
 		return pi;
 	}

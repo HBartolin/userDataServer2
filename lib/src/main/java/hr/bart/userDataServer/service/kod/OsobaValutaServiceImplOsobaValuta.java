@@ -2,14 +2,16 @@ package hr.bart.userDataServer.service.kod;
 
 import org.springframework.data.domain.PageRequest;
 
+import hr.bart.userDataServer.repository.OsobaValutaRepository;
 import hr.bart.userDataServer.util.PojoInterface;
 
 public class OsobaValutaServiceImplOsobaValuta extends Kod {
 	private final Long idSifarnikOsoba;
-	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
+	private ACommonServis aCommonServis=new ACommonServis();
+	private final OsobaValutaRepository osobaValutaRepository;
 	
-	public OsobaValutaServiceImplOsobaValuta(KodRepository kodRepository, Long idSifarnikOsoba) {
-		super(kodRepository);
+	public OsobaValutaServiceImplOsobaValuta(OsobaValutaRepository osobaValutaRepository, Long idSifarnikOsoba) {
+		this.osobaValutaRepository=osobaValutaRepository;
 		this.idSifarnikOsoba=idSifarnikOsoba;
 	}
 
@@ -17,7 +19,7 @@ public class OsobaValutaServiceImplOsobaValuta extends Kod {
 	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {
 		PageRequest pageRequest=PageRequest.of(NULA, pageRequestSize50);
 		
-		aCommonServis.findAllBySifarnikOsobaId(pi, idSifarnikOsoba, pageRequest);
+		aCommonServis.findAllBySifarnikOsobaId(osobaValutaRepository, pi, idSifarnikOsoba, pageRequest);
 		
 		return pi;
 	}
