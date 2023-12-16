@@ -88,7 +88,7 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 				
 			} else {
 				for(OsobaClaimPlanned osobaCPLokal: osobaClaimPlannedList) {
-					aCommonServis.setTabliceClaim1(osobaCPLokal);
+					aCommonServis.setTabliceClaim1(osobaClaimPlannedRepository, claimRepository, osobaCPLokal);
 				}
 				
 				aCommonServis.setTablicePlannedClaim(

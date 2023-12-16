@@ -66,7 +66,7 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 				for(OsobaClaimPlanned osobaClaimPlanned: ocpList) {
 					OsobaClaimPlanned oca=osobaClaimPlannedRepository.save(osobaClaimPlanned);
 					
-					aCommonServis.setTabliceClaim1(oca);
+					aCommonServis.setTabliceClaim1(osobaClaimPlannedRepository, claimRepository, oca);
 				}
 				
 				aCommonServis.setTablicePlannedClaim(

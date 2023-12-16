@@ -95,19 +95,22 @@ public class ACommonServis extends Kod {
 		claimRepository.save(claimO.get());
 	}
 	
-	public void setTabliceClaim1(OsobaClaimPlanned ocp) {
+	public void setTabliceClaim1(
+			OsobaClaimPlannedRepository osobaClaimPlannedRepository,
+			ClaimRepository claimRepository,
+			OsobaClaimPlanned ocp) {
 		BigDecimal koliko=new BigDecimal(0);
 		koliko.setScale(2, RoundingMode.HALF_EVEN);
-		Optional<List<OsobaClaimPlanned>> findAllByIdClaim=getKodRepository().getOsobaClaimPlannedRepository().findAllByIdClaim(ocp.getClaim().getId());
+		Optional<List<OsobaClaimPlanned>> findAllByIdClaim=osobaClaimPlannedRepository.findAllByIdClaim(ocp.getClaim().getId());
 		
 		for(OsobaClaimPlanned osobaCP: findAllByIdClaim.get()) {
 			koliko=koliko.add(osobaCP.getSati());
 		}
 		
-		Optional<Claim> claimO=getKodRepository().getClaimRepository().findById(ocp.getClaim().getId());
+		Optional<Claim> claimO=claimRepository.findById(ocp.getClaim().getId());
 		
 		claimO.get().setOsobaClaimPlanned(koliko);
-		getKodRepository().getClaimRepository().save(claimO.get());
+		claimRepository.save(claimO.get());
 	}
 
 	public void setTabliceActualClaim(
