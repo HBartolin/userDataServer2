@@ -18,9 +18,11 @@ import hr.bart.userDataServer.db.Projekt;
 import hr.bart.userDataServer.db.ProjektDetalji;
 import hr.bart.userDataServer.db.SifarnikMjeseca;
 import hr.bart.userDataServer.db.SifarnikOsoba;
+import hr.bart.userDataServer.repository.ClaimPodugovaracRepository;
 import hr.bart.userDataServer.repository.ClaimRepository;
 import hr.bart.userDataServer.repository.OsobaClaimActualRepository;
 import hr.bart.userDataServer.repository.OsobaClaimPlannedRepository;
+import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
 import hr.bart.userDataServer.util.DbStatus;
 import hr.bart.userDataServer.util.PojoInterface;
 
@@ -117,6 +119,8 @@ public class ACommonServis extends Kod {
 			ClaimRepository claimRepository,
 			OsobaClaimActualRepository osobaClaimActualRepository,
 			OsobaClaimPlannedRepository osobaClaimPlannedRepository,
+			ClaimPodugovaracRepository claimPodugovaracRepository,
+			ProjektDetaljiRepository projektDetaljiRepository,
 			Long idProjektDetalji) {		
 		BigDecimal osobaClaimActualKn=new BigDecimal(0);
 		osobaClaimActualKn.setScale(2, RoundingMode.HALF_EVEN);					
@@ -132,7 +136,7 @@ public class ACommonServis extends Kod {
 			}
 		}
 		
-		Optional<List<ClaimPodugovarac>> claimPodugovaracListO=getKodRepository().getClaimPodugovaracRepository().findAllByIdProjektDetalji(idProjektDetalji);
+		Optional<List<ClaimPodugovarac>> claimPodugovaracListO=claimPodugovaracRepository.findAllByIdProjektDetalji(idProjektDetalji);
 		
 		if(claimPodugovaracListO.isPresent()) {
 			for(ClaimPodugovarac claimPodugovarac: claimPodugovaracListO.get()) {
@@ -140,10 +144,10 @@ public class ACommonServis extends Kod {
 			}
 		}
 		
-		Optional<ProjektDetalji> projektDetaljiO=getKodRepository().getProjektDetaljiRepository().findById(idProjektDetalji);
+		Optional<ProjektDetalji> projektDetaljiO=projektDetaljiRepository.findById(idProjektDetalji);
 		projektDetaljiO.get().setCostActual(osobaClaimActualKn);
 
-		getKodRepository().getProjektDetaljiRepository().save(projektDetaljiO.get());
+		projektDetaljiRepository.save(projektDetaljiO.get());
 	}
 	
 	public OsobaValuta getOsobaValuta(Long idSifarnikOsoba, String imePrezime, LocalDate datum) throws Throwable {		

@@ -16,9 +16,11 @@ import hr.bart.userDataServer.db.Claim;
 import hr.bart.userDataServer.db.OsobaClaimActual;
 import hr.bart.userDataServer.db.SifarnikDatuma;
 import hr.bart.userDataServer.db.SifarnikMjeseca;
+import hr.bart.userDataServer.repository.ClaimPodugovaracRepository;
 import hr.bart.userDataServer.repository.ClaimRepository;
 import hr.bart.userDataServer.repository.OsobaClaimActualRepository;
 import hr.bart.userDataServer.repository.OsobaClaimPlannedRepository;
+import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
 import hr.bart.userDataServer.repository.SifarnikDatumaRepository;
 import hr.bart.userDataServer.util.PojoInterface;
 
@@ -31,6 +33,8 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 	private final SifarnikDatumaRepository sifarnikDatumaRepository;
 	private final OsobaClaimActualRepository osobaClaimActualRepository;
 	private final OsobaClaimPlannedRepository osobaClaimPlannedRepository;
+	private final ClaimPodugovaracRepository claimPodugovaracRepository;
+	private final ProjektDetaljiRepository projektDetaljiRepository;
 	
 	public OsobaClaimActualServiceImplClaimNewActualByDate(
 			KodRepository kodRepository, 
@@ -38,6 +42,8 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 			SifarnikDatumaRepository sifarnikDatumaRepository,
 			OsobaClaimActualRepository osobaClaimActualRepository,
 			OsobaClaimPlannedRepository osobaClaimPlannedRepository,
+			ProjektDetaljiRepository projektDetaljiRepository, 
+			ClaimPodugovaracRepository claimPodugovaracRepository,
 			Long idProjektDetalji, 
 			LocalDate datum, 
 			HashMap<String, String> podatci) {
@@ -49,6 +55,8 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 		this.datum=datum;
 		this.podatci=podatci;
 		this.osobaClaimPlannedRepository = osobaClaimPlannedRepository;
+		this.claimPodugovaracRepository = claimPodugovaracRepository;
+		this.projektDetaljiRepository = projektDetaljiRepository;
 	}
 
 	@Override
@@ -118,6 +126,8 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 						claimRepository,
 						osobaClaimActualRepository,
 						osobaClaimPlannedRepository,
+						claimPodugovaracRepository,
+						projektDetaljiRepository,
 						idProjektDetalji);					
 				
 				Optional<List<Claim>> claimListOptional=aCommonServis.claimActualPlanned(
