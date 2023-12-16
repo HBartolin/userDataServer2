@@ -52,7 +52,6 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 	private final OsobaClaimPlannedRepository osobaClaimPlannedRepository;
 	
 	public ProjektDetaljiRepositoryUnesiOsobaValuta(
-			KodRepository kodRepository,
 			SifarnikDatumaRepository sifarnikDatumaRepository,
 			OsobaValutaRepository osobaValutaRepository,
 			SifarnikOsobaRepository sifarnikOsobaRepository,
@@ -70,7 +69,6 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 			LocalDate sifarnikDatumaOdLD,
 			LocalDate sifarnikDatumaDoLD
 			) {
-		super(kodRepository);
 		this.sifarnikDatumaRepository=sifarnikDatumaRepository;
 		this.osobaValutaRepository=osobaValutaRepository;
 		this.sifarnikOsobaRepository=sifarnikOsobaRepository;

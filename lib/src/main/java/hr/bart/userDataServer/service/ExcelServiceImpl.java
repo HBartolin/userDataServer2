@@ -10,7 +10,6 @@ import hr.bart.userDataServer.repository.OsobaValutaRepository;
 import hr.bart.userDataServer.repository.PodugovaracRepository;
 import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
 import hr.bart.userDataServer.service.kod.ExcelServiceImplUExcel;
-import hr.bart.userDataServer.service.kod.KodRepository;
 import hr.bart.userDataServer.util.PojoInterface;
 import jakarta.transaction.Transactional;
 
@@ -33,7 +32,6 @@ public class ExcelServiceImpl  extends AService implements ExcelService {
 	@Override
 	public PojoInterface uExcel(Long id) {		
 		return new ExcelServiceImplUExcel(
-				getKodRepository(),
 				podugovaracRepository, 
 				osobaValutaRepository,
 				projektDetaljiRepository,
@@ -41,18 +39,6 @@ public class ExcelServiceImpl  extends AService implements ExcelService {
 				osobaClaimActualRepository, 
 				claimRepository,
 				id).izvrsi();
-	}
-	
-	private KodRepository getKodRepository() {
-		KodRepository kodRepository=new KodRepository();
-		kodRepository.setProjektDetaljiRepository(projektDetaljiRepository);
-		kodRepository.setOsobaValutaRepository(osobaValutaRepository);
-		kodRepository.setPodugovaracRepository(podugovaracRepository);
-		kodRepository.setClaimRepository(claimRepository);
-		kodRepository.setOsobaClaimActualRepository(osobaClaimActualRepository);
-		kodRepository.setOsobaClaimPlannedRepository(osobaClaimPlannedRepository);
-		
-		return kodRepository;
 	}
 	
 }

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import hr.bart.userDataServer.repository.ProjektRepository;
-import hr.bart.userDataServer.service.kod.KodRepository;
 import hr.bart.userDataServer.service.kod.ProjektServiceImplNoviProjekt;
 import hr.bart.userDataServer.service.kod.ProjektServiceImplProjekti;
 import hr.bart.userDataServer.service.kod.ProjektServiceImplTablicaProjekti;
@@ -34,7 +33,7 @@ public class ProjektServiceImpl extends AService implements ProjektService {
 	
 	@Override
 	public PojoInterface noviProjekt(String claim, String contract) {
-		return new ProjektServiceImplNoviProjekt(getKodRepository(), projektRepository, claim, contract).izvrsi();
+		return new ProjektServiceImplNoviProjekt(projektRepository, claim, contract).izvrsi();
 	}
 	
 	@Override
@@ -45,13 +44,6 @@ public class ProjektServiceImpl extends AService implements ProjektService {
 	@Override
 	public PojoInterface traziProjekt(String trazi) {
 		return new ProjektServiceImplTraziProjekte(projektRepository, trazi).izvrsi();
-	}
-	
-	private KodRepository getKodRepository() {
-		KodRepository kodRepository=new KodRepository();
-		kodRepository.setProjektRepository(projektRepository);
-		
-		return kodRepository;
 	}
 	
 }

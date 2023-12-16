@@ -30,7 +30,6 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 	private final ProjektDetaljiRepository projektDetaljiRepository;
 
 	public OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate(
-			KodRepository kodRepository, 
 			OsobaClaimPlannedRepository osobaClaimPlannedRepository,
 			SifarnikMjesecaRepository sifarnikMjesecaRepository,
 			ClaimRepository claimRepository,
@@ -40,7 +39,6 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 			LocalDate datum, 
 			List<ClaimUpdatedActualPlanned> podatci, 
 			Long idProjektDetalji) {
-		super(kodRepository);
 		this.osobaClaimPlannedRepository=osobaClaimPlannedRepository;
 		this.sifarnikMjesecaRepository=sifarnikMjesecaRepository;
 		this.claimRepository=claimRepository;

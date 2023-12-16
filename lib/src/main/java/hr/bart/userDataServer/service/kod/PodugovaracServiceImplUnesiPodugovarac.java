@@ -37,7 +37,6 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 	private final OsobaClaimPlannedRepository osobaClaimPlannedRepository;
 
 	public PodugovaracServiceImplUnesiPodugovarac(
-			KodRepository kodRepository,
 			ClaimPodugovaracRepository claimPodugovaracRepository,
 			PodugovaracRepository podugovaracRepository,
 			ProjektDetaljiRepository projektDetaljiRepository,
@@ -53,7 +52,6 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 			Optional<BigDecimal> cijena,
 			Optional<Long> invoiceNumber
 			) {
-		super(kodRepository);
 		this.claimPodugovaracRepository=claimPodugovaracRepository;
 		this.podugovaracRepository=podugovaracRepository;
 		this.projektDetaljiRepository=projektDetaljiRepository;

@@ -13,7 +13,6 @@ import hr.bart.userDataServer.repository.OsobaClaimActualRepository;
 import hr.bart.userDataServer.repository.OsobaClaimPlannedRepository;
 import hr.bart.userDataServer.repository.PodugovaracRepository;
 import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
-import hr.bart.userDataServer.service.kod.KodRepository;
 import hr.bart.userDataServer.service.kod.PodugovaracServiceImplPodugovaraci;
 import hr.bart.userDataServer.service.kod.PodugovaracServiceImplUnesiPodugovarac;
 import hr.bart.userDataServer.util.PojoInterface;
@@ -43,7 +42,6 @@ public class PodugovaracServiceImpl extends AService implements PodugovaracServi
 	@Override
 	public PojoInterface unesiPodugovarac(Optional<Long> id, Long ts, Long idProjektDetalji, Optional<Long> idPurchaseOrder, LocalDate datumPlanned, LocalDate datumActual, Optional<BigDecimal> cijena, Optional<Long> invoiceNumber) {
 		return new PodugovaracServiceImplUnesiPodugovarac(
-				getKodRepository(),
 				claimPodugovaracRepository,
 				podugovaracRepository,
 				projektDetaljiRepository,
@@ -58,18 +56,6 @@ public class PodugovaracServiceImpl extends AService implements PodugovaracServi
 				datumActual,
 				cijena,
 				invoiceNumber).izvrsi();
-	}
-	
-	private KodRepository getKodRepository() {
-		KodRepository kodRepository=new KodRepository();
-		kodRepository.setClaimPodugovaracRepository(claimPodugovaracRepository);
-		kodRepository.setPodugovaracRepository(podugovaracRepository);
-		kodRepository.setProjektDetaljiRepository(projektDetaljiRepository);
-		kodRepository.setOsobaClaimPlannedRepository(osobaClaimPlannedRepository);
-		kodRepository.setOsobaClaimActualRepository(osobaClaimActualRepository);
-		kodRepository.setClaimRepository(claimRepository);
-		
-		return kodRepository;
 	}
 
 }

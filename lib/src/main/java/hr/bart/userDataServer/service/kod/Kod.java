@@ -24,10 +24,6 @@ public abstract class Kod {
 	protected final static int DVA=2;
 	protected final static int SEDAM=7;
 	protected final static int STO=100;
-		
-	public Kod(KodRepository kodRepository) {
-		this.kodRepository=kodRepository;
-	}
 	
 	public Kod() {
 		this.kodRepository = new KodRepository();

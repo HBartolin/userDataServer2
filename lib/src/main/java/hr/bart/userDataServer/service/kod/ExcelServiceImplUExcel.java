@@ -64,7 +64,7 @@ public class ExcelServiceImplUExcel extends Kod {
 	private final OsobaClaimActualRepository osobaClaimActualRepository;
 	private final OsobaClaimPlannedRepository osobaClaimPlannedRepository;
 
-	public ExcelServiceImplUExcel(KodRepository kodRepository,
+	public ExcelServiceImplUExcel(
 			PodugovaracRepository podugovaracRepository, 
 			OsobaValutaRepository osobaValutaRepository,
 			ProjektDetaljiRepository projektDetaljiRepository,
@@ -72,7 +72,6 @@ public class ExcelServiceImplUExcel extends Kod {
 			OsobaClaimActualRepository osobaClaimActualRepository, 
 			ClaimRepository claimRepository,
 			Long id) {
-		super(kodRepository);
 		this.podugovaracRepository=podugovaracRepository;
 		this.osobaValutaRepository=osobaValutaRepository;
 		this.projektDetaljiRepository=projektDetaljiRepository;

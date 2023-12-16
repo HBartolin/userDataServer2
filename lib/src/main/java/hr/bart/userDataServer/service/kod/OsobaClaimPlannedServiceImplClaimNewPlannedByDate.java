@@ -34,7 +34,6 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 	private final ProjektDetaljiRepository projektDetaljiRepository;
 	
 	public OsobaClaimPlannedServiceImplClaimNewPlannedByDate(
-			KodRepository kodRepository, 
 			ClaimRepository claimRepository,
 			OsobaClaimPlannedRepository osobaClaimPlannedRepository,
 			OsobaClaimActualRepository osobaClaimActualRepository,
@@ -44,7 +43,6 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 			LocalDate datum, 
 			HashMap<String, String> podatci, 
 			Long idProjektDetalji) {
-		super(kodRepository);
 		this.claimRepository=claimRepository;
 		this.osobaClaimPlannedRepository=osobaClaimPlannedRepository;
 		this.datum=datum;

@@ -16,8 +16,7 @@ public class ProjektServiceImplNoviProjekt extends Kod {
 	private ACommonServis aCommonServis=new ACommonServis();
 	private final ProjektRepository projektRepository;
 
-	public ProjektServiceImplNoviProjekt(KodRepository kodRepository, ProjektRepository projektRepository, String claim, String contract) {
-		super(kodRepository);
+	public ProjektServiceImplNoviProjekt(ProjektRepository projektRepository, String claim, String contract) {
 		this.projektRepository=projektRepository;
 		this.claim=claim;
 		this.contract=contract;

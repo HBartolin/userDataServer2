@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
-import jakarta.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +15,11 @@ import hr.bart.userDataServer.repository.OsobaValutaRepository;
 import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
 import hr.bart.userDataServer.repository.SifarnikDatumaRepository;
 import hr.bart.userDataServer.repository.SifarnikMjesecaRepository;
-import hr.bart.userDataServer.service.kod.KodRepository;
 import hr.bart.userDataServer.service.kod.OsobaClaimActualServiceImplClaimNewActualByDate;
 import hr.bart.userDataServer.service.kod.OsobaClaimActualServiceImplClaimUpdatedActualByDate;
 import hr.bart.userDataServer.util.ClaimUpdatedActualPlanned;
 import hr.bart.userDataServer.util.PojoInterface;
+import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
@@ -46,7 +44,6 @@ public class OsobaClaimActualServiceImpl extends AService implements OsobaClaimA
 	@Override
 	public PojoInterface claimUpdatedActualByDate(Long idProjektDetalji, LocalDate datum, List<ClaimUpdatedActualPlanned> podatci) {
 		return new OsobaClaimActualServiceImplClaimUpdatedActualByDate(
-				getKodRepository(), 
 				osobaClaimActualRepository,
 				sifarnikDatumaRepository,
 				claimRepository,
@@ -62,7 +59,6 @@ public class OsobaClaimActualServiceImpl extends AService implements OsobaClaimA
 	@Override
 	public PojoInterface claimNewActualByDate(Long idProjektDetalji, LocalDate datum, HashMap<String, String> podatci) {		
 		return new OsobaClaimActualServiceImplClaimNewActualByDate(
-				getKodRepository(), 
 				claimRepository,
 				sifarnikDatumaRepository,
 				osobaClaimActualRepository,
@@ -75,20 +71,5 @@ public class OsobaClaimActualServiceImpl extends AService implements OsobaClaimA
 				datum, 
 				podatci).izvrsi();
 	}
-	
-	private KodRepository getKodRepository() {
-		KodRepository kodRepository=new KodRepository();
-		kodRepository.setOsobaClaimActualRepository(osobaClaimActualRepository);
-		kodRepository.setClaimRepository(claimRepository);
-		kodRepository.setSifarnikDatumaRepository(sifarnikDatumaRepository);
-		kodRepository.setSifarnikMjesecaRepository(sifarnikMjesecaRepository);
-		kodRepository.setOsobaValutaRepository(osobaValutaRepository);
-		kodRepository.setProjektDetaljiRepository(projektDetaljiRepository);
-		kodRepository.setClaimPodugovaracRepository(claimPodugovaracRepository);
-		kodRepository.setOsobaClaimPlannedRepository(osobaClaimPlannedRepository);
-		
-		return kodRepository;
-	}
-
 	
 }

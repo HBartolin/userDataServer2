@@ -16,7 +16,6 @@ import hr.bart.userDataServer.repository.SifarnikDatumaRepository;
 import hr.bart.userDataServer.repository.SifarnikMjesecaRepository;
 import hr.bart.userDataServer.repository.SifarnikOsobaRepository;
 import hr.bart.userDataServer.repository.SifarnikValutaRepository;
-import hr.bart.userDataServer.service.kod.KodRepository;
 import hr.bart.userDataServer.service.kod.OsobaValutaServiceImplOsobaValuta;
 import hr.bart.userDataServer.service.kod.OsobaValutaServiceImplTablicaOsobaValuta;
 import hr.bart.userDataServer.service.kod.ProjektDetaljiRepositoryUnesiOsobaValuta;
@@ -53,7 +52,6 @@ public class OsobaValutaServiceImpl extends AService implements OsobaValutaServi
 	@Override
 	public PojoInterface unesiOsobaValuta(Optional<Long> id, Long ts, Long idSifarnikOsoba, String band, BigDecimal cijena, LocalDate sifarnikDatumaOdLD, LocalDate sifarnikDatumaDoLD) {
 		return new ProjektDetaljiRepositoryUnesiOsobaValuta(
-				getKodRepository(),
 				sifarnikDatumaRepository,
 				osobaValutaRepository,
 				sifarnikOsobaRepository,
@@ -77,19 +75,4 @@ public class OsobaValutaServiceImpl extends AService implements OsobaValutaServi
 		return new OsobaValutaServiceImplTablicaOsobaValuta(osobaValutaRepository, idSifarnikOsoba, pageNumber).izvrsi();	
 	}
 	
-	private KodRepository getKodRepository() {
-		KodRepository kodRepository=new KodRepository();
-		kodRepository.setSifarnikDatumaRepository(sifarnikDatumaRepository);
-		kodRepository.setOsobaValutaRepository(osobaValutaRepository);
-		kodRepository.setSifarnikOsobaRepository(sifarnikOsobaRepository);
-		kodRepository.setSifarnikValutaRepository(sifarnikValutaRepository);
-		kodRepository.setOsobaClaimActualRepository(osobaClaimActualRepository);
-		kodRepository.setClaimRepository(claimRepository);
-		kodRepository.setProjektDetaljiRepository(projektDetaljiRepository);
-		kodRepository.setSifarnikMjesecaRepository(sifarnikMjesecaRepository);
-		kodRepository.setOsobaClaimPlannedRepository(osobaClaimPlannedRepository);
-		
-		return kodRepository;
-	}
-
 }
