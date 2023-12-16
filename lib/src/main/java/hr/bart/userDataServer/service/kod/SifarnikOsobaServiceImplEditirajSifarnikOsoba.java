@@ -12,16 +12,14 @@ public class SifarnikOsobaServiceImplEditirajSifarnikOsoba extends Kod {
 	private final Optional<Long> id;
 	private final String ime;
 	private final String prezime;
-	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
+	private ACommonServis aCommonServis=new ACommonServis();
 	private final SifarnikOsobaRepository sifarnikOsobaRepository;
 
 	public SifarnikOsobaServiceImplEditirajSifarnikOsoba(
-			KodRepository kodRepository, 
 			SifarnikOsobaRepository sifarnikOsobaRepository,
 			Optional<Long> id, 
 			String ime, 
 			String prezime) {
-		super(kodRepository);
 		this.id=id;
 		this.ime=ime;
 		this.prezime=prezime;
@@ -55,7 +53,7 @@ public class SifarnikOsobaServiceImplEditirajSifarnikOsoba extends Kod {
 		}
 		
 		PageRequest pageRequest=PageRequest.of(NULA, pageRequestSize50);
-		aCommonServis.findAll_sifarnikOsoba(pi, pageRequest);
+		aCommonServis.findAll_sifarnikOsoba(pi, sifarnikOsobaRepository, pageRequest);
 		
 		return pi;
 	}

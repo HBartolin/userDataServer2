@@ -26,6 +26,7 @@ import hr.bart.userDataServer.repository.OsobaValutaRepository;
 import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
 import hr.bart.userDataServer.repository.ProjektRepository;
 import hr.bart.userDataServer.repository.SifarnikMjesecaRepository;
+import hr.bart.userDataServer.repository.SifarnikOsobaRepository;
 import hr.bart.userDataServer.util.DbStatus;
 import hr.bart.userDataServer.util.PojoInterface;
 
@@ -252,8 +253,11 @@ public class ACommonServis extends Kod {
 		setRezultatPage(pi, pageProjektList);
 	}
 	
-	public void findAll_sifarnikOsoba(PojoInterface pi, PageRequest pageRequest) {
-		Page<List<SifarnikOsoba>> pageSifarnikOsobaList=getKodRepository().getSifarnikOsobaRepository().findAll(pageRequest);
+	public void findAll_sifarnikOsoba(
+			PojoInterface pi, 
+			SifarnikOsobaRepository sifarnikOsobaRepository, 
+			PageRequest pageRequest) {
+		Page<List<SifarnikOsoba>> pageSifarnikOsobaList=sifarnikOsobaRepository.findAll(pageRequest);
 		pi.setRezultat(pageSifarnikOsobaList.getContent());
 		
 		setRezultatPage(pi, pageSifarnikOsobaList);
