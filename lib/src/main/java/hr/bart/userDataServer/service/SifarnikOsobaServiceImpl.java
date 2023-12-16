@@ -26,7 +26,7 @@ public class SifarnikOsobaServiceImpl extends AService implements SifarnikOsobaS
 
 	@Override
 	public PojoInterface editirajSifarnikOsoba(Optional<Long> id, String ime, String prezime) {	
-		return new SifarnikOsobaServiceImplEditirajSifarnikOsoba(getKodRepository(), id, ime, prezime).izvrsi();
+		return new SifarnikOsobaServiceImplEditirajSifarnikOsoba(getKodRepository(), sifarnikOsobaRepository, id, ime, prezime).izvrsi();
 	}
 	
 	@Override

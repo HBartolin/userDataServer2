@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.data.domain.PageRequest;
 
 import hr.bart.userDataServer.db.SifarnikOsoba;
+import hr.bart.userDataServer.repository.SifarnikOsobaRepository;
 import hr.bart.userDataServer.util.PojoInterface;
 
 public class SifarnikOsobaServiceImplEditirajSifarnikOsoba extends Kod {
@@ -12,12 +13,19 @@ public class SifarnikOsobaServiceImplEditirajSifarnikOsoba extends Kod {
 	private final String ime;
 	private final String prezime;
 	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
+	private final SifarnikOsobaRepository sifarnikOsobaRepository;
 
-	public SifarnikOsobaServiceImplEditirajSifarnikOsoba(KodRepository kodRepository, Optional<Long> id, String ime, String prezime) {
+	public SifarnikOsobaServiceImplEditirajSifarnikOsoba(
+			KodRepository kodRepository, 
+			SifarnikOsobaRepository sifarnikOsobaRepository,
+			Optional<Long> id, 
+			String ime, 
+			String prezime) {
 		super(kodRepository);
 		this.id=id;
 		this.ime=ime;
 		this.prezime=prezime;
+		this.sifarnikOsobaRepository = sifarnikOsobaRepository;
 	}
 
 	@Override
@@ -41,7 +49,7 @@ public class SifarnikOsobaServiceImplEditirajSifarnikOsoba extends Kod {
 			sifarnikOsoba.setIme(ime);
 			sifarnikOsoba.setPrezime(prezime);
 			
-			getKodRepository().getSifarnikOsobaRepository().save(sifarnikOsoba);
+			sifarnikOsobaRepository.save(sifarnikOsoba);
 			
 			pi.setOk("Osoba je dodana.");
 		}
