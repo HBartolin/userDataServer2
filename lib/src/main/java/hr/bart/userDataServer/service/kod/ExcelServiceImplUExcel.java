@@ -56,7 +56,7 @@ public class ExcelServiceImplUExcel extends Kod {
 	private HashMap<String, CellStyle> hmCellStyle=new HashMap<>();
 	private SortedSet<LocalDate> datumiSortedSet;
 	private Optional<List<Claim>> claimListO;
-	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
+	private ACommonServis aCommonServis=new ACommonServis();
 	private final PodugovaracRepository podugovaracRepository;
 	private final OsobaValutaRepository osobaValutaRepository;
 	private final ProjektDetaljiRepository projektDetaljiRepository;

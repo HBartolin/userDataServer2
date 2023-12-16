@@ -40,7 +40,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 	private final LocalDate sifarnikDatumaDoLD;
 	private String sifarnikDatumaOdValue="Datum od";
 	private String sifarnikDatumaDoValue="Datum do";
-	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
+	private ACommonServis aCommonServis=new ACommonServis();
 	private final SifarnikDatumaRepository sifarnikDatumaRepository;
 	private final OsobaValutaRepository osobaValutaRepository;
 	private final SifarnikOsobaRepository sifarnikOsobaRepository;

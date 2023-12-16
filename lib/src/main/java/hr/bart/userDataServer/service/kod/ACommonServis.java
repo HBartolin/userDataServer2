@@ -32,10 +32,6 @@ import hr.bart.userDataServer.util.PojoInterface;
 
 public class ACommonServis extends Kod {
 	
-	public ACommonServis(KodRepository kodRepository) {
-		super(kodRepository);
-	}
-	
 	public ACommonServis() {
 		super(new KodRepository());
 	}

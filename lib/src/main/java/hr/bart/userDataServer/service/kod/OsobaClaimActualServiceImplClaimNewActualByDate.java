@@ -30,7 +30,7 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 	private final Long idProjektDetalji;
 	private final LocalDate datum;
 	private final HashMap<String, String> podatci;
-	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
+	private ACommonServis aCommonServis=new ACommonServis();
 	private final ClaimRepository claimRepository;
 	private final SifarnikDatumaRepository sifarnikDatumaRepository;
 	private final OsobaClaimActualRepository osobaClaimActualRepository;

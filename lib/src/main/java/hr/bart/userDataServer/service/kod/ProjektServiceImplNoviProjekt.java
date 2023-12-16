@@ -13,7 +13,7 @@ import hr.bart.userDataServer.util.PojoInterface;
 public class ProjektServiceImplNoviProjekt extends Kod {
 	private final String claim;
 	private final String contract;
-	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
+	private ACommonServis aCommonServis=new ACommonServis();
 	private final ProjektRepository projektRepository;
 
 	public ProjektServiceImplNoviProjekt(KodRepository kodRepository, ProjektRepository projektRepository, String claim, String contract) {

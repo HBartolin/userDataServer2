@@ -28,7 +28,7 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 	private final LocalDate datumActual;
 	private final Optional<BigDecimal> cijena;
 	private final Optional<Long> invoiceNumber;
-	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
+	private ACommonServis aCommonServis=new ACommonServis();
 	private final ClaimPodugovaracRepository claimPodugovaracRepository;
 	private final PodugovaracRepository podugovaracRepository;
 	private final ProjektDetaljiRepository projektDetaljiRepository;

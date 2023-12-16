@@ -21,7 +21,7 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 	private final LocalDate datum;
 	private final List<ClaimUpdatedActualPlanned> podatci;
 	private final Long idProjektDetalji;
-	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
+	private ACommonServis aCommonServis=new ACommonServis();
 	private final OsobaClaimPlannedRepository osobaClaimPlannedRepository;
 	private final SifarnikMjesecaRepository sifarnikMjesecaRepository;
 	private final ClaimRepository claimRepository;
