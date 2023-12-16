@@ -24,6 +24,7 @@ import hr.bart.userDataServer.repository.OsobaClaimActualRepository;
 import hr.bart.userDataServer.repository.OsobaClaimPlannedRepository;
 import hr.bart.userDataServer.repository.OsobaValutaRepository;
 import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
+import hr.bart.userDataServer.repository.ProjektRepository;
 import hr.bart.userDataServer.repository.SifarnikMjesecaRepository;
 import hr.bart.userDataServer.util.DbStatus;
 import hr.bart.userDataServer.util.PojoInterface;
@@ -233,8 +234,12 @@ public class ACommonServis extends Kod {
 		setRezultatPage(pi, pageOsobaValutaList);
 	}
 	
-	public void findByStatus(PojoInterface pi, DbStatus dbStatus, PageRequest pageRequest) {
-		Page<List<Projekt>> pageProjektList=getKodRepository().getProjektRepository().findByStatus(dbStatus, pageRequest);
+	public void findByStatus(
+			PojoInterface pi, 
+			ProjektRepository projektRepository, 
+			DbStatus dbStatus, 
+			PageRequest pageRequest) {
+		Page<List<Projekt>> pageProjektList=projektRepository.findByStatus(dbStatus, pageRequest);
 		pi.setRezultat(pageProjektList.getContent());
 		
 		setRezultatPage(pi, pageProjektList);

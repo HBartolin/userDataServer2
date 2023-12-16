@@ -62,7 +62,7 @@ public class ProjektServiceImplZatvoriOtvoriProjekt extends Kod {
 		PageRequest pageRequest=PageRequest.of(NULA, pageRequestSize50);
 		
 		if(status.isPresent()) {
-			aCommonServis.findByStatus(pi, DbStatus.valueOf(status.get()), pageRequest);
+			aCommonServis.findByStatus(pi, projektRepository, DbStatus.valueOf(status.get()), pageRequest);
 		} else {
 			aCommonServis.findAll_projekt(pi, pageRequest);
 		}

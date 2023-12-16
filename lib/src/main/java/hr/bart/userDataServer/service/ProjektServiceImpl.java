@@ -24,7 +24,7 @@ public class ProjektServiceImpl extends AService implements ProjektService {
 	
 	@Override
 	public PojoInterface projekti(Optional<String> status) {
-		return new ProjektServiceImplProjekti(getKodRepository(), status).izvrsi();
+		return new ProjektServiceImplProjekti(projektRepository, status).izvrsi();
 	}
 	
 	@Override
@@ -39,7 +39,7 @@ public class ProjektServiceImpl extends AService implements ProjektService {
 	
 	@Override
 	public PojoInterface tablicaProjekti(int pageNumber, Optional<String> status) {
-		return new ProjektServiceImplTablicaProjekti(getKodRepository(), status, pageNumber).izvrsi();
+		return new ProjektServiceImplTablicaProjekti(projektRepository, status, pageNumber).izvrsi();
 	}
 	
 	@Override
