@@ -37,6 +37,9 @@ public class ExcelServiceImpl  extends AService implements ExcelService {
 				podugovaracRepository, 
 				osobaValutaRepository,
 				projektDetaljiRepository,
+				osobaClaimPlannedRepository, 
+				osobaClaimActualRepository, 
+				claimRepository,
 				id).izvrsi();
 	}
 	

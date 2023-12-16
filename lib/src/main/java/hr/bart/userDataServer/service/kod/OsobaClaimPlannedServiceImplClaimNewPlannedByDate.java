@@ -14,6 +14,7 @@ import java.util.Set;
 import hr.bart.userDataServer.db.Claim;
 import hr.bart.userDataServer.db.OsobaClaimPlanned;
 import hr.bart.userDataServer.repository.ClaimRepository;
+import hr.bart.userDataServer.repository.OsobaClaimActualRepository;
 import hr.bart.userDataServer.repository.OsobaClaimPlannedRepository;
 import hr.bart.userDataServer.util.PojoInterface;
 
@@ -24,11 +25,13 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
 	private final ClaimRepository claimRepository;
 	private final OsobaClaimPlannedRepository osobaClaimPlannedRepository;
+	private final OsobaClaimActualRepository osobaClaimActualRepository;
 	
 	public OsobaClaimPlannedServiceImplClaimNewPlannedByDate(
 			KodRepository kodRepository, 
 			ClaimRepository claimRepository,
 			OsobaClaimPlannedRepository osobaClaimPlannedRepository,
+			OsobaClaimActualRepository osobaClaimActualRepository,
 			LocalDate datum, 
 			HashMap<String, String> podatci, 
 			Long idProjektDetalji) {
@@ -38,6 +41,7 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 		this.datum=datum;
 		this.podatci=podatci;
 		this.idProjektDetalji=idProjektDetalji;
+		this.osobaClaimActualRepository = osobaClaimActualRepository;
 	}
 
 	@Override
@@ -87,9 +91,17 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 					aCommonServis.setTabliceClaim1(osobaCPLokal);
 				}
 				
-				aCommonServis.setTablicePlannedClaim(idProjektDetalji);					
+				aCommonServis.setTablicePlannedClaim(
+						claimRepository,
+						osobaClaimActualRepository,
+						osobaClaimPlannedRepository,
+						idProjektDetalji);					
 				
-				Optional<List<Claim>> claimListOptional=aCommonServis.claimActualPlanned(idProjektDetalji);
+				Optional<List<Claim>> claimListOptional=aCommonServis.claimActualPlanned(
+						claimRepository,
+						osobaClaimActualRepository,
+						osobaClaimPlannedRepository,
+						idProjektDetalji);
 				
 				if(claimListOptional.isPresent()) {
 					pi.setRezultat(claimListOptional.get());

@@ -4,20 +4,36 @@ import java.util.List;
 import java.util.Optional;
 
 import hr.bart.userDataServer.db.Claim;
+import hr.bart.userDataServer.repository.ClaimRepository;
+import hr.bart.userDataServer.repository.OsobaClaimActualRepository;
+import hr.bart.userDataServer.repository.OsobaClaimPlannedRepository;
 import hr.bart.userDataServer.util.PojoInterface;
 
 public class ClaimServiceImplTablicaOsobaValuta extends Kod {
 	private final Long idProjektDetalji;
-	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
+	private ACommonServis aCommonServis=new ACommonServis();
+	private final ClaimRepository claimRepository;
+	private final OsobaClaimActualRepository osobaClaimActualRepository;
+	private final OsobaClaimPlannedRepository osobaClaimPlannedRepository;
 
-	public ClaimServiceImplTablicaOsobaValuta(KodRepository kodRepository, Long idProjektDetalji) {
-		super(kodRepository);
+	public ClaimServiceImplTablicaOsobaValuta(
+			ClaimRepository claimRepository, 
+			OsobaClaimActualRepository osobaClaimActualRepository,
+			OsobaClaimPlannedRepository osobaClaimPlannedRepository,
+			Long idProjektDetalji) {
 		this.idProjektDetalji=idProjektDetalji;
+		this.claimRepository = claimRepository;
+		this.osobaClaimActualRepository = osobaClaimActualRepository;
+		this.osobaClaimPlannedRepository = osobaClaimPlannedRepository;
 	}
 
 	@Override
 	public PojoInterface izvrsiKod(PojoInterface pi) {		
-		Optional<List<Claim>> claimListOptional=aCommonServis.claimActualPlanned(idProjektDetalji);
+		Optional<List<Claim>> claimListOptional=aCommonServis.claimActualPlanned(
+				claimRepository,
+				osobaClaimActualRepository,
+				osobaClaimPlannedRepository,
+				idProjektDetalji);
 		
 		if(claimListOptional.isPresent()) {
 			pi.setRezultat(claimListOptional.get());

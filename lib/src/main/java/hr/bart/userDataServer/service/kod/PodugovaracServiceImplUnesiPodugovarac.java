@@ -12,6 +12,9 @@ import hr.bart.userDataServer.db.ClaimPodugovarac;
 import hr.bart.userDataServer.db.Podugovarac;
 import hr.bart.userDataServer.db.ProjektDetalji;
 import hr.bart.userDataServer.repository.ClaimPodugovaracRepository;
+import hr.bart.userDataServer.repository.ClaimRepository;
+import hr.bart.userDataServer.repository.OsobaClaimActualRepository;
+import hr.bart.userDataServer.repository.OsobaClaimPlannedRepository;
 import hr.bart.userDataServer.repository.PodugovaracRepository;
 import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
 import hr.bart.userDataServer.util.PojoInterface;
@@ -29,12 +32,18 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 	private final ClaimPodugovaracRepository claimPodugovaracRepository;
 	private final PodugovaracRepository podugovaracRepository;
 	private final ProjektDetaljiRepository projektDetaljiRepository;
+	private final ClaimRepository claimRepository;
+	private final OsobaClaimActualRepository osobaClaimActualRepository;
+	private final OsobaClaimPlannedRepository osobaClaimPlannedRepository;
 
 	public PodugovaracServiceImplUnesiPodugovarac(
 			KodRepository kodRepository,
 			ClaimPodugovaracRepository claimPodugovaracRepository,
 			PodugovaracRepository podugovaracRepository,
 			ProjektDetaljiRepository projektDetaljiRepository,
+			OsobaClaimActualRepository osobaClaimActualRepository, 
+			ClaimRepository claimRepository, 
+			OsobaClaimPlannedRepository osobaClaimPlannedRepository,
 			Optional<Long> id,
 			Long ts,
 			Long idProjektDetalji,
@@ -56,6 +65,9 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 		this.datumActual=datumActual;
 		this.cijena=cijena;
 		this.invoiceNumber=invoiceNumber;
+		this.claimRepository = claimRepository;
+		this.osobaClaimActualRepository = osobaClaimActualRepository;
+		this.osobaClaimPlannedRepository = osobaClaimPlannedRepository;
 	}
 
 	@Override
@@ -124,7 +136,11 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 		osobaClaimActualKn.setScale(2, RoundingMode.HALF_EVEN);	
 		HashSet<Long> hashSet=new HashSet<Long>();
 		
-		Optional<List<Claim>> claimListO=aCommonServis.claimActualPlanned(idProjektDetalji);
+		Optional<List<Claim>> claimListO=aCommonServis.claimActualPlanned(
+				claimRepository,
+				osobaClaimActualRepository,
+				osobaClaimPlannedRepository,
+				idProjektDetalji);
 		
 		if(claimListO.isPresent()) {
 			for(Claim c: claimListO.get()) {

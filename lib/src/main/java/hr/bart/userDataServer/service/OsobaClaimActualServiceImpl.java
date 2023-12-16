@@ -50,6 +50,7 @@ public class OsobaClaimActualServiceImpl extends AService implements OsobaClaimA
 				osobaClaimActualRepository,
 				sifarnikDatumaRepository,
 				claimRepository,
+				osobaClaimPlannedRepository,
 				idProjektDetalji, 
 				datum, 
 				podatci).izvrsi();
@@ -62,6 +63,7 @@ public class OsobaClaimActualServiceImpl extends AService implements OsobaClaimA
 				claimRepository,
 				sifarnikDatumaRepository,
 				osobaClaimActualRepository,
+				osobaClaimPlannedRepository,
 				idProjektDetalji, 
 				datum, 
 				podatci).izvrsi();

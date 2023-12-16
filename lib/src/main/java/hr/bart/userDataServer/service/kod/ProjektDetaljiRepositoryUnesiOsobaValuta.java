@@ -21,6 +21,7 @@ import hr.bart.userDataServer.db.SifarnikOsoba;
 import hr.bart.userDataServer.db.SifarnikValuta;
 import hr.bart.userDataServer.repository.ClaimRepository;
 import hr.bart.userDataServer.repository.OsobaClaimActualRepository;
+import hr.bart.userDataServer.repository.OsobaClaimPlannedRepository;
 import hr.bart.userDataServer.repository.OsobaValutaRepository;
 import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
 import hr.bart.userDataServer.repository.SifarnikDatumaRepository;
@@ -48,6 +49,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 	private final ClaimRepository claimRepository;
 	private final ProjektDetaljiRepository projektDetaljiRepository;
 	private final SifarnikMjesecaRepository sifarnikMjesecaRepository;
+	private final OsobaClaimPlannedRepository osobaClaimPlannedRepository;
 	
 	public ProjektDetaljiRepositoryUnesiOsobaValuta(
 			KodRepository kodRepository,
@@ -59,6 +61,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 			ClaimRepository claimRepository,
 			ProjektDetaljiRepository projektDetaljiRepository,
 			SifarnikMjesecaRepository sifarnikMjesecaRepository,
+			OsobaClaimPlannedRepository osobaClaimPlannedRepository,
 			Optional<Long> id,
 			Long ts,
 			Long idSifarnikOsoba,
@@ -83,6 +86,7 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 		this.cijena=cijena;
 		this.sifarnikDatumaDoLD=sifarnikDatumaDoLD;
 		this.sifarnikDatumaOdLD=sifarnikDatumaOdLD;
+		this.osobaClaimPlannedRepository = osobaClaimPlannedRepository;
 	}
 
 	@Override
@@ -311,7 +315,11 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 			for(Long idPD: idProjektDetaljiList) {		
 				BigDecimal osobaClaimActualKn=new BigDecimal(0);
 				osobaClaimActualKn.setScale(2, RoundingMode.HALF_EVEN);	
-				Optional<List<Claim>> claimListO=aCommonServis.claimActualPlanned(idPD);
+				Optional<List<Claim>> claimListO=aCommonServis.claimActualPlanned(
+						claimRepository,
+						osobaClaimActualRepository,
+						osobaClaimPlannedRepository,
+						idPD);
 				
 				for(Claim c: claimListO.get()) {
 					osobaClaimActualKn=osobaClaimActualKn.add(c.getOsobaClaimActual());

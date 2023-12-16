@@ -13,6 +13,7 @@ import hr.bart.userDataServer.db.OsobaValuta;
 import hr.bart.userDataServer.db.SifarnikDatuma;
 import hr.bart.userDataServer.repository.ClaimRepository;
 import hr.bart.userDataServer.repository.OsobaClaimActualRepository;
+import hr.bart.userDataServer.repository.OsobaClaimPlannedRepository;
 import hr.bart.userDataServer.repository.SifarnikDatumaRepository;
 import hr.bart.userDataServer.util.ClaimUpdatedActualPlanned;
 import hr.bart.userDataServer.util.PojoInterface;
@@ -25,12 +26,14 @@ public class OsobaClaimActualServiceImplClaimUpdatedActualByDate extends Kod {
 	private final OsobaClaimActualRepository osobaClaimActualRepository;
 	private final SifarnikDatumaRepository sifarnikDatumaRepository;
 	private final ClaimRepository claimRepository;
+	private final OsobaClaimPlannedRepository osobaClaimPlannedRepository;
 	
 	public OsobaClaimActualServiceImplClaimUpdatedActualByDate(
 			KodRepository kodRepository, 
 			OsobaClaimActualRepository osobaClaimActualRepository,
 			SifarnikDatumaRepository sifarnikDatumaRepository,
 			ClaimRepository claimRepository,
+			OsobaClaimPlannedRepository osobaClaimPlannedRepository,
 			Long idProjektDetalji, 
 			LocalDate datum, 
 			List<ClaimUpdatedActualPlanned> podatci) {
@@ -41,6 +44,7 @@ public class OsobaClaimActualServiceImplClaimUpdatedActualByDate extends Kod {
 		this.idProjektDetalji=idProjektDetalji;
 		this.datum=datum;
 		this.podatci=podatci;
+		this.osobaClaimPlannedRepository = osobaClaimPlannedRepository;
 	}
 
 	@Override
@@ -109,9 +113,17 @@ public class OsobaClaimActualServiceImplClaimUpdatedActualByDate extends Kod {
 					aCommonServis.setTabliceClaim1(oca);
 				}
 				
-				aCommonServis.setTabliceActualClaim(idProjektDetalji);
+				aCommonServis.setTabliceActualClaim(
+						claimRepository,
+						osobaClaimActualRepository,
+						osobaClaimPlannedRepository,
+						idProjektDetalji);
 				
-				Optional<List<Claim>> claimListOptional=aCommonServis.claimActualPlanned(idProjektDetalji);
+				Optional<List<Claim>> claimListOptional=aCommonServis.claimActualPlanned(
+						claimRepository,
+						osobaClaimActualRepository,
+						osobaClaimPlannedRepository,
+						idProjektDetalji);
 				
 				if(claimListOptional.isPresent()) {
 					pi.setRezultat(claimListOptional.get());

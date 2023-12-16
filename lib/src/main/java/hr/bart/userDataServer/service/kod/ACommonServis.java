@@ -18,6 +18,9 @@ import hr.bart.userDataServer.db.Projekt;
 import hr.bart.userDataServer.db.ProjektDetalji;
 import hr.bart.userDataServer.db.SifarnikMjeseca;
 import hr.bart.userDataServer.db.SifarnikOsoba;
+import hr.bart.userDataServer.repository.ClaimRepository;
+import hr.bart.userDataServer.repository.OsobaClaimActualRepository;
+import hr.bart.userDataServer.repository.OsobaClaimPlannedRepository;
 import hr.bart.userDataServer.util.DbStatus;
 import hr.bart.userDataServer.util.PojoInterface;
 
@@ -25,6 +28,10 @@ public class ACommonServis extends Kod {
 	
 	public ACommonServis(KodRepository kodRepository) {
 		super(kodRepository);
+	}
+	
+	public ACommonServis() {
+		super(new KodRepository());
 	}
 	
 	@Override
@@ -37,13 +44,17 @@ public class ACommonServis extends Kod {
 		throw new RuntimeException("Ne koristi se!");
 	}
 
-	public Optional<List<Claim>> claimActualPlanned(Long idProjektDetalji) {
-		Optional<List<Claim>> claimListOptional=getKodRepository().getClaimRepository().findAllByIdProjektDetalji(idProjektDetalji);
+	public Optional<List<Claim>> claimActualPlanned(
+			ClaimRepository claimRepository,
+			OsobaClaimActualRepository osobaClaimActualRepository,
+			OsobaClaimPlannedRepository osobaClaimPlannedRepository,
+			Long idProjektDetalji) {
+		Optional<List<Claim>> claimListOptional=claimRepository.findAllByIdProjektDetalji(idProjektDetalji);
 		
 		if(claimListOptional.isPresent()) {
 			for(Claim claim: claimListOptional.get()) {
-				Optional<List<OsobaClaimActual>> osobaClaimActualListO=getKodRepository().getOsobaClaimActualRepository().findAllByIdClaim(claim.getId());
-				Optional<List<OsobaClaimPlanned>> osobaClaimPlannedListO=getKodRepository().getOsobaClaimPlannedRepository().findAllByIdClaim(claim.getId());
+				Optional<List<OsobaClaimActual>> osobaClaimActualListO=osobaClaimActualRepository.findAllByIdClaim(claim.getId());
+				Optional<List<OsobaClaimPlanned>> osobaClaimPlannedListO=osobaClaimPlannedRepository.findAllByIdClaim(claim.getId());
 				
 				if(osobaClaimActualListO.isPresent()) {
 //					for(OsobaClaimActual osa: osobaClaimActualListO.get()) {
@@ -96,10 +107,18 @@ public class ACommonServis extends Kod {
 		getKodRepository().getClaimRepository().save(claimO.get());
 	}
 
-	public void setTabliceActualClaim(Long idProjektDetalji) {		
+	public void setTabliceActualClaim(
+			ClaimRepository claimRepository,
+			OsobaClaimActualRepository osobaClaimActualRepository,
+			OsobaClaimPlannedRepository osobaClaimPlannedRepository,
+			Long idProjektDetalji) {		
 		BigDecimal osobaClaimActualKn=new BigDecimal(0);
 		osobaClaimActualKn.setScale(2, RoundingMode.HALF_EVEN);					
-		Optional<List<Claim>> claimListO=claimActualPlanned(idProjektDetalji);
+		Optional<List<Claim>> claimListO=claimActualPlanned(
+				claimRepository,
+				osobaClaimActualRepository,
+				osobaClaimPlannedRepository,
+				idProjektDetalji);
 		
 		if(claimListO.isPresent()) {
 			for(Claim c: claimListO.get()) {
@@ -154,10 +173,18 @@ public class ACommonServis extends Kod {
 		return sifarnikMjeseca;
 	}
 	
-	public void setTablicePlannedClaim(Long idProjektDetalji) {
+	public void setTablicePlannedClaim(
+			ClaimRepository claimRepository,
+			OsobaClaimActualRepository osobaClaimActualRepository,
+			OsobaClaimPlannedRepository osobaClaimPlannedRepository,
+			Long idProjektDetalji) {
 		BigDecimal osobaClaimPlannedKn=new BigDecimal(0);
 		osobaClaimPlannedKn.setScale(2, RoundingMode.HALF_EVEN);					
-		Optional<List<Claim>> claimListO=claimActualPlanned(idProjektDetalji);
+		Optional<List<Claim>> claimListO=claimActualPlanned(
+				claimRepository,
+				osobaClaimActualRepository,
+				osobaClaimPlannedRepository,
+				idProjektDetalji);
 		
 		for(Claim c: claimListO.get()) {
 			osobaClaimPlannedKn=osobaClaimPlannedKn.add(c.getOsobaClaimPlanned());

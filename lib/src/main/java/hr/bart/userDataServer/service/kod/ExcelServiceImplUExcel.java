@@ -31,6 +31,9 @@ import hr.bart.userDataServer.db.OsobaClaimPlanned;
 import hr.bart.userDataServer.db.OsobaValuta;
 import hr.bart.userDataServer.db.Podugovarac;
 import hr.bart.userDataServer.db.ProjektDetalji;
+import hr.bart.userDataServer.repository.ClaimRepository;
+import hr.bart.userDataServer.repository.OsobaClaimActualRepository;
+import hr.bart.userDataServer.repository.OsobaClaimPlannedRepository;
 import hr.bart.userDataServer.repository.OsobaValutaRepository;
 import hr.bart.userDataServer.repository.PodugovaracRepository;
 import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
@@ -57,17 +60,26 @@ public class ExcelServiceImplUExcel extends Kod {
 	private final PodugovaracRepository podugovaracRepository;
 	private final OsobaValutaRepository osobaValutaRepository;
 	private final ProjektDetaljiRepository projektDetaljiRepository;
+	private final ClaimRepository claimRepository;
+	private final OsobaClaimActualRepository osobaClaimActualRepository;
+	private final OsobaClaimPlannedRepository osobaClaimPlannedRepository;
 
 	public ExcelServiceImplUExcel(KodRepository kodRepository,
 			PodugovaracRepository podugovaracRepository, 
 			OsobaValutaRepository osobaValutaRepository,
 			ProjektDetaljiRepository projektDetaljiRepository,
+			OsobaClaimPlannedRepository osobaClaimPlannedRepository, 
+			OsobaClaimActualRepository osobaClaimActualRepository, 
+			ClaimRepository claimRepository,
 			Long id) {
 		super(kodRepository);
 		this.podugovaracRepository=podugovaracRepository;
 		this.osobaValutaRepository=osobaValutaRepository;
 		this.projektDetaljiRepository=projektDetaljiRepository;
 		this.id=id;
+		this.claimRepository = claimRepository;
+		this.osobaClaimActualRepository = osobaClaimActualRepository;
+		this.osobaClaimPlannedRepository = osobaClaimPlannedRepository;
 	}
 
 	@Override
@@ -230,7 +242,11 @@ public class ExcelServiceImplUExcel extends Kod {
 	private ReturnClaim setClaim(Long id, Workbook wb) {
 		Sheet sheetClaim = wb.createSheet(CLAIM);
 		
-		claimListO=aCommonServis.claimActualPlanned(id);
+		claimListO=aCommonServis.claimActualPlanned(
+				claimRepository,
+				osobaClaimActualRepository,
+				osobaClaimPlannedRepository,
+				id);
 		
 		if(!claimListO.isPresent()) { 
 			return null;

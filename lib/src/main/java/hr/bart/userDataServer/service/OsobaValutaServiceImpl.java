@@ -62,6 +62,7 @@ public class OsobaValutaServiceImpl extends AService implements OsobaValutaServi
 				claimRepository,
 				projektDetaljiRepository,
 				sifarnikMjesecaRepository,
+				osobaClaimPlannedRepository,
 				id,
 				ts,
 				idSifarnikOsoba,

@@ -12,7 +12,6 @@ import hr.bart.userDataServer.repository.OsobaClaimPlannedRepository;
 import hr.bart.userDataServer.service.kod.ClaimServiceImplClaimImena;
 import hr.bart.userDataServer.service.kod.ClaimServiceImplNovaOsoba;
 import hr.bart.userDataServer.service.kod.ClaimServiceImplTablicaOsobaValuta;
-import hr.bart.userDataServer.service.kod.KodRepository;
 import hr.bart.userDataServer.util.PojoInterface;
 import jakarta.transaction.Transactional;
 
@@ -28,7 +27,11 @@ public class ClaimServiceImpl extends AService implements ClaimService {
 	
 	@Override
 	public PojoInterface tablicaOsobaValuta(Long idProjektDetalji) {
-		return new ClaimServiceImplTablicaOsobaValuta(getKodRepository(), idProjektDetalji).izvrsi();
+		return new ClaimServiceImplTablicaOsobaValuta(
+				claimRepository, 
+				osobaClaimActualRepository,
+				osobaClaimPlannedRepository,
+				idProjektDetalji).izvrsi();
 	}
 	
 	@Override
@@ -40,15 +43,5 @@ public class ClaimServiceImpl extends AService implements ClaimService {
 	public PojoInterface claimImena(Optional<List<Long>> podatciO) {	
 		return new ClaimServiceImplClaimImena(podatciO).izvrsi();
 	}
-	
-	private KodRepository getKodRepository() {
-		KodRepository kodRepository=new KodRepository();
-		kodRepository.setClaimRepository(claimRepository);
-		kodRepository.setOsobaClaimActualRepository(osobaClaimActualRepository);
-		kodRepository.setOsobaClaimPlannedRepository(osobaClaimPlannedRepository);
-		
-		return kodRepository;
-	}
-
 
 }
