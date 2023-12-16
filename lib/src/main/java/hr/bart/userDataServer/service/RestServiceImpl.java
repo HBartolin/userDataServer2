@@ -15,7 +15,6 @@ import hr.bart.userDataServer.repository.SifarnikMjesecaRepository;
 import hr.bart.userDataServer.repository.SifarnikOsobaRepository;
 import hr.bart.userDataServer.repository.SifarnikPodugovaracaRepository;
 import hr.bart.userDataServer.repository.SifarnikValutaRepository;
-import hr.bart.userDataServer.service.kod.KodRepository;
 import hr.bart.userDataServer.service.kod.RestServiceImplCreateDB;
 import hr.bart.userDataServer.util.PojoInterface;
 import jakarta.transaction.Transactional;
@@ -50,24 +49,19 @@ public class RestServiceImpl extends AService implements RestService {
 	
 	@Override
 	public PojoInterface createDB() {
-		return new RestServiceImplCreateDB(getKodRepository()).izvrsi();
+		return new RestServiceImplCreateDB(
+				sifarnikValutaRepository,
+				sifarnikOsobaRepository,
+				sifarnikMjesecaRepository,
+				sifarnikDatumaRepository,
+				osobaValutaRepository,
+				sifarnikPodugovaracaRepository,
+				projektRepository,
+				projektDetaljiRepository,
+				claimRepository,
+				osobaClaimActualRepository,
+				osobaClaimPlannedRepository,
+				claimPodugovaracRepository).izvrsi();
 	}
 	
-	private KodRepository getKodRepository() {
-		KodRepository kodRepository=new KodRepository();
-		kodRepository.setSifarnikOsobaRepository(sifarnikOsobaRepository);
-		kodRepository.setSifarnikValutaRepository(sifarnikValutaRepository);
-		kodRepository.setSifarnikDatumaRepository(sifarnikDatumaRepository);
-		kodRepository.setSifarnikMjesecaRepository(sifarnikMjesecaRepository);
-		kodRepository.setOsobaValutaRepository(osobaValutaRepository);
-		kodRepository.setProjektRepository(projektRepository);
-		kodRepository.setProjektDetaljiRepository(projektDetaljiRepository);
-		kodRepository.setSifarnikPodugovaracaRepository(sifarnikPodugovaracaRepository);
-		kodRepository.setClaimRepository(claimRepository);
-		kodRepository.setClaimPodugovaracRepository(claimPodugovaracRepository);
-		kodRepository.setOsobaClaimActualRepository(osobaClaimActualRepository);
-		kodRepository.setOsobaClaimPlannedRepository(osobaClaimPlannedRepository);
-		
-		return kodRepository;
-	}
 }
