@@ -110,7 +110,10 @@ public class OsobaClaimActualServiceImplClaimUpdatedActualByDate extends Kod {
 				for(OsobaClaimActual osobaClaimActual: ocaList) {
 					OsobaClaimActual oca=osobaClaimActualRepository.save(osobaClaimActual);
 					
-					aCommonServis.setTabliceClaim1(oca);
+					aCommonServis.setTabliceClaim1(
+							osobaClaimActualRepository,
+							claimRepository,
+							oca);
 				}
 				
 				aCommonServis.setTabliceActualClaim(
