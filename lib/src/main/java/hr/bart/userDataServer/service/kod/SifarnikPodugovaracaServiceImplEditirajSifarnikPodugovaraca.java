@@ -4,16 +4,18 @@ import java.util.List;
 import java.util.Optional;
 
 import hr.bart.userDataServer.db.SifarnikPodugovaraca;
+import hr.bart.userDataServer.repository.SifarnikPodugovaracaRepository;
 import hr.bart.userDataServer.util.PojoInterface;
 
 public class SifarnikPodugovaracaServiceImplEditirajSifarnikPodugovaraca extends Kod {
 	private final Optional<Long> idO;
 	private final Optional<String> nazivO;
+	private final SifarnikPodugovaracaRepository sifarnikPodugovaracaRepository;
 
-	public SifarnikPodugovaracaServiceImplEditirajSifarnikPodugovaraca(KodRepository kodRepository, Optional<Long> idO, Optional<String> nazivO) {
-		super(kodRepository);
+	public SifarnikPodugovaracaServiceImplEditirajSifarnikPodugovaraca(SifarnikPodugovaracaRepository sifarnikPodugovaracaRepository, Optional<Long> idO, Optional<String> nazivO) {
 		this.idO=idO;
 		this.nazivO=nazivO;
+		this.sifarnikPodugovaracaRepository = sifarnikPodugovaracaRepository;
 	}
 
 	@Override
@@ -35,12 +37,12 @@ public class SifarnikPodugovaracaServiceImplEditirajSifarnikPodugovaraca extends
 					sp.setId(idO.get());
 				}
 				
-				getKodRepository().getSifarnikPodugovaracaRepository().save(sp);
+				sifarnikPodugovaracaRepository.save(sp);
 			}
 		}
 		
 		if(pi.getGreska().isEmpty()) {
-			List<SifarnikPodugovaraca> sifarnikPodugovaracaList=getKodRepository().getSifarnikPodugovaracaRepository().findAll();
+			List<SifarnikPodugovaraca> sifarnikPodugovaracaList=sifarnikPodugovaracaRepository.findAll();
 			
 			pi.setRezultat(sifarnikPodugovaracaList);
 		} else {

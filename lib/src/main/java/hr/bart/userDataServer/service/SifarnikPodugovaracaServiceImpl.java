@@ -20,7 +20,7 @@ public class SifarnikPodugovaracaServiceImpl extends AService implements Sifarni
 	
 	@Override
 	public PojoInterface editirajSifarnikPodugovaraca(Optional<Long> idO, Optional<String> nazivO) {
-		return new SifarnikPodugovaracaServiceImplEditirajSifarnikPodugovaraca(getKodRepository(), idO, nazivO).izvrsi();
+		return new SifarnikPodugovaracaServiceImplEditirajSifarnikPodugovaraca(sifarnikPodugovaracaRepository, idO, nazivO).izvrsi();
 	}
 	
 	@Override
