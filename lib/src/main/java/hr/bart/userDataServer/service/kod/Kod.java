@@ -12,7 +12,6 @@ import hr.bart.userDataServer.util.TimerKoda;
 
 public abstract class Kod {
 	private TimerKoda timerKoda=new TimerKoda(getClass());
-	private final KodRepository kodRepository;
 	private final Logger LOGGER=LoggerFactory.getLogger(getClass());
 	protected final static int pageRequestSize50=50;
 	protected final static int pageRequestSize8=8;
@@ -26,7 +25,6 @@ public abstract class Kod {
 	protected final static int STO=100;
 	
 	public Kod() {
-		this.kodRepository = new KodRepository();
 	}
 	
 	public abstract PojoInterface izvrsiKod(PojoInterface pi) throws Throwable;
@@ -58,10 +56,6 @@ public abstract class Kod {
 		rezultatPage.setTotalPages(page.getTotalPages());
 		
 		pi.setRezultatPage(rezultatPage);
-	}
-
-	public KodRepository getKodRepository() {
-		return kodRepository;
 	}
 	
 }
