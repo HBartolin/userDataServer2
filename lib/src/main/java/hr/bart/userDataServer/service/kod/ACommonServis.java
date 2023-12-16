@@ -245,8 +245,8 @@ public class ACommonServis extends Kod {
 		setRezultatPage(pi, pageProjektList);
 	}
 	
-	public void findAll_projekt(PojoInterface pi, PageRequest pageRequest) {
-		Page<List<Projekt>> pageProjektList=getKodRepository().getProjektRepository().findAll(pageRequest);
+	public void findAll_projekt(PojoInterface pi, ProjektRepository projektRepository, PageRequest pageRequest) {
+		Page<List<Projekt>> pageProjektList=projektRepository.findAll(pageRequest);
 		pi.setRezultat(pageProjektList.getContent());
 		
 		setRezultatPage(pi, pageProjektList);

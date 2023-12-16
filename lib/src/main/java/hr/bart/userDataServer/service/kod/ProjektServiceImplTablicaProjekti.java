@@ -27,7 +27,7 @@ public class ProjektServiceImplTablicaProjekti extends Kod {
 		if(status.isPresent()) {
 			aCommonServis.findByStatus(pi, projektRepository, DbStatus.valueOf(status.get()), pageRequest);
 		} else {
-			aCommonServis.findAll_projekt(pi, pageRequest);
+			aCommonServis.findAll_projekt(pi, projektRepository, pageRequest);
 		}
 		
 		return pi;

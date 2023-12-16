@@ -29,7 +29,7 @@ public class ProjektServiceImpl extends AService implements ProjektService {
 	
 	@Override
 	public PojoInterface zatvoriOtvoriProjekt(ZatvoriOtvori zo, Long id, Long ts, Optional<String> status) {
-		return new ProjektServiceImplZatvoriOtvoriProjekt(getKodRepository(), projektRepository, zo, id, ts, status).izvrsi();
+		return new ProjektServiceImplZatvoriOtvoriProjekt(projektRepository, zo, id, ts, status).izvrsi();
 	}
 	
 	@Override

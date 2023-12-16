@@ -15,18 +15,16 @@ public class ProjektServiceImplZatvoriOtvoriProjekt extends Kod {
 	private final Long id;
 	private final Long ts;
 	private final Optional<String> status;
-	private ACommonServis aCommonServis=new ACommonServis(getKodRepository());
+	private ACommonServis aCommonServis=new ACommonServis();
 	private final ProjektRepository projektRepository;
 
 	public ProjektServiceImplZatvoriOtvoriProjekt(
-			KodRepository kodRepository,
 			ProjektRepository projektRepository,
 			ZatvoriOtvori zo,
 			Long id,
 			Long ts,
 			Optional<String> status
 			) {
-		super(kodRepository);
 		this.projektRepository=projektRepository;
 		this.zo=zo;
 		this.id=id;
@@ -64,7 +62,7 @@ public class ProjektServiceImplZatvoriOtvoriProjekt extends Kod {
 		if(status.isPresent()) {
 			aCommonServis.findByStatus(pi, projektRepository, DbStatus.valueOf(status.get()), pageRequest);
 		} else {
-			aCommonServis.findAll_projekt(pi, pageRequest);
+			aCommonServis.findAll_projekt(pi, projektRepository, pageRequest);
 		}
 	}
 
