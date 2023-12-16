@@ -24,9 +24,6 @@ public abstract class Kod {
 	protected final static int SEDAM=7;
 	protected final static int STO=100;
 	
-	public Kod() {
-	}
-	
 	public abstract PojoInterface izvrsiKod(PojoInterface pi) throws Throwable;
 	
 	public PojoInterface izvrsi() {
