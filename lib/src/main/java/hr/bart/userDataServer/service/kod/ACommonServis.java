@@ -192,6 +192,8 @@ public class ACommonServis extends Kod {
 			ClaimRepository claimRepository,
 			OsobaClaimActualRepository osobaClaimActualRepository,
 			OsobaClaimPlannedRepository osobaClaimPlannedRepository,
+			ClaimPodugovaracRepository claimPodugovaracRepository,
+			ProjektDetaljiRepository projektDetaljiRepository,
 			Long idProjektDetalji) {
 		BigDecimal osobaClaimPlannedKn=new BigDecimal(0);
 		osobaClaimPlannedKn.setScale(2, RoundingMode.HALF_EVEN);					
@@ -205,7 +207,7 @@ public class ACommonServis extends Kod {
 			osobaClaimPlannedKn=osobaClaimPlannedKn.add(c.getOsobaClaimPlanned());
 		}
 		
-		Optional<List<ClaimPodugovarac>> claimPodugovaracListO=getKodRepository().getClaimPodugovaracRepository().findAllByIdProjektDetalji(idProjektDetalji);
+		Optional<List<ClaimPodugovarac>> claimPodugovaracListO=claimPodugovaracRepository.findAllByIdProjektDetalji(idProjektDetalji);
 		
 		if(claimPodugovaracListO.isPresent()) {
 			for(ClaimPodugovarac claimPodugovarac: claimPodugovaracListO.get()) {
@@ -213,10 +215,10 @@ public class ACommonServis extends Kod {
 			}
 		}
 		
-		Optional<ProjektDetalji> projektDetaljiO=getKodRepository().getProjektDetaljiRepository().findById(idProjektDetalji);
+		Optional<ProjektDetalji> projektDetaljiO=projektDetaljiRepository.findById(idProjektDetalji);
 		projektDetaljiO.get().setCostPlanned(osobaClaimPlannedKn);
 
-		getKodRepository().getProjektDetaljiRepository().save(projektDetaljiO.get());
+		projektDetaljiRepository.save(projektDetaljiO.get());
 	}
 	
 	public void findAllBySifarnikOsobaId(PojoInterface pi, Long idSifarnikOsoba, PageRequest pageRequest) {

@@ -13,9 +13,11 @@ import java.util.Set;
 
 import hr.bart.userDataServer.db.Claim;
 import hr.bart.userDataServer.db.OsobaClaimPlanned;
+import hr.bart.userDataServer.repository.ClaimPodugovaracRepository;
 import hr.bart.userDataServer.repository.ClaimRepository;
 import hr.bart.userDataServer.repository.OsobaClaimActualRepository;
 import hr.bart.userDataServer.repository.OsobaClaimPlannedRepository;
+import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
 import hr.bart.userDataServer.repository.SifarnikMjesecaRepository;
 import hr.bart.userDataServer.util.PojoInterface;
 
@@ -28,6 +30,8 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 	private final OsobaClaimPlannedRepository osobaClaimPlannedRepository;
 	private final OsobaClaimActualRepository osobaClaimActualRepository;
 	private final SifarnikMjesecaRepository sifarnikMjesecaRepository;
+	private final ClaimPodugovaracRepository claimPodugovaracRepository;
+	private final ProjektDetaljiRepository projektDetaljiRepository;
 	
 	public OsobaClaimPlannedServiceImplClaimNewPlannedByDate(
 			KodRepository kodRepository, 
@@ -35,6 +39,8 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 			OsobaClaimPlannedRepository osobaClaimPlannedRepository,
 			OsobaClaimActualRepository osobaClaimActualRepository,
 			SifarnikMjesecaRepository sifarnikMjesecaRepository,
+			ProjektDetaljiRepository projektDetaljiRepository, 
+			ClaimPodugovaracRepository claimPodugovaracRepository,
 			LocalDate datum, 
 			HashMap<String, String> podatci, 
 			Long idProjektDetalji) {
@@ -46,6 +52,8 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 		this.idProjektDetalji=idProjektDetalji;
 		this.osobaClaimActualRepository = osobaClaimActualRepository;
 		this.sifarnikMjesecaRepository = sifarnikMjesecaRepository;
+		this.claimPodugovaracRepository = claimPodugovaracRepository;
+		this.projektDetaljiRepository = projektDetaljiRepository;
 	}
 
 	@Override
@@ -99,6 +107,8 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 						claimRepository,
 						osobaClaimActualRepository,
 						osobaClaimPlannedRepository,
+						claimPodugovaracRepository,
+						projektDetaljiRepository,
 						idProjektDetalji);					
 				
 				Optional<List<Claim>> claimListOptional=aCommonServis.claimActualPlanned(
