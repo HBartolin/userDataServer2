@@ -28,7 +28,7 @@ public abstract class AService {
 	protected final static int pageRequestSize8=8;
 	protected final static LocalDate datumPatakZadnji=LocalDate.of(9999, 12, 24);
 	protected final static LocalDate mjesecZadnji=datumPatakZadnji.withDayOfMonth(1);
-	protected final static String HRK="HRK";
+	protected final static String HRK="€";
 	protected final static int NULA=0;
 	protected final static int JEDAN=1;
 	protected final static int DVA=2;

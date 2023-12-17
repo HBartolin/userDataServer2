@@ -75,7 +75,7 @@ public class RestServiceImplCreateDB extends Kod {
 	@Override
 	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {
 		SifarnikValuta sv=new SifarnikValuta();
-		sv.setNaziv("HRK");
+		sv.setNaziv(HRK);
 		sv=sifarnikValutaRepository.save(sv);
 		pi.setOk("SifarnikValuta");
 		
