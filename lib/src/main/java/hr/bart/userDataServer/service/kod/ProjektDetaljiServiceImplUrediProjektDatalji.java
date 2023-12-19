@@ -39,9 +39,7 @@ public class ProjektDetaljiServiceImplUrediProjektDatalji extends Kod {
 		BigDecimal totalRevenueBD=getBigDecimalValue(pi, totalRevenue, "Total revenue");			
 		BigDecimal costPsBD=getBigDecimalValue(pi, costPs, "Cost");
 		
-		if(!pi.getGreska().isEmpty()) {
-			
-		} else {
+		if(pi.getGreska().isEmpty()) {
 			pi.setRezultat(ucitajProjektDetalje(id, totalRevenueBD, costPsBD));
 		}
 		
