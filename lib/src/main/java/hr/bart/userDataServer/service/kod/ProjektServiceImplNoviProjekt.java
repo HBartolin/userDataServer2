@@ -24,7 +24,7 @@ public class ProjektServiceImplNoviProjekt extends Kod {
 
 	@Override
 	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {		
-		if(claim==null || "".equals(claim.replaceAll("\\s",""))) {
+		if(claim==null || "".equals(claim.strip())) {
 			String msg="Polje Claim nije upisano.";
 			pi.addGreskaList(msg);
 		}
