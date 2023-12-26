@@ -9,6 +9,22 @@ public class PojoInterface {
 	private Object rezultat="";
 	private Object rezultatPage="";
 
+	public String getOk() {
+		return ok;
+	}
+
+	public void setOk(String ok) {
+		this.ok = ok;
+	}
+	
+	public List<String> getGreska() {
+		return greskaList;
+	}
+
+	public void addGreskaList(String greska) {
+		greskaList.add(greska);
+	}
+	
 	public Object getRezultat() {
 		return rezultat;
 	}
@@ -17,28 +33,12 @@ public class PojoInterface {
 		this.rezultat = rezultat;
 	}
 
-	public String getOk() {
-		return ok;
-	}
-
-	public void setOk(String ok) {
-		this.ok = ok;
-	}
-
 	public Object getRezultatPage() {
 		return rezultatPage;
 	}
 
 	public void setRezultatPage(Object rezultatPage) {
 		this.rezultatPage = rezultatPage;
-	}
-
-	public List<String> getGreska() {
-		return greskaList;
-	}
-
-	public void addGreskaList(String greska) {
-		greskaList.add(greska);
 	}
 	
 }
