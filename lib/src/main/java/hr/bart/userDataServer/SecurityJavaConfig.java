@@ -60,7 +60,7 @@ public class SecurityJavaConfig /* extends WebSecurityConfigurerAdapter */ {
 		return http.build();
 	} 
 	
-	@Bean
+	/*@Bean
 	public WebMvcConfigurer corsConfigurer()
 	{
 	   ArrayList<String> allowDomainsList=new ArrayList<>();
@@ -80,7 +80,7 @@ public class SecurityJavaConfig /* extends WebSecurityConfigurerAdapter */ {
 	         	.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE");
 	      }
 	   };
-	}
+	} */
 	
 //	 @Override
 //	    public void addViewControllers(ViewControllerRegistry registry) {
