@@ -17,31 +17,31 @@ import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
-public class ProjektServiceImpl extends AService implements ProjektService {	
+public class ProjektServiceImpl extends AService {	
 	@Autowired
 	private transient ProjektRepository projektRepository;
-	
-	@Override
+	@Autowired
+	private transient ProjektServiceImplProjekti projektServiceImplProjekti;
+
 	public PojoInterface projekti(Optional<String> status) {
-		return new ProjektServiceImplProjekti(projektRepository, status).izvrsi();
+		return projektServiceImplProjekti.init(status).izvrsi();
 	}
 	
-	@Override
 	public PojoInterface zatvoriOtvoriProjekt(ZatvoriOtvori zo, Long id, Long ts, Optional<String> status) {
 		return new ProjektServiceImplZatvoriOtvoriProjekt(projektRepository, zo, id, ts, status).izvrsi();
 	}
 	
-	@Override
+
 	public PojoInterface noviProjekt(String claim, String contract) {
 		return new ProjektServiceImplNoviProjekt(projektRepository, claim, contract).izvrsi();
 	}
 	
-	@Override
+	
 	public PojoInterface tablicaProjekti(int pageNumber, Optional<String> status) {
 		return new ProjektServiceImplTablicaProjekti(projektRepository, status, pageNumber).izvrsi();
 	}
 	
-	@Override
+	
 	public PojoInterface traziProjekt(String trazi) {
 		return new ProjektServiceImplTraziProjekte(projektRepository, trazi).izvrsi();
 	}

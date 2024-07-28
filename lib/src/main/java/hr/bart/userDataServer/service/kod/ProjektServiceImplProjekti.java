@@ -2,20 +2,28 @@ package hr.bart.userDataServer.service.kod;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
 
 import hr.bart.userDataServer.repository.ProjektRepository;
 import hr.bart.userDataServer.util.DbStatus;
 import hr.bart.userDataServer.util.PojoInterface;
+import jakarta.transaction.Transactional;
 
+@Service
+@Transactional
 public class ProjektServiceImplProjekti extends Kod {
-	private final Optional<String> status;
+	private Optional<String> status;
 	private ACommonServis aCommonServis=new ACommonServis();
-	private final ProjektRepository projektRepository;
-
-	public ProjektServiceImplProjekti(ProjektRepository projektRepository, Optional<String> status) {
+	
+	@Autowired
+	private ProjektRepository projektRepository;	
+	
+	public ProjektServiceImplProjekti init(Optional<String> status) {
 		this.status=status;
-		this.projektRepository = projektRepository;
+		
+		return this;
 	}
 
 	@Override

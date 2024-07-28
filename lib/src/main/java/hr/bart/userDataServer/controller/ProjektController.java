@@ -27,7 +27,7 @@ import hr.bart.userDataServer.service.OsobaClaimPlannedService;
 import hr.bart.userDataServer.service.OsobaValutaService;
 import hr.bart.userDataServer.service.PodugovaracService;
 import hr.bart.userDataServer.service.ProjektDetaljiService;
-import hr.bart.userDataServer.service.ProjektService;
+import hr.bart.userDataServer.service.ProjektServiceImpl;
 import hr.bart.userDataServer.service.RestService;
 import hr.bart.userDataServer.service.SifarnikOsobaService;
 import hr.bart.userDataServer.service.SifarnikPodugovaracaService;
@@ -42,7 +42,7 @@ public class ProjektController {
 	private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("y-M-d");
 	
 	@Autowired
-	private transient ProjektService projektService;  
+	private transient ProjektServiceImpl projektService;  
 	@Autowired
 	private transient ProjektDetaljiService projektDetaljiService;
 	@Autowired
