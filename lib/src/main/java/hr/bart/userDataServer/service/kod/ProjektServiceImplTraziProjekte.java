@@ -10,12 +10,13 @@ import hr.bart.userDataServer.repository.ProjektRepository;
 import hr.bart.userDataServer.util.PojoInterface;
 
 public class ProjektServiceImplTraziProjekte extends Kod {
-	private final String trazi;
-	private final ProjektRepository projektRepository;
+	private String trazi;
+	private ProjektRepository projektRepository;
 
-	public ProjektServiceImplTraziProjekte(ProjektRepository projektRepository, String trazi) {
-		this.projektRepository=projektRepository;
+	public ProjektServiceImplTraziProjekte info(String trazi) {
 		this.trazi=trazi;
+		
+		return this;
 	}
 
 	@Override

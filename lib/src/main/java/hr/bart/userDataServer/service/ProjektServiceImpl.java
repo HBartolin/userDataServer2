@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import hr.bart.userDataServer.repository.ProjektRepository;
 import hr.bart.userDataServer.service.kod.ProjektServiceImplNoviProjekt;
 import hr.bart.userDataServer.service.kod.ProjektServiceImplProjekti;
 import hr.bart.userDataServer.service.kod.ProjektServiceImplTablicaProjekti;
@@ -19,8 +18,6 @@ import jakarta.transaction.Transactional;
 @Transactional
 public class ProjektServiceImpl extends AService {	
 	@Autowired
-	private transient ProjektRepository projektRepository;
-	@Autowired
 	private transient ProjektServiceImplProjekti projektServiceImplProjekti;
 	@Autowired
 	private transient ProjektServiceImplZatvoriOtvoriProjekt projektServiceImplZatvoriOtvoriProjekt;
@@ -28,6 +25,8 @@ public class ProjektServiceImpl extends AService {
 	private transient ProjektServiceImplNoviProjekt projektServiceImplNoviProjekt;
 	@Autowired
 	private transient ProjektServiceImplTablicaProjekti projektServiceImplTablicaProjekti;
+	@Autowired
+	private transient ProjektServiceImplTraziProjekte projektServiceImplTraziProjekte;
 
 	public PojoInterface projekti(Optional<String> status) {
 		return projektServiceImplProjekti.init(status).izvrsi();
@@ -49,7 +48,7 @@ public class ProjektServiceImpl extends AService {
 	
 	
 	public PojoInterface traziProjekt(String trazi) {
-		return new ProjektServiceImplTraziProjekte(projektRepository, trazi).izvrsi();
+		return projektServiceImplTraziProjekte.info(trazi).izvrsi();
 	}
 	
 }
