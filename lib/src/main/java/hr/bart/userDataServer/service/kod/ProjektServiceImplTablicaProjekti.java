@@ -9,15 +9,16 @@ import hr.bart.userDataServer.util.DbStatus;
 import hr.bart.userDataServer.util.PojoInterface;
 
 public class ProjektServiceImplTablicaProjekti extends Kod {
-	private final int pageNumber;
-	private final Optional<String> status;
+	private int pageNumber;
+	private Optional<String> status;
 	private ACommonServis aCommonServis=new ACommonServis();
-	private final ProjektRepository projektRepository;
+	private ProjektRepository projektRepository;
 
-	public ProjektServiceImplTablicaProjekti(ProjektRepository projektRepository, Optional<String> status, int pageNumber) {
+	public ProjektServiceImplTablicaProjekti info(Optional<String> status, int pageNumber) {
 		this.status=status;
 		this.pageNumber=pageNumber;
-		this.projektRepository = projektRepository;
+		
+		return this;
 	}
 
 	@Override

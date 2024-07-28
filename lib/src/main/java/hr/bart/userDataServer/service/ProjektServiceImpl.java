@@ -26,6 +26,8 @@ public class ProjektServiceImpl extends AService {
 	private transient ProjektServiceImplZatvoriOtvoriProjekt projektServiceImplZatvoriOtvoriProjekt;
 	@Autowired
 	private transient ProjektServiceImplNoviProjekt projektServiceImplNoviProjekt;
+	@Autowired
+	private transient ProjektServiceImplTablicaProjekti projektServiceImplTablicaProjekti;
 
 	public PojoInterface projekti(Optional<String> status) {
 		return projektServiceImplProjekti.init(status).izvrsi();
@@ -42,7 +44,7 @@ public class ProjektServiceImpl extends AService {
 	
 	
 	public PojoInterface tablicaProjekti(int pageNumber, Optional<String> status) {
-		return new ProjektServiceImplTablicaProjekti(projektRepository, status, pageNumber).izvrsi();
+		return projektServiceImplTablicaProjekti.info(status, pageNumber).izvrsi();
 	}
 	
 	
