@@ -2,6 +2,7 @@ package hr.bart.userDataServer.service.kod;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 
 import hr.bart.userDataServer.db.Projekt;
@@ -11,25 +12,22 @@ import hr.bart.userDataServer.util.PojoInterface;
 import hr.bart.userDataServer.util.ZatvoriOtvori;
 
 public class ProjektServiceImplZatvoriOtvoriProjekt extends Kod {
-	private final ZatvoriOtvori zo;
-	private final Long id;
-	private final Long ts;
-	private final Optional<String> status;
+	private ZatvoriOtvori zo;
+	private Long id;
+	private Long ts;
+	private Optional<String> status;
 	private ACommonServis aCommonServis=new ACommonServis();
-	private final ProjektRepository projektRepository;
+	
+	@Autowired
+	private ProjektRepository projektRepository;	
 
-	public ProjektServiceImplZatvoriOtvoriProjekt(
-			ProjektRepository projektRepository,
-			ZatvoriOtvori zo,
-			Long id,
-			Long ts,
-			Optional<String> status
-			) {
-		this.projektRepository=projektRepository;
+	public ProjektServiceImplZatvoriOtvoriProjekt init(ZatvoriOtvori zo, Long id, Long ts, Optional<String> status) {
 		this.zo=zo;
 		this.id=id;
 		this.ts=ts;
 		this.status=status;
+		
+		return this;
 	}
 
 	@Override

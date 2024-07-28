@@ -22,13 +22,15 @@ public class ProjektServiceImpl extends AService {
 	private transient ProjektRepository projektRepository;
 	@Autowired
 	private transient ProjektServiceImplProjekti projektServiceImplProjekti;
+	@Autowired
+	private transient ProjektServiceImplZatvoriOtvoriProjekt projektServiceImplZatvoriOtvoriProjekt;
 
 	public PojoInterface projekti(Optional<String> status) {
 		return projektServiceImplProjekti.init(status).izvrsi();
 	}
 	
 	public PojoInterface zatvoriOtvoriProjekt(ZatvoriOtvori zo, Long id, Long ts, Optional<String> status) {
-		return new ProjektServiceImplZatvoriOtvoriProjekt(projektRepository, zo, id, ts, status).izvrsi();
+		return projektServiceImplZatvoriOtvoriProjekt.init(zo, id, ts, status).izvrsi();
 	}
 	
 
