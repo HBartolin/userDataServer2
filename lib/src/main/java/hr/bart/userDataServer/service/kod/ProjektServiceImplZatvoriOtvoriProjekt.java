@@ -4,13 +4,17 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
 
 import hr.bart.userDataServer.db.Projekt;
 import hr.bart.userDataServer.repository.ProjektRepository;
 import hr.bart.userDataServer.util.DbStatus;
 import hr.bart.userDataServer.util.PojoInterface;
 import hr.bart.userDataServer.util.ZatvoriOtvori;
+import jakarta.transaction.Transactional;
 
+@Service
+@Transactional
 public class ProjektServiceImplZatvoriOtvoriProjekt extends Kod {
 	private ZatvoriOtvori zo;
 	private Long id;

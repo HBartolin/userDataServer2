@@ -5,12 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
 
 import hr.bart.userDataServer.db.Projekt;
 import hr.bart.userDataServer.repository.ProjektRepository;
 import hr.bart.userDataServer.util.DbStatus;
 import hr.bart.userDataServer.util.PojoInterface;
+import jakarta.transaction.Transactional;
 
+@Service
+@Transactional
 public class ProjektServiceImplNoviProjekt extends Kod {
 	private String claim;
 	private String contract;
