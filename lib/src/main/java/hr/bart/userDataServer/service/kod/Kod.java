@@ -26,7 +26,7 @@ public abstract class Kod {
 	protected final static int STO=100;
 	
 	public abstract PojoInterface izvrsiKod(PojoInterface pi) throws Throwable;
-	public abstract String getToString();
+	public abstract String getToString(String timerKodaEnd);
 	
 	public PojoInterface izvrsi() {
 		timerKoda.begin();
@@ -37,8 +37,7 @@ public abstract class Kod {
 		} catch(Throwable t) {
 			cachException(t, pi);
 		} finally {
-			LOGGER.info(getToString());
-			timerKoda.end();
+			LOGGER.info(getToString(timerKoda.end()));
 		}
 		
 		return pi;

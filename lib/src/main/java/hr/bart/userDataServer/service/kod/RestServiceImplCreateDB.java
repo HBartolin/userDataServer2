@@ -183,7 +183,7 @@ public class RestServiceImplCreateDB extends Kod {
 	}
 
 	@Override
-	public String getToString() {
-		return new ReflectionToStringBuilder(this, getStandardToStringStyle()).toString();
+	public String getToString(String timerKodaEnd) {
+		return getClass().getSimpleName() + " " + timerKodaEnd + " " + new ReflectionToStringBuilder(this, getStandardToStringStyle()).toString();
 	}
 }

@@ -4,32 +4,33 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class TimerKoda {
-	private final Logger LOGGER=LoggerFactory.getLogger(getClass());
+//	private final Logger LOGGER=LoggerFactory.getLogger(getClass());
 	private long pocetak=0;
-	private final String clazzSN;
+//	private final String clazzSN;
 	
 	public TimerKoda(Class<?> clazz) {
-		clazzSN=clazz.getSimpleName();
+//		clazzSN=clazz.getSimpleName();
 	}
 	
 	public void begin() {
 		pocetak=System.currentTimeMillis();
-		LOGGER.info("* POCETAK - {} *", clazzSN);
+	//	LOGGER.info("* POCETAK - {} *", clazzSN);
 	}
 	
-	public void end() {
+	public String end() {
 		long kraj=System.currentTimeMillis();
 		long koliko=kraj - pocetak;
 		String jedinica="ms";
-		String prefiks="";
+//		String prefiks="";
 		
 		if(koliko>1000) {
 			koliko=koliko / 1000;
 			jedinica="s";
-			prefiks="**** ";
+//			prefiks="**** ";
 		}
 		
-		LOGGER.info("* {}Total time: {} {} - {} *", prefiks, koliko, jedinica, clazzSN);
+		return koliko + " " + jedinica;
+//		LOGGER.info("* {}Total time: {} {} - {} *", prefiks, koliko, jedinica, clazzSN);
 	}
 	
 }
