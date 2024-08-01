@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.springframework.data.domain.PageRequest;
 
 import hr.bart.userDataServer.db.Claim;
@@ -448,5 +449,9 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 			osobaValutaRepository.save(ovDoSljedece);
 		}
 	}
-	
+
+	@Override
+	public String getToString() {
+		return new ReflectionToStringBuilder(this, getStandardToStringStyle()).toString();
+	}
 }

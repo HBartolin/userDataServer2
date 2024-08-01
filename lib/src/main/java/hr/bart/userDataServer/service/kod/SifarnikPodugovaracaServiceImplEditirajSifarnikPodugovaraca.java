@@ -3,6 +3,8 @@ package hr.bart.userDataServer.service.kod;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 import hr.bart.userDataServer.db.SifarnikPodugovaraca;
 import hr.bart.userDataServer.repository.SifarnikPodugovaracaRepository;
 import hr.bart.userDataServer.util.PojoInterface;
@@ -52,4 +54,8 @@ public class SifarnikPodugovaracaServiceImplEditirajSifarnikPodugovaraca extends
 		return pi;
 	}
 
+	@Override
+	public String getToString() {
+		return new ReflectionToStringBuilder(this, getStandardToStringStyle()).toString();
+	}
 }

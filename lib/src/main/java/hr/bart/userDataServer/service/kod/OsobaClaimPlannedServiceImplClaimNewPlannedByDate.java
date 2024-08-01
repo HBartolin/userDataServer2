@@ -8,6 +8,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 import java.util.Optional;
 import java.util.Set;
 
@@ -149,5 +152,9 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 			}
 		}
 	}
-	
+
+	@Override
+	public String getToString() {
+		return new ReflectionToStringBuilder(this, getStandardToStringStyle()).toString();
+	}
 }

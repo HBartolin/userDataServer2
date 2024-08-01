@@ -2,6 +2,8 @@ package hr.bart.userDataServer.service.kod;
 
 import java.util.Optional;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 import hr.bart.userDataServer.db.ProjektDetalji;
 import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
 import hr.bart.userDataServer.util.PojoInterface;
@@ -29,4 +31,8 @@ public class ProjektDetaljiServiceImplProjektDatalji extends Kod {
 		return pi;
 	}
 
+	@Override
+	public String getToString() {
+		return new ReflectionToStringBuilder(this, getStandardToStringStyle()).toString();
+	}
 }

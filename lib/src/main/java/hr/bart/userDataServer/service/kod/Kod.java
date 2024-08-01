@@ -2,6 +2,7 @@ package hr.bart.userDataServer.service.kod;
 
 import java.time.LocalDate;
 
+import org.apache.commons.lang3.builder.StandardToStringStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -25,6 +26,7 @@ public abstract class Kod {
 	protected final static int STO=100;
 	
 	public abstract PojoInterface izvrsiKod(PojoInterface pi) throws Throwable;
+	public abstract String getToString();
 	
 	public PojoInterface izvrsi() {
 		timerKoda.begin();
@@ -35,10 +37,20 @@ public abstract class Kod {
 		} catch(Throwable t) {
 			cachException(t, pi);
 		} finally {
+			LOGGER.info(getToString());
 			timerKoda.end();
 		}
 		
 		return pi;
+	}
+	
+	protected StandardToStringStyle getStandardToStringStyle() {
+		StandardToStringStyle style = new StandardToStringStyle();
+		style.setFieldSeparator(", ");
+		style.setUseClassName(false);
+		style.setUseIdentityHashCode(false);
+
+		return style;
 	}
 	
 	protected void cachException(Throwable t, PojoInterface pi) {

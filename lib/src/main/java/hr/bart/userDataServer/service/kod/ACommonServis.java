@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
@@ -268,5 +269,10 @@ public class ACommonServis extends Kod {
 	
 	public String skratiAkoTreba255(String provjeri) {
 		return skratiAkoTreba(255, provjeri);
+	}
+
+	@Override
+	public String getToString() {
+		return new ReflectionToStringBuilder(this, getStandardToStringStyle()).toString();
 	}
 }

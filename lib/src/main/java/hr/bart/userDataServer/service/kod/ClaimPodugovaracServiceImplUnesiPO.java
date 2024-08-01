@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 import hr.bart.userDataServer.db.ClaimPodugovarac;
 import hr.bart.userDataServer.repository.ClaimPodugovaracRepository;
 import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
@@ -116,4 +118,8 @@ public class ClaimPodugovaracServiceImplUnesiPO extends Kod {
 		return pi;
 	}
 
+	@Override
+	public String getToString() {
+		return new ReflectionToStringBuilder(this, getStandardToStringStyle()).toString();
+	}
 }

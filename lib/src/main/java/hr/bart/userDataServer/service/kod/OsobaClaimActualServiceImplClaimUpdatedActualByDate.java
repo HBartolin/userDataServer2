@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 import hr.bart.userDataServer.db.Claim;
 import hr.bart.userDataServer.db.OsobaClaimActual;
 import hr.bart.userDataServer.db.OsobaValuta;
@@ -158,5 +160,9 @@ public class OsobaClaimActualServiceImplClaimUpdatedActualByDate extends Kod {
 			pi.addGreskaList(msg);
 		} 
 	}
-	
+
+	@Override
+	public String getToString() {
+		return new ReflectionToStringBuilder(this, getStandardToStringStyle()).toString();
+	}
 }

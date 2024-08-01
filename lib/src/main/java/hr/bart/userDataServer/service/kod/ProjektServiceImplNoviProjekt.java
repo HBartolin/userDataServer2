@@ -2,6 +2,7 @@ package hr.bart.userDataServer.service.kod;
 
 import java.util.List;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -64,4 +65,8 @@ public class ProjektServiceImplNoviProjekt extends Kod {
 		return pi;
 	}
 
+	@Override
+	public String getToString() {
+		return new ReflectionToStringBuilder(this, getStandardToStringStyle()).toString();
+	}
 }

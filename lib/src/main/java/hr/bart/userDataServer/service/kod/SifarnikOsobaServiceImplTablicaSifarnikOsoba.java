@@ -1,5 +1,6 @@
 package hr.bart.userDataServer.service.kod;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.springframework.data.domain.PageRequest;
 
 import hr.bart.userDataServer.repository.SifarnikOsobaRepository;
@@ -24,4 +25,8 @@ public class SifarnikOsobaServiceImplTablicaSifarnikOsoba extends Kod {
 		return pi;
 	}
 	
+	@Override
+	public String getToString() {
+		return new ReflectionToStringBuilder(this, getStandardToStringStyle()).toString();
+	}
 }
