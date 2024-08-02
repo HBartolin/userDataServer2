@@ -54,7 +54,10 @@ public abstract class Kod {
 	}
 	
 	private String getReflectionToStringBuilder() {
-		return getClass().getSimpleName() + " " + timerKoda.getShowTime() + " " + new ReflectionToStringBuilder(this, getStandardToStringStyle()).toString();
+		ReflectionToStringBuilder rb=new ReflectionToStringBuilder(this, getStandardToStringStyle());
+		rb.setExcludeFieldNames("aCommonServis", "projektRepository", "LOGGER", "timerKoda");
+		
+		return String.format("%s %s %s", getClass().getSimpleName(), timerKoda.getShowTime(), rb.toString());
 	}
 	
 	protected void cachException(Throwable t, PojoInterface pi) {
