@@ -39,8 +39,4 @@ public class ProjektServiceImplProjekti extends Kod {
 		return pi;
 	}
 
-	@Override
-	public String getToString(String dd) {
-		return getReflectionToStringBuilder();
-	}
 }

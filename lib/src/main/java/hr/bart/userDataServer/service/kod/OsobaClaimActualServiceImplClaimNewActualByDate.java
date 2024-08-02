@@ -9,9 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-
 import java.util.Optional;
 import java.util.Set;
 
@@ -203,8 +200,4 @@ public class OsobaClaimActualServiceImplClaimNewActualByDate extends Kod {
 		}
 	}
 
-	@Override
-	public String getToString(String timerKodaEnd) {
-		return getClass().getSimpleName() + " " + timerKodaEnd + " " + new ReflectionToStringBuilder(this, getStandardToStringStyle()).toString();
-	}
 }

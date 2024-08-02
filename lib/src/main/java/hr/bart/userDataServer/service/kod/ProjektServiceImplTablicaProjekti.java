@@ -2,7 +2,6 @@ package hr.bart.userDataServer.service.kod;
 
 import java.util.Optional;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -39,8 +38,4 @@ public class ProjektServiceImplTablicaProjekti extends Kod {
 		return pi;
 	}
 
-	@Override
-	public String getToString(String timerKodaEnd) {
-		return getClass().getSimpleName() + " " + timerKodaEnd + " " + new ReflectionToStringBuilder(this, getStandardToStringStyle()).toString();
-	}
 }

@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-
 import hr.bart.userDataServer.db.Claim;
 import hr.bart.userDataServer.db.OsobaClaimActual;
 import hr.bart.userDataServer.db.OsobaValuta;
@@ -161,8 +159,4 @@ public class OsobaClaimActualServiceImplClaimUpdatedActualByDate extends Kod {
 		} 
 	}
 
-	@Override
-	public String getToString(String timerKodaEnd) {
-		return getClass().getSimpleName() + " " + timerKodaEnd + " " + new ReflectionToStringBuilder(this, getStandardToStringStyle()).toString();
-	}
 }

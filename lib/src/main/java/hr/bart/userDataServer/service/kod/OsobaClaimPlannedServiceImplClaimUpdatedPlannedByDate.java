@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-
 import hr.bart.userDataServer.db.Claim;
 import hr.bart.userDataServer.db.OsobaClaimPlanned;
 import hr.bart.userDataServer.db.SifarnikMjeseca;
@@ -153,8 +151,4 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 		}
 	}
 
-	@Override
-	public String getToString(String timerKodaEnd) {
-		return getClass().getSimpleName() + " " + timerKodaEnd + " " + new ReflectionToStringBuilder(this, getStandardToStringStyle()).toString();
-	}
 }

@@ -11,7 +11,6 @@ import java.util.Optional;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -763,8 +762,4 @@ public class ExcelServiceImplUExcel extends Kod {
 	    sheetTotalRevenue.setColumnWidth(7, 3000);
 	}
 
-	@Override
-	public String getToString(String timerKodaEnd) {
-		return getClass().getSimpleName() + " " + timerKodaEnd + " " + new ReflectionToStringBuilder(this, getStandardToStringStyle()).toString();
-	}
 }

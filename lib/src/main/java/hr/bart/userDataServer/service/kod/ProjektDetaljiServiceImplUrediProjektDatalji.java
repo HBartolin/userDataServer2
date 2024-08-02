@@ -3,8 +3,6 @@ package hr.bart.userDataServer.service.kod;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-
 import hr.bart.userDataServer.db.Projekt;
 import hr.bart.userDataServer.db.ProjektDetalji;
 import hr.bart.userDataServer.db.SifarnikValuta;
@@ -91,9 +89,5 @@ public class ProjektDetaljiServiceImplUrediProjektDatalji extends Kod {
 			return BigDecimal.ONE;
 		}
 	}
-
-	@Override
-	public String getToString(String timerKodaEnd) {
-		return getClass().getSimpleName() + " " + timerKodaEnd + " " + new ReflectionToStringBuilder(this, getStandardToStringStyle()).toString();
-	}
+	
 }

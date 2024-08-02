@@ -3,8 +3,6 @@ package hr.bart.userDataServer.service.kod;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-
 import hr.bart.userDataServer.db.Claim;
 import hr.bart.userDataServer.db.ClaimPodugovarac;
 import hr.bart.userDataServer.db.OsobaClaimActual;
@@ -182,8 +180,4 @@ public class RestServiceImplCreateDB extends Kod {
 		return pi;
 	}
 
-	@Override
-	public String getToString(String timerKodaEnd) {
-		return getClass().getSimpleName() + " " + timerKodaEnd + " " + new ReflectionToStringBuilder(this, getStandardToStringStyle()).toString();
-	}
 }

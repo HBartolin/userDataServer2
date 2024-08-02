@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.springframework.data.domain.PageRequest;
 
 import hr.bart.userDataServer.db.Claim;
@@ -450,8 +449,4 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 		}
 	}
 
-	@Override
-	public String getToString(String timerKodaEnd) {
-		return getClass().getSimpleName() + " " + timerKodaEnd + " " + new ReflectionToStringBuilder(this, getStandardToStringStyle()).toString();
-	}
 }

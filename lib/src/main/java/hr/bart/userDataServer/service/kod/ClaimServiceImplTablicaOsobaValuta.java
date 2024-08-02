@@ -3,8 +3,6 @@ package hr.bart.userDataServer.service.kod;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-
 import hr.bart.userDataServer.db.Claim;
 import hr.bart.userDataServer.repository.ClaimRepository;
 import hr.bart.userDataServer.repository.OsobaClaimActualRepository;
@@ -44,8 +42,4 @@ public class ClaimServiceImplTablicaOsobaValuta extends Kod {
 		return pi;
 	}
 	
-	@Override
-	public String getToString(String timerKodaEnd) {
-		return getClass().getSimpleName() + " " + timerKodaEnd + " " + new ReflectionToStringBuilder(this, getStandardToStringStyle()).toString();
-	}
 }

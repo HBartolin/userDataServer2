@@ -13,7 +13,7 @@ import hr.bart.userDataServer.util.RezultatPage;
 import hr.bart.userDataServer.util.TimerKoda;
 
 public abstract class Kod {
-	private TimerKoda timerKoda=new TimerKoda(getClass());
+	private TimerKoda timerKoda=new TimerKoda();
 	private final Logger LOGGER=LoggerFactory.getLogger(getClass());
 	protected final static int pageRequestSize50=50;
 	protected final static int pageRequestSize8=8;
@@ -27,7 +27,6 @@ public abstract class Kod {
 	protected final static int STO=100;
 	
 	public abstract PojoInterface izvrsiKod(PojoInterface pi) throws Throwable;
-	public abstract String getToString(String aa);
 	
 	public PojoInterface izvrsi() {
 		timerKoda.begin();
@@ -45,7 +44,7 @@ public abstract class Kod {
 		return pi;
 	}
 	
-	protected StandardToStringStyle getStandardToStringStyle() {
+	private StandardToStringStyle getStandardToStringStyle() {
 		StandardToStringStyle style = new StandardToStringStyle();
 		style.setFieldSeparator(", ");
 		style.setUseClassName(false);
@@ -54,8 +53,8 @@ public abstract class Kod {
 		return style;
 	}
 	
-	protected String getReflectionToStringBuilder() {
-		return getClass().getSimpleName() + " " + timerKoda + " " + new ReflectionToStringBuilder(this, getStandardToStringStyle()).toString();
+	private String getReflectionToStringBuilder() {
+		return getClass().getSimpleName() + " " + timerKoda.getShowTime() + " " + new ReflectionToStringBuilder(this, getStandardToStringStyle()).toString();
 	}
 	
 	protected void cachException(Throwable t, PojoInterface pi) {

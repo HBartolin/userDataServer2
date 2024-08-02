@@ -2,7 +2,6 @@ package hr.bart.userDataServer.service.kod;
 
 import java.util.Optional;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.springframework.data.domain.PageRequest;
 
 import hr.bart.userDataServer.db.SifarnikOsoba;
@@ -59,8 +58,4 @@ public class SifarnikOsobaServiceImplEditirajSifarnikOsoba extends Kod {
 		return pi;
 	}
 
-	@Override
-	public String getToString(String timerKodaEnd) {
-		return getClass().getSimpleName() + " " + timerKodaEnd + " " + new ReflectionToStringBuilder(this, getStandardToStringStyle()).toString();
-	}
 }
