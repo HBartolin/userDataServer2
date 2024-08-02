@@ -3,6 +3,8 @@ package hr.bart.userDataServer.service.kod;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.builder.ToStringExclude;
+
 import hr.bart.userDataServer.db.SifarnikPodugovaraca;
 import hr.bart.userDataServer.repository.SifarnikPodugovaracaRepository;
 import hr.bart.userDataServer.util.PojoInterface;
@@ -10,6 +12,7 @@ import hr.bart.userDataServer.util.PojoInterface;
 public class SifarnikPodugovaracaServiceImplEditirajSifarnikPodugovaraca extends Kod {
 	private final Optional<Long> idO;
 	private final Optional<String> nazivO;
+	@ToStringExclude
 	private final SifarnikPodugovaracaRepository sifarnikPodugovaracaRepository;
 
 	public SifarnikPodugovaracaServiceImplEditirajSifarnikPodugovaraca(SifarnikPodugovaracaRepository sifarnikPodugovaracaRepository, Optional<Long> idO, Optional<String> nazivO) {

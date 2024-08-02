@@ -2,6 +2,7 @@ package hr.bart.userDataServer.service.kod;
 
 import java.util.List;
 
+import org.apache.commons.lang3.builder.ToStringExclude;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +19,7 @@ import jakarta.transaction.Transactional;
 public class ProjektServiceImplNoviProjekt extends Kod {
 	private String claim;
 	private String contract;
+	@ToStringExclude
 	private ACommonServis aCommonServis=new ACommonServis();
 	
 	@Autowired

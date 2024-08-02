@@ -2,6 +2,7 @@ package hr.bart.userDataServer.service.kod;
 
 import java.util.Optional;
 
+import org.apache.commons.lang3.builder.ToStringExclude;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,9 @@ import jakarta.transaction.Transactional;
 public class ProjektServiceImplTablicaProjekti extends Kod {
 	private int pageNumber;
 	private Optional<String> status;
+	@ToStringExclude
 	private ACommonServis aCommonServis=new ACommonServis();
+	@ToStringExclude
 	private ProjektRepository projektRepository;
 
 	public ProjektServiceImplTablicaProjekti info(Optional<String> status, int pageNumber) {

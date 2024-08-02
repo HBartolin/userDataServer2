@@ -2,6 +2,7 @@ package hr.bart.userDataServer.service.kod;
 
 import java.util.List;
 
+import org.apache.commons.lang3.builder.ToStringExclude;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import jakarta.transaction.Transactional;
 @Transactional
 public class ProjektServiceImplTraziProjekte extends Kod {
 	private String trazi;
+	@ToStringExclude
 	private ProjektRepository projektRepository;
 
 	public ProjektServiceImplTraziProjekte info(String trazi) {

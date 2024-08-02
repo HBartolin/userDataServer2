@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.builder.ToStringExclude;
+
 import hr.bart.userDataServer.db.ClaimPodugovarac;
 import hr.bart.userDataServer.repository.ClaimPodugovaracRepository;
 import hr.bart.userDataServer.repository.ProjektDetaljiRepository;
@@ -17,8 +19,11 @@ public class ClaimPodugovaracServiceImplUnesiPO extends Kod {
 	private final Long idSifarnikPodugovaraca;
 	private final String po;
 	private final Optional<BigDecimal> totalO;
+	@ToStringExclude
 	private final ClaimPodugovaracRepository claimPodugovaracRepository;
+	@ToStringExclude
 	private final ProjektDetaljiRepository projektDetaljiRepository;
+	@ToStringExclude
 	private final SifarnikPodugovaracaRepository sifarnikPodugovaracaRepository;
 
 	public ClaimPodugovaracServiceImplUnesiPO(

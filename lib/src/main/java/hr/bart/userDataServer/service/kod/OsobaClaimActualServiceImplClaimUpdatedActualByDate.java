@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.builder.ToStringExclude;
+
 import hr.bart.userDataServer.db.Claim;
 import hr.bart.userDataServer.db.OsobaClaimActual;
 import hr.bart.userDataServer.db.OsobaValuta;
@@ -25,13 +27,21 @@ public class OsobaClaimActualServiceImplClaimUpdatedActualByDate extends Kod {
 	private final Long idProjektDetalji;
 	private final LocalDate datum;
 	private final List<ClaimUpdatedActualPlanned> podatci;	
+	@ToStringExclude
 	private ACommonServis aCommonServis=new ACommonServis();
+	@ToStringExclude
 	private final OsobaClaimActualRepository osobaClaimActualRepository;
+	@ToStringExclude
 	private final SifarnikDatumaRepository sifarnikDatumaRepository;
+	@ToStringExclude
 	private final ClaimRepository claimRepository;
+	@ToStringExclude
 	private final OsobaClaimPlannedRepository osobaClaimPlannedRepository;
+	@ToStringExclude
 	private final ClaimPodugovaracRepository claimPodugovaracRepository;
+	@ToStringExclude
 	private final ProjektDetaljiRepository projektDetaljiRepository;
+	@ToStringExclude
 	private final OsobaValutaRepository osobaValutaRepository;
 	
 	public OsobaClaimActualServiceImplClaimUpdatedActualByDate(

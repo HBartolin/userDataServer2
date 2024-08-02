@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.builder.ToStringExclude;
+
 import hr.bart.userDataServer.db.Claim;
 import hr.bart.userDataServer.db.ClaimPodugovarac;
 import hr.bart.userDataServer.db.Podugovarac;
@@ -28,12 +30,19 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 	private final LocalDate datumActual;
 	private final Optional<BigDecimal> cijena;
 	private final Optional<Long> invoiceNumber;
+	@ToStringExclude
 	private ACommonServis aCommonServis=new ACommonServis();
+	@ToStringExclude
 	private final ClaimPodugovaracRepository claimPodugovaracRepository;
+	@ToStringExclude
 	private final PodugovaracRepository podugovaracRepository;
+	@ToStringExclude
 	private final ProjektDetaljiRepository projektDetaljiRepository;
+	@ToStringExclude
 	private final ClaimRepository claimRepository;
+	@ToStringExclude
 	private final OsobaClaimActualRepository osobaClaimActualRepository;
+	@ToStringExclude
 	private final OsobaClaimPlannedRepository osobaClaimPlannedRepository;
 
 	public PodugovaracServiceImplUnesiPodugovarac(

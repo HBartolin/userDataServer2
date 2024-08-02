@@ -8,6 +8,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.apache.commons.lang3.builder.ToStringExclude;
+
 import java.util.Optional;
 import java.util.Set;
 
@@ -25,12 +28,19 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 	private final LocalDate datum;
 	private final HashMap<String, String> podatci;
 	private final Long idProjektDetalji;
+	@ToStringExclude
 	private ACommonServis aCommonServis=new ACommonServis();
+	@ToStringExclude
 	private final ClaimRepository claimRepository;
+	@ToStringExclude
 	private final OsobaClaimPlannedRepository osobaClaimPlannedRepository;
+	@ToStringExclude
 	private final OsobaClaimActualRepository osobaClaimActualRepository;
+	@ToStringExclude
 	private final SifarnikMjesecaRepository sifarnikMjesecaRepository;
+	@ToStringExclude
 	private final ClaimPodugovaracRepository claimPodugovaracRepository;
+	@ToStringExclude
 	private final ProjektDetaljiRepository projektDetaljiRepository;
 	
 	public OsobaClaimPlannedServiceImplClaimNewPlannedByDate(

@@ -2,6 +2,7 @@ package hr.bart.userDataServer.service.kod;
 
 import java.util.Optional;
 
+import org.apache.commons.lang3.builder.ToStringExclude;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,11 @@ import jakarta.transaction.Transactional;
 @Transactional
 public class ProjektServiceImplProjekti extends Kod {
 	private Optional<String> status;
+	@ToStringExclude
 	private ACommonServis aCommonServis=new ACommonServis();
 	
 	@Autowired
+	@ToStringExclude
 	private ProjektRepository projektRepository;	
 	
 	public ProjektServiceImplProjekti init(Optional<String> status) {

@@ -3,6 +3,8 @@ package hr.bart.userDataServer.service.kod;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+import org.apache.commons.lang3.builder.ToStringExclude;
+
 import hr.bart.userDataServer.db.Projekt;
 import hr.bart.userDataServer.db.ProjektDetalji;
 import hr.bart.userDataServer.db.SifarnikValuta;
@@ -15,8 +17,11 @@ public class ProjektDetaljiServiceImplUrediProjektDatalji extends Kod {
 	private final Long id;
 	private final String totalRevenue;
 	private final String costPs;
+	@ToStringExclude
 	private final ProjektDetaljiRepository projektDetaljiRepository;
+	@ToStringExclude
 	private final SifarnikValutaRepository sifarnikValutaRepository;
+	@ToStringExclude
 	private final ProjektRepository projektRepository;
 
 	public ProjektDetaljiServiceImplUrediProjektDatalji(

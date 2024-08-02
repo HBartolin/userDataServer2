@@ -2,6 +2,7 @@ package hr.bart.userDataServer.service.kod;
 
 import java.util.Optional;
 
+import org.apache.commons.lang3.builder.ToStringExclude;
 import org.springframework.data.domain.PageRequest;
 
 import hr.bart.userDataServer.db.SifarnikOsoba;
@@ -12,7 +13,9 @@ public class SifarnikOsobaServiceImplEditirajSifarnikOsoba extends Kod {
 	private final Optional<Long> id;
 	private final String ime;
 	private final String prezime;
+	@ToStringExclude
 	private ACommonServis aCommonServis=new ACommonServis();
+	@ToStringExclude
 	private final SifarnikOsobaRepository sifarnikOsobaRepository;
 
 	public SifarnikOsobaServiceImplEditirajSifarnikOsoba(

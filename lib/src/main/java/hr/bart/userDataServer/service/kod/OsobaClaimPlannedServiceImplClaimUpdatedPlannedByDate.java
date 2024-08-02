@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.builder.ToStringExclude;
+
 import hr.bart.userDataServer.db.Claim;
 import hr.bart.userDataServer.db.OsobaClaimPlanned;
 import hr.bart.userDataServer.db.SifarnikMjeseca;
@@ -21,12 +23,19 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 	private final LocalDate datum;
 	private final List<ClaimUpdatedActualPlanned> podatci;
 	private final Long idProjektDetalji;
+	@ToStringExclude
 	private ACommonServis aCommonServis=new ACommonServis();
+	@ToStringExclude
 	private final OsobaClaimPlannedRepository osobaClaimPlannedRepository;
+	@ToStringExclude
 	private final SifarnikMjesecaRepository sifarnikMjesecaRepository;
+	@ToStringExclude
 	private final ClaimRepository claimRepository;
+	@ToStringExclude
 	private final OsobaClaimActualRepository osobaClaimActualRepository;
+	@ToStringExclude
 	private final ClaimPodugovaracRepository claimPodugovaracRepository;
+	@ToStringExclude
 	private final ProjektDetaljiRepository projektDetaljiRepository;
 
 	public OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate(

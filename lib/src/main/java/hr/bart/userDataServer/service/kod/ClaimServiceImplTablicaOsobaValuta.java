@@ -3,6 +3,8 @@ package hr.bart.userDataServer.service.kod;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.builder.ToStringExclude;
+
 import hr.bart.userDataServer.db.Claim;
 import hr.bart.userDataServer.repository.ClaimRepository;
 import hr.bart.userDataServer.repository.OsobaClaimActualRepository;
@@ -12,8 +14,11 @@ import hr.bart.userDataServer.util.PojoInterface;
 public class ClaimServiceImplTablicaOsobaValuta extends Kod {
 	private final Long idProjektDetalji;
 	private ACommonServis aCommonServis=new ACommonServis();
+	@ToStringExclude
 	private final ClaimRepository claimRepository;
+	@ToStringExclude
 	private final OsobaClaimActualRepository osobaClaimActualRepository;
+	@ToStringExclude
 	private final OsobaClaimPlannedRepository osobaClaimPlannedRepository;
 
 	public ClaimServiceImplTablicaOsobaValuta(

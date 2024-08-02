@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import org.apache.commons.lang3.builder.ToStringExclude;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -56,12 +57,19 @@ public class ExcelServiceImplUExcel extends Kod {
 	private HashMap<String, CellStyle> hmCellStyle=new HashMap<>();
 	private SortedSet<LocalDate> datumiSortedSet;
 	private Optional<List<Claim>> claimListO;
+	@ToStringExclude
 	private ACommonServis aCommonServis=new ACommonServis();
+	@ToStringExclude
 	private final PodugovaracRepository podugovaracRepository;
+	@ToStringExclude
 	private final OsobaValutaRepository osobaValutaRepository;
+	@ToStringExclude
 	private final ProjektDetaljiRepository projektDetaljiRepository;
+	@ToStringExclude
 	private final ClaimRepository claimRepository;
+	@ToStringExclude
 	private final OsobaClaimActualRepository osobaClaimActualRepository;
+	@ToStringExclude
 	private final OsobaClaimPlannedRepository osobaClaimPlannedRepository;
 
 	public ExcelServiceImplUExcel(

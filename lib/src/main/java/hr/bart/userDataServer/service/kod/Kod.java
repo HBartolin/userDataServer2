@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.StandardToStringStyle;
+import org.apache.commons.lang3.builder.ToStringExclude;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -13,7 +14,9 @@ import hr.bart.userDataServer.util.RezultatPage;
 import hr.bart.userDataServer.util.TimerKoda;
 
 public abstract class Kod {
+	@ToStringExclude
 	private TimerKoda timerKoda=new TimerKoda();
+	@ToStringExclude
 	private final Logger LOGGER=LoggerFactory.getLogger(getClass());
 	protected final static int pageRequestSize50=50;
 	protected final static int pageRequestSize8=8;
@@ -55,7 +58,6 @@ public abstract class Kod {
 	
 	private String getReflectionToStringBuilder() {
 		ReflectionToStringBuilder rb=new ReflectionToStringBuilder(this, getStandardToStringStyle());
-		rb.setExcludeFieldNames("aCommonServis", "projektRepository", "LOGGER", "timerKoda");
 		
 		return String.format("%s %s %s", getClass().getSimpleName(), timerKoda.getShowTime(), rb.toString());
 	}

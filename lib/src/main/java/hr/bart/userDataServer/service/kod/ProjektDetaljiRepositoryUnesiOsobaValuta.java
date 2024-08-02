@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.builder.ToStringExclude;
 import org.springframework.data.domain.PageRequest;
 
 import hr.bart.userDataServer.db.Claim;
@@ -40,15 +41,25 @@ public class ProjektDetaljiRepositoryUnesiOsobaValuta extends Kod {
 	private final LocalDate sifarnikDatumaDoLD;
 	private String sifarnikDatumaOdValue="Datum od";
 	private String sifarnikDatumaDoValue="Datum do";
+	@ToStringExclude
 	private ACommonServis aCommonServis=new ACommonServis();
+	@ToStringExclude
 	private final SifarnikDatumaRepository sifarnikDatumaRepository;
+	@ToStringExclude
 	private final OsobaValutaRepository osobaValutaRepository;
+	@ToStringExclude
 	private final SifarnikOsobaRepository sifarnikOsobaRepository;
+	@ToStringExclude
 	private final SifarnikValutaRepository sifarnikValutaRepository;
+	@ToStringExclude
 	private final OsobaClaimActualRepository osobaClaimActualRepository;
+	@ToStringExclude
 	private final ClaimRepository claimRepository;
+	@ToStringExclude
 	private final ProjektDetaljiRepository projektDetaljiRepository;
+	@ToStringExclude
 	private final SifarnikMjesecaRepository sifarnikMjesecaRepository;
+	@ToStringExclude
 	private final OsobaClaimPlannedRepository osobaClaimPlannedRepository;
 	
 	public ProjektDetaljiRepositoryUnesiOsobaValuta(
