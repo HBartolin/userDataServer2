@@ -45,8 +45,6 @@ import hr.bart.userDataServer.util.ZatvoriOtvori;
 public class ProjektController {
 	private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("y-M-d");
 	
-//	@Autowired
-//	private transient ProjektServiceImpl projektService;  
 	@Autowired
 	private transient ProjektServiceImplProjekti projektServiceImplProjekti;
 	@Autowired
