@@ -25,7 +25,6 @@ import hr.bart.userDataServer.service.OsobaClaimActualService;
 import hr.bart.userDataServer.service.OsobaClaimPlannedService;
 import hr.bart.userDataServer.service.OsobaValutaService;
 import hr.bart.userDataServer.service.PodugovaracService;
-import hr.bart.userDataServer.service.RestService;
 import hr.bart.userDataServer.service.SifarnikOsobaService;
 import hr.bart.userDataServer.service.SifarnikPodugovaracaService;
 import hr.bart.userDataServer.util.ClaimUpdatedActualPlanned;
@@ -52,16 +51,7 @@ public class ProjektController extends ResponseEntityPojo {
 	@Autowired
 	private transient PodugovaracService podugovaracService;
 	@Autowired
-	private transient ClaimPodugovaracService purchaseOrderService;
-	@Autowired
-	private transient RestService restService;
-	
-	@GetMapping(value="/createDB") @PostMapping(value = "/createDB")
-	public ResponseEntity<PojoInterface> createDB() {		
-		PojoInterface pi=restService.createDB();
-		
-		return handlePi(pi);
-	}
+	private transient ClaimPodugovaracService purchaseOrderService;    
 	
 	@GetMapping(value="/sifarniciOsoba")
 	public ResponseEntity<PojoInterface> sifarniciOsoba() {

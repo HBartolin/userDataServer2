@@ -3,6 +3,8 @@ package hr.bart.userDataServer.service.kod;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import org.springframework.stereotype.Service;
+
 import hr.bart.userDataServer.db.Claim;
 import hr.bart.userDataServer.db.ClaimPodugovarac;
 import hr.bart.userDataServer.db.OsobaClaimActual;
@@ -29,7 +31,10 @@ import hr.bart.userDataServer.repository.SifarnikPodugovaracaRepository;
 import hr.bart.userDataServer.repository.SifarnikValutaRepository;
 import hr.bart.userDataServer.util.DbStatus;
 import hr.bart.userDataServer.util.PojoInterface;
+import jakarta.transaction.Transactional;
 
+@Service
+@Transactional
 public class RestServiceImplCreateDB extends Kod {
 	private final SifarnikValutaRepository sifarnikValutaRepository;
 	private final SifarnikOsobaRepository sifarnikOsobaRepository;
