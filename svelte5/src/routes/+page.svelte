@@ -1,5 +1,47 @@
 <script>
 	import search16 from '$lib/img/search16.png';
+  import { onMount } from 'svelte';
+
+  var serverUrl=`http://localhost:8090/api/`;
+  var aktivni="aktivni";
+  var neaktivni="neaktivni";
+  var dataRezultatSO=[];
+
+  onMount(() => {
+		projektiTC();
+	});
+
+  function pozoviRestServis(mojUrl, ucitaj) {
+	  console.log(mojUrl);
+	
+    fetch(mojUrl)
+        .then((response) => response.json())
+        .then(ucitaj);
+}
+
+  function inicijalnoNapuni() {
+    var projektUrl=`${serverUrl}createDB`;
+    
+    pozoviRestServis(projektUrl, projektiTC);
+  }
+
+  function projektiTC() {
+    var aktivni_=document.getElementById(aktivni);
+    var neaktivni_=document.getElementById(neaktivni);
+    var projektUrl=`${serverUrl}projekti?`;
+
+    if(aktivni_.checked) {
+        projektUrl+="status=A";
+    } else if(neaktivni_.checked) {
+        projektUrl+="status=N";
+    } 
+
+    pozoviRestServis(projektUrl, projektiRest_);
+  }
+
+  function projektiRest_(data) {
+    dataRezultatSO=data.rezultat;
+  }
 </script>
 
 <div class="container">
@@ -23,7 +65,7 @@
             </div>
           </div>
           <button class="btn btn-primary mb-3 ml-3" type="submit" data-toggle="modal" data-target="#noviProjekt" _onclick="hideGreska()">Novi projekt</button>
-          <button class="btn btn-primary mb-3 ml-3" type="submit" _onclick="inicijalnoNapuni()">Inicijalno napuni</button>
+          <button class="btn btn-primary mb-3 ml-3" type="submit" on:click={() => inicijalnoNapuni()}>Inicijalno napuni</button>
         </div>
         <div id="pretrazi" class="pretrazi">
             <img src={search16} _onclick="pretrazi()" >
@@ -59,7 +101,17 @@
                 </th>
             </tr>
         </thead>
-        <tbody id="projektTablicaBody"></tbody>
+        <tbody id="projektTablicaBody">
+          {#each dataRezultatSO as cell}
+          <tr>
+            <td>{cell.id}</td>
+            <td>{cell.claim}</td>
+            <td>{cell.contract}</td>
+            <td>{cell.status}</td>
+            <td></td>
+          </tr>
+          {/each}          
+        </tbody>
       </table>
       <div class="btn-group" role="group">
         <button type="button" id="projektTablicaPrethodno" _onclick="projektTablicaPrethodno()" class="btn btn-outline-secondary">&laquo;<div id="pTablicaPrethodno" style="display: none;"></div></button>
