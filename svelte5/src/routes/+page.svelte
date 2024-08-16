@@ -1,23 +1,15 @@
-<script>
-	import search16 from '$lib/img/search16.png';
+<script lang="ts">
+  import { pozoviRestServis, serverUrl } from '$lib/common';
   import { onMount } from 'svelte';
+  import search16 from '$lib/img/search16.png';
 
-  var serverUrl=`http://localhost:8090/api/`;
   var aktivni="aktivni";
   var neaktivni="neaktivni";
-  var dataRezultatSO=[];
+  let dataRezultatSO=$state([]);
 
   onMount(() => {
 		projektiTC();
 	});
-
-  function pozoviRestServis(mojUrl, ucitaj) {
-	  console.log(mojUrl);
-	
-    fetch(mojUrl)
-        .then((response) => response.json())
-        .then(ucitaj);
-}
 
   function inicijalnoNapuni() {
     var projektUrl=`${serverUrl}createDB`;
@@ -39,8 +31,8 @@
     pozoviRestServis(projektUrl, projektiRest_);
   }
 
-  function projektiRest_(data) {
-    dataRezultatSO=data.rezultat;
+  function projektiRest_(data: any) {
+    dataRezultatSO= data.rezultat;
   }
 </script>
 
@@ -119,69 +111,7 @@
       </div>
     </div>
 
-    <div class="modal fade" id="noviProjekt" tabindex="-1" role="dialog" aria-labelledby="noviProjektLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="noviProjektLabel">Novi projekt</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div name="greska" style="display: none"></div>
-          <div class="modal-body">
-            <div class="form-group row">
-              <label for="inputClaim" class="col-sm-2 col-form-label">Claim:</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputClaim" autofocus>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="inputContract" class="col-sm-2 col-form-label">Contract:</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputContract">
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" _onclick="noviProjekt()">Novi projekt</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    
 
-    <div class="modal fade" id="okModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Poruka</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div id="okModalMsg" class="modal-body">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Zatvori</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="gumbiZaRedak" style="display: none;">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent_redakId}" aria-controls="navbarSupportedContent_redakId}" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent_redakId}">
-          <div class="btn-group" role="group">
-            <button type="button" class="btn btn-outline-primary" _onclick="prikaziProjekt(redakId})">Prikaži</button>
-            <button type="button" class="btn btn-outline-primary" _onclick="uExel(redakId}, 'redakClaim}', 'redakContract}')">U Excel</button>
-            <button type="button" class="btn btn-outline-danger" _onclick="zatvoriProjekt(redakId}, redakTs})">Zatvori</button>
-            <button type="button" class="btn btn-outline-primary" _onclick="otvoriProjekt(redakId}, redakTs})">Otvori</button>
-          </div>
-        </div>
-      </nav>
-    </div>
+   
 
