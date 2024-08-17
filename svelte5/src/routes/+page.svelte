@@ -22,9 +22,9 @@
     var neaktivni_=document.getElementById(neaktivni);
     var projektUrl=`${serverUrl}projekti?`;
 
-    if(aktivni_.checked) {
+    if(aktivni_?.checked) {
         projektUrl+="status=A";
-    } else if(neaktivni_.checked) {
+    } else if(neaktivni_?.checked) {
         projektUrl+="status=N";
     } 
 
@@ -34,8 +34,13 @@
   function projektiRest_(data: any) {
     dataRezultatSO= data.rezultat;
   }
+
+  function prikaziProjekt(id: string) {   
+    window.open(`projektDetalji/?id=${id}`, "_parent");
+}
 </script>
 
+<!-- svelte-ignore a11y_missing_attribute -->
 <div class="container">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,7 +62,7 @@
             </div>
           </div>
           <button class="btn btn-primary mb-3 ml-3" type="submit" data-toggle="modal" data-target="#noviProjekt" _onclick="hideGreska()">Novi projekt</button>
-          <button class="btn btn-primary mb-3 ml-3" type="submit" on:click={() => inicijalnoNapuni()}>Inicijalno napuni</button>
+          <button class="btn btn-primary mb-3 ml-3" type="submit" onclick={() => inicijalnoNapuni()}>Inicijalno napuni</button>
         </div>
         <div id="pretrazi" class="pretrazi">
             <img src={search16} _onclick="pretrazi()" >
@@ -67,8 +72,6 @@
           <button _onclick="projektTrazi()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Zatvori</button>
         </div>
       </nav>
-
-      <div name="greska" style="display: none"></div>
    
       <table class="table table-sm table-striped">
         <thead>
@@ -100,7 +103,16 @@
             <td>{cell.claim}</td>
             <td>{cell.contract}</td>
             <td>{cell.status}</td>
-            <td></td>
+            <td>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent_{cell.id}">
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-outline-primary" onclick={() => prikaziProjekt(cell.id)}>Prikaži</button>
+                  <button type="button" class="btn btn-outline-primary" _onclick="uExel({cell.id}, '{cell.claim}', '{cell.contract}')">U Excel</button>
+                  <button type="button" class="btn btn-outline-danger" _onclick="zatvoriProjekt({cell.id}, {cell.ts})">Zatvori</button>
+                  <button type="button" class="btn btn-outline-primary" _onclick="otvoriProjekt({cell.id}, {cell.ts})">Otvori</button>
+                </div>
+              </div>
+            </td>
           </tr>
           {/each}          
         </tbody>
