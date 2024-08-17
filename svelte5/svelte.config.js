@@ -14,12 +14,18 @@ const config = {
 		adapter: adapter({
 			// default options are shown. On some platforms
 			// these options are set automatically — see below
-			pages: 'build',
-			assets: 'build',
+			pages: 'build/svelte5',
+			assets: 'build/svelte5',
 			fallback: undefined,
 			precompress: false,
-			strict: true
+			strict: true,
+	//		paths: {
+	//			base: '/build',
+	//		},
 		}),
+	//	paths: {
+	//		base: '/build',
+	//	},
 	},
 	preprocess: vitePreprocess()
 };
