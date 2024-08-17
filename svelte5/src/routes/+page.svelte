@@ -11,13 +11,13 @@
 		projektiTC();
 	});
 
-  function inicijalnoNapuni() {
+  const inicijalnoNapuni: Function = () => {
     var projektUrl=`${serverUrl}createDB`;
     
     pozoviRestServis(projektUrl, projektiTC);
   }
 
-  function projektiTC() {
+  const projektiTC: Function = () => {
     var aktivni_=document.getElementById(aktivni);
     var neaktivni_=document.getElementById(neaktivni);
     var projektUrl=`${serverUrl}projekti?`;
@@ -31,11 +31,11 @@
     pozoviRestServis(projektUrl, projektiRest_);
   }
 
-  function projektiRest_(data: any) {
+  const projektiRest_: Function = (data: any) => {
     dataRezultatSO= data.rezultat;
   }
 
-  function prikaziProjekt(id: string) {   
+  const prikaziProjekt: Function = (id: string) => {   
     window.open(`projektDetalji/?id=${id}`, "_parent");
 }
 </script>
