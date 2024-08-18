@@ -41,38 +41,78 @@
 </script>
 
 <!-- svelte-ignore a11y_missing_attribute -->
-<div class="container">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item active" aria-current="page">Projekti</li>
-            </ol>
-          </nav>
-          <div class="btn-group" role="group">
-            <button id="btnGroupDrop1" type="button" class="btn btn-primary mb-3 ml-3 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Uredi
-            </button>
-            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-              <a class="dropdown-item" _onclick="urediOsobuOtvori()">Uredi osobu</a>
-              <a class="dropdown-item" _onclick="urediPodugovaraca()">Uredi podugovarača</a>
-            </div>
-          </div>
-          <button class="btn btn-primary mb-3 ml-3" type="submit" data-toggle="modal" data-target="#noviProjekt" _onclick="hideGreska()">Novi projekt</button>
-          <button class="btn btn-primary mb-3 ml-3" type="submit" onclick={() => inicijalnoNapuni()}>Inicijalno napuni</button>
-        </div>
-        <div id="pretrazi" class="pretrazi">
-            <img src={search16} _onclick="pretrazi()" >
-        </div>
-        <div id="trazi" class="form-inline my-2 my-lg-0" style="display: none">
-          <input type="text" id="projektTrazi" _onKeyUp="onProjektTrazi()" class="form-control mr-sm-2" autofocus>
-          <button _onclick="projektTrazi()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Zatvori</button>
-        </div>
-      </nav>
-   
+
+<div class="navbar bg-base-100">
+  <div class="navbar-start">
+    <div class="dropdown">
+      <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h8m-8 6h16" />
+        </svg>
+      </div>
+      <ul
+        tabindex="0"
+        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+        <li><a>Item 1</a></li>
+        <li>
+          <a>Parent</a>
+          <ul class="p-2">
+            <li><a>Submenu 1</a></li>
+            <li><a>Submenu 2</a></li>
+          </ul>
+        </li>
+        <li><a>Item 3</a></li>
+      </ul>
+    </div>
+    <div class="btn btn-ghost breadcrumbs text-sm">
+      <ul>
+        <li><a>Projekti</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="navbar-center hidden lg:flex">
+    <div class="menu menu-horizontal px-1">
+      <details class="dropdown">
+        <summary class="btn m-1">Uredi</summary>
+        <ul class="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+          <li><a _onclick="urediOsobuOtvori()">Uredi osobu</a></li>
+          <li><a  _onclick="urediPodugovaraca()">Uredi podugovarača</a></li>
+        </ul>
+      </details>
+      
+      <button class="btn btn-primary" type="submit" _onclick="hideGreska()">Novi projekt</button>
+      <button class="btn btn-primary" type="submit" onclick={() => inicijalnoNapuni()}>Inicijalno napuni</button>
+    </div>
+  </div>
+  <div class="navbar-end">
+    <img src={search16} _onclick="pretrazi()" >
+
+    <div id="trazi" class="form-inline my-2 my-lg-0" style="display: none">
+      <input type="text" id="projektTrazi" _onKeyUp="onProjektTrazi()" class="form-control mr-sm-2" autofocus>
+      <button _onclick="projektTrazi()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Zatvori</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="container">   
       <table class="table table-sm table-striped">
         <thead>
             <tr>
@@ -104,12 +144,12 @@
             <td>{cell.contract}</td>
             <td>{cell.status}</td>
             <td>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent_{cell.id}">
-                <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-outline-primary" onclick={() => prikaziProjekt(cell.id)}>Prikaži</button>
-                  <button type="button" class="btn btn-outline-primary" _onclick="uExel({cell.id}, '{cell.claim}', '{cell.contract}')">U Excel</button>
-                  <button type="button" class="btn btn-outline-danger" _onclick="zatvoriProjekt({cell.id}, {cell.ts})">Zatvori</button>
-                  <button type="button" class="btn btn-outline-primary" _onclick="otvoriProjekt({cell.id}, {cell.ts})">Otvori</button>
+              <div class="" id="navbarSupportedContent_{cell.id}">
+                <div class="join">
+                  <button type="button" class="btn btn-outline btn-primary join-item" onclick={() => prikaziProjekt(cell.id)}>Prikaži</button>
+                  <button type="button" class="btn btn-outline btn-primary join-item" _onclick="uExel({cell.id}, '{cell.claim}', '{cell.contract}')">U Excel</button>
+                  <button type="button" class="btn btn-outline btn-error join-item" _onclick="zatvoriProjekt({cell.id}, {cell.ts})">Zatvori</button>
+                  <button type="button" class="btn btn-outline btn-primary join-item" _onclick="otvoriProjekt({cell.id}, {cell.ts})">Otvori</button>
                 </div>
               </div>
             </td>
