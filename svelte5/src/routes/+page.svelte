@@ -82,14 +82,14 @@
   <div class="navbar-center hidden lg:flex">
     <div class="menu menu-horizontal px-1">
       <details class="dropdown">
-        <summary class="btn m-1">Uredi</summary>
-        <ul class="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+        <summary class="btn btn-primary">Uredi</summary>
+        <ul class="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow margi">
           <li><a _onclick="urediOsobuOtvori()">Uredi osobu</a></li>
-          <li><a  _onclick="urediPodugovaraca()">Uredi podugovarača</a></li>
+          <li><a _onclick="urediPodugovaraca()">Uredi podugovarača</a></li>
         </ul>
       </details>
       
-      <button class="btn btn-primary" type="submit" _onclick="hideGreska()">Novi projekt</button>
+      <button class="btn btn-primary mx-2" type="submit" _onclick="hideGreska()">Novi projekt</button>
       <button class="btn btn-primary" type="submit" onclick={() => inicijalnoNapuni()}>Inicijalno napuni</button>
     </div>
   </div>
@@ -103,17 +103,8 @@
   </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-<div class="container">   
-      <table class="table table-sm table-striped">
+<div class="container overflow-x-auto">   
+      <table class="table table-zebra table-sm">
         <thead>
             <tr>
                 <th class="text-right">Id</th>
@@ -138,7 +129,7 @@
         </thead>
         <tbody id="projektTablicaBody">
           {#each dataRezultatSO as cell}
-          <tr>
+          <tr class="hover">
             <td>{cell.id}</td>
             <td>{cell.claim}</td>
             <td>{cell.contract}</td>
