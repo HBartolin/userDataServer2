@@ -12,6 +12,7 @@
 	"devDependencies": {
 		"@sveltejs/adapter-static": "^3.0.4",
 		"@sveltejs/kit": "^2.5.25",
+		"@zerodevx/svelte-toast": "^0.9.5",
 		"autoprefixer": "^10.4.20",
 		"daisyui": "^4.12.10",
 		"postcss": "^8.4.41",
@@ -21,6 +22,8 @@
 		"typescript": "^5.5.4",
 		"vite": "^5.4.2"
 	},
-	"overrides": {"@sveltejs/vite-plugin-svelte": "^4.0.0-next.6"},
+	"overrides": {
+		"@sveltejs/vite-plugin-svelte": "^4.0.0-next.6"
+	},
 	"type": "module"
 }

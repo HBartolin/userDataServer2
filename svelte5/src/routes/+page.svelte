@@ -2,10 +2,14 @@
   import { pozoviRestServis, serverUrl } from '$lib/common';
   import { onMount } from 'svelte';
   import search16 from '$lib/img/search16.png';
+  import MojCatch from "$lib/MojCatch.svelte";
+  import DisplayAlert from "$lib/DisplayAlert.svelte";
 
   var aktivni="aktivni";
   var neaktivni="neaktivni";
   let dataRezultatSO=$state([]);
+  let adiPromise: Promise<string>;
+  let displayAlertMessage: string;
 
   onMount(() => {
 		projektiTC();
@@ -41,6 +45,12 @@
 </script>
 
 <!-- svelte-ignore a11y_missing_attribute -->
+
+{#await adiPromise}
+    <DisplayAlert msg={displayAlertMessage} />
+{:catch e}
+    <MojCatch errorMsg={e} />
+{/await}
 
 <div class="navbar bg-base-100">
   <div class="navbar-start">
