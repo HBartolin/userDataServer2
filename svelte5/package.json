@@ -11,11 +11,11 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-static": "^3.0.4",
-		"@sveltejs/kit": "^2.5.24",
+		"@sveltejs/kit": "^2.5.25",
 		"autoprefixer": "^10.4.20",
 		"daisyui": "^4.12.10",
 		"postcss": "^8.4.41",
-		"svelte": "^5.0.0-next.1",
+		"svelte": "^5.0.0-next.242",
 		"svelte-check": "^3.8.6",
 		"tailwindcss": "^3.4.10",
 		"typescript": "^5.5.4",
