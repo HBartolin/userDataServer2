@@ -4,32 +4,26 @@
   import search16 from '$lib/img/search16.png';
   import MojCatch from "$lib/MojCatch.svelte";
   import DisplayAlert from "$lib/DisplayAlert.svelte";
-  import { SvelteToast, toast } from '@zerodevx/svelte-toast'
 
   var aktivni="aktivni";
   var neaktivni="neaktivni";
   let dataRezultatSO=$state([]);
-  let adiPromise: Promise<string>;
-  let displayAlertMessage: string;
+  let adiPromise: Promise<string>=$state(undefined);
+  let displayAlertMessage: string=$state();
 
   onMount(() => {
-    toast.pop(0);
-    toast.push("aaaaa");
-    displayAlertMessage="Ažuriram podatak.";
+    displayAlertMessage="Dohvaćam podatak.";
 		adiPromise=projektiTC();
 	});
 
   const inicijalnoNapuni: Function = async () => {
-    displayAlertMessage="Ažuriram podatak.";
+    displayAlertMessage="Dodajem podatak.";
     var projektUrl=`${serverUrl}createDB`;
     
-    await (
-      adiPromise=pozoviRestServis(projektUrl, projektiTC)
-    );
+    adiPromise=pozoviRestServis(projektUrl, projektiTC);
   }
 
   const projektiTC: Function = async () => {
-    displayAlertMessage="Ažuriram podatak.";
     var aktivni_=document.getElementById(aktivni);
     var neaktivni_=document.getElementById(neaktivni);
     var projektUrl=`${serverUrl}projekti?`;
@@ -40,9 +34,7 @@
         projektUrl+="status=N";
     } 
 
-    await (
-      adiPromise=pozoviRestServis(projektUrl, projektiRest_)
-    );
+    await pozoviRestServis(projektUrl, projektiRest_);
   }
 
   const projektiRest_: Function = async (data: any) => {
@@ -55,11 +47,8 @@
 </script>
 
 <!-- svelte-ignore a11y_missing_attribute -->
-<div class="wrap-green">
-	
-</div>
+
 {#await adiPromise}
-<SvelteToast />
     <DisplayAlert msg={displayAlertMessage} />
 {:catch e}
     <MojCatch errorMsg={e} />
