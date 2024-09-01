@@ -47,6 +47,7 @@
 </script>
 
 <!-- svelte-ignore a11y_missing_attribute -->
+<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 
 {#await adiPromise}
     <DisplayAlert msg={displayAlertMessage} />
@@ -74,15 +75,16 @@
       <ul
         tabindex="0"
         class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-        <li><a>Item 1</a></li>
-        <li>
-          <a>Parent</a>
-          <ul class="p-2">
-            <li><a>Submenu 1</a></li>
-            <li><a>Submenu 2</a></li>
+        <details class="dropdown">
+          <summary class="btn btn-primary">Uredi</summary>
+          <ul class="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow margi">
+            <li><a _onclick="urediOsobuOtvori()">Uredi osobu</a></li>
+            <li><a _onclick="urediPodugovaraca()">Uredi podugovarača</a></li>
           </ul>
-        </li>
-        <li><a>Item 3</a></li>
+        </details>
+        
+        <button class="btn btn-primary mt-4" type="submit" _onclick="hideGreska()">Novi projekt</button>
+        <button class="btn btn-primary mt-4" type="submit" onclick={() => inicijalnoNapuni()}>Inicijalno napuni</button>
       </ul>
     </div>
     <div class="btn btn-ghost breadcrumbs text-sm">
