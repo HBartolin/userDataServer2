@@ -48,6 +48,7 @@
 
 <!-- svelte-ignore a11y_missing_attribute -->
 <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+<!-- svelte-ignore a11y_missing_attribute -->
 
 {#await adiPromise}
     <DisplayAlert msg={displayAlertMessage} />
