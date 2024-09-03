@@ -6,7 +6,7 @@
 
 <style>
 	:root {
-		--MojToastContainerTop: 4rem;
+		--MojToastContainerTop: 5rem;
 		--MojToastContainerRight: auto;
 		--mojToastContainerBottom: auto;
 		--mojToastContainerLeft: calc(50vw - 8rem);
