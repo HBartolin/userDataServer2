@@ -1,6 +1,5 @@
 <script lang="ts">
-     export let msg: string = "Nedostaje poruka.";
-     export let alertMsg: string;
+     let {msg, alertMsg}=$props();
 </script>
 
 <div class="toast toast-center toast-middle">
