@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
+  import BartToast from "./BartToast.svelte";
+//    import { onMount } from 'svelte';
  //   import { SvelteToast, toast } from '@zerodevx/svelte-toast'
 
     export let errorMsg: string = "Nedostaje argument 'errorMsg'.";
@@ -7,21 +8,17 @@
 
     $: console.log(errorMsg);
 
-    onMount(() => {
+//    onMount(() => {
    //     toast.pop(0);
    //     toast.push(errorMsg.toString());
-    });
+ //   });
 
-    const options = {
-        'duration': durationMS,
-    };
-    // <SvelteToast {options} />
+   // const options = {
+     //   'duration': durationMS,
+  //  };
+    // <SvelteToast {options} />  class="wrap-red"
 </script>
 
-<div class="wrap-red">
-    <div class="toast toast-top toast-end">
-        <div class="alert alert-error">
-          <span>{errorMsg}</span>
-        </div>
-      </div>
-</div>
+<BartToast msg={errorMsg} alertMsg="alert-error" />
+    
+

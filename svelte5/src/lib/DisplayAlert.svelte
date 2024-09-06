@@ -1,24 +1,19 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
+    import BartToast from "./BartToast.svelte";
+    //import { onMount } from 'svelte';
    // import { SvelteToast, toast } from '@zerodevx/svelte-toast'
 
     export let msg: string = "Nedostaje poruka.";
 
-    onMount(() => {
+  //  onMount(() => {
    //    toast.pop(0);
    //    toast.push(msg);
-    })
+  //  })
 
-    const options = {
-    };
+    //const options = {
+    //};
 
     // <SvelteToast {options} />
 </script>
 	
-<div class="wrap-green">
-	<div class="toast toast-top toast-end">
-    <div class="alert alert-success">
-      <span>{msg}</span>
-    </div>
-  </div>
-</div>
+<BartToast {msg} alertMsg="alert-success" />
