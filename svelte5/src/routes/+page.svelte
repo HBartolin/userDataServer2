@@ -10,6 +10,7 @@
   let dataRezultatSO=$state([]);
   let adiPromise: Promise<string>=$state(undefined);
   let displayAlertMessage: string=$state();
+  let shownTrazi: boolean=$state(false);
 
   onMount(() => {
     displayAlertMessage="Dohvaćam podatak.";
@@ -44,6 +45,14 @@
   const prikaziProjekt: Function = (id: string) => {   
     window.open(`projektDetalji/?id=${id}`, "_parent");
 }
+
+  const pretrazi: Function = () => {
+    shownTrazi=true;
+  }
+
+  const projektTrazi: Function = () => {
+    shownTrazi=false;
+  }
 </script>
 
 <!-- svelte-ignore a11y_missing_attribute -->
@@ -109,12 +118,14 @@
     </div>
   </div>
   <div class="navbar-end">
-    <img src={search16} _onclick="pretrazi()" >
-
-    <div id="trazi" class="form-inline my-2 my-lg-0" style="display: none">
-      <input type="text" id="projektTrazi" _onKeyUp="onProjektTrazi()" class="form-control mr-sm-2" autofocus>
-      <button _onclick="projektTrazi()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Zatvori</button>
-    </div>
+    {#if !shownTrazi}
+      <img src={search16} onclick={() => pretrazi()} >
+    {:else}
+      <div id="trazi" class="">
+        <input type="text" id="projektTrazi" _onKeyUp="onProjektTrazi()" class="input input-bordered input-primary input-xs max-w-xs" autofocus>
+        <button onclick={() => projektTrazi()} class="btn btn-primary" type="submit">Zatvori</button>
+      </div>
+    {/if}
   </div>
 </div>
 
