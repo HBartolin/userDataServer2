@@ -119,7 +119,7 @@
   </div>
   <div class="navbar-end">
     {#if !shownTrazi}
-      <img src={search16} onclick={() => pretrazi()} >
+      <a onclick={() => pretrazi()} ><img src={search16} ></a>
     {:else}
       <div id="trazi" class="">
         <input type="text" id="projektTrazi" _onKeyUp="onProjektTrazi()" class="input input-bordered input-primary input-xs max-w-xs" autofocus>
