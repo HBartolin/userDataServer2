@@ -1,7 +1,7 @@
 <script lang="ts">
   import BartToast from "./BartToast.svelte";
 
-   let {errorMsg, durationMS} = $props();
+   let {errorMsg} = $props();  // durationMS
 
    console.log(errorMsg);
 </script>
