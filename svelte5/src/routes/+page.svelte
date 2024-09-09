@@ -59,9 +59,10 @@
   }
 
   const onProjektTrazi: KeyboardEventHandler<HTMLInputElement> = async (e) => {  
+    displayAlertMessage="Tražim..";
     var projektUrl_=`${serverUrl}traziProjekt?trazi=${traziVaule}`;
 
-    await pozoviRestServis(projektUrl_, projektTraziRest_);
+    adiPromise=pozoviRestServis(projektUrl_, projektTraziRest_);
   }
 
   const projektTraziRest_: Function = async (data: any) => {
@@ -99,8 +100,8 @@
         <details class="dropdown">
           <summary class="btn btn-primary">Uredi</summary>
           <ul class="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow margi">
-            <li><a _onclick="urediOsobuOtvori()" href="*">Uredi osobu</a></li>
-            <li><a _onclick="urediPodugovaraca()" href="*">Uredi podugovarača</a></li>
+            <li><a _onclick="urediOsobuOtvori()">Uredi osobu</a></li>
+            <li><a _onclick="urediPodugovaraca()">Uredi podugovarača</a></li>
           </ul>
         </details>
         
@@ -110,7 +111,7 @@
     </div>
     <div class="btn btn-ghost breadcrumbs text-sm">
       <ul>
-        <li><a href="*">Projekti</a></li>
+        <li><a>Projekti</a></li>
       </ul>
     </div>
   </div>
@@ -119,8 +120,8 @@
       <details class="dropdown">
         <summary class="btn btn-primary">Uredi</summary>
         <ul class="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow margi">
-          <li><a _onclick="urediOsobuOtvori()" href="*">Uredi osobu</a></li>
-          <li><a _onclick="urediPodugovaraca()" href="*">Uredi podugovarača</a></li>
+          <li><a _onclick="urediOsobuOtvori()">Uredi osobu</a></li>
+          <li><a _onclick="urediPodugovaraca()">Uredi podugovarača</a></li>
         </ul>
       </details>
       
@@ -130,7 +131,7 @@
   </div>
   <div class="navbar-end">
     {#if !shownTrazi}
-      <a onclick={() => pretrazi()} href="*"><img src={search16}></a>
+      <a onclick={() => pretrazi()}><img src={search16}></a>
     {:else}
       <div id="trazi" class="">
         <input type="text" id="projektTrazi" bind:value={traziVaule} onkeyup={onProjektTrazi} class="input input-bordered input-primary input-xs max-w-xs" autofocus>
