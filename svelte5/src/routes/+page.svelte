@@ -9,7 +9,7 @@
   var aktivni="aktivni";
   var neaktivni="neaktivni";
   let dataRezultatSO=$state([]);
-  let adiPromise: Promise<string>=$state(undefined);
+  let adiPromise: Promise<string>=$state();
   let displayAlertMessage=$state();
   let shownTrazi: boolean=$state(false);
   let traziVaule=$state();
@@ -17,6 +17,13 @@
   onMount(() => {
     displayAlertMessage="Dohvaćam podatak.";
 		adiPromise=projektiTC();
+	});
+
+  $effect(() => {
+    displayAlertMessage="Tražim..";
+    var projektUrl_=`${serverUrl}traziProjekt?trazi=${traziVaule}`;
+
+    adiPromise=pozoviRestServis(projektUrl_, projektTraziRest_);
 	});
 
   const inicijalnoNapuni: Function = async () => {
@@ -56,13 +63,6 @@
   const projektTrazi: Function = () => {
     shownTrazi=false;
     traziVaule="";
-  }
-
-  const onProjektTrazi: KeyboardEventHandler<HTMLInputElement> = async (e) => {  
-    displayAlertMessage="Tražim..";
-    var projektUrl_=`${serverUrl}traziProjekt?trazi=${traziVaule}`;
-
-    adiPromise=pozoviRestServis(projektUrl_, projektTraziRest_);
   }
 
   const projektTraziRest_: Function = async (data: any) => {
@@ -134,7 +134,7 @@
       <a onclick={() => pretrazi()}><img src={search16}></a>
     {:else}
       <div id="trazi" class="">
-        <input type="text" id="projektTrazi" bind:value={traziVaule} onkeyup={onProjektTrazi} class="input input-bordered input-primary input-xs max-w-xs" autofocus>
+        <input type="text" id="projektTrazi" bind:value={traziVaule} class="input input-bordered input-primary input-xs max-w-xs" autofocus>
         <button onclick={() => projektTrazi()} class="btn btn-primary" type="submit">Zatvori</button>
       </div>
     {/if}
