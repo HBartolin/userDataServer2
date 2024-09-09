@@ -4,13 +4,15 @@
   import search16 from '$lib/img/search16.png';
   import MojCatch from "$lib/MojCatch.svelte";
   import DisplayAlert from "$lib/DisplayAlert.svelte";
+    import type { KeyboardEventHandler } from 'svelte/elements';
 
   var aktivni="aktivni";
   var neaktivni="neaktivni";
   let dataRezultatSO=$state([]);
   let adiPromise: Promise<string>=$state(undefined);
-  let displayAlertMessage: string=$state();
+  let displayAlertMessage=$state();
   let shownTrazi: boolean=$state(false);
+  let traziVaule=$state();
 
   onMount(() => {
     displayAlertMessage="Dohvaćam podatak.";
@@ -47,17 +49,31 @@
 }
 
   const pretrazi: Function = () => {
+    traziVaule="";
     shownTrazi=true;
   }
 
   const projektTrazi: Function = () => {
     shownTrazi=false;
+    traziVaule="";
+  }
+
+  const onProjektTrazi: Function = async (e: KeyboardEventHandler<HTMLInputElement>) => {
+    if(e.key==="Backspace") {
+      traziVaule=traziVaule.substring(0, traziVaule.length-1);
+    } else {
+      traziVaule+=e.key;
+    }
+       console.log(traziVaule);
+    var projektUrl_=`${serverUrl}traziProjekt?trazi=${traziVaule}`;
+
+    await pozoviRestServis(projektUrl_, projektTraziRest_);
+  }
+
+  const projektTraziRest_: Function = async (data: any) => {
+    dataRezultatSO=data.rezultat;
   }
 </script>
-
-<!-- svelte-ignore a11y_missing_attribute -->
-<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
-<!-- svelte-ignore a11y_missing_attribute -->
 
 {#await adiPromise}
     <DisplayAlert msg={displayAlertMessage} />
@@ -122,7 +138,7 @@
       <a onclick={() => pretrazi()} ><img src={search16} ></a>
     {:else}
       <div id="trazi" class="">
-        <input type="text" id="projektTrazi" _onKeyUp="onProjektTrazi()" class="input input-bordered input-primary input-xs max-w-xs" autofocus>
+        <input type="text" id="projektTrazi" onkeyup={onProjektTrazi} class="input input-bordered input-primary input-xs max-w-xs" autofocus>
         <button onclick={() => projektTrazi()} class="btn btn-primary" type="submit">Zatvori</button>
       </div>
     {/if}
