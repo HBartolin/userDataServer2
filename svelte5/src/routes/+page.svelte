@@ -58,15 +58,7 @@
     traziVaule="";
   }
 
-  const onProjektTrazi: Function = async (e: KeyboardEventHandler<HTMLInputElement>) => {
-    let kodS=e.code.substring(0, 3);
-   
-    if(e.key==="Backspace") {
-      traziVaule=traziVaule.substring(0, traziVaule.length-1);
-    } else if(kodS === "Key") {
-      traziVaule+=e.key;
-    }
-    
+  const onProjektTrazi: KeyboardEventHandler<HTMLInputElement> = async (e) => {  
     var projektUrl_=`${serverUrl}traziProjekt?trazi=${traziVaule}`;
 
     await pozoviRestServis(projektUrl_, projektTraziRest_);
@@ -100,14 +92,15 @@
             d="M4 6h16M4 12h8m-8 6h16" />
         </svg>
       </div>
+      <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
       <ul
         tabindex="0"
         class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
         <details class="dropdown">
           <summary class="btn btn-primary">Uredi</summary>
           <ul class="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow margi">
-            <li><a _onclick="urediOsobuOtvori()">Uredi osobu</a></li>
-            <li><a _onclick="urediPodugovaraca()">Uredi podugovarača</a></li>
+            <li><a _onclick="urediOsobuOtvori()" href="*">Uredi osobu</a></li>
+            <li><a _onclick="urediPodugovaraca()" href="*">Uredi podugovarača</a></li>
           </ul>
         </details>
         
@@ -117,7 +110,7 @@
     </div>
     <div class="btn btn-ghost breadcrumbs text-sm">
       <ul>
-        <li><a>Projekti</a></li>
+        <li><a href="*">Projekti</a></li>
       </ul>
     </div>
   </div>
@@ -126,8 +119,8 @@
       <details class="dropdown">
         <summary class="btn btn-primary">Uredi</summary>
         <ul class="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow margi">
-          <li><a _onclick="urediOsobuOtvori()">Uredi osobu</a></li>
-          <li><a _onclick="urediPodugovaraca()">Uredi podugovarača</a></li>
+          <li><a _onclick="urediOsobuOtvori()" href="*">Uredi osobu</a></li>
+          <li><a _onclick="urediPodugovaraca()" href="*">Uredi podugovarača</a></li>
         </ul>
       </details>
       
@@ -137,10 +130,10 @@
   </div>
   <div class="navbar-end">
     {#if !shownTrazi}
-      <a onclick={() => pretrazi()} ><img src={search16} ></a>
+      <a onclick={() => pretrazi()} href="*"><img src={search16}></a>
     {:else}
       <div id="trazi" class="">
-        <input type="text" id="projektTrazi" onkeyup={onProjektTrazi} class="input input-bordered input-primary input-xs max-w-xs" autofocus>
+        <input type="text" id="projektTrazi" bind:value={traziVaule} onkeyup={onProjektTrazi} class="input input-bordered input-primary input-xs max-w-xs" autofocus>
         <button onclick={() => projektTrazi()} class="btn btn-primary" type="submit">Zatvori</button>
       </div>
     {/if}
