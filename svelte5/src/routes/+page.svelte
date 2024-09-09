@@ -59,12 +59,14 @@
   }
 
   const onProjektTrazi: Function = async (e: KeyboardEventHandler<HTMLInputElement>) => {
+    let kodS=e.code.substring(0, 3);
+   
     if(e.key==="Backspace") {
       traziVaule=traziVaule.substring(0, traziVaule.length-1);
-    } else {
+    } else if(kodS === "Key") {
       traziVaule+=e.key;
     }
-       console.log(traziVaule);
+    
     var projektUrl_=`${serverUrl}traziProjekt?trazi=${traziVaule}`;
 
     await pozoviRestServis(projektUrl_, projektTraziRest_);
