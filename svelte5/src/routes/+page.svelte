@@ -5,6 +5,7 @@
   import MojCatch from "$lib/MojCatch.svelte";
   import DisplayAlert from "$lib/DisplayAlert.svelte";
   import { type INTP } from '$lib/common.js';
+  import type { KeyboardEventHandler } from 'svelte/elements';
 
   var aktivni="aktivni";
   var neaktivni="neaktivni";
@@ -19,12 +20,12 @@
 		adiPromise=projektiTC();
 	});
 
-  $effect(() => {
+  const traziButton: KeyboardEventHandler<HTMLInputElement> = async() => {
     displayAlertMessage="Tražim..";
     var projektUrl_=`${serverUrl}traziProjekt?trazi=${traziVaule}`;
 
     adiPromise=pozoviRestServis(projektUrl_, projektTraziRest_);
-	});
+  }
 
   const inicijalnoNapuni: Function = async () => {
     displayAlertMessage="Dodajem podatak.";
@@ -131,10 +132,13 @@
   </div>
   <div class="navbar-end">
     {#if !shownTrazi}
+      <!-- svelte-ignore a11y_click_events_have_key_events -->
+      <!-- svelte-ignore a11y_no_static_element_interactions -->
+      <!-- svelte-ignore a11y_missing_attribute -->
       <a onclick={() => pretrazi()}><img src={search16}></a>
     {:else}
       <div id="trazi" class="">
-        <input type="text" id="projektTrazi" bind:value={traziVaule} class="input input-bordered input-primary input-xs max-w-xs" autofocus>
+        <input type="text" id="projektTrazi" bind:value={traziVaule} onkeyup={traziButton} class="input input-bordered input-primary input-xs max-w-xs" autofocus>
         <button onclick={() => projektTrazi()} class="btn btn-primary" type="submit">Zatvori</button>
       </div>
     {/if}
