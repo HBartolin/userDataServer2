@@ -7,3 +7,10 @@ export const pozoviRestServis: Function = async (mojUrl: string, ucitaj: any) =>
         .then((response) => response.json())
         .then(ucitaj);
 }
+
+export interface INTP {
+    id: number;
+    claim: string;
+    contract: string;
+    status: string;
+}

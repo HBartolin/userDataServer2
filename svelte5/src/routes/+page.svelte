@@ -4,15 +4,15 @@
   import search16 from '$lib/img/search16.png';
   import MojCatch from "$lib/MojCatch.svelte";
   import DisplayAlert from "$lib/DisplayAlert.svelte";
-    import type { KeyboardEventHandler } from 'svelte/elements';
+  import { type INTP } from '$lib/common.js';
 
   var aktivni="aktivni";
   var neaktivni="neaktivni";
-  let dataRezultatSO=$state([]);
+  let dataRezultatSO: Array<INTP>=$state([]);
   let adiPromise: Promise<string>=$state();
   let displayAlertMessage=$state();
   let shownTrazi: boolean=$state(false);
-  let traziVaule=$state();
+  let traziVaule=$state("");
 
   onMount(() => {
     displayAlertMessage="Dohvaćam podatak.";
