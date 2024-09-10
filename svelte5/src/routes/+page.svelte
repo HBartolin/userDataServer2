@@ -7,16 +7,18 @@
   import { type INTP } from '$lib/common.js';
   import type { KeyboardEventHandler } from 'svelte/elements';
 
-  var aktivni="aktivni";
-  var neaktivni="neaktivni";
   let dataRezultatSO: Array<INTP>=$state([]);
   let adiPromise: Promise<string>=$state();
   let displayAlertMessage=$state();
   let shownTrazi: boolean=$state(false);
   let traziVaule=$state("");
+  let aktivniFild=$state();
+  let neaktivniFild=$state();
+  let sviFild=$state();
 
   onMount(() => {
     displayAlertMessage="Dohvaćam podatak.";
+    
 		adiPromise=projektiTC();
 	});
 
@@ -35,13 +37,11 @@
   }
 
   const projektiTC: Function = async () => {
-    var aktivni_=document.getElementById(aktivni);
-    var neaktivni_=document.getElementById(neaktivni);
     var projektUrl=`${serverUrl}projekti?`;
-
-    if(aktivni_?.checked) {
+    console.log(aktivniFild , neaktivniFild , sviFild);
+    if(aktivniFild) {
         projektUrl+="status=A";
-    } else if(neaktivni_?.checked) {
+    } else if(neaktivniFild) {
         projektUrl+="status=N";
     } 
 
@@ -155,16 +155,16 @@
                 <th>Status</th>
                 <th>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="aktivni" value="option1" _onchange="projekti()" checked>
-                    <label class="form-check-label" for="aktivni">Aktivni</label>
+                    <input class="radio" type="radio" name="inlineRadioOptions" id="aktivni" bind:value={aktivniFild} onchange={projektiTC} checked="checked" >
+                    <label class="" for="aktivni">Aktivni</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="neaktivni" value="option2" _onchange="projekti()">
-                    <label class="form-check-label" for="neaktivni">Neaktivni</label>
+                    <input class="radio" type="radio" name="inlineRadioOptions" id="neaktivni" bind:value={neaktivniFild} onchange={projektiTC}>
+                    <label class="" for="neaktivni">Neaktivni</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="svi" value="option3" _onchange="projekti()">
-                    <label class="form-check-label" for="svi">Svi</label>
+                    <input class="radio" type="radio" name="inlineRadioOptions" id="svi" bind:value={sviFild} onchange={projektiTC}>
+                    <label class="" for="svi">Svi</label>
                   </div>
                 </th>
             </tr>
