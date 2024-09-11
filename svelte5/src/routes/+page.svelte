@@ -5,22 +5,49 @@
   import MojCatch from "$lib/MojCatch.svelte";
   import DisplayAlert from "$lib/DisplayAlert.svelte";
   import { type INTP } from '$lib/common.js';
-  import type { KeyboardEventHandler } from 'svelte/elements';
+  import type { ChangeEventHandler, KeyboardEventHandler } from 'svelte/elements';
 
   let dataRezultatSO: Array<INTP>=$state([]);
   let adiPromise: Promise<string>=$state();
   let displayAlertMessage=$state();
   let shownTrazi: boolean=$state(false);
   let traziVaule=$state("");
-  let aktivniFild=$state();
-  let neaktivniFild=$state();
-  let sviFild=$state();
+  let aktivniFild=false;
+  let neaktivniFild=false;
+  let sviFild=false;
 
   onMount(() => {
     displayAlertMessage="Dohvaćam podatak.";
     
 		adiPromise=projektiTC();
 	});
+
+  const ocAktiv: ChangeEventHandler<HTMLInputElement> = async () => {
+    setFieldFalse();
+    aktivniFild=true;
+
+    adiPromise=projektiTC();
+  }
+
+  const ocSvi: ChangeEventHandler<HTMLInputElement> = async () => {
+    setFieldFalse();
+    sviFild=true;
+
+    adiPromise=projektiTC();
+  }
+
+  const ocNeaktiv: ChangeEventHandler<HTMLInputElement> = async () => {
+    setFieldFalse();
+    neaktivniFild=true;
+
+    adiPromise=projektiTC();
+  }
+
+  const setFieldFalse: Function = () => {
+    aktivniFild=false;
+    neaktivniFild=false;
+    sviFild=false;
+  }
 
   const traziButton: KeyboardEventHandler<HTMLInputElement> = async() => {
     displayAlertMessage="Tražim..";
@@ -38,7 +65,7 @@
 
   const projektiTC: Function = async () => {
     var projektUrl=`${serverUrl}projekti?`;
-    console.log(aktivniFild , neaktivniFild , sviFild);
+    
     if(aktivniFild) {
         projektUrl+="status=A";
     } else if(neaktivniFild) {
@@ -155,15 +182,15 @@
                 <th>Status</th>
                 <th>
                   <div class="form-check form-check-inline">
-                    <input class="radio" type="radio" name="inlineRadioOptions" id="aktivni" bind:value={aktivniFild} onchange={projektiTC} checked="checked" >
+                    <input class="radio radio-xs" type="radio" name="inlineRadioOptions" id="aktivni" onchange={ocAktiv} checked >
                     <label class="" for="aktivni">Aktivni</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="radio" type="radio" name="inlineRadioOptions" id="neaktivni" bind:value={neaktivniFild} onchange={projektiTC}>
+                    <input class="radio radio-xs" type="radio" name="inlineRadioOptions" id="neaktivni" onchange={ocNeaktiv}>
                     <label class="" for="neaktivni">Neaktivni</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="radio" type="radio" name="inlineRadioOptions" id="svi" bind:value={sviFild} onchange={projektiTC}>
+                    <input class="radio radio-xs" type="radio" name="inlineRadioOptions" id="svi" onchange={ocSvi}>
                     <label class="" for="svi">Svi</label>
                   </div>
                 </th>
