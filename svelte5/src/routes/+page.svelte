@@ -8,7 +8,7 @@
   import type { ChangeEventHandler, KeyboardEventHandler } from 'svelte/elements';
 
   let dataRezultatSO: Array<INTP>=$state([]);
-  let adiPromise: Promise<string>=$state();
+  let adiPromise: Promise<string> | undefined=$state();
   let displayAlertMessage=$state();
   let shownTrazi: boolean=$state(false);
   let traziVaule=$state("");
@@ -148,7 +148,9 @@
       <details class="dropdown">
         <summary class="btn btn-primary">Uredi</summary>
         <ul class="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow margi">
+          <!-- svelte-ignore a11y_missing_attribute -->
           <li><a _onclick="urediOsobuOtvori()">Uredi osobu</a></li>
+          <!-- svelte-ignore a11y_missing_attribute -->
           <li><a _onclick="urediPodugovaraca()">Uredi podugovarača</a></li>
         </ul>
       </details>
@@ -165,6 +167,7 @@
       <a onclick={() => pretrazi()}><img src={search16}></a>
     {:else}
       <div id="trazi" class="">
+        <!-- svelte-ignore a11y_autofocus -->
         <input type="text" id="projektTrazi" bind:value={traziVaule} onkeyup={traziButton} class="input input-bordered input-primary input-xs max-w-xs" autofocus>
         <button onclick={() => projektTrazi()} class="btn btn-primary" type="submit">Zatvori</button>
       </div>
