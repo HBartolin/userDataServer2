@@ -15,9 +15,11 @@
   let aktivniFild=false;
   let neaktivniFild=false;
   let sviFild=false;
+  let noviProjectCollectionDialog: HTMLDialogElement;
 
   onMount(() => {
     displayAlertMessage="Dohvaćam podatak.";
+    noviProjectCollectionDialog = document.getElementById('noviProject-confirmation-dialog') as HTMLDialogElement;
     
 		adiPromise=projektiTC();
 	});
@@ -96,6 +98,14 @@
   const projektTraziRest_: Function = async (data: any) => {
     dataRezultatSO=data.rezultat;
   }
+
+  const noviProjectModalShown: Function = () => {
+    noviProjectCollectionDialog.showModal();
+  }
+
+  const noviProjectClose: Function = () => {
+    noviProjectCollectionDialog.close();
+  }
 </script>
 
 {#await adiPromise}
@@ -133,7 +143,7 @@
           </ul>
         </details>
         
-        <button class="btn btn-primary mt-4" type="submit" _onclick="hideGreska()">Novi projekt</button>
+        <button class="btn btn-primary mt-4" type="submit" onclick={() => noviProjectModalShown()}>Novi projekt</button>
         <button class="btn btn-primary mt-4" type="submit" onclick={() => inicijalnoNapuni()}>Inicijalno napuni</button>
       </ul>
     </div>
@@ -155,7 +165,7 @@
         </ul>
       </details>
       
-      <button class="btn btn-primary mx-2" type="submit" _onclick="hideGreska()">Novi projekt</button>
+      <button class="btn btn-primary mx-2" type="submit" onclick={() => noviProjectModalShown()}>Novi projekt</button>
       <button class="btn btn-primary" type="submit" onclick={() => inicijalnoNapuni()}>Inicijalno napuni</button>
     </div>
   </div>
@@ -226,7 +236,20 @@
       </div>
     </div>
 
-    
+    <dialog id="noviProject-confirmation-dialog" class="modal">
+      <div class="modal-box">
+        <div class=""> Novi projekt </div>
+          <div name="greska" style="display: none"></div>
+          <label for="inputClaim" class="">Claim:</label>
+          <input type="text" class="input input-bordered input-primary input-xs max-w-xs" id="inputClaim" autofocus>
+          <label for="inputContract" class="col-sm-2 col-form-label">Contract:</label>
+          <input type="text" class="input input-bordered input-primary input-xs max-w-xs" id="inputContract">
+          <div class="modal-action">
+            <button type="button" class="btn btn-outline btn-primary" _onclick="noviProjekt()">Novi projekt</button>
+            <button type="button" class="btn btn-outline btn-primary" onclick={()=>noviProjectClose()}>Odustani</button>
+          </div>
+        </div>
+    </dialog>
 
    
 
