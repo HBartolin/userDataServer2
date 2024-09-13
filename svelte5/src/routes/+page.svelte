@@ -238,13 +238,17 @@
 
     <dialog id="noviProject-confirmation-dialog" class="modal">
       <div class="modal-box">
-        <div class=""> Novi projekt </div>
-          <div name="greska" style="display: none"></div>
-          <label for="inputClaim" class="">Claim:</label>
-          <input type="text" class="input input-bordered input-primary input-xs max-w-xs" id="inputClaim" autofocus>
-          <label for="inputContract" class="col-sm-2 col-form-label">Contract:</label>
-          <input type="text" class="input input-bordered input-primary input-xs max-w-xs" id="inputContract">
-          <div class="modal-action">
+        <div class="my-8 text-xl"> Novi projekt </div>
+          <div name="greska"></div>
+          <label class="input input-bordered flex items-center my-4">
+            Claim: 
+            <input type="text" class="grow" id="inputClaim" autofocus />
+          </label>
+          <label class="input input-bordered flex items-center my-4">
+            Contract: 
+            <input type="text" class="grow" id="inputContract" />
+          </label>
+          <div class="modal-action my-8">
             <button type="button" class="btn btn-outline btn-primary" _onclick="noviProjekt()">Novi projekt</button>
             <button type="button" class="btn btn-outline btn-primary" onclick={()=>noviProjectClose()}>Odustani</button>
           </div>
