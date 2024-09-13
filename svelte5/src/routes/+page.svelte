@@ -16,6 +16,8 @@
   let neaktivniFild=false;
   let sviFild=false;
   let noviProjectCollectionDialog: HTMLDialogElement;
+  let inputClaim=$state("");
+  let inputContract=$state("");
 
   onMount(() => {
     displayAlertMessage="Dohvaćam podatak.";
@@ -104,6 +106,18 @@
   }
 
   const noviProjectClose: Function = () => {
+    noviProjectCollectionDialog.close();
+  }
+
+  const noviProjekt: Function = () => {
+    var projektUrl_=`${serverUrl}noviProjekt?claim=${inputClaim}&contract=${inputContract}`;
+    
+    pozoviRestServis(projektUrl_, noviProjektRest_);
+  }
+
+  const noviProjektRest_: Function = (data) => {
+    dataRezultatSO=data.rezultat;
+
     noviProjectCollectionDialog.close();
   }
 </script>
@@ -242,14 +256,14 @@
           <div name="greska"></div>
           <label class="input input-bordered flex items-center my-4">
             Claim: 
-            <input type="text" class="grow" id="inputClaim" autofocus />
+            <input type="text" class="grow" id="inputClaim" bind:value={inputClaim} autofocus />
           </label>
           <label class="input input-bordered flex items-center my-4">
             Contract: 
-            <input type="text" class="grow" id="inputContract" />
+            <input type="text" class="grow" id="inputContract" bind:value={inputContract} />
           </label>
           <div class="modal-action my-8">
-            <button type="button" class="btn btn-outline btn-primary" _onclick="noviProjekt()">Novi projekt</button>
+            <button type="button" class="btn btn-outline btn-primary" onclick={() => noviProjekt()}>Novi projekt</button>
             <button type="button" class="btn btn-outline btn-primary" onclick={()=>noviProjectClose()}>Odustani</button>
           </div>
         </div>
