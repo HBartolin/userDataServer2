@@ -18,6 +18,7 @@
   let noviProjectCollectionDialog: HTMLDialogElement;
   let inputClaim=$state("");
   let inputContract=$state("");
+  let greska2=$state([]);
 
   onMount(() => {
     displayAlertMessage="Dohvaćam podatak.";
@@ -102,6 +103,10 @@
   }
 
   const noviProjectModalShown: Function = () => {
+    greska2="";
+    inputClaim="";
+    inputContract="";
+
     noviProjectCollectionDialog.showModal();
   }
 
@@ -115,10 +120,14 @@
     pozoviRestServis(projektUrl_, noviProjektRest_);
   }
 
-  const noviProjektRest_: Function = (data) => {
-    dataRezultatSO=data.rezultat;
+  const noviProjektRest_: Function = (data: any) => {
+    if(data.greska.length>0) {
+        greska2=data.greska;
+    } else {
+      dataRezultatSO=data.rezultat;
 
-    noviProjectCollectionDialog.close();
+      noviProjectCollectionDialog.close();
+    }
   }
 </script>
 
@@ -253,7 +262,24 @@
     <dialog id="noviProject-confirmation-dialog" class="modal">
       <div class="modal-box">
         <div class="my-8 text-xl"> Novi projekt </div>
-          <div name="greska"></div>
+        {#if greska2.length>0}
+          {#each greska2 as g2}
+            <div role="alert" class="alert alert-error my-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 shrink-0 stroke-current"
+                fill="none"
+                viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>{g2}</span>
+            </div>
+          {/each} 
+        {/if}
           <label class="input input-bordered flex items-center my-4">
             Claim: 
             <input type="text" class="grow" id="inputClaim" bind:value={inputClaim} autofocus />
