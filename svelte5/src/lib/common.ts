@@ -1,16 +1,19 @@
-export const serverUrl=`http://localhost:8090/api/`;
+export const serverUrl = `http://localhost:8090/api/`;
 
-export const pozoviRestServis: Function = async (mojUrl: string, ucitaj: any) => {
-    console.log(mojUrl);
+export const pozoviRestServis: Function = async (
+  mojUrl: string,
+  ucitaj: any,
+) => {
+  console.log(mojUrl);
 
-   return fetch(mojUrl)
-        .then((response) => response.json())
-        .then(ucitaj);
-}
+  return fetch(mojUrl)
+    .then((response) => response.json())
+    .then(ucitaj);
+};
 
 export interface INTP {
-    id: number;
-    claim: string;
-    contract: string;
-    status: string;
+  id: number;
+  claim: string;
+  contract: string;
+  status: string;
 }
