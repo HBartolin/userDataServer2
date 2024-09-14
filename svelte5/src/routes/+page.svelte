@@ -167,7 +167,7 @@
         class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
       >
         <details class="dropdown">
-          <summary class="btn btn-primary">Uredi</summary>
+          <summary class="btn btn-outline btn-primary">Uredi</summary>
           <ul
             class="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow margi"
           >
@@ -177,12 +177,12 @@
         </details>
 
         <button
-          class="btn btn-primary mt-4"
+          class="btn btn-outline btn-primary mt-4"
           type="submit"
           onclick={() => noviProjectModalShown()}>Novi projekt</button
         >
         <button
-          class="btn btn-primary mt-4"
+          class="btn btn-outline btn-primary mt-4"
           type="submit"
           onclick={() => inicijalnoNapuni()}>Inicijalno napuni</button
         >
@@ -197,7 +197,7 @@
   <div class="navbar-center hidden lg:flex">
     <div class="menu menu-horizontal px-1">
       <details class="dropdown">
-        <summary class="btn btn-primary">Uredi</summary>
+        <summary class="btn btn-outline btn-primary">Uredi</summary>
         <ul
           class="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow margi"
         >
@@ -209,12 +209,12 @@
       </details>
 
       <button
-        class="btn btn-primary mx-2"
+        class="btn btn-outline btn-primary mx-2"
         type="submit"
         onclick={() => noviProjectModalShown()}>Novi projekt</button
       >
       <button
-        class="btn btn-primary"
+        class="btn btn-outline btn-primary"
         type="submit"
         onclick={() => inicijalnoNapuni()}>Inicijalno napuni</button
       >
@@ -239,7 +239,7 @@
         />
         <button
           onclick={() => projektTrazi()}
-          class="btn btn-primary"
+          class="btn btn-outline btn-primary"
           type="submit">Zatvori</button
         >
       </div>
@@ -351,7 +351,7 @@
 
 <dialog id="noviProject-confirmation-dialog" class="modal">
   <div class="modal-box">
-    <div class="my-8 text-xl">Novi projekt</div>
+    <div class="my-8 text-xl font-bold">Novi projekt</div>
     {#if greska2.length > 0}
       {#each greska2 as g2}
         <div role="alert" class="alert alert-error my-4">
@@ -399,7 +399,7 @@
       >
       <button
         type="button"
-        class="btn btn-outline btn-primary"
+        class="btn btn-outline"
         onclick={() => noviProjectClose()}>Odustani</button
       >
     </div>
