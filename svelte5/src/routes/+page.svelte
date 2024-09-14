@@ -373,7 +373,7 @@
       {/each}
     {/if}
     <label class="input input-bordered flex items-center my-4">
-      Claim:
+      <div class="mr-1">Claim: </div>
       <input
         type="text"
         class="grow"
@@ -383,7 +383,7 @@
       />
     </label>
     <label class="input input-bordered flex items-center my-4">
-      Contract:
+      <div class="mr-1">Contract: </div>
       <input
         type="text"
         class="grow"

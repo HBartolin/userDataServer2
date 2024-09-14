@@ -1,10 +1,7 @@
 <script>
   import "../app.css";
-</script>
 
-<slot />
-
-<style>
+  /*
   :root {
     --MojToastContainerTop: 5rem;
     --MojToastContainerRight: auto;
@@ -32,4 +29,10 @@
     --toastBackground: rgba(72, 187, 120, 0.9);
     --toastBarBackground: #2f855a;
   }
-</style>
+
+  */
+</script>
+
+<slot />
+
+<style></style>
