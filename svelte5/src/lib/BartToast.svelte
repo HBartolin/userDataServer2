@@ -9,10 +9,7 @@
     <div id="bartToast" class="alert {alertMsg}">
       <span>{msg}</span>
 
-      <button
-        type="button"
-        class="close-btn"
-        onclick={() => (showModal = false)}>
+      <button type="button" onclick={() => (showModal = false)}>
         <svg
           class="w-3 h-3"
           aria-hidden="true"
