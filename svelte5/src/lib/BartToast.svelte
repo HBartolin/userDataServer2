@@ -6,7 +6,7 @@
 
 {#if showModal}
   <div class="toast toast-center toast-top z-50">
-    <div id="bartToast" class="alert {alertMsg}">
+    <div class="alert {alertMsg}">
       <span>{msg}</span>
 
       <button type="button" onclick={() => (showModal = false)}>
