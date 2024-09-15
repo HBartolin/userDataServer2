@@ -24,4 +24,3 @@ export interface dataInterface {
   rezultatPage: {};
   greska: string[];
 }
-

@@ -69,7 +69,7 @@
 
   const inicijalnoNapuni: Function = async () => {
     displayAlertMessage = "Dodajem podatak.";
-    dataOk="";
+    dataOk = "";
     var projektUrl = `${serverUrl}createDB`;
 
     adiPromise = pozoviRestServis(projektUrl, createDB_);
@@ -128,7 +128,7 @@
   };
 
   const noviProjekt: Function = () => {
-    dataOk="";
+    dataOk = "";
     var projektUrl_ = `${serverUrl}noviProjekt?claim=${inputClaim}&contract=${inputContract}`;
 
     pozoviRestServis(projektUrl_, noviProjektRest_);
@@ -138,7 +138,7 @@
     if (data.greska.length > 0) {
       greska2 = data.greska;
     } else {
-      dataOk=data.ok;
+      dataOk = data.ok;
       dataRezultatSO = data.rezultat;
 
       noviProjectCollectionDialog.close();
