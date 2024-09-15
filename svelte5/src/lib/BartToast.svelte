@@ -5,8 +5,8 @@
 </script>
 
 {#if showModal}
-  <div class="toast toast-center toast-top z-50 mt-24">
-    <div class="alert {alertMsg} ">
+  <div class="toast toast-center toast-top z-50 mt-24 min-w-80 max-w-96">
+    <div class="alert {alertMsg} text-wrap">
       <span>{msg}</span>
 
       <button type="button" onclick={() => (showModal = false)}>
