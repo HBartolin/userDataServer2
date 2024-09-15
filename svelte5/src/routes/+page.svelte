@@ -22,6 +22,7 @@
   let inputClaim = $state("");
   let inputContract = $state("");
   let greska2 = $state([]);
+  let dataOk = $state("");
 
   onMount(() => {
     displayAlertMessage = "Dohvaćam podatak.";
@@ -70,7 +71,13 @@
     displayAlertMessage = "Dodajem podatak.";
     var projektUrl = `${serverUrl}createDB`;
 
-    adiPromise = pozoviRestServis(projektUrl, projektiTC);
+    adiPromise = pozoviRestServis(projektUrl, createDB_);
+  };
+
+  const createDB_: Function = async (data: any) => {
+    dataOk = data.ok;
+
+    projektiTC();
   };
 
   const projektiTC: Function = async () => {
@@ -141,6 +148,10 @@
 {:catch e}
   <MojCatch errorMsg={e} />
 {/await}
+
+{#if dataOk.length > 0}
+  <DisplayAlert msg={dataOk} />
+{/if}
 
 <div class="navbar bg-base-100">
   <div class="navbar-start">
