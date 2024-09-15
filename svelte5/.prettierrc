@@ -8,5 +8,6 @@
       }
     }
   ],
-  "svelteStrictMode": false
+  "svelteStrictMode": false,
+  "bracketSameLine": true
 }

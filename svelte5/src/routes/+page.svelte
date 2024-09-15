@@ -151,26 +151,22 @@
           class="h-5 w-5"
           fill="none"
           viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
+          stroke="currentColor">
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            d="M4 6h16M4 12h8m-8 6h16"
-          />
+            d="M4 6h16M4 12h8m-8 6h16" />
         </svg>
       </div>
       <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
       <ul
         tabindex="0"
-        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-      >
+        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
         <details class="dropdown">
           <summary class="btn btn-outline btn-primary">Uredi</summary>
           <ul
-            class="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow margi"
-          >
+            class="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow margi">
             <li><a _onclick="urediOsobuOtvori()">Uredi osobu</a></li>
             <li><a _onclick="urediPodugovaraca()">Uredi podugovarača</a></li>
           </ul>
@@ -179,13 +175,11 @@
         <button
           class="btn btn-outline btn-primary mt-4"
           type="submit"
-          onclick={() => noviProjectModalShown()}>Novi projekt</button
-        >
+          onclick={() => noviProjectModalShown()}>Novi projekt</button>
         <button
           class="btn btn-outline btn-primary mt-4"
           type="submit"
-          onclick={() => inicijalnoNapuni()}>Inicijalno napuni</button
-        >
+          onclick={() => inicijalnoNapuni()}>Inicijalno napuni</button>
       </ul>
     </div>
     <div class="btn btn-ghost breadcrumbs text-sm">
@@ -199,8 +193,7 @@
       <details class="dropdown">
         <summary class="btn btn-outline btn-primary">Uredi</summary>
         <ul
-          class="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow margi"
-        >
+          class="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow margi">
           <!-- svelte-ignore a11y_missing_attribute -->
           <li><a _onclick="urediOsobuOtvori()">Uredi osobu</a></li>
           <!-- svelte-ignore a11y_missing_attribute -->
@@ -211,13 +204,11 @@
       <button
         class="btn btn-outline btn-primary mx-2"
         type="submit"
-        onclick={() => noviProjectModalShown()}>Novi projekt</button
-      >
+        onclick={() => noviProjectModalShown()}>Novi projekt</button>
       <button
         class="btn btn-outline btn-primary"
         type="submit"
-        onclick={() => inicijalnoNapuni()}>Inicijalno napuni</button
-      >
+        onclick={() => inicijalnoNapuni()}>Inicijalno napuni</button>
     </div>
   </div>
   <div class="navbar-end">
@@ -235,13 +226,11 @@
           bind:value={traziVaule}
           onkeyup={traziButton}
           class="input input-bordered input-primary input-xs max-w-xs"
-          autofocus
-        />
+          autofocus />
         <button
           onclick={() => projektTrazi()}
           class="btn btn-outline btn-primary"
-          type="submit">Zatvori</button
-        >
+          type="submit">Zatvori</button>
       </div>
     {/if}
   </div>
@@ -263,8 +252,7 @@
               name="inlineRadioOptions"
               id="aktivni"
               onchange={ocAktiv}
-              checked
-            />
+              checked />
             <label class="" for="aktivni">Aktivni</label>
           </div>
           <div class="form-check form-check-inline">
@@ -273,8 +261,7 @@
               type="radio"
               name="inlineRadioOptions"
               id="neaktivni"
-              onchange={ocNeaktiv}
-            />
+              onchange={ocNeaktiv} />
             <label class="" for="neaktivni">Neaktivni</label>
           </div>
           <div class="form-check form-check-inline">
@@ -283,8 +270,7 @@
               type="radio"
               name="inlineRadioOptions"
               id="svi"
-              onchange={ocSvi}
-            />
+              onchange={ocSvi} />
             <label class="" for="svi">Svi</label>
           </div>
         </th>
@@ -303,25 +289,21 @@
                 <button
                   type="button"
                   class="btn btn-outline btn-primary join-item"
-                  onclick={() => prikaziProjekt(cell.id)}>Prikaži</button
-                >
+                  onclick={() => prikaziProjekt(cell.id)}>Prikaži</button>
                 <button
                   type="button"
                   class="btn btn-outline btn-primary join-item"
                   _onclick="uExel({cell.id}, '{cell.claim}', '{cell.contract}')"
-                  >U Excel</button
-                >
+                  >U Excel</button>
                 <button
                   type="button"
                   class="btn btn-outline btn-error join-item"
                   _onclick="zatvoriProjekt({cell.id}, {cell.ts})"
-                  >Zatvori</button
-                >
+                  >Zatvori</button>
                 <button
                   type="button"
                   class="btn btn-outline btn-primary join-item"
-                  _onclick="otvoriProjekt({cell.id}, {cell.ts})">Otvori</button
-                >
+                  _onclick="otvoriProjekt({cell.id}, {cell.ts})">Otvori</button>
               </div>
             </div>
           </td>
@@ -336,16 +318,14 @@
       _onclick="projektTablicaPrethodno()"
       class="btn btn-outline-secondary"
       >&laquo;
-      <div id="pTablicaPrethodno" style="display: none;"></div></button
-    >
+      <div id="pTablicaPrethodno" style="display: none;"></div></button>
     <button
       type="button"
       id="projektTablicaSlijedece"
       _onclick="projektTablicaSlijedece()"
       class="btn btn-outline-secondary"
       >&raquo;
-      <div id="pTablicaSlijedece" style="display: none;"></div></button
-    >
+      <div id="pTablicaSlijedece" style="display: none;"></div></button>
   </div>
 </div>
 
@@ -358,14 +338,12 @@
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6 shrink-0 stroke-current"
           fill="none"
-          viewBox="0 0 24 24"
-        >
+          viewBox="0 0 24 24">
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
+            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
         <span>{g2}</span>
       </div>
@@ -377,8 +355,7 @@
         class="grow"
         id="inputClaim"
         bind:value={inputClaim}
-        autofocus
-      />
+        autofocus />
     </label>
     <label class="input input-bordered flex items-center my-4">
       <div class="mr-1">Contract:</div>
@@ -386,20 +363,17 @@
         type="text"
         class="grow"
         id="inputContract"
-        bind:value={inputContract}
-      />
+        bind:value={inputContract} />
     </label>
     <div class="modal-action my-8">
       <button
         type="button"
         class="btn btn-outline btn-primary"
-        onclick={() => noviProjekt()}>Novi projekt</button
-      >
+        onclick={() => noviProjekt()}>Novi projekt</button>
       <button
         type="button"
         class="btn btn-outline"
-        onclick={() => noviProjectClose()}>Odustani</button
-      >
+        onclick={() => noviProjectClose()}>Odustani</button>
     </div>
   </div>
 </dialog>
