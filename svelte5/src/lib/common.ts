@@ -17,3 +17,11 @@ export interface INTP {
   contract: string;
   status: string;
 }
+
+export interface dataInterface {
+  ok: string;
+  rezultat: Array<INTP>;
+  rezultatPage: {};
+  greska: string[];
+}
+

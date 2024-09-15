@@ -4,7 +4,7 @@
   import search16 from "$lib/img/search16.png";
   import MojCatch from "$lib/MojCatch.svelte";
   import DisplayAlert from "$lib/DisplayAlert.svelte";
-  import { type INTP } from "$lib/common.js";
+  import { type INTP, type dataInterface } from "$lib/common.js";
   import type {
     ChangeEventHandler,
     KeyboardEventHandler,
@@ -21,7 +21,7 @@
   let noviProjectCollectionDialog: HTMLDialogElement;
   let inputClaim = $state("");
   let inputContract = $state("");
-  let greska2 = $state([]);
+  let greska2: Array<string> = $state([]);
   let dataOk = $state("");
 
   onMount(() => {
@@ -69,12 +69,13 @@
 
   const inicijalnoNapuni: Function = async () => {
     displayAlertMessage = "Dodajem podatak.";
+    dataOk="";
     var projektUrl = `${serverUrl}createDB`;
 
     adiPromise = pozoviRestServis(projektUrl, createDB_);
   };
 
-  const createDB_: Function = async (data: any) => {
+  const createDB_: Function = async (data: dataInterface) => {
     dataOk = data.ok;
 
     projektiTC();
@@ -92,7 +93,7 @@
     await pozoviRestServis(projektUrl, projektiRest_);
   };
 
-  const projektiRest_: Function = async (data: any) => {
+  const projektiRest_: Function = async (data: dataInterface) => {
     dataRezultatSO = data.rezultat;
   };
 
@@ -110,7 +111,7 @@
     traziVaule = "";
   };
 
-  const projektTraziRest_: Function = async (data: any) => {
+  const projektTraziRest_: Function = async (data: dataInterface) => {
     dataRezultatSO = data.rezultat;
   };
 
@@ -127,15 +128,17 @@
   };
 
   const noviProjekt: Function = () => {
+    dataOk="";
     var projektUrl_ = `${serverUrl}noviProjekt?claim=${inputClaim}&contract=${inputContract}`;
 
     pozoviRestServis(projektUrl_, noviProjektRest_);
   };
 
-  const noviProjektRest_: Function = (data: any) => {
+  const noviProjektRest_: Function = (data: dataInterface) => {
     if (data.greska.length > 0) {
       greska2 = data.greska;
     } else {
+      dataOk=data.ok;
       dataRezultatSO = data.rezultat;
 
       noviProjectCollectionDialog.close();
