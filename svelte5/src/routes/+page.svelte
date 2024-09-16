@@ -76,7 +76,7 @@
   };
 
   const createDB_: Function = async (data: dataInterface) => {
-    dataOk = data.ok;
+   // dataOk = data.ok;
 
     projektiTC();
   };
