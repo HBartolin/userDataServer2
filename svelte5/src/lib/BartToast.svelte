@@ -9,13 +9,13 @@
     <div class="alert {alertMsg}">
       {msg}
 
-      <button type="button" onclick={() => (showModal = false)}>
-        X
-      </button>
+      <button type="button" onclick={() => (showModal = false)}> X </button>
     </div>
   </div>
 {/if}
 
 <style>
-  .nnoowhite-space {white-space: pre-line;}
+  .nnoowhite-space {
+    white-space: pre-line;
+  }
 </style>
