@@ -11,9 +11,12 @@
         <div class="card place-items-center">{msg}</div>
         <div class="card place-items-center">
           <!-- svelte-ignore a11y_consider_explicit_label -->
-          <button type="button" onclick={() => (showModal = false)} class="pt-3">
+          <button
+            type="button"
+            onclick={() => (showModal = false)}
+            class="pt-3">
             <svg
-              class="w-4 h-4 "
+              class="w-4 h-4"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
