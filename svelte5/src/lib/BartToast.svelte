@@ -5,7 +5,7 @@
 </script>
 
 {#if showModal}
-  <div class="toast toast-center toast-top z-50 nnoowhite-space">
+  <div class="toast toast-center toast-top z-50">
     <div class="alert {alertMsg}">
       {msg}
       <button type="button" onclick={() => (showModal = false)}> X </button>
@@ -14,7 +14,5 @@
 {/if}
 
 <style>
-  .nnoowhite-space {
-    white-space: pre-line;
-  }
+ 
 </style>
