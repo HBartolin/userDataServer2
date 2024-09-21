@@ -3,6 +3,7 @@ package hr.bart.userDataServer.service.kod;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.apache.commons.lang3.builder.ToStringExclude;
@@ -60,7 +61,7 @@ public class OsobaClaimPlannedServiceImplClaimUpdatedPlannedByDate extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {
+	public PojoInterface izvrsiKod(PojoInterface pi, Map<String, Object> o) throws Throwable {
 		List<OsobaClaimPlanned> ocpList=new ArrayList<>();  
 		validirajClaimUpdatePlannedByDate(pi, datum);
 		

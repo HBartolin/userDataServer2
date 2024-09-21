@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -36,12 +37,12 @@ public class ACommonServis extends Kod {
 	}
 	
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {
+	public PojoInterface izvrsiKod(PojoInterface pi, Map<String, Object> o) throws Throwable {
 		throw new RuntimeException("Ne koristi se!");
 	}
 	
 	@Override
-	public PojoInterface izvrsi(Object... o) {
+	public PojoInterface izvrsi(Map<String, Object> o) {
 		throw new RuntimeException("Ne koristi se!");
 	}
 

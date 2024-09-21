@@ -1,6 +1,7 @@
 package hr.bart.userDataServer.service.kod;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.StandardToStringStyle;
@@ -29,14 +30,18 @@ public abstract class Kod {
 	protected final static int SEDAM=7;
 	protected final static int STO=100;
 	
-	public abstract PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable;
+	public abstract PojoInterface izvrsiKod(PojoInterface pi, Map<String, Object> map) throws Throwable;
 	
-	public PojoInterface izvrsi(Object... o) {
+	public PojoInterface izvrsi() {
+	    return izvrsi(null);
+	}
+	
+	public PojoInterface izvrsi(Map<String, Object> map) {
 		timerKoda.begin();
 		PojoInterface pi=new PojoInterface();
 		
 		try {
-			izvrsiKod(pi, o);
+			izvrsiKod(pi, map);
 		} catch(Throwable t) {
 			cachException(t, pi);
 		} finally {

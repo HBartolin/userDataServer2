@@ -1,5 +1,6 @@
 package hr.bart.userDataServer.service.kod;
 
+import java.util.Map;
 import java.util.Optional;
 
 import org.apache.commons.lang3.builder.ToStringExclude;
@@ -38,7 +39,7 @@ public class ProjektServiceImplZatvoriOtvoriProjekt extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {
+	public PojoInterface izvrsiKod(PojoInterface pi, Map<String, Object> map) throws Throwable {
 		Optional<Projekt> projektOptional=projektRepository.findById(id);
 		
 		if(zo.getDbStatusSuprotni().equals(projektOptional.get().getStatus())) {

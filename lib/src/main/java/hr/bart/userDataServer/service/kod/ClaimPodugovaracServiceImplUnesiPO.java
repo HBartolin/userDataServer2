@@ -2,6 +2,7 @@ package hr.bart.userDataServer.service.kod;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.apache.commons.lang3.builder.ToStringExclude;
@@ -49,7 +50,7 @@ public class ClaimPodugovaracServiceImplUnesiPO extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) {				
+	public PojoInterface izvrsiKod(PojoInterface pi, Map<String, Object> o) {				
 		if(idProjektDetalji==null) {
 			String msg="Polje 'idProjektDetalji' nije upisano.";
 			pi.addGreskaList(msg);

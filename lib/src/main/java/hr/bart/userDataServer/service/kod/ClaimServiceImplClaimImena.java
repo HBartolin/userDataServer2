@@ -1,6 +1,7 @@
 package hr.bart.userDataServer.service.kod;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import hr.bart.userDataServer.util.PojoInterface;
@@ -13,7 +14,7 @@ public class ClaimServiceImplClaimImena extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) {	
+	public PojoInterface izvrsiKod(PojoInterface pi, Map<String, Object> o) {	
 		if(podatciO.isPresent()) {
 			List<Long> podatci=podatciO.get();
 		} else {

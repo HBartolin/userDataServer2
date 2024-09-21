@@ -1,6 +1,7 @@
 package hr.bart.userDataServer.service.kod;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.apache.commons.lang3.builder.ToStringExclude;
@@ -20,7 +21,7 @@ public class PodugovaracServiceImplPodugovaraci extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {
+	public PojoInterface izvrsiKod(PojoInterface pi, Map<String, Object> map) throws Throwable {
 		Optional<List<Podugovarac>> podugovaracListO=podugovaracRepository.findAllByIdProjektDetalji(idProjektDetalji);
 		
 		if(podugovaracListO.isPresent()) {

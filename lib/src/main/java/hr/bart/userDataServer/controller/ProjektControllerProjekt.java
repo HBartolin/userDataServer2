@@ -42,7 +42,7 @@ public class ProjektControllerProjekt extends ResponseEntityPojo {
 	@GetMapping(value = "/projekti")
     public ResponseEntity<PojoInterface> projekti(@RequestParam("status") Optional<String> status) {		
 		//PojoInterface pi=projektService.projekti(status);
-		PojoInterface pi=projektServiceImplProjekti.init(status).izvrsi();
+		PojoInterface pi=projektServiceImplProjekti.init(status).izvrsi(null);
 		
 		return handlePi(pi);
     }	
@@ -50,7 +50,7 @@ public class ProjektControllerProjekt extends ResponseEntityPojo {
 	@GetMapping(value="/zatvoriProjekt/{id}") @PutMapping(value="/zatvoriProjekt/{id}")
 	public ResponseEntity<PojoInterface> zatvoriProjekt(@PathVariable Long id, @RequestParam("ts") Long ts, @RequestParam("status") Optional<String> status) {
 		//PojoInterface pi= projektService.zatvoriOtvoriProjekt(ZatvoriOtvori.ZATVORI, id, ts, status);
-		PojoInterface pi=projektServiceImplZatvoriOtvoriProjekt.init(ZatvoriOtvori.ZATVORI, id, ts, status).izvrsi();
+		PojoInterface pi=projektServiceImplZatvoriOtvoriProjekt.init(ZatvoriOtvori.ZATVORI, id, ts, status).izvrsi(null);
 		
 		return handlePi(pi);
 	}
@@ -58,7 +58,7 @@ public class ProjektControllerProjekt extends ResponseEntityPojo {
 	@GetMapping(value="/otvoriProjekt/{id}") @PutMapping(value="/otvoriProjekt/{id}")
 	public ResponseEntity<PojoInterface> otvoriProjekt(@PathVariable Long id, @RequestParam("ts") Long ts, @RequestParam("status") Optional<String> status) {
 		// PojoInterface pi= projektService.zatvoriOtvoriProjekt(ZatvoriOtvori.OTVORI, id, ts, status);
-		PojoInterface pi=projektServiceImplZatvoriOtvoriProjekt.init(ZatvoriOtvori.OTVORI, id, ts, status).izvrsi();
+		PojoInterface pi=projektServiceImplZatvoriOtvoriProjekt.init(ZatvoriOtvori.OTVORI, id, ts, status).izvrsi(null);
 		
 		return handlePi(pi);
 	}
@@ -66,7 +66,7 @@ public class ProjektControllerProjekt extends ResponseEntityPojo {
 	@GetMapping(value="/noviProjekt") @PostMapping(value = "/noviProjekt")
 	public ResponseEntity<PojoInterface> noviProjekt(@RequestParam("claim") String claim, @RequestParam("contract") String contract) {		
 		//PojoInterface pi= projektService.noviProjekt(claim, contract);
-		 PojoInterface pi=projektServiceImplNoviProjekt.info(claim, contract).izvrsi();
+		 PojoInterface pi=projektServiceImplNoviProjekt.info(claim, contract).izvrsi(null);
 		
 		return handlePi(pi);
 	}

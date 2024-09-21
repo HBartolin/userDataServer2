@@ -1,5 +1,6 @@
 package hr.bart.userDataServer.service.kod;
 
+import java.util.Map;
 import java.util.Optional;
 
 import org.apache.commons.lang3.builder.ToStringExclude;
@@ -30,7 +31,7 @@ public class SifarnikOsobaServiceImplEditirajSifarnikOsoba extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {		
+	public PojoInterface izvrsiKod(PojoInterface pi, Map<String, Object> map) throws Throwable {		
 		if(ime==null || "".equals(ime.replaceAll("\\s",""))) {
 			String msg="Polje Ime nije upisano.";
 			pi.addGreskaList(msg);

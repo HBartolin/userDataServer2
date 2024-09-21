@@ -1,5 +1,7 @@
 package hr.bart.userDataServer.service.kod;
 
+import java.util.Map;
+
 import org.apache.commons.lang3.builder.ToStringExclude;
 import org.springframework.data.domain.PageRequest;
 
@@ -19,7 +21,7 @@ public class OsobaValutaServiceImplOsobaValuta extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {
+	public PojoInterface izvrsiKod(PojoInterface pi, Map<String, Object> map) throws Throwable {
 		PageRequest pageRequest=PageRequest.of(NULA, pageRequestSize50);
 		
 		aCommonServis.findAllBySifarnikOsobaId(osobaValutaRepository, pi, idSifarnikOsoba, pageRequest);

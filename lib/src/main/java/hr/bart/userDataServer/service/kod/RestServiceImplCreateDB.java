@@ -2,6 +2,7 @@ package hr.bart.userDataServer.service.kod;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -78,7 +79,7 @@ public class RestServiceImplCreateDB extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {
+	public PojoInterface izvrsiKod(PojoInterface pi, Map<String, Object> map) throws Throwable {
 		SifarnikValuta sv=new SifarnikValuta();
 		sv.setNaziv(HRK);
 		sv=sifarnikValutaRepository.save(sv);

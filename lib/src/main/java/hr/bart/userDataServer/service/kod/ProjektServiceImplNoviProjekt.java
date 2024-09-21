@@ -1,6 +1,7 @@
 package hr.bart.userDataServer.service.kod;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.builder.ToStringExclude;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class ProjektServiceImplNoviProjekt extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {		
+	public PojoInterface izvrsiKod(PojoInterface pi, Map<String, Object> map) throws Throwable {		
 		if(claim==null || "".equals(claim.strip())) {
 			String msg="Polje Claim nije upisano.";
 			pi.addGreskaList(msg);

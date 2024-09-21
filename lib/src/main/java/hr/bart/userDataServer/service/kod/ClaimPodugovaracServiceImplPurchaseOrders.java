@@ -1,6 +1,7 @@
 package hr.bart.userDataServer.service.kod;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.apache.commons.lang3.builder.ToStringExclude;
@@ -20,7 +21,7 @@ public class ClaimPodugovaracServiceImplPurchaseOrders extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) {		
+	public PojoInterface izvrsiKod(PojoInterface pi, Map<String, Object> o) {		
 		Optional<List<ClaimPodugovarac>> purchaseOrderListO=claimPodugovaracRepository.findAllByIdProjektDetalji(idProjektDetalji);
 		
 		if(purchaseOrderListO.isPresent()) {
