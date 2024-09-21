@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -60,7 +61,7 @@ public class ProjektController extends ResponseEntityPojo {
 		return handlePi(pi);
 	}
 	
-	@GetMapping(value="/editirajSifarnikOsoba") @PutMapping(value="/editirajSifarnikOsoba")
+	@RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value = "/editirajSifarnikOsoba")
 	public ResponseEntity<PojoInterface> editirajSifarnikOsoba(@RequestParam("id") Optional<Long> id, @RequestParam("ime") String ime, @RequestParam("prezime") String prezime) {
 		PojoInterface pi= sifarnikOsobaService.editirajSifarnikOsoba(id, ime, prezime);
 		
@@ -81,7 +82,7 @@ public class ProjektController extends ResponseEntityPojo {
 		return handlePi(pi);
 	}
 	
-	@GetMapping(value="/unesiOsobaValuta") @PostMapping(value = "/unesiOsobaValuta")
+	@RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value = "/unesiOsobaValuta")
 	public ResponseEntity<PojoInterface> unesiOsobaValuta(@RequestParam("id") Optional<Long> id, @RequestParam("ts") Long ts, @RequestParam("idSifarnikOsoba") Long idSifarnikOsoba, @RequestParam("band") String band, @RequestParam("cijena") BigDecimal cijena, @RequestParam("sifarnikDatumaOd") Optional<String> sifarnikDatumaOd, @RequestParam("sifarnikDatumaDo") Optional<String> sifarnikDatumaDo) {
 		PojoInterface pi= osobaValutaService.unesiOsobaValuta(id, ts, idSifarnikOsoba, band, cijena, getParseLD(sifarnikDatumaOd), getParseLD(sifarnikDatumaDo));
 		
@@ -102,7 +103,7 @@ public class ProjektController extends ResponseEntityPojo {
 		return handlePi(pi);
 	}
 	
-	@PutMapping(value="/claimNewActualByDate") @PostMapping(value = "/claimNewActualByDate")
+	@RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value = "/claimNewActualByDate")
 	public ResponseEntity<PojoInterface> claimNewActualByDate(@RequestBody HashMap<String, String> podatci, @RequestParam("idProjektDetalji") Long idProjektDetalji, @RequestParam("datum") Optional<String> datum) {
 		PojoInterface pi= osobaClaimActualService.claimNewActualByDate(idProjektDetalji, getParseLD(datum), podatci);
 		
@@ -123,7 +124,7 @@ public class ProjektController extends ResponseEntityPojo {
 		return handlePi(pi);
 	}
 	
-	@PutMapping(value="/claimNewPlannedByDate") @PostMapping(value = "/claimNewPlannedByDate")
+	@RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value = "/claimNewPlannedByDate")
 	public ResponseEntity<PojoInterface> claimNewPlannedByDate(@RequestBody HashMap<String, String> podatci, @RequestParam("idProjektDetalji") Long idProjektDetalji, @RequestParam("datum") Optional<String> datum) {
 		PojoInterface pi= osobaClaimPlannedService.claimNewPlannedByDate(idProjektDetalji, getParseLD(datum), podatci);
 		
@@ -137,14 +138,14 @@ public class ProjektController extends ResponseEntityPojo {
 		return handlePi(pi);
 	}
 	
-	@GetMapping(value="/urediPodugovarace") @PutMapping(value="/urediPodugovarace")
+	@RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value = "/urediPodugovarace")
 	public ResponseEntity<PojoInterface> urediPodugovarace() {
 		PojoInterface pi= sifarnikPodugovaracaService.urediPodugovarace();
 		
 		return handlePi(pi);
 	}
 	
-	@GetMapping(value="/editirajSifarnikPodugovaraca") @PutMapping(value="/editirajSifarnikPodugovaraca")
+	@RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value = "/editirajSifarnikPodugovaraca")
 	public ResponseEntity<PojoInterface> editirajSifarnikPodugovaraca(@RequestParam("id") Optional<Long> id, @RequestParam("naziv") Optional<String> naziv) {
 		PojoInterface pi= sifarnikPodugovaracaService.editirajSifarnikPodugovaraca(id, naziv);
 		
@@ -172,21 +173,21 @@ public class ProjektController extends ResponseEntityPojo {
 		return handlePi(pi);
 	}
 	
-	@GetMapping(value="/unesiPO") @PostMapping(value = "/unesiPO")
+	@RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value = "/unesiPO")
 	public ResponseEntity<PojoInterface> unesiPO(@RequestParam("id") Optional<Long> id, @RequestParam("ts") Optional<Long> ts, @RequestParam("idProjektDetalji") Long idProjektDetalji, @RequestParam("idSifarnikPodugovaraca") Long idSifarnikPodugovaraca, @RequestParam("po") String po, @RequestParam("total") Optional<BigDecimal> total) {
 		PojoInterface pi= purchaseOrderService.unesiPO(id, ts, idProjektDetalji, idSifarnikPodugovaraca, po, total);
 		
 		return handlePi(pi);
 	}
 	
-	@GetMapping(value="/unesiPodugovarac") @PostMapping(value = "/unesiPodugovarac")
+	@RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value = "/unesiPodugovarac")
 	public ResponseEntity<PojoInterface> unesiPodugovarac(@RequestParam("id") Optional<Long> id, @RequestParam("ts") Long ts, @RequestParam("idProjektDetalji") Long idProjektDetalji, @RequestParam("idPurchaseOrder") Optional<Long> idPurchaseOrder, @RequestParam("datumPlanned") Optional<String> datumPlanned, @RequestParam("datumActual") Optional<String> datumActual, @RequestParam("cijena") Optional<BigDecimal> cijena, @RequestParam("invoiceNumber") Optional<Long> invoiceNumber) {
 		PojoInterface pi= podugovaracService.unesiPodugovarac(id, ts, idProjektDetalji, idPurchaseOrder, getParseLD(datumPlanned), getParseLD(datumActual), cijena, invoiceNumber);
 		
 		return handlePi(pi);
 	}
 	
-	@GetMapping(value="/novaOsoba") @PostMapping(value = "/novaOsoba")
+	@RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value = "/novaOsoba")
 	public ResponseEntity<PojoInterface> novaOsoba() {
 		PojoInterface pi= claimService.novaOsoba();
 		

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import hr.bart.userDataServer.service.kod.RestServiceImplCreateDB;
@@ -18,7 +19,7 @@ public class ProjektControllerRest extends ResponseEntityPojo {
     @Autowired
     private transient RestServiceImplCreateDB restServiceImplCreateDB; 
     
-    @GetMapping(value="/createDB") @PostMapping(value = "/createDB")
+    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value = "/createDB")
     public ResponseEntity<PojoInterface> createDB() {       
         PojoInterface pi=restServiceImplCreateDB.izvrsi();
         

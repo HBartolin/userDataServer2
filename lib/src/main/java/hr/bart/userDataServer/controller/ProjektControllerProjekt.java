@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,7 +48,7 @@ public class ProjektControllerProjekt extends ResponseEntityPojo {
 		return handlePi(pi);
     }	
 	
-	@GetMapping(value="/zatvoriProjekt/{id}") @PutMapping(value="/zatvoriProjekt/{id}")
+	@RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value = "/zatvoriProjekt/{id}")
 	public ResponseEntity<PojoInterface> zatvoriProjekt(@PathVariable Long id, @RequestParam("ts") Long ts, @RequestParam("status") Optional<String> status) {
 		//PojoInterface pi= projektService.zatvoriOtvoriProjekt(ZatvoriOtvori.ZATVORI, id, ts, status);
 		PojoInterface pi=projektServiceImplZatvoriOtvoriProjekt.init(ZatvoriOtvori.ZATVORI, id, ts, status).izvrsi(null);
@@ -55,7 +56,7 @@ public class ProjektControllerProjekt extends ResponseEntityPojo {
 		return handlePi(pi);
 	}
 	
-	@GetMapping(value="/otvoriProjekt/{id}") @PutMapping(value="/otvoriProjekt/{id}")
+	@RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value = "/otvoriProjekt/{id}")
 	public ResponseEntity<PojoInterface> otvoriProjekt(@PathVariable Long id, @RequestParam("ts") Long ts, @RequestParam("status") Optional<String> status) {
 		// PojoInterface pi= projektService.zatvoriOtvoriProjekt(ZatvoriOtvori.OTVORI, id, ts, status);
 		PojoInterface pi=projektServiceImplZatvoriOtvoriProjekt.init(ZatvoriOtvori.OTVORI, id, ts, status).izvrsi(null);
@@ -63,7 +64,7 @@ public class ProjektControllerProjekt extends ResponseEntityPojo {
 		return handlePi(pi);
 	}
 	
-	@GetMapping(value="/noviProjekt") @PostMapping(value = "/noviProjekt")
+	@RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value = "/noviProjekt")
 	public ResponseEntity<PojoInterface> noviProjekt(@RequestParam("claim") String claim, @RequestParam("contract") String contract) {		
 		//PojoInterface pi= projektService.noviProjekt(claim, contract);
 		 PojoInterface pi=projektServiceImplNoviProjekt.info(claim, contract).izvrsi(null);
@@ -78,7 +79,7 @@ public class ProjektControllerProjekt extends ResponseEntityPojo {
 		return handlePi(pi);
 	}
 	
-	@GetMapping(value="/urediProjektDatalji/{id}") @PutMapping(value="/urediProjektDatalji/{id}")
+	@RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value = "/urediProjektDatalji/{id}")
 	public ResponseEntity<PojoInterface> urediProjektDatalji(@PathVariable Long id, @RequestParam("totalRevenue") String totalRevenue, @RequestParam("costPs") String costPs) {
 		PojoInterface pi= projektDetaljiService.urediProjektDatalji(id, totalRevenue, costPs);
 		
