@@ -38,7 +38,7 @@ public class ProjektServiceImplZatvoriOtvoriProjekt extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {
+	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {
 		Optional<Projekt> projektOptional=projektRepository.findById(id);
 		
 		if(zo.getDbStatusSuprotni().equals(projektOptional.get().getStatus())) {

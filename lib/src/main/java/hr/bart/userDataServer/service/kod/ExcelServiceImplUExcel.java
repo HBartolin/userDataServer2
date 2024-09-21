@@ -90,7 +90,7 @@ public class ExcelServiceImplUExcel extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {		
+	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {		
 		ByteArrayOutputStream baos=getByteExcelWriteClose(id);
 	    
 		String encodedBytes = Base64.getEncoder().encodeToString(baos.toByteArray());

@@ -78,7 +78,7 @@ public class PodugovaracServiceImplUnesiPodugovarac extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {		
+	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {		
 		if(!idPurchaseOrder.isPresent()) {
 			String msg="'Purchase order' nije odababran. Odaberite ga.";
 			pi.addGreskaList(msg);

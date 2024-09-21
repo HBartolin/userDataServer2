@@ -29,14 +29,14 @@ public abstract class Kod {
 	protected final static int SEDAM=7;
 	protected final static int STO=100;
 	
-	public abstract PojoInterface izvrsiKod(PojoInterface pi) throws Throwable;
+	public abstract PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable;
 	
-	public PojoInterface izvrsi() {
+	public PojoInterface izvrsi(Object... o) {
 		timerKoda.begin();
 		PojoInterface pi=new PojoInterface();
 		
 		try {
-			izvrsiKod(pi);
+			izvrsiKod(pi, o);
 		} catch(Throwable t) {
 			cachException(t, pi);
 		} finally {

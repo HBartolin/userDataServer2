@@ -30,7 +30,7 @@ public class SifarnikOsobaServiceImplEditirajSifarnikOsoba extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {		
+	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {		
 		if(ime==null || "".equals(ime.replaceAll("\\s",""))) {
 			String msg="Polje Ime nije upisano.";
 			pi.addGreskaList(msg);

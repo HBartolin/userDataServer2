@@ -65,7 +65,7 @@ public class OsobaClaimPlannedServiceImplClaimNewPlannedByDate extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {		
+	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {		
 		validirajClaimPlannedByDate(pi, idProjektDetalji, datum);
 		
 		if(!pi.getGreska().isEmpty()) {

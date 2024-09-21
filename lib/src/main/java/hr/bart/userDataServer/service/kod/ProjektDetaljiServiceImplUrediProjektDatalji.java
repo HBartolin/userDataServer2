@@ -40,7 +40,7 @@ public class ProjektDetaljiServiceImplUrediProjektDatalji extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {
+	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {
 		BigDecimal totalRevenueBD=getBigDecimalValue(pi, totalRevenue, "Total revenue");			
 		BigDecimal costPsBD=getBigDecimalValue(pi, costPs, "Cost");
 		

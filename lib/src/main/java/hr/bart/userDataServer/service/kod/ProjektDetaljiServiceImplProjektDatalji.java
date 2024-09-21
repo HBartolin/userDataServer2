@@ -19,7 +19,7 @@ public class ProjektDetaljiServiceImplProjektDatalji extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {
+	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {
 		Optional<ProjektDetalji> projektDetalji=projektDetaljiRepositor.findById(id);
 		
 		if(projektDetalji.isPresent()) {

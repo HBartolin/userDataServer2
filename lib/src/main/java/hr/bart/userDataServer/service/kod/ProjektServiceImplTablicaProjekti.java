@@ -29,7 +29,7 @@ public class ProjektServiceImplTablicaProjekti extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {
+	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {
 		PageRequest pageRequest=PageRequest.of(pageNumber, pageRequestSize50);
 		
 		if(status.isPresent()) {

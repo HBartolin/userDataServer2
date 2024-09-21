@@ -19,7 +19,7 @@ public class OsobaValutaServiceImplOsobaValuta extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {
+	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {
 		PageRequest pageRequest=PageRequest.of(NULA, pageRequestSize50);
 		
 		aCommonServis.findAllBySifarnikOsobaId(osobaValutaRepository, pi, idSifarnikOsoba, pageRequest);

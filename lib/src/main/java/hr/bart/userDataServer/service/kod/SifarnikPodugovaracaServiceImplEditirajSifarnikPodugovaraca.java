@@ -22,7 +22,7 @@ public class SifarnikPodugovaracaServiceImplEditirajSifarnikPodugovaraca extends
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {		
+	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {		
 		if(!nazivO.isPresent()) {
 			String msg="Polje Naziv nije upisano.";
 			pi.addGreskaList(msg);

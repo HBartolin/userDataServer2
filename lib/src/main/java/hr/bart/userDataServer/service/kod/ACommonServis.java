@@ -36,12 +36,12 @@ public class ACommonServis extends Kod {
 	}
 	
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {
+	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {
 		throw new RuntimeException("Ne koristi se!");
 	}
 	
 	@Override
-	public PojoInterface izvrsi() {
+	public PojoInterface izvrsi(Object... o) {
 		throw new RuntimeException("Ne koristi se!");
 	}
 

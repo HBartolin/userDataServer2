@@ -28,7 +28,7 @@ public class ProjektServiceImplTraziProjekte extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi) throws Throwable {
+	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {
 		PageRequest pageRequest=PageRequest.of(NULA, pageRequestSize50);
 		StringBuilder sb=new StringBuilder("%").append(trazi.toUpperCase()).append("%");
 			

@@ -33,7 +33,7 @@ public class ClaimServiceImplTablicaOsobaValuta extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi) {		
+	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) {		
 		Optional<List<Claim>> claimListOptional=aCommonServis.claimActualPlanned(
 				claimRepository,
 				osobaClaimActualRepository,
