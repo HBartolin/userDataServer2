@@ -22,14 +22,16 @@ public class ProjektServiceImplTraziProjekte extends Kod {
 	@Autowired
 	private ProjektRepository projektRepository;
 
-	public ProjektServiceImplTraziProjekte info(String trazi) {
-		this.trazi=trazi;
-		
-		return this;
-	}
+//	public ProjektServiceImplTraziProjekte info(String trazi) {
+//		this.trazi=trazi;
+//		
+//		return this;
+//	}
 
 	@Override
 	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {
+	    trazi=(String) o[0];
+	    
 		PageRequest pageRequest=PageRequest.of(NULA, pageRequestSize50);
 		StringBuilder sb=new StringBuilder("%").append(trazi.toUpperCase()).append("%");
 			

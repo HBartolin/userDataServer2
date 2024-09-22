@@ -22,15 +22,18 @@ public class ProjektServiceImplTablicaProjekti extends Kod {
 	@ToStringExclude
 	private ProjektRepository projektRepository;
 
-	public ProjektServiceImplTablicaProjekti info(Optional<String> status, int pageNumber) {
-		this.status=status;
-		this.pageNumber=pageNumber;
-		
-		return this;
-	}
+//	public ProjektServiceImplTablicaProjekti info(Optional<String> status, int pageNumber) {
+//		this.status=status;
+//		this.pageNumber=pageNumber;
+//		
+//		return this;
+//	}
 
 	@Override
 	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {
+	    status=(Optional<String>) o[0];
+	    pageNumber=(Integer) o[1];
+	    
 		PageRequest pageRequest=PageRequest.of(pageNumber, pageRequestSize50);
 		
 		if(status.isPresent()) {

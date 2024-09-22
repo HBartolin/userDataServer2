@@ -93,7 +93,7 @@ public class ProjektControllerProjekt extends ResponseEntityPojo {
 	@GetMapping(value="/tablicaProjekti")
 	public ResponseEntity<PojoInterface> tablicaProjekti(@RequestParam("pageNumber") int pageNumber, @RequestParam("status") Optional<String> status) {
 		// PojoInterface pi= projektService.tablicaProjekti(pageNumber, status);
-		PojoInterface pi=projektServiceImplTablicaProjekti.info(status, pageNumber).izvrsi();
+		PojoInterface pi=projektServiceImplTablicaProjekti.izvrsi(status, pageNumber);
 		
 		return handlePi(pi);
 	}
@@ -101,7 +101,7 @@ public class ProjektControllerProjekt extends ResponseEntityPojo {
 	@GetMapping(value="/traziProjekt")
 	public ResponseEntity<PojoInterface> traziProjekt(@RequestParam("trazi") String trazi) {
 		//PojoInterface pi= projektService.traziProjekt(trazi);
-		PojoInterface pi=projektServiceImplTraziProjekte.info(trazi).izvrsi();
+		PojoInterface pi=projektServiceImplTraziProjekte.izvrsi(trazi);
 		
 		return handlePi(pi);
 	}
