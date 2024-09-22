@@ -55,7 +55,10 @@ public class SecurityJavaConfig /* extends WebSecurityConfigurerAdapter */ {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		//LOGGER.info("=======================================================================");
 		//http.csrf();
-		http.cors().and().csrf().disable(); 
+		//http.cors().and().csrf().disable();
+	    
+	    http
+        .csrf(csrf -> csrf.disable());
 		 
 		return http.build();
 	} 
