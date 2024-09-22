@@ -16,7 +16,6 @@ import jakarta.transaction.Transactional;
 @Service
 @Transactional
 public class ProjektServiceImplProjekti extends Kod {
-	private Optional<String> status;
 	@ToStringExclude
 	private ACommonServis aCommonServis=new ACommonServis();
 	
@@ -24,14 +23,15 @@ public class ProjektServiceImplProjekti extends Kod {
 	@ToStringExclude
 	private ProjektRepository projektRepository;	
 	
-	public ProjektServiceImplProjekti init(Optional<String> status) {
-		this.status=status;
-		
-		return this;
-	}
+//	public ProjektServiceImplProjekti init(Optional<String> status) {
+//		this.status=status;
+//		
+//		return this;
+//	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi, Map<String, Object> map) throws Throwable {
+	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {
+	    Optional<String> status=(Optional<String>) o[0];
 		PageRequest pageRequest=PageRequest.of(NULA, pageRequestSize50);
 		
 		if(status.isPresent()) {				

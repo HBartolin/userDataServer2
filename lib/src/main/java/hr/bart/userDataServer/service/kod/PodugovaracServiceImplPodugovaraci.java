@@ -21,7 +21,7 @@ public class PodugovaracServiceImplPodugovaraci extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi, Map<String, Object> map) throws Throwable {
+	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {
 		Optional<List<Podugovarac>> podugovaracListO=podugovaracRepository.findAllByIdProjektDetalji(idProjektDetalji);
 		
 		if(podugovaracListO.isPresent()) {

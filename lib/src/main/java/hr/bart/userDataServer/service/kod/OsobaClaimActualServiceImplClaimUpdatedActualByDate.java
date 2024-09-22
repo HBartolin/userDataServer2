@@ -69,7 +69,7 @@ public class OsobaClaimActualServiceImplClaimUpdatedActualByDate extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi, Map<String, Object> o) throws Throwable {		
+	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {		
 		List<OsobaClaimActual> ocaList=new ArrayList<>();  
 		validirajClaimUpdateActualByDate(pi, datum);
 		

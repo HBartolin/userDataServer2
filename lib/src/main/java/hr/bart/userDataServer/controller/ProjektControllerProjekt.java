@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import hr.bart.userDataServer.service.ProjektDetaljiService;
+import hr.bart.userDataServer.service.kod.ProjektDetaljiServiceImplProjektDatalji;
 import hr.bart.userDataServer.service.kod.ProjektServiceImplNoviProjekt;
 import hr.bart.userDataServer.service.kod.ProjektServiceImplProjekti;
 import hr.bart.userDataServer.service.kod.ProjektServiceImplTablicaProjekti;
@@ -39,11 +40,13 @@ public class ProjektControllerProjekt extends ResponseEntityPojo {
 	private transient ProjektServiceImplTraziProjekte projektServiceImplTraziProjekte;
 	@Autowired
 	private transient ProjektDetaljiService projektDetaljiService;
+	@Autowired
+	private transient ProjektDetaljiServiceImplProjektDatalji projektDetaljiServiceImplProjektDatalji; 
 	
 	@GetMapping(value = "/projekti")
     public ResponseEntity<PojoInterface> projekti(@RequestParam("status") Optional<String> status) {		
 		//PojoInterface pi=projektService.projekti(status);
-		PojoInterface pi=projektServiceImplProjekti.init(status).izvrsi(null);
+		PojoInterface pi=projektServiceImplProjekti.izvrsi(status);
 		
 		return handlePi(pi);
     }	
@@ -74,7 +77,8 @@ public class ProjektControllerProjekt extends ResponseEntityPojo {
 	
 	@GetMapping(value="/projektDatalji/{id}")
 	public ResponseEntity<PojoInterface> projektDatalji(@PathVariable Long id) {
-		PojoInterface pi= projektDetaljiService.projektDatalji(id);
+		//PojoInterface pi= projektDetaljiService.projektDatalji(id);
+	    PojoInterface pi=projektDetaljiServiceImplProjektDatalji.izvrsi(id);
 		
 		return handlePi(pi);
 	}

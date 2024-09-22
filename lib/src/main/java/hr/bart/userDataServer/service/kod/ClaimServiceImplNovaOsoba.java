@@ -10,7 +10,7 @@ public class ClaimServiceImplNovaOsoba extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi, Map<String, Object> o) {
+	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) {
 		// TODO Auto-generated method stub
 		return null;
 	}

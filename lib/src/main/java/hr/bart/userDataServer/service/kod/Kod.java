@@ -30,18 +30,18 @@ public abstract class Kod {
 	protected final static int SEDAM=7;
 	protected final static int STO=100;
 	
-	public abstract PojoInterface izvrsiKod(PojoInterface pi, Map<String, Object> map) throws Throwable;
+	public abstract PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable;
 	
 	public PojoInterface izvrsi() {
 	    return izvrsi(null);
 	}
 	
-	public PojoInterface izvrsi(Map<String, Object> map) {
+	public PojoInterface izvrsi(Object... o) {
 		timerKoda.begin();
 		PojoInterface pi=new PojoInterface();
 		
 		try {
-			izvrsiKod(pi, map);
+			izvrsiKod(pi, o);
 		} catch(Throwable t) {
 			cachException(t, pi);
 		} finally {

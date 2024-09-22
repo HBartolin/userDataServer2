@@ -21,7 +21,7 @@ public class ClaimPodugovaracServiceImplPurchaseOrders extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi, Map<String, Object> o) {		
+	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) {		
 		Optional<List<ClaimPodugovarac>> purchaseOrderListO=claimPodugovaracRepository.findAllByIdProjektDetalji(idProjektDetalji);
 		
 		if(purchaseOrderListO.isPresent()) {

@@ -50,7 +50,7 @@ public class ClaimPodugovaracServiceImplUnesiPO extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi, Map<String, Object> o) {				
+	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) {				
 		if(idProjektDetalji==null) {
 			String msg="Polje 'idProjektDetalji' nije upisano.";
 			pi.addGreskaList(msg);

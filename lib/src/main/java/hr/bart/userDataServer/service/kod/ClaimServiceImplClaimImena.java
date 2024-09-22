@@ -14,7 +14,7 @@ public class ClaimServiceImplClaimImena extends Kod {
 	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi, Map<String, Object> o) {	
+	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) {	
 		if(podatciO.isPresent()) {
 			List<Long> podatci=podatciO.get();
 		} else {
