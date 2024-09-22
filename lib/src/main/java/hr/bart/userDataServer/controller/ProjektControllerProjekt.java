@@ -54,7 +54,7 @@ public class ProjektControllerProjekt extends ResponseEntityPojo {
 	@RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value = "/zatvoriProjekt/{id}")
 	public ResponseEntity<PojoInterface> zatvoriProjekt(@PathVariable Long id, @RequestParam("ts") Long ts, @RequestParam("status") Optional<String> status) {
 		//PojoInterface pi= projektService.zatvoriOtvoriProjekt(ZatvoriOtvori.ZATVORI, id, ts, status);
-		PojoInterface pi=projektServiceImplZatvoriOtvoriProjekt.init(ZatvoriOtvori.ZATVORI, id, ts, status).izvrsi(null);
+		PojoInterface pi=projektServiceImplZatvoriOtvoriProjekt.izvrsi(ZatvoriOtvori.ZATVORI, id, ts, status);
 		
 		return handlePi(pi);
 	}
@@ -62,7 +62,7 @@ public class ProjektControllerProjekt extends ResponseEntityPojo {
 	@RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value = "/otvoriProjekt/{id}")
 	public ResponseEntity<PojoInterface> otvoriProjekt(@PathVariable Long id, @RequestParam("ts") Long ts, @RequestParam("status") Optional<String> status) {
 		// PojoInterface pi= projektService.zatvoriOtvoriProjekt(ZatvoriOtvori.OTVORI, id, ts, status);
-		PojoInterface pi=projektServiceImplZatvoriOtvoriProjekt.init(ZatvoriOtvori.OTVORI, id, ts, status).izvrsi(null);
+		PojoInterface pi=projektServiceImplZatvoriOtvoriProjekt.izvrsi(ZatvoriOtvori.OTVORI, id, ts, status);
 		
 		return handlePi(pi);
 	}

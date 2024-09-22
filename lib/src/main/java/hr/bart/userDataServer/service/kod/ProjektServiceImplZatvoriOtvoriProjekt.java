@@ -29,17 +29,22 @@ public class ProjektServiceImplZatvoriOtvoriProjekt extends Kod {
 	@ToStringExclude
 	private ProjektRepository projektRepository;	
 
-	public ProjektServiceImplZatvoriOtvoriProjekt init(ZatvoriOtvori zo, Long id, Long ts, Optional<String> status) {
-		this.zo=zo;
-		this.id=id;
-		this.ts=ts;
-		this.status=status;
-		
-		return this;
-	}
+//	public ProjektServiceImplZatvoriOtvoriProjekt init(ZatvoriOtvori zo, Long id, Long ts, Optional<String> status) {
+//		this.zo=zo;
+//		this.id=id;
+//		this.ts=ts;
+//		this.status=status;
+//		
+//		return this;
+//	}
 
 	@Override
 	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {
+	    zo=(ZatvoriOtvori) o[0];
+        id=(Long) o[1];
+        ts=(Long) o[2];
+        status=(Optional<String>) o[3];
+	    
 		Optional<Projekt> projektOptional=projektRepository.findById(id);
 		
 		if(zo.getDbStatusSuprotni().equals(projektOptional.get().getStatus())) {
