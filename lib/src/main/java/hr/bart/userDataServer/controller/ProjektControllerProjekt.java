@@ -70,7 +70,7 @@ public class ProjektControllerProjekt extends ResponseEntityPojo {
 	@RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value = "/noviProjekt")
 	public ResponseEntity<PojoInterface> noviProjekt(@RequestParam("claim") String claim, @RequestParam("contract") String contract) {		
 		//PojoInterface pi= projektService.noviProjekt(claim, contract);
-		 PojoInterface pi=projektServiceImplNoviProjekt.info(claim, contract).izvrsi(null);
+		 PojoInterface pi=projektServiceImplNoviProjekt.izvrsi(claim, contract);
 		
 		return handlePi(pi);
 	}

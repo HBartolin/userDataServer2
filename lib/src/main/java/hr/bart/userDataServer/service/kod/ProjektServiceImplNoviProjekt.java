@@ -26,15 +26,18 @@ public class ProjektServiceImplNoviProjekt extends Kod {
 	@Autowired
 	private ProjektRepository projektRepository;
 
-	public ProjektServiceImplNoviProjekt info(String claim, String contract) {
-		this.claim=claim;
-		this.contract=contract;
-		
-		return this;
-	}
+//	public ProjektServiceImplNoviProjekt info(String claim, String contract) {
+//		this.claim=claim;
+//		this.contract=contract;
+//		
+//		return this;
+//	}
 
 	@Override
-	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {		
+	public PojoInterface izvrsiKod(PojoInterface pi, Object... o) throws Throwable {
+	    claim=(String) o[0];
+	    contract=(String) o[1];
+	            
 		if(claim==null || "".equals(claim.strip())) {
 			String msg="Polje Claim nije upisano.";
 			pi.addGreskaList(msg);
